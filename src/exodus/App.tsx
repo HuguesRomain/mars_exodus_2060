@@ -6,6 +6,7 @@ export const App = () => {
     return (
         <div>
             <Normalize />
+            <GlobalStyled />
         </div>
     )
 }

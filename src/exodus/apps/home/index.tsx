@@ -1,5 +1,7 @@
 import React from "react";
 
-export const HomeApp = () => {
-    return <div></div>;
+const HomeApp = () => {
+    return <div>home</div>;
 };
+
+export default HomeApp

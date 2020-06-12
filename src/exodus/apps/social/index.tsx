@@ -1,5 +1,7 @@
 import React from "react";
 
-export const SocialApp = () => {
-    return <div></div>;
+const SocialApp = () => {
+    return <div>social</div>;
 };
+
+export default SocialApp
