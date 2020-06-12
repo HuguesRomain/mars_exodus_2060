@@ -1,3 +1,1 @@
-const appProfile = () => {
-
-}
+export const Profile = () => {}
