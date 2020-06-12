@@ -21,7 +21,7 @@ const getApp = () => {
     const currentPath = window.document.location.pathname;
 
     if (currentPath === "/") {
-        window.history.replaceState(null,"/app/home");
+        window.history.replaceState(null, null, "/app/home");
         return HomeApp;
     }
 
