@@ -1,27 +1,46 @@
-type Router<T> = { [K in keyof T]: T[K] };
-
-const prependUri = (prefix: string) => <T>(router: any): Router<T> =>
-    Object.keys(router).reduce((acc, key) => {
-        const route = router[key];
-        return {
-            ...acc,
-            [key]: (...args: string[]): string => prefix + route.apply(null, args),
-        };
-    }, {} as Router<T>);
-
-
-class HomeAppRoutes {
-    home = () => ``;
-    article = (articleId: number) => `article/${articleId}`;
-}
+const authApp = "/app/auth/";
+const homeApp = "/app/home/";
+const calandarApp = "/app/calandar/";
+const socialApp = "/app/social/";
+const profileApp = "/app/profile/";
 
 class AuthAppRoutes {
-    login = () => `/login`
-    register = () => `/register`
+  login = () => `${authApp}/login`;
+  register = () => `${authApp}/register`;
 }
 
-const homeAppRoutes = new HomeAppRoutes();
-export const homeAppRouter = prependUri("/app/home")(homeAppRoutes);
+class HomeAppRoutes {
+  home = () => `${homeApp}`;
+  article = (articleId: number) => `${homeApp}article/${articleId}`;
+}
+
+class CalandarAppRoutes {
+  calandar = () => `${calandarApp}`;
+}
+
+class SocialAppRoutes {
+  social = () => `${socialApp}`;
+}
+
+class ProfileAppRoutes {
+  profile = () => `${profileApp}`;
+}
 
 const authAppRoutes = new AuthAppRoutes();
-export const authAppRouter = prependUri("/app/auth")(authAppRoutes);
+export const authAppRouter = authAppRoutes;
+
+const homeAppRoutes = new HomeAppRoutes();
+export const homeAppRouter = homeAppRoutes;
+
+const calandarAppRoutes = new CalandarAppRoutes();
+export const calandarAppRouter = calandarAppRoutes;
+
+const socialAppRoutes = new SocialAppRoutes();
+export const socialAppRouter = socialAppRoutes;
+
+const profileAppRoutes = new ProfileAppRoutes();
+export const profileAppRouter = profileAppRoutes;
+
+/* Todo : idéalement au lieu de devoir à chaque fois utiliser
+les raccourcir de path (cf l.1 à 6) on voudrait une fonction 
+permettant de les ajouter tout seul dans les appels de class */
