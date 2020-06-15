@@ -1,33 +1,42 @@
 import {
   homeAppRouter,
   socialAppRouter,
-  calandarAppRouter,
+  calendarAppRouter,
   profileAppRouter,
+  UriType,
 } from "../../../internal-router";
+import { IconName } from "styles/atoms/icons";
 
-export const apps = [
+type AppsTypes = {
+  label: string;
+  uri: UriType;
+  icon: IconName;
+  order: number;
+};
+
+export const apps: AppsTypes[] = [
   {
     label: "Accueil",
     uri: homeAppRouter.home(),
-    icon: "path/to/icon",
+    icon: "home",
     order: 1,
   },
   {
     label: "Calendrier",
-    uri: calandarAppRouter.calandar(),
-    icon: "path/to/icon",
+    uri: calendarAppRouter.calendar(),
+    icon: "calendar",
     order: 2,
   },
   {
     label: "Social",
     uri: socialAppRouter.social(),
-    icon: "path/to/icon",
+    icon: "social",
     order: 3,
   },
   {
     label: "Compte",
     uri: profileAppRouter.profile(),
-    icon: "path/to/icon",
+    icon: "profile",
     order: 4,
   },
 ];

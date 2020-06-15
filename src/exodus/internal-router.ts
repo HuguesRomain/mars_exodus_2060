@@ -1,6 +1,8 @@
+export type UriType = string;
+
 export const authApp = "/app/auth/";
 export const homeApp = "/app/home/";
-export const calandarApp = "/app/calandar/";
+export const calendarApp = "/app/calendar/";
 export const socialApp = "/app/social/";
 export const profileApp = "/app/profile/";
 
@@ -14,8 +16,8 @@ class HomeAppRoutes {
   article = (articleId: number) => `${homeApp}article/${articleId}`;
 }
 
-class CalandarAppRoutes {
-  calandar = () => `${calandarApp}`;
+class CalendarAppRoutes {
+  calendar = () => `${calendarApp}`;
 }
 
 class SocialAppRoutes {
@@ -32,8 +34,8 @@ export const authAppRouter = authAppRoutes;
 const homeAppRoutes = new HomeAppRoutes();
 export const homeAppRouter = homeAppRoutes;
 
-const calandarAppRoutes = new CalandarAppRoutes();
-export const calandarAppRouter = calandarAppRoutes;
+const calendarAppRoutes = new CalendarAppRoutes();
+export const calendarAppRouter = calendarAppRoutes;
 
 const socialAppRoutes = new SocialAppRoutes();
 export const socialAppRouter = socialAppRoutes;

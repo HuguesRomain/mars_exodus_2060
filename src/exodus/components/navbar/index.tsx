@@ -5,6 +5,8 @@ import { apps } from "./data/index";
 import { rem } from "polished";
 import { Icon } from "../../../styles/atoms/icons";
 
+import { useHistory } from "react-router-dom";
+
 const WrapperNavigation = styled.div`
   display: flex;
   align-items: center;
@@ -12,8 +14,14 @@ const WrapperNavigation = styled.div`
   width: 100%;
 `;
 
-const ListItemMenuLink = styled.a<{ linkActive: boolean }>`
+const ListItemMenuLink = styled.a`
+  display: flex;
+  align-items: center;
   padding: 10;
+`;
+
+const Label = styled.p<{ linkActive: boolean }>`
+  padding-left: ${rem(5)};
 `;
 
 const NavBarWrapper = styled.div`
@@ -21,23 +29,31 @@ const NavBarWrapper = styled.div`
   position: fixed;
   bottom: 0;
   width: 100%;
-  padding: 0 ${rem(20)};
+  padding: ${rem(15)} ${rem(20)};
+  background-color: white;
+  border-radius: 20px 20px 0px 0px;
 `;
 
 const NavBar = () => {
+  const history = useHistory();
   return (
     <WrapperNavigation>
-      {apps.map(({ label, uri }) => {
+      {apps.map(({ label, uri, icon }) => {
         return (
-          <>
-            <Icon name={"calandar"} color={"red"} size={20} />
-            <ListItemMenuLink
-              linkActive={window.location.pathname.includes(uri)}
-              href={uri}
-            >
-              {label}
-            </ListItemMenuLink>
-          </>
+          <ListItemMenuLink href={uri}>
+            <Icon
+              onClick={() => {
+                history.push(uri);
+              }}
+              name={icon}
+              size={24}
+            />
+            {window.location.pathname.includes(uri) && (
+              <Label linkActive={window.location.pathname.includes(uri)}>
+                {label}
+              </Label>
+            )}
+          </ListItemMenuLink>
         );
       })}
     </WrapperNavigation>
