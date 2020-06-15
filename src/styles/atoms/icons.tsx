@@ -24,7 +24,6 @@ type Props = {
 export const Icon = (props: Props) => {
   const style: CSSProperties = {
     fill: props.color ? props.color : "grey",
-    color: props.color ? props.color : undefined,
     ...props.style,
     maxHeight: `${props.size}px`,
     maxWidth: `${props.size}px`,
@@ -38,3 +37,5 @@ export const Icon = (props: Props) => {
     </svg>
   ) : null;
 };
+
+// Todo : Change the svg logic or found a adequate lib
