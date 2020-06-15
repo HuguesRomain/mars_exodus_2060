@@ -8,6 +8,8 @@ import frLocale from "@fullcalendar/core/locales/fr";
 import { isPast } from "date-fns";
 import Bus from "../../../../services/Bus";
 
+import "./test.css";
+
 const BaseEvent = {
   title: "Entrainement en apesanteur",
   start: new Date(),
@@ -41,10 +43,10 @@ export const Calendar = () => {
       locales={[frLocale]}
       locale={"fr"}
       /* header={{
-        left: "prev,next today",
-        center: "title",
-        right: "dayGridMonth,timeGridWeek,timeGridDay",
-      }} */
+          left: "prev,next today",
+          center: "title",
+          right: "dayGridMonth,timeGridWeek,timeGridDay",
+        }} */
       plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
       events={calendarEvents}
       dateClick={handleDateClick}
