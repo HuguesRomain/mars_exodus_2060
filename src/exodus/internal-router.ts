@@ -1,8 +1,8 @@
-const authApp = "/app/auth/";
-const homeApp = "/app/home/";
-const calandarApp = "/app/calandar/";
-const socialApp = "/app/social/";
-const profileApp = "/app/profile/";
+export const authApp = "/app/auth/";
+export const homeApp = "/app/home/";
+export const calandarApp = "/app/calandar/";
+export const socialApp = "/app/social/";
+export const profileApp = "/app/profile/";
 
 class AuthAppRoutes {
   login = () => `${authApp}/login`;
