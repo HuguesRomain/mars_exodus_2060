@@ -9,6 +9,10 @@ function isFunction(obj) {
 let once = {};
 let events = {};
 
+// type BusType = {
+//   emit: () => void,
+// };
+
 export default Object.freeze({
   // emit an event
   emit(name, data) {

@@ -12,7 +12,7 @@ export const ActivityList = () => {
   const [alldates, setAllDates] = useState<Props[]>([]);
 
   useEffect(() => {
-    Bus.on("EventDates", setAllDates);
+    Bus.once("EventDates", setAllDates);
   }, []);
 
   return (
