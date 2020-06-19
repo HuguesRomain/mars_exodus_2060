@@ -1,7 +1,9 @@
 import React from "react";
+import { CardAuth } from "./organisms/authCard";
+import { FirstStep } from "./molecules/authFirstStep";
 
 const AuthApp = () => {
-  return <div>auth</div>;
+  return <CardAuth children={<FirstStep />} />;
 };
 
-export default AuthApp
+export default AuthApp;
