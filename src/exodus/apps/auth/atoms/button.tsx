@@ -5,7 +5,7 @@ import { rem } from "polished";
 type ButtonType = {
   placeholder: string;
   type: "button" | "submit" | "reset";
-  onClick: (e: any) => void;
+  onClick?: (e: any) => void;
 };
 
 const ButtonStyled = styled.button<{ type: string }>`

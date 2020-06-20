@@ -32,6 +32,7 @@ const CardContent = styled.div`
   background-color: white;
   border-radius: 0px 0px 20px 20px;
   padding-bottom: ${rem(50)};
+  height: ${rem(484)};
 `;
 
 export const CardAuth = ({ children }: { children: JSX.Element }) => {
