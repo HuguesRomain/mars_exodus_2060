@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Input } from "../../atoms/input";
 import { Button } from "../../atoms/button";
@@ -11,8 +11,10 @@ import {
 } from "../../style";
 import { authAppRouter } from "exodus/internal-router";
 import { Link } from "react-router-dom";
+import { RightArrow } from "styles/assets/icons/icons";
 
 export const RegisterFirstStep = () => {
+  const [password, setPassword] = useState<string>("");
   return (
     <>
       <Title>Bienvenue Voyageur !</Title>
@@ -23,13 +25,25 @@ export const RegisterFirstStep = () => {
       </Paragraph>
       <FormStyle>
         <Input
+          value={password}
           onChange={(e) => {
+            setPassword(e.target.value);
             console.log(e.target.value);
           }}
           placeholder={"Mot de passe"}
         />
-        <Link to={authAppRouter.loginSecondStep()}>
-          <Button type={"submit"} placeholder={"Valider"} />
+        <Link
+          to={
+            password
+              ? authAppRouter.loginSecondStep()
+              : window.location.pathname
+          }
+        >
+          <Button
+            type={"submit"}
+            placeholder={`Valider`}
+            children={<RightArrow />}
+          />
         </Link>
       </FormStyle>
       <Link to={authAppRouter.resetPassword()}>

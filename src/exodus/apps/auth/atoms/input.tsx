@@ -13,10 +13,16 @@ const InputStyled = styled.input`
 type InputType = {
   placeholder: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
+  value: string;
 };
 
-export const Input = ({ placeholder, onChange }: InputType) => {
+export const Input = ({ value, placeholder, onChange }: InputType) => {
   return (
-    <InputStyled onChange={onChange} type="text" placeholder={placeholder} />
+    <InputStyled
+      value={value}
+      onChange={onChange}
+      type="text"
+      placeholder={placeholder}
+    />
   );
 };

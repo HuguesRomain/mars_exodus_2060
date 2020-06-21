@@ -7,9 +7,8 @@ import HeaderImg from "../../../../styles/assets/mobile/header.png";
 const CardAuthStyled = styled.div`
   display: flex;
   flex-direction: column;
-  margin-top: 20px;
-  margin-left: 20px;
-  width: ${rem(335)};
+  max-width: ${rem(531)};
+  margin: 0 ${rem(15)};
 `;
 
 const Header = styled.div`
