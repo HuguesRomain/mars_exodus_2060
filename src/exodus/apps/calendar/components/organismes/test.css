@@ -1,0 +1,57 @@
+@import "~@fullcalendar/core/main.css";
+@import "~@fullcalendar/daygrid/main.css";
+@import "~@fullcalendar/timegrid/main.css";
+
+.fc .fc-head-container {
+  border: none;
+  background-color: #ddd;
+}
+
+.fc .fc-widget-header {
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+}
+
+.fc .fc-day-header {
+  border-color: transparent;
+  padding: 20px 0;
+}
+
+.fc .fc-button {
+  background-color: red;
+}
+.fc .fc-button-primary:not(:disabled).fc-button-active {
+  background-color: green;
+}
+
+.fc .fc-day-number {
+  float: left !important;
+}
+
+.fc .fc-title {
+  white-space: break-spaces;
+}
+
+.fc .fc-event {
+  border-left: solid 5px black;
+}
+
+.fc .fc-content {
+  padding: 3px;
+}
+
+.fc .fc-prev-button {
+  border-radius: 50% !important;
+  height: 45px;
+  width: 45px;
+  background: transparent;
+  color: black;
+}
+
+.fc .fc-next-button {
+  border-radius: 50% !important;
+  height: 45px;
+  width: 45px;
+  background: transparent;
+  color: black;
+}
