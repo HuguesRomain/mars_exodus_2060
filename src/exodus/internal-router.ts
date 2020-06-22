@@ -26,6 +26,8 @@ class SocialAppRoutes {
 
 class ProfileAppRoutes {
   profile = () => `${profileApp}`;
+  identity = (token: string) => `${profileApp}identity/${token}`;
+  ticket = (token: string) => `${profileApp}ticket/${token}`;
 }
 
 const authAppRoutes = new AuthAppRoutes();
