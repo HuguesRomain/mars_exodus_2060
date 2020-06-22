@@ -1,3 +1,1 @@
-export const color = {
-
-}
+export const color = [];

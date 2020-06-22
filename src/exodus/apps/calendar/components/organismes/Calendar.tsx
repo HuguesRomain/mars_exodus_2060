@@ -19,17 +19,16 @@ export const Calendar = ({calendarEvents}: props) => {
 
   useEffect(() => {
     Bus.emit("EventDates", calendarEvents);
-  });
+  }, []);
 
-  const handleDateClick = (arg: any) => {
-    console.log(arg);
+  const handleDateClick = (arg: EventType) => {
     if (isPast(arg.date)) return;
     setcalendarEvents(
       calendarEvents.concat({
         title: "New Event",
         start: arg.date,
         allDay: arg.allDay,
-      }),
+      })
     );
   }; */
 
