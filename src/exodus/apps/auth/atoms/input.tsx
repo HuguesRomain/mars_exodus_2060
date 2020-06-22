@@ -14,14 +14,15 @@ type InputType = {
   placeholder: string;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   value: string;
+  type?: string;
 };
 
-export const Input = ({ value, placeholder, onChange }: InputType) => {
+export const Input = ({ type, value, placeholder, onChange }: InputType) => {
   return (
     <InputStyled
       value={value}
       onChange={onChange}
-      type="text"
+      type={type ? type : "text"}
       placeholder={placeholder}
     />
   );

@@ -8,7 +8,7 @@ const CardAuthStyled = styled.div`
   display: flex;
   flex-direction: column;
   max-width: ${rem(531)};
-  margin: 0 ${rem(15)};
+  margin: ${rem(10)} ${rem(15)};
 `;
 
 const Header = styled.div`
