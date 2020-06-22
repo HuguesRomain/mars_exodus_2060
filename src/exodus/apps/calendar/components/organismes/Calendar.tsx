@@ -1,25 +1,21 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import FullCalendar from "@fullcalendar/react";
-import { EventInput } from "@fullcalendar/core";
 import dayGridPlugin from "@fullcalendar/daygrid";
 import timeGridPlugin from "@fullcalendar/timegrid";
 import interactionPlugin from "@fullcalendar/interaction"; // needed for dayClick
 import frLocale from "@fullcalendar/core/locales/fr";
-import { isPast } from "date-fns";
-import Bus from "../../../../services/Bus";
+/* import { isPast } from "date-fns"; */
 
 import "./test.css";
 
-const BaseEvent = {
-  title: "Entrainement en apesanteur",
-  start: new Date(),
-  dateStr: "14:00, 18:00",
-};
+interface props {
+  calendarEvents: Array<Dates>;
+}
 
-export const Calendar = () => {
-  const [calendarEvents, setcalendarEvents] = useState<EventInput[]>([
+export const Calendar = ({calendarEvents}: props) => {
+  /* const [calendarEvents, setcalendarEvents] = useState<Dates[]>(
     BaseEvent,
-  ]);
+  );
 
   useEffect(() => {
     Bus.emit("EventDates", calendarEvents);
@@ -35,7 +31,7 @@ export const Calendar = () => {
         allDay: arg.allDay,
       }),
     );
-  };
+  }; */
 
   return (
     <FullCalendar
@@ -49,7 +45,7 @@ export const Calendar = () => {
         }} */
       plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
       events={calendarEvents}
-      dateClick={handleDateClick}
+      /* dateClick={handleDateClick} */
     />
   );
 };

@@ -13,11 +13,7 @@ const Item = styled.li`
 `;
 
 type Props = {
-  dateEvent: {
-    title: string;
-    start: Date;
-    dateStr: string;
-  };
+  dateEvent: Dates
 };
 
 export const ActivityItem = ({ dateEvent }: Props) => {
@@ -43,6 +39,7 @@ export const ActivityItem = ({ dateEvent }: Props) => {
     <div>
       <h2>{isActual}</h2>
       <Item>
+        <p>{dateEvent.status}</p>
         <p>{theDay}</p>
         <p>{theMounth}</p>
         <p>{dateEvent.title}</p>
