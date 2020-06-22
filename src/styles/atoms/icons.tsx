@@ -1,5 +1,5 @@
 import React, { CSSProperties } from "react";
-// import styled from "styled-components";
+// // import styled from "styled-components";
 import { Home, Calendar, Social, Profile } from "../assets/icons/icons";
 
 export class IconsMapping {
@@ -22,20 +22,9 @@ type Props = {
 };
 
 export const Icon = (props: Props) => {
-  const style: CSSProperties = {
-    fill: props.color ? props.color : "grey",
-    ...props.style,
-    maxHeight: `${props.size}px`,
-    maxWidth: `${props.size}px`,
-  };
-
   const CorrespondingIcon = iconsMapping[props.name];
 
-  return CorrespondingIcon ? (
-    <svg style={style} onClick={props.onClick}>
-      <CorrespondingIcon />
-    </svg>
-  ) : null;
+  return CorrespondingIcon ? <CorrespondingIcon /> : null;
 };
 
 // Todo : Change the svg logic or found a adequate lib
