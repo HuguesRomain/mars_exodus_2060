@@ -3,16 +3,17 @@ import { PostItem } from "./organismes/PostItem";
 
 const postes = [
   {
-    author: "Ada Lovelace",
-    avatar:
-      "https://vignette.wikia.nocookie.net/fallout/images/c/c0/VaultBoyFO3.png/revision/latest?cb=20110809182235",
+    author: "Julien Verite",
+    avatar: "https://pbs.twimg.com/media/EapZFw1XgAA1LEW?format=jpg&name=small",
     date: new Date("2020-06-23T00:00:00"),
     text:
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ligula nunc nunc massa nibh eu.",
     like: 3,
     comment: [
       {
-        author: "Eddy Saturn",
+        author: "Sezer Celik",
+        avatar:
+          "https://media-exp1.licdn.com/dms/image/C5603AQHhfdZN6P5jBA/profile-displayphoto-shrink_200_200/0?e=1597276800&v=beta&t=A6ymlRiTyS0ieUQ3Dvbzi5oOf4l-0Jiw3CBeqqPoo_w",
         date: new Date("2020-06-23T00:00:00"),
         text: "ipsum dolor sit amet, consectetur adipiscing elit.",
       },

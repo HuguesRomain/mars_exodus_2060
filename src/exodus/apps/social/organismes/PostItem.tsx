@@ -1,5 +1,9 @@
 import React from "react";
 import styled from "styled-components";
+import { Like } from "../atoms/Like";
+import { Comment } from "../atoms/Comment";
+import { Share } from "../atoms/Share";
+import { CommentItem } from "./CommentItem";
 
 const Item = styled.li`
   list-style-type: none;
@@ -7,7 +11,6 @@ const Item = styled.li`
   border-radius: 20px;
   background-color: white;
   padding: 15px;
-  justify-content: flex-start;
 `;
 const UserInfo = styled.div`
   display: flex;
@@ -31,6 +34,17 @@ const PostText = styled.p`
   text-align: center;
   padding-top: 10px;
 `;
+const Interact = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  padding-top: 10px;
+`;
+
+/* const Icon = styled.svg`
+  fill: red;
+  width: 15px;
+  height: 15px;
+`; */
 
 type Props = {
   posts: Posts;
@@ -40,13 +54,24 @@ export const PostItem = ({ posts }: Props) => {
   const theDay = posts.date.toLocaleString("default", { weekday: "long" });
 
   return (
-    <Item>
-      <UserInfo>
-        <Avatar src={posts.avatar} alt="avatar" />
-        <Author>{posts.author}</Author>
-        <Since>{theDay}</Since>
-      </UserInfo>
-      <PostText>{posts.text}</PostText>
-    </Item>
+    <>
+      <Item>
+        <UserInfo>
+          <Avatar src={posts.avatar} alt="avatar" />
+          <Author>{posts.author}</Author>
+          <Since>il y a {theDay}</Since>
+        </UserInfo>
+        <PostText>{posts.text}</PostText>
+        <Interact>
+          <Share />
+          <Like quantity={22} />
+          <Comment quantity={posts.comment.length} />
+        </Interact>
+      </Item>
+      {posts.comment &&
+        posts.comment.map((value) => {
+          return <CommentItem key={value.author} comments={value} />;
+        })}
+    </>
   );
 };

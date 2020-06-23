@@ -6,6 +6,7 @@ type Posts = {
   like: number;
   comment: Array<{
     author: string;
+    avatar: string;
     date: Date;
     text: stiring;
   }>;
