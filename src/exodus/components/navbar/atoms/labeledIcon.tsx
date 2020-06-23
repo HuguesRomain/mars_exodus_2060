@@ -36,7 +36,6 @@ const IconWrapper = styled.div`
 `;
 
 export const LabeledIcon = ({ app }: { app: AppsTypes }) => {
-  // const [earthOrMars, setEarthOrMars] = useState("earth");
   const history = useHistory();
   const isLocation = (uri: UriType) => window.location.pathname.includes(uri);
   return (
