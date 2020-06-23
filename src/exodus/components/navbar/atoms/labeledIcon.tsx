@@ -5,7 +5,7 @@ import { useHistory } from "react-router-dom";
 import { UriType } from "exodus/internal-router";
 import { Icon } from "styles/atoms/icons";
 import { AppsTypes } from "../data";
-import { color } from "styles/const";
+import { color, iconSize } from "styles/const";
 import { LabelOverlay } from "..";
 import { isMobileOnly } from "react-device-detect";
 import { rem } from "polished";
@@ -50,7 +50,7 @@ export const LabeledIcon = ({ app }: { app: AppsTypes }) => {
             history.push(app.uri);
           }}
           name={app.icon}
-          size={"24"}
+          size={iconSize.m}
           color={
             isLocation(app.uri)
               ? color.darker.BlackRussian

@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Icon } from "styles/atoms/icons";
 import { rem } from "polished";
+import LogoMarsExodus from "../../../../styles/assets/LogoMarsExodus.png";
 
 const IconStyled = styled.div`
   display: flex;
@@ -10,10 +10,14 @@ const IconStyled = styled.div`
   width: ${rem(250)};
 `;
 
+const Logo = styled.img`
+  width: ${rem(30)};
+`;
+
 export const IconMarsExodus = () => {
   return (
     <IconStyled>
-      <Icon name={"logo"} />
+      <Logo src={LogoMarsExodus} />
     </IconStyled>
   );
 };

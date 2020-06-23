@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Icon } from "styles/atoms/icons";
 import { rem } from "polished";
-import { color } from "styles/const";
+import { color, iconSize } from "styles/const";
 
 const PlanetsDateStyled = styled.div`
   display: flex;
@@ -61,7 +61,7 @@ const Text = styled.p`
 const Position = ({ planet }: { planet: string }) => {
   return (
     <PositionStyled>
-      <Icon name={"pin"} size={"10"} color={"red"} />
+      <Icon name={"pin"} size={iconSize.xs} color={"red"} />
       <PositionText>{planet}</PositionText>
     </PositionStyled>
   );
@@ -111,9 +111,9 @@ const PlanetDate = ({ isBorder, name, date, hours }: PlanetType) => {
         isBorder={isBorder}
       >
         {name === "earth" ? (
-          <Icon name={"earth"} size={"45"} />
+          <Icon name={"earth"} size={iconSize.xl} />
         ) : (
-          <Icon name={"mars"} size={"45"} />
+          <Icon name={"mars"} size={iconSize.xl} />
         )}
       </PlanetDateStyled>
     </div>

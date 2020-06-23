@@ -36,7 +36,6 @@ const NavBarWrapper = styled.nav`
   background-color: white;
   border-radius: 0px 20px 20px 0px;
   height: 100vh;
-  z-index: 100000000;
 `;
 
 const WrapperNavigation = styled.div`
@@ -61,7 +60,6 @@ const ListItemMenuLinkWrapper = styled.div`
   flex-direction: column;
   justify-content: space-between;
   height: ${rem(300)};
-  margin-top: ${rem(40)};
 `;
 
 const NavBarMobile = () => {

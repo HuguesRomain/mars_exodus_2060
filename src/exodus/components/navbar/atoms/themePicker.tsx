@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import { Icon } from "styles/atoms/icons";
-import { color } from "styles/const";
+import { color, iconSize } from "styles/const";
 import { rem } from "polished";
 import { DeviceSize } from "exodus/utils/checkWindowSize";
 
@@ -42,14 +42,14 @@ export const ThemePicker = () => {
       {isLight ? (
         <>
           <IconWrapper>
-            <Icon name={"sun"} />
+            <Icon name={"sun"} size={iconSize.m} />
           </IconWrapper>
           {DeviceSize.isMinVerticalTablet() && <Label>Light</Label>}
         </>
       ) : (
         <>
           <IconWrapper>
-            <Icon name={"moon"} />
+            <Icon name={"moon"} size={iconSize.m} />
           </IconWrapper>
           {DeviceSize.isMinVerticalTablet() && <Label>Dark</Label>}
         </>

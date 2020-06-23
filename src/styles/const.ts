@@ -1,3 +1,5 @@
+import { rem } from "polished";
+
 export const color = {
   light: {
     PureWhite: "#ffffff",
@@ -19,4 +21,19 @@ export const color = {
   Lipstick: "#9B1D44",
 };
 
-// const device
+export const space = {
+  xs: rem(8),
+  s: rem(16),
+  m: rem(24),
+  l: rem(48),
+  xl: rem(80),
+};
+
+export const iconSize = {
+  xs: rem(8),
+  s: rem(16),
+  m: rem(24),
+  l: rem(32),
+  xl: rem(48),
+  xxl: rem(64),
+};
