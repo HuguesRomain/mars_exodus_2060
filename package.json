@@ -20,6 +20,7 @@
     "date-fns": "^2.14.0",
     "polished": "^3.6.4",
     "react": "^16.13.1",
+    "react-device-detect": "^1.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",

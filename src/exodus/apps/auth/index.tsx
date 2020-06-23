@@ -1,7 +1,7 @@
 import React from "react";
 
 const AuthApp = () => {
-  return <div>auth</div>;
+  return <div></div>;
 };
 
-export default AuthApp
+export default AuthApp;

@@ -1,4 +1,7 @@
 import * as React from "react";
+import styled from "styled-components";
+import { rem } from "polished";
+import { isMobileOnly } from "react-device-detect";
 import { AppFrame } from "./startup";
 
 const AuthApp = React.lazy(() => import("./apps/auth"));
@@ -26,7 +29,7 @@ const getApp = () => {
   }
 
   const maybeApp = launchers.find(([pathPrefix]) =>
-    currentPath.startsWith(pathPrefix),
+    currentPath.startsWith(pathPrefix)
   );
 
   if (maybeApp) {
@@ -37,10 +40,18 @@ const getApp = () => {
   }
 };
 
+const AppWrapper = styled.div`
+  padding: ${isMobileOnly
+    ? `${rem(69)} ${rem(10)} ${rem(10)} ${rem(30)}`
+    : `0 0 0 ${rem(100)}`};
+`;
+
 const AppWithContext = ({ App }) => {
   return (
     <AppFrame>
-      <App />
+      <AppWrapper>
+        <App />
+      </AppWrapper>
     </AppFrame>
   );
 };

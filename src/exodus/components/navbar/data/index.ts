@@ -7,7 +7,7 @@ import {
 } from "../../../internal-router";
 import { IconName } from "styles/atoms/icons";
 
-type AppsTypes = {
+export type AppsTypes = {
   label: string;
   uri: UriType;
   icon: IconName;

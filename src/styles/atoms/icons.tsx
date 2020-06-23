@@ -1,41 +1,49 @@
-import React, { CSSProperties } from "react";
-// import styled from "styled-components";
-import { Home, Calendar, Social, Profile } from "../assets/icons/icons";
+import React from "react";
+import {
+  Home,
+  Calendar,
+  Social,
+  Profile,
+  Sun,
+  Earth,
+  Mars,
+  Logo,
+  Moon,
+  Pin,
+} from "../assets/icons/icons";
 
 export class IconsMapping {
   home = Home;
   calendar = Calendar;
   social = Social;
   profile = Profile;
+  sun = Sun;
+  moon = Moon;
+  earth = Earth;
+  mars = Mars;
+  logo = Logo;
+  pin = Pin;
 }
 
 export type IconName = keyof IconsMapping;
 const iconsMapping = new IconsMapping();
 
-type Props = {
+export type IconProps = {
   name: IconName;
   color?: string | null;
+  secondColor?: string | null;
   size?: number | string;
-  className?: string;
-  style?: React.CSSProperties;
   onClick?: (e: any) => void;
 };
 
-export const Icon = (props: Props) => {
-  const style: CSSProperties = {
-    fill: props.color ? props.color : "grey",
-    ...props.style,
-    maxHeight: `${props.size}px`,
-    maxWidth: `${props.size}px`,
-  };
-
+export const Icon = (props: IconProps) => {
   const CorrespondingIcon = iconsMapping[props.name];
 
   return CorrespondingIcon ? (
-    <svg style={style} onClick={props.onClick}>
-      <CorrespondingIcon />
-    </svg>
+    <CorrespondingIcon
+      onClick={props.onClick}
+      size={props.size}
+      color={props.color}
+    />
   ) : null;
 };
-
-// Todo : Change the svg logic or found a adequate lib

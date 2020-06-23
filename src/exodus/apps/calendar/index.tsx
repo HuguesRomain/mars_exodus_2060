@@ -24,11 +24,11 @@ const BaseEvent = [
 ];
 
 const CalendarApp = () => {
-  const [calendarEvents, setcalendarEvents] = useState<Dates[]>(BaseEvent);
+  const [calendarEvents] = useState<Dates[]>(BaseEvent);
   return (
     <Content>
-      <ActivityList calendarEvents={calendarEvents}/>
-      <Calendar calendarEvents={calendarEvents}/>
+      <ActivityList calendarEvents={calendarEvents} />
+      <Calendar calendarEvents={calendarEvents} />
     </Content>
   );
 };
