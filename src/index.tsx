@@ -10,17 +10,17 @@ import { MobileHeader } from "exodus/components/molecules/mobileHeader";
 import { isMobileOnly } from "react-device-detect";
 // Need to export class from all files to resolve this error
 // "All files must be modules when the '--isolatedModules' flag is provided."
-const Loading = ({ props }: { props: string }) => <div>{props}</div>;
+// const Loading = ({ props }: { props: string }) => <div>{props}</div>;
 
 ReactDOM.render(
   <>
     {isMobileOnly && <MobileHeader />}
-    <React.Suspense fallback={<Loading props={`"Chargement en cours..."`} />}>
+    {!window.location.pathname.includes(authApp) && <NavBarContainer />}
+    <React.Suspense fallback={<div></div>}>
       <GlobalStyled />
       <Normalize />
       <App />
     </React.Suspense>
-    {!window.location.pathname.includes(authApp) && <NavBarContainer />}
   </>,
   document.getElementById("root")
 );

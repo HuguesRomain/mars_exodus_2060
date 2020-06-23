@@ -8,6 +8,7 @@ import { LabeledIcon } from "./atoms/labeledIcon";
 import { isMobileOnly } from "react-device-detect";
 import { IconMarsExodus } from "./atoms/IconMarsExodus";
 import { ThemePicker } from "./atoms/themePicker";
+import { PlanetsDate } from "./organisms/planetDate";
 
 const WrapperMobileNavigation = styled.div`
   display: flex;
@@ -24,6 +25,7 @@ const NavBarMobileWrapper = styled.nav`
   padding: ${rem(15)} ${rem(20)};
   background-color: white;
   border-radius: 20px 20px 0px 0px;
+  z-index: -1;
 `;
 
 const NavBarWrapper = styled.nav`
@@ -32,34 +34,34 @@ const NavBarWrapper = styled.nav`
   left: 0;
   width: ${rem(96)};
   background-color: white;
-  border-radius: 20px 20px 0px 0px;
+  border-radius: 0px 20px 20px 0px;
   height: 100vh;
-
-  @media (min-width: 770px) {
-    width: ${rem(250)};
-  }
+  z-index: 100000000;
 `;
 
 const WrapperNavigation = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
   padding: ${rem(15)} ${rem(20)};
 `;
 
 export const LabelOverlay = styled.p<{ linkActive?: boolean }>`
-  padding-left: ${rem(5)};
   color: ${(props) =>
-    !props.linkActive ? color.medium.LinkWater : color.darker.BlackRussian};
+    !props.linkActive ? color.medium.Manatee : color.darker.BlackRussian};
 
   @media (min-width: 1440px) {
-    padding-left: ${rem(10)};
+    padding-top: ${rem(10)};
   }
 `;
 
-const NavElementWrapper = styled.div`
+const ListItemMenuLinkWrapper = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: ${rem(300)};
-  margin-top: ${rem(70)};
+  margin-top: ${rem(40)};
 `;
 
 const NavBarMobile = () => {
@@ -76,12 +78,15 @@ const NavBar = () => {
   return (
     <WrapperNavigation>
       <IconMarsExodus />
-      <NavElementWrapper>
+      <ListItemMenuLinkWrapper>
         {apps.map((app, i) => {
           return <LabeledIcon key={i} app={app} />;
         })}
-      </NavElementWrapper>
-      <ThemePicker />
+      </ListItemMenuLinkWrapper>
+      <div style={{ marginTop: rem(100) }}>
+        <ThemePicker />
+        <PlanetsDate />
+      </div>
     </WrapperNavigation>
   );
 };

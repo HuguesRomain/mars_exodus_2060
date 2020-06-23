@@ -6,7 +6,7 @@ export const color = {
     AliceBlue: "#F3F8FE",
   },
   medium: {
-    LinkWater: "#C1C6D7",
+    Manatee: "#848897",
   },
   darker: {
     BlackRussian: "#091124",
@@ -18,3 +18,5 @@ export const color = {
   SunsetOrange: "#FC5252",
   Lipstick: "#9B1D44",
 };
+
+// const device

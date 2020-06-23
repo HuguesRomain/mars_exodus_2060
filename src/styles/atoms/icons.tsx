@@ -6,8 +6,10 @@ import {
   Profile,
   Sun,
   Earth,
+  Mars,
   Logo,
   Moon,
+  Pin,
 } from "../assets/icons/icons";
 
 export class IconsMapping {
@@ -18,7 +20,9 @@ export class IconsMapping {
   sun = Sun;
   moon = Moon;
   earth = Earth;
+  mars = Mars;
   logo = Logo;
+  pin = Pin;
 }
 
 export type IconName = keyof IconsMapping;
