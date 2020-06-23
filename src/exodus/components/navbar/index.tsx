@@ -30,13 +30,13 @@ const NavBarWrapper = styled.nav`
   overflow: hidden;
   position: fixed;
   left: 0;
-  width: ${rem(250)};
+  width: ${rem(96)};
   background-color: white;
   border-radius: 20px 20px 0px 0px;
   height: 100vh;
 
-  @media (min-width: 768px) {
-    width: ${rem(96)};
+  @media (min-width: 770px) {
+    width: ${rem(250)};
   }
 `;
 
