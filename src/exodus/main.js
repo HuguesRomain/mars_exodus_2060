@@ -41,7 +41,7 @@ const getApp = () => {
 };
 
 const AppWrapper = styled.div`
-  padding: ${isMobileOnly ? `${rem(69)} 0 ${rem(10)} 0` : `0 0 0 ${rem(100)}`};
+  padding: ${isMobileOnly ? `${rem(69)} 0 ${rem(90)} 0` : `0 0 0 ${rem(100)}`};
 `;
 
 const AppWithContext = ({ App }) => {

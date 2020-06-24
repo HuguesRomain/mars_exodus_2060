@@ -14,7 +14,7 @@ const ThemePickerStyled = styled.a<{ isLocation?: boolean }>`
   display: flex;
   align-items: center;
   flex-direction: column;
-
+  cursor: pointer;
   @media (min-width: 768px) {
     padding: ${rem(15)};
     background: ${(props) => props.isLocation && "#F8F8F8"};

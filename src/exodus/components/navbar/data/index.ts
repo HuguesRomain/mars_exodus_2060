@@ -6,6 +6,7 @@ import {
   UriType,
 } from "../../../internal-router";
 import { IconName } from "styles/atoms/icons";
+import { isMobile } from "react-device-detect";
 
 export type AppsTypes = {
   label: string;
@@ -35,11 +36,8 @@ export const apps: AppsTypes[] = [
   },
   {
     label: "Compte",
-    uri: profileAppRouter.profile(),
+    uri: isMobile ? profileAppRouter.identity("1") : profileAppRouter.profile(),
     icon: "profile",
     order: 4,
   },
 ];
-
-/* Ordre correspond à leurs positions dans la barre de navigation 
-ça peut être utile de préciser l'information */
