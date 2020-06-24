@@ -3,28 +3,21 @@ import styled from "styled-components";
 import { apps } from "./data/index";
 
 import { rem } from "polished";
-import { Icon } from "../../../styles/atoms/icons";
+import { color } from "styles/const";
+import { LabeledIcon } from "./atoms/labeledIcon";
+import { isMobileOnly } from "react-device-detect";
+import { IconMarsExodus } from "./atoms/IconMarsExodus";
+import { ThemePicker } from "./atoms/themePicker";
+import { PlanetsDate } from "./organisms/planetDate";
 
-import { useHistory } from "react-router-dom";
-
-const WrapperNavigation = styled.div`
+const WrapperMobileNavigation = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
 `;
 
-const ListItemMenuLink = styled.a`
-  display: flex;
-  align-items: center;
-  padding: 10;
-`;
-
-const Label = styled.p<{ linkActive: boolean }>`
-  padding-left: ${rem(5)};
-`;
-
-const NavBarWrapper = styled.div`
+const NavBarMobileWrapper = styled.nav`
   overflow: hidden;
   position: fixed;
   bottom: 0;
@@ -32,38 +25,82 @@ const NavBarWrapper = styled.div`
   padding: ${rem(15)} ${rem(20)};
   background-color: white;
   border-radius: 20px 20px 0px 0px;
+  z-index: -1;
 `;
 
+const NavBarWrapper = styled.nav`
+  overflow: hidden;
+  position: fixed;
+  left: 0;
+  width: ${rem(96)};
+  background-color: white;
+  border-radius: 0px 20px 20px 0px;
+  height: 100vh;
+`;
+
+const WrapperNavigation = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  padding: ${rem(15)} ${rem(20)};
+`;
+
+export const LabelOverlay = styled.p<{ linkActive?: boolean }>`
+  color: ${(props) =>
+    !props.linkActive ? color.medium.Manatee : color.darker.BlackRussian};
+
+  @media (min-width: 1440px) {
+    padding-top: ${rem(10)};
+  }
+`;
+
+const ListItemMenuLinkWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: ${rem(300)};
+`;
+
+const NavBarMobile = () => {
+  return (
+    <WrapperMobileNavigation>
+      {apps.map((app, i) => {
+        return <LabeledIcon key={i} app={app} />;
+      })}
+    </WrapperMobileNavigation>
+  );
+};
+
 const NavBar = () => {
-  const history = useHistory();
   return (
     <WrapperNavigation>
-      {apps.map(({ label, uri, icon }) => {
-        return (
-          <ListItemMenuLink href={uri}>
-            <Icon
-              onClick={() => {
-                history.push(uri);
-              }}
-              name={icon}
-              size={24}
-            />
-            {window.location.pathname.includes(uri) && (
-              <Label linkActive={window.location.pathname.includes(uri)}>
-                {label}
-              </Label>
-            )}
-          </ListItemMenuLink>
-        );
-      })}
+      <IconMarsExodus />
+      <ListItemMenuLinkWrapper>
+        {apps.map((app, i) => {
+          return <LabeledIcon key={i} app={app} />;
+        })}
+      </ListItemMenuLinkWrapper>
+      <div style={{ marginTop: rem(100) }}>
+        <ThemePicker />
+        <PlanetsDate />
+      </div>
     </WrapperNavigation>
   );
 };
 
 export const NavBarContainer = () => {
   return (
-    <NavBarWrapper>
-      <NavBar></NavBar>
-    </NavBarWrapper>
+    <>
+      {isMobileOnly ? (
+        <NavBarMobileWrapper>
+          <NavBarMobile />
+        </NavBarMobileWrapper>
+      ) : (
+        <NavBarWrapper>
+          <NavBar />
+        </NavBarWrapper>
+      )}
+    </>
   );
 };

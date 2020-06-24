@@ -2,6 +2,9 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 import { profileAppRouter } from "exodus/internal-router";
 import styled from "styled-components";
+import { ProfileHeader } from "./molecules/header";
+import { isMobileOnly } from "react-device-detect";
+import { ProfileNavigation } from "./molecules/navigation";
 
 const Nav = styled.div`
   display: flex;
@@ -10,10 +13,7 @@ const Nav = styled.div`
 const ProfileApp = () => {
   return (
     <>
-      <Nav>
-        <Link to={profileAppRouter.identity("1")}>Identité</Link>
-        <Link to={profileAppRouter.ticket("1")}>Billet</Link>
-      </Nav>
+      {!isMobileOnly && <ProfileHeader />}
       <Router>
         <Switch>
           <Route
@@ -27,6 +27,7 @@ const ProfileApp = () => {
             render={() => <div />}
           />
         </Switch>
+        <ProfileNavigation />
       </Router>
     </>
   );
