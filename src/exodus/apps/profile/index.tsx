@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { profileAppRouter } from "exodus/internal-router";
 import styled from "styled-components";
 import { isMobileOnly, isMobile } from "react-device-detect";
-import { ProfileNavigation } from "./molecules/navigation";
+import { SubNavigation } from "../../components/molecules/subNavigation";
 import { IdentityCard } from "./molecules/identityCard";
 import { Button } from "exodus/components/atoms/button";
 import { rem } from "polished";
@@ -29,12 +29,23 @@ const ButtonWrapper = styled.div`
   padding: ${rem(10)} 0;
 `;
 
+export const apps = [
+  {
+    label: "Identité",
+    uri: profileAppRouter.identity("1"),
+  },
+  {
+    label: "Billet",
+    uri: profileAppRouter.ticket("1"),
+  },
+];
+
 const ProfileApp = () => {
   return isMobile ? (
     <ProfileAppMobileStyled>
       {!isMobileOnly && <WelcomeMessage />}
       <Router>
-        <ProfileNavigation />
+        <SubNavigation datas={apps} />
         <Switch>
           <Route
             exact
