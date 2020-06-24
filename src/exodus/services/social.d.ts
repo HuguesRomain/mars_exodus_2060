@@ -8,6 +8,6 @@ type Posts = {
     author: string;
     avatar: string;
     date: Date;
-    text: stiring;
+    text: string;
   }>;
 };

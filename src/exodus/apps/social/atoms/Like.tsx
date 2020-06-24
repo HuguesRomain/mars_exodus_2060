@@ -21,7 +21,7 @@ export const Like = ({ quantity }: Props) => {
   let [like, setLike] = useState<number>(quantity);
   let [triger, setTriger] = useState<boolean>(false);
 
-  const handleLike = (event: React.MouseEvent<HTMLElement>) => {
+  const handleLike = () => {
     if (triger) return;
     setLike((like += 1));
     setTriger(true);

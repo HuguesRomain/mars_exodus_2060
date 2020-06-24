@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Like } from "../atoms/Like";
 import { Comment } from "../atoms/Comment";
 import { Share } from "../atoms/Share";
-/* import { CommentItem } from "./CommentItem"; */
+import { CommentItem } from "./CommentItem";
 
 const Item = styled.li`
   list-style-type: none;
@@ -48,7 +48,6 @@ type Props = {
 
 export const PostItem = ({ posts }: Props) => {
   const theDay = posts.date.toLocaleString("default", { weekday: "long" });
-
   return (
     <>
       <Item>
@@ -63,11 +62,12 @@ export const PostItem = ({ posts }: Props) => {
           <Like quantity={0} />
           <Comment quantity={posts.comment.length} />
         </Interact>
+        {window.matchMedia("(min-width: 600px)").matches &&
+          posts.comment &&
+          posts.comment.map((value) => {
+            return <CommentItem key={value.author} comments={value} />;
+          })}
       </Item>
-      {/* {posts.comment &&
-        posts.comment.map((value) => {
-          return <CommentItem key={value.author} comments={value} />;
-        })} */}
     </>
   );
 };

@@ -31,7 +31,7 @@ const getApp = () => {
   }
 
   const maybeApp = launchers.find(([pathPrefix]) =>
-    currentPath.startsWith(pathPrefix)
+    currentPath.startsWith(pathPrefix),
   );
 
   if (maybeApp) {

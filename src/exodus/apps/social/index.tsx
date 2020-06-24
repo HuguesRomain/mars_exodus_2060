@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { PostItem } from "./organismes/PostItem";
 import { SendComment } from "./organismes/SendComment";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import MobileComments from "./MobileComments";
 
 const postes = [
   {
@@ -25,15 +27,22 @@ const postes = [
 const SocialApp = () => {
   const [posts, setposts] = useState<Posts[]>(postes);
   return (
-    <main>
-      <SendComment setposts={setposts} posts={posts} />
-      <ul>
-        {posts &&
-          posts.map((value) => {
-            return <PostItem key={value.like} posts={value} />;
-          })}
-      </ul>
-    </main>
+    <Router>
+      <main>
+        <Switch>
+          <Route path="/app/social">
+            <SendComment setposts={setposts} posts={posts} />
+            <ul>
+              {posts &&
+                posts.map((value) => {
+                  return <PostItem key={value.like} posts={value} />;
+                })}
+            </ul>
+          </Route>
+          <Route path="/app/comments" component={MobileComments} />
+        </Switch>
+      </main>
+    </Router>
   );
 };
 

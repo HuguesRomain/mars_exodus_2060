@@ -24,7 +24,7 @@ export const Comment = ({ quantity }: Props) => {
 
   const goToComments = () => {
     if (window.matchMedia("(max-width: 600px)").matches) {
-      console.log(`test ${history}`);
+      history.push("/app/comments");
     } else console.log("sorry bro");
   };
 

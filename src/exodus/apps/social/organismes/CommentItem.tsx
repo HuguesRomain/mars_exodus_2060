@@ -1,9 +1,11 @@
 import React from "react";
 import styled from "styled-components";
 
-const Comment = styled.div`
+const Comment = styled.li`
+  list-style-type: none;
   max-width: 500px;
   display: flex;
+  margin: 10px auto 0;
 `;
 const Avatar = styled.img`
   width: 32px;
@@ -14,9 +16,10 @@ const Avatar = styled.img`
   align-self: center;
 `;
 const Content = styled.div`
-  background-color: #f2f2f2;
+  background-color: white;
   border-radius: 20px;
   padding: 10px 13px;
+  width: 100%;
 `;
 const Author = styled.p`
   display: inline;
