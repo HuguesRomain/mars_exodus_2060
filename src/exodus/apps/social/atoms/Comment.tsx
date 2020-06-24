@@ -2,6 +2,8 @@ import React from "react";
 import styled from "styled-components";
 import icons from "../../../../assets/icons.svg";
 
+import { useHistory } from "react-router-dom";
+
 const Item = styled.div`
   display: flex;
 `;
@@ -18,8 +20,16 @@ type Props = {
 };
 
 export const Comment = ({ quantity }: Props) => {
+  const history = useHistory();
+
+  const goToComments = () => {
+    if (window.matchMedia("(max-width: 600px)").matches) {
+      console.log(`test ${history}`);
+    } else console.log("sorry bro");
+  };
+
   return (
-    <Item>
+    <Item onClick={goToComments}>
       <Icon>
         <use xlinkHref={`${icons}#comments`} />
       </Icon>

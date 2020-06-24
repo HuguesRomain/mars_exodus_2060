@@ -11,6 +11,7 @@ const Item = styled.li`
   border-radius: 20px;
   background-color: white;
   padding: 15px;
+  margin-top: 20px;
 `;
 const UserInfo = styled.div`
   display: flex;
@@ -19,6 +20,8 @@ const UserInfo = styled.div`
 `;
 const Avatar = styled.img`
   width: 32px;
+  height: 32px;
+  object-fit: cover;
   border-radius: 50%;
   background-color: yellow;
 `;
@@ -31,7 +34,6 @@ const Since = styled.p`
   margin-left: auto;
 `;
 const PostText = styled.p`
-  text-align: center;
   padding-top: 10px;
 `;
 const Interact = styled.div`
@@ -64,14 +66,14 @@ export const PostItem = ({ posts }: Props) => {
         <PostText>{posts.text}</PostText>
         <Interact>
           <Share />
-          <Like quantity={22} />
+          <Like quantity={0} />
           <Comment quantity={posts.comment.length} />
         </Interact>
       </Item>
-      {posts.comment &&
+      {/* {posts.comment &&
         posts.comment.map((value) => {
           return <CommentItem key={value.author} comments={value} />;
-        })}
+        })} */}
     </>
   );
 };

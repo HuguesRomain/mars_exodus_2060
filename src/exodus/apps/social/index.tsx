@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { PostItem } from "./organismes/PostItem";
+import { SendComment } from "./organismes/SendComment";
 
 const postes = [
   {
@@ -25,6 +26,7 @@ const SocialApp = () => {
   const [posts, setposts] = useState<Posts[]>(postes);
   return (
     <main>
+      <SendComment setposts={setposts} posts={posts} />
       <ul>
         {posts &&
           posts.map((value) => {

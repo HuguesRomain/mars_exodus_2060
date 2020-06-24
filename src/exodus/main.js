@@ -6,6 +6,7 @@ const HomeApp = React.lazy(() => import("./apps/home"));
 const ProfileApp = React.lazy(() => import("./apps/profile"));
 const CalendarApp = React.lazy(() => import("./apps/calendar"));
 const SocialApp = React.lazy(() => import("./apps/social"));
+const MobileComments = React.lazy(() => import("./apps/social/MobileComments"));
 
 export const AppContext = React.createContext(null);
 
@@ -15,6 +16,7 @@ const launchers = [
   ["/app/profile", ProfileApp],
   ["/app/calendar", CalendarApp],
   ["/app/social", SocialApp],
+  ["/app/comments", MobileComments],
 ];
 
 const getApp = () => {
