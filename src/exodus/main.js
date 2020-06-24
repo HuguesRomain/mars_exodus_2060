@@ -16,6 +16,7 @@ import {
   socialAppRouter,
   profileAppRouter,
 } from "./internal-router";
+import { isMobile } from "react-device-detect";
 
 export const AppContext = React.createContext(null);
 
@@ -51,7 +52,11 @@ const AppWithContext = () => {
             />
             <Route
               exact
-              path={profileAppRouter.profile()}
+              path={
+                isMobile
+                  ? profileAppRouter.identity("1")
+                  : profileAppRouter.profile()
+              }
               render={() => <ProfileApp />}
             />
           </Switch>
