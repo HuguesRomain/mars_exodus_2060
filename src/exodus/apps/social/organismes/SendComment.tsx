@@ -8,7 +8,7 @@ const Content = styled.div`
   border-radius: 20px;
   background-color: white;
   padding: 12px 21px;
-  margin-bottom: 24px;
+  margin: 0 auto;
 
   @media (max-width: 500px) {
     margin: 20px 20px;
@@ -35,6 +35,7 @@ const CommentInput = styled.input`
   margin-left: 20px;
   height: 48px;
   border: none;
+  width: 100%;
 `;
 const Icon = styled.svg`
   fill: #fc5252;

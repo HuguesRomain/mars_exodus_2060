@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { Like } from "../atoms/Like";
 import { Comment } from "../atoms/Comment";
 import { Share } from "../atoms/Share";
-import { CommentItem } from "./CommentItem";
+/* import { CommentItem } from "./CommentItem"; */
 
 const Item = styled.li`
   list-style-type: none;
@@ -11,7 +11,7 @@ const Item = styled.li`
   border-radius: 20px;
   background-color: white;
   padding: 15px;
-  margin-top: 20px;
+  margin: 20px auto;
 `;
 const UserInfo = styled.div`
   display: flex;
@@ -41,12 +41,6 @@ const Interact = styled.div`
   justify-content: flex-end;
   padding-top: 10px;
 `;
-
-/* const Icon = styled.svg`
-  fill: red;
-  width: 15px;
-  height: 15px;
-`; */
 
 type Props = {
   posts: Posts;
