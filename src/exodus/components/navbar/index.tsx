@@ -33,9 +33,9 @@ const NavBarWrapper = styled.nav`
   position: fixed;
   left: 0;
   width: ${rem(96)};
+  height: 100%;
   background-color: white;
   border-radius: 0px 20px 20px 0px;
-  height: 100vh;
 `;
 
 const WrapperNavigation = styled.div`

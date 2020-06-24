@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 import { color, space } from "styles/const";
-import { rem } from "polished";
 
 const LabeledInfoStyled = styled.div`
   display: flex;

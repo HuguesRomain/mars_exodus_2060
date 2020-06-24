@@ -9,6 +9,7 @@ import {
   Mars,
   Moon,
   Pin,
+  Disconnect,
 } from "../assets/icons/icons";
 
 export class IconsMapping {
@@ -21,6 +22,7 @@ export class IconsMapping {
   earth = Earth;
   mars = Mars;
   pin = Pin;
+  disconnect = Disconnect;
 }
 
 export type IconName = keyof IconsMapping;
@@ -32,7 +34,7 @@ export type IconProps = {
   secondColor?: string | null;
   size?: number | string;
   onClick?: (e: any) => void;
-  // style?: CSSProperties;
+  style?: CSSProperties;
 };
 
 export const Icon = (props: IconProps) => {
@@ -43,7 +45,7 @@ export const Icon = (props: IconProps) => {
       onClick={props.onClick}
       size={props.size}
       color={props.color}
-      // style={style}
+      style={props.style}
     />
   ) : null;
 };

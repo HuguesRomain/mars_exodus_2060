@@ -2,24 +2,24 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { Icon, IconName } from "styles/atoms/icons";
 import { rem } from "polished";
-import { color } from "styles/const";
+import { color as globalColors } from "styles/const";
 
 const primary = css`
-  background-color: ${color.SunsetOrange};
-  color: ${color.light.PureWhite};
+  background-color: ${globalColors.SunsetOrange};
+  color: ${globalColors.light.PureWhite};
 
   :hover {
-    background-color: ${color.Alizarin};
+    background-color: ${globalColors.Alizarin};
   }
 `;
 
 const secondary = css`
-  border: solid 1px ${color.darker.LuckyPoint};
-  color: ${color.darker.LuckyPoint};
+  border: solid 1px ${globalColors.darker.LuckyPoint};
+  color: ${globalColors.darker.LuckyPoint};
 
   :hover {
-    color: ${color.light.PureWhite};
-    background-color: ${color.darker.LuckyPoint};
+    color: ${globalColors.light.PureWhite};
+    background-color: ${globalColors.darker.LuckyPoint};
   }
 `;
 
@@ -30,7 +30,7 @@ const PrecomputeButton = styled.div<ButtonProps>`
   align-items: center;
   border-radius: 8px;
   width: 100%;
-  min-height: ${rem(40)};
+  height: ${rem(40)};
   min-width: ${rem(134)};
   padding: 0 ${rem(10)};
   cursor: pointer;
@@ -64,7 +64,18 @@ export const Button = ({
       style={style}
     >
       {children && children}
-      {iconName && <Icon name={iconName} size={14} />}
+      {iconName && (
+        <Icon
+          color={
+            type === "primary"
+              ? globalColors.light.PureWhite
+              : globalColors.darker.LuckyPoint
+          }
+          name={iconName}
+          size={14}
+          style={{ marginLeft: rem(10) }}
+        />
+      )}
     </PrecomputeButton>
   );
 };
