@@ -1,66 +1,70 @@
 import * as React from "react";
 import styled from "styled-components";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { rem } from "polished";
 import { isMobileOnly } from "react-device-detect";
 import { AppFrame } from "./startup";
-
-const AuthApp = React.lazy(() => import("./apps/auth"));
-const HomeApp = React.lazy(() => import("./apps/home"));
-const ProfileApp = React.lazy(() => import("./apps/profile"));
-const CalendarApp = React.lazy(() => import("./apps/calendar"));
-const SocialApp = React.lazy(() => import("./apps/social"));
-const MobileComments = React.lazy(() => import("./apps/social/MobileComments"));
+import AuthApp from "./apps/auth";
+import HomeApp from "./apps/home";
+import ProfileApp from "./apps/profile";
+import CalendarApp from "./apps/calendar";
+import SocialApp from "./apps/social";
+import {
+  authAppRouter,
+  homeAppRouter,
+  calendarAppRouter,
+  socialAppRouter,
+  profileAppRouter,
+} from "./internal-router";
+import { isMobile } from "react-device-detect";
 
 export const AppContext = React.createContext(null);
 
-const launchers = [
-  ["/app/auth", AuthApp],
-  ["/app/home", HomeApp],
-  ["/app/profile", ProfileApp],
-  ["/app/calendar", CalendarApp],
-  ["/app/social", SocialApp],
-  ["/app/comments", MobileComments],
-];
-
-const getApp = () => {
-  const currentPath = window.document.location.pathname;
-
-  if (currentPath === "/") {
-    window.history.replaceState(null, null, "/app/home");
-    return HomeApp;
-  }
-
-  const maybeApp = launchers.find(([pathPrefix]) =>
-    currentPath.startsWith(pathPrefix),
-  );
-
-  if (maybeApp) {
-    const [, App] = maybeApp;
-    return App;
-  } else {
-    return undefined;
-  }
-};
-
 const AppWrapper = styled.div`
-  padding: ${isMobileOnly ? `${rem(69)} 0 ${rem(10)} 0` : `0 0 0 ${rem(100)}`};
+  padding: ${isMobileOnly ? `${rem(69)} 0 ${rem(90)} 0` : `0 0 0 ${rem(100)}`};
 `;
 
-const AppWithContext = ({ App }) => {
+const AppWithContext = () => {
   return (
     <AppFrame>
       <AppWrapper>
-        <App />
+        <Router>
+          <Switch>
+            <Route
+              exact
+              path={authAppRouter.login()}
+              render={() => <AuthApp />}
+            />
+            <Route
+              exact
+              path={homeAppRouter.home()}
+              render={() => <HomeApp />}
+            />
+            <Route
+              exact
+              path={calendarAppRouter.calendar()}
+              render={() => <CalendarApp />}
+            />
+            <Route
+              exact
+              path={socialAppRouter.social()}
+              render={() => <SocialApp />}
+            />
+            <Route
+              exact
+              path={
+                isMobile
+                  ? profileAppRouter.identity("1")
+                  : profileAppRouter.profile()
+              }
+              render={() => <ProfileApp />}
+            />
+          </Switch>
+        </Router>
       </AppWrapper>
     </AppFrame>
   );
 };
 
 // You're welcome to Mars Exodus 2060 🌕🚀
-export const App = () => {
-  const App = getApp();
-  if (!App) {
-    return <div>Il n'y à pas de page ici</div>;
-  }
-  return <AppWithContext App={App} />;
-};
+export const App = () => <AppWithContext App={App} />;

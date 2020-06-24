@@ -16,7 +16,7 @@ const Avatar = styled.img`
   align-self: center;
 `;
 const Content = styled.div`
-  background-color: white;
+  background-color: #f2f2f2;
   border-radius: 20px;
   padding: 10px 13px;
   width: 100%;

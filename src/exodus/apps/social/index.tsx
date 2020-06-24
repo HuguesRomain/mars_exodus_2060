@@ -1,8 +1,13 @@
 import React, { useState } from "react";
+import styled from "styled-components";
 import { PostItem } from "./organismes/PostItem";
 import { SendComment } from "./organismes/SendComment";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MobileComments from "./MobileComments";
+
+const SocialContent = styled.main`
+  padding-top: 30px;
+`;
 
 const postes = [
   {
@@ -28,7 +33,7 @@ const SocialApp = () => {
   const [posts, setposts] = useState<Posts[]>(postes);
   return (
     <Router>
-      <main>
+      <SocialContent>
         <Switch>
           <Route path="/app/social">
             <SendComment setposts={setposts} posts={posts} />
@@ -41,7 +46,7 @@ const SocialApp = () => {
           </Route>
           <Route path="/app/comments" component={MobileComments} />
         </Switch>
-      </main>
+      </SocialContent>
     </Router>
   );
 };

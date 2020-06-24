@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
-import { UriType } from "exodus/internal-router";
 import { Icon } from "styles/atoms/icons";
 import { AppsTypes } from "../data";
 import { color, iconSize } from "styles/const";
@@ -10,6 +9,7 @@ import { LabelOverlay } from "..";
 import { isMobileOnly } from "react-device-detect";
 import { rem } from "polished";
 import { DeviceSize } from "exodus/utils/checkWindowSize";
+import { isLocation } from "exodus/utils/uriUtils";
 
 const ListItemMenuLink = styled.a<{ linkActive?: boolean }>`
   display: flex;
@@ -37,7 +37,6 @@ const IconWrapper = styled.div`
 
 export const LabeledIcon = ({ app }: { app: AppsTypes }) => {
   const history = useHistory();
-  const isLocation = (uri: UriType) => window.location.pathname.includes(uri);
   return (
     <ListItemMenuLink
       linkActive={isLocation(app.uri)}
