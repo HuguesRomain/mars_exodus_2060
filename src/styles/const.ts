@@ -4,7 +4,7 @@ export const color = {
   light: {
     PureWhite: "#ffffff",
     WhiteSmoke: "#F8F8F8",
-    Solitude: "#EFF3FF",
+    Solitude: "#E8ECEF",
     AliceBlue: "#F3F8FE",
   },
   medium: {

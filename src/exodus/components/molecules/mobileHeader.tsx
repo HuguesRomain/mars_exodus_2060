@@ -14,6 +14,8 @@ const WrapperHeader = styled.div`
   top: 0;
   width: 100%;
   height: ${rem(69)};
+  background-color: ${color.light.PureWhite};
+  border-radius: 0px 0px 20px 20px;
 `;
 
 const PopupStyled = styled.div`

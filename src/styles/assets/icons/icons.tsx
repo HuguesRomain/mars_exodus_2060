@@ -1,17 +1,20 @@
 import React from "react";
+import { CSSProperties } from "styled-components";
 
 type IconPropType = {
   color?: string | undefined | null;
   secondColor?: string;
   size?: string | number | undefined;
   onClick?: (e: any) => void;
+  style?: CSSProperties;
 };
 
-export const Home = ({ color, secondColor, size }: IconPropType) => {
+export const Home = ({ color, secondColor, size, style }: IconPropType) => {
   return (
     <svg
       width={size ? size : "24"}
       height={size ? size : "24"}
+      style={style && style}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -28,11 +31,12 @@ export const Home = ({ color, secondColor, size }: IconPropType) => {
   );
 };
 
-export const Calendar = ({ color, secondColor, size }: IconPropType) => {
+export const Calendar = ({ color, secondColor, size, style }: IconPropType) => {
   return (
     <svg
       width={size ? size : "24"}
       height={size ? size : "24"}
+      style={style && style}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -92,11 +96,12 @@ export const Calendar = ({ color, secondColor, size }: IconPropType) => {
   );
 };
 
-export const Social = ({ color, secondColor, size }: IconPropType) => {
+export const Social = ({ color, secondColor, size, style }: IconPropType) => {
   return (
     <svg
       width={size ? size : "24"}
       height={size ? size : "24"}
+      style={style && style}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -147,11 +152,12 @@ export const Social = ({ color, secondColor, size }: IconPropType) => {
   );
 };
 
-export const Profile = ({ color, secondColor, size }: IconPropType) => {
+export const Profile = ({ color, secondColor, size, style }: IconPropType) => {
   return (
     <svg
       width={size ? size : "24"}
       height={size ? size : "24"}
+      style={style && style}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -176,11 +182,12 @@ export const Profile = ({ color, secondColor, size }: IconPropType) => {
   );
 };
 
-export const Star = ({ color, size }: IconPropType) => {
+export const Star = ({ color, size, style }: IconPropType) => {
   return (
     <svg
       width={size ? size : "24"}
       height={size ? size : "24"}
+      style={style && style}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -201,11 +208,12 @@ export const Star = ({ color, size }: IconPropType) => {
   );
 };
 
-export const Moon = ({ color, size }: IconPropType) => {
+export const Moon = ({ color, size, style }: IconPropType) => {
   return (
     <svg
       width={size ? size : "24"}
       height={size ? size : "24"}
+      style={style && style}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -222,11 +230,12 @@ export const Moon = ({ color, size }: IconPropType) => {
   );
 };
 
-export const Sun = ({ color, size }: IconPropType) => {
+export const Sun = ({ color, size, style }: IconPropType) => {
   return (
     <svg
       width={size ? size : "24"}
       height={size ? size : "24"}
+      style={style && style}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -288,11 +297,12 @@ export const Sun = ({ color, size }: IconPropType) => {
   );
 };
 
-export const Pin = ({ color, size }: IconPropType) => {
+export const Pin = ({ color, size, style }: IconPropType) => {
   return (
     <svg
       width={size ? size : "24"}
       height={size ? size : "24"}
+      style={style && style}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -312,11 +322,12 @@ export const Pin = ({ color, size }: IconPropType) => {
   );
 };
 
-export const Earth = ({ size }: IconPropType) => {
+export const Earth = ({ size, style }: IconPropType) => {
   return (
     <svg
       width={size ? size : "24"}
       height={size ? size : "24"}
+      style={style && style}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -341,11 +352,12 @@ export const Earth = ({ size }: IconPropType) => {
   );
 };
 
-export const Mars = ({ size }: IconPropType) => {
+export const Mars = ({ size, style }: IconPropType) => {
   return (
     <svg
       width={size ? size : "24"}
       height={size ? size : "24"}
+      style={style && style}
       viewBox="0 0 64 64"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -378,68 +390,6 @@ export const Mars = ({ size }: IconPropType) => {
         d="M57.3039 44H32V52H51.5931C53.9524 49.69 55.8856 46.9818 57.3039 44Z"
         fill="#A00715"
       />
-    </svg>
-  );
-};
-
-export const Logo = () => {
-  return (
-    <svg
-      width="33"
-      height="32"
-      viewBox="0 0 33 32"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <mask
-        id="mask0"
-        mask-type="alpha"
-        maskUnits="userSpaceOnUse"
-        x="0"
-        y="0"
-        width="33"
-        height="32"
-      >
-        <circle cx="16.5" cy="16" r="16" fill="#072033" />
-      </mask>
-      <g mask="url(#mask0)">
-        <circle cx="16.5" cy="16" r="16" fill="#072033" />
-        <circle cx="9.91911" cy="18.0503" r="9.02458" fill="white" />
-        <circle cx="9.91914" cy="18.0504" r="8.23555" fill="#FF6801" />
-        <circle cx="9.91894" cy="18.0507" r="6.95336" fill="#EB003D" />
-        <ellipse
-          cx="9.91898"
-          cy="18.0507"
-          rx="5.76981"
-          ry="5.76981"
-          fill="#AF0041"
-        />
-        <ellipse
-          cx="9.9194"
-          cy="18.0505"
-          rx="4.48763"
-          ry="4.48763"
-          fill="#072033"
-        />
-        <path
-          fillRule="evenodd"
-          clipRule="evenodd"
-          d="M3.93594 10.0121H0.5V30.1325H2.57258C2.93733 30.4645 3.35286 30.7464 3.8104 30.9653C4.31321 32.2517 5.32577 33.3093 6.65474 33.8506L12.4115 36.1953C15.8842 37.6097 19.6834 35.0549 19.6834 31.3052C19.6834 29.2765 18.5241 27.4477 16.7357 26.568C16.1797 25.1909 15.0542 24.0787 13.5947 23.5641L8.11481 21.632L14.7181 9.12413C13.328 8.24962 11.6826 7.74377 9.91911 7.74377C7.62374 7.74377 5.52853 8.60072 3.93594 10.0121Z"
-          fill="white"
-        />
-        <circle cx="7.70009" cy="19.7764" r="2.86025" fill="white" />
-        <circle cx="7.70003" cy="19.7766" r="1.08492" fill="#072033" />
-        <ellipse
-          cx="7.70038"
-          cy="19.7765"
-          rx="1.77533"
-          ry="1.77533"
-          stroke="#072033"
-          strokeWidth="0.5"
-        />
-        <path d="M13.7158 8.53284L7.69946 19.8259" stroke="#072033" />
-        <circle cx="16.5" cy="16" r="15" stroke="#072033" strokeWidth="2" />
-      </g>
     </svg>
   );
 };

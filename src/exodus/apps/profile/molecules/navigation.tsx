@@ -8,6 +8,7 @@ import { isMobile } from "react-device-detect";
 const NavigationWrapper = styled.div`
   display: flex;
   justify-content: center;
+  margin-top: ${rem(10)};
 `;
 
 const LinkWrapper = styled(Link)`

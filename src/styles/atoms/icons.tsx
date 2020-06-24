@@ -1,4 +1,4 @@
-import React from "react";
+import React, { CSSProperties } from "react";
 import {
   Home,
   Calendar,
@@ -7,7 +7,6 @@ import {
   Sun,
   Earth,
   Mars,
-  Logo,
   Moon,
   Pin,
 } from "../assets/icons/icons";
@@ -21,7 +20,6 @@ export class IconsMapping {
   moon = Moon;
   earth = Earth;
   mars = Mars;
-  logo = Logo;
   pin = Pin;
 }
 
@@ -34,6 +32,7 @@ export type IconProps = {
   secondColor?: string | null;
   size?: number | string;
   onClick?: (e: any) => void;
+  // style?: CSSProperties;
 };
 
 export const Icon = (props: IconProps) => {
@@ -44,6 +43,7 @@ export const Icon = (props: IconProps) => {
       onClick={props.onClick}
       size={props.size}
       color={props.color}
+      // style={style}
     />
   ) : null;
 };

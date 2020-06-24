@@ -25,7 +25,7 @@ const NavBarMobileWrapper = styled.nav`
   padding: ${rem(15)} ${rem(20)};
   background-color: white;
   border-radius: 20px 20px 0px 0px;
-  z-index: -1;
+  z-index: 100;
 `;
 
 const NavBarWrapper = styled.nav`
