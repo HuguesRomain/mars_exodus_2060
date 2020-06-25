@@ -29,14 +29,12 @@ type Props = {
 export const Comment = ({ quantity }: Props) => {
   const history = useHistory();
 
-  const goToComments = () => {
-    if (window.matchMedia("(max-width: 600px)").matches) {
-      history.push(socialAppRouter.comments());
-    } else console.log("sorry bro");
-  };
-
   return (
-    <Item onClick={goToComments}>
+    <Item
+      onClick={() => {
+        isMobile && history.push(socialAppRouter.comments());
+      }}
+    >
       <IconStyled color={color.medium.Manatee} name={"comment"} />
       <Text style={{ margin: `0 ${rem(5)}` }}>{quantity}</Text>
       {!isMobile && <Text>Commentaires</Text>}
