@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import icons from "../../../../assets/icons.svg";
+import { color } from "styles/const";
+import { Icon } from "styles/atoms/icons";
+import { rem } from "polished";
 
 const Item = styled.div`
   display: flex;
-  padding: 0 30px;
+  align-items: center;
 `;
-const Icon = styled.svg`
-  fill: grey;
-  width: 15px;
-  height: 15px;
-  margin-right: 10px;
+
+const Text = styled.p`
+  color: ${color.medium.Manatee};
+  margin-left: ${rem(10)};
 `;
 
 type Props = {
@@ -29,10 +30,8 @@ export const Like = ({ quantity }: Props) => {
 
   return (
     <Item onClick={handleLike}>
-      <Icon>
-        <use xlinkHref={`${icons}#like`} />
-      </Icon>
-      <p>{like}</p>
+      <Icon color={color.medium.Manatee} name={"like"} />
+      <Text>{like}</Text>
     </Item>
   );
 };

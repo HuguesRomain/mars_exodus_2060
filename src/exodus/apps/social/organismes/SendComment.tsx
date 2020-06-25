@@ -2,6 +2,8 @@ import React, { useState, ChangeEvent, KeyboardEvent } from "react";
 import styled from "styled-components";
 import icons from "../../../../assets/icons.svg";
 import { AddMedia } from "../molecules/AddMedia";
+import { color, iconSize } from "styles/const";
+import { Avatar } from "../atoms/Avatar";
 
 const Content = styled.div`
   max-width: 500px;
@@ -17,14 +19,7 @@ const Content = styled.div`
 const Head = styled.div`
   display: flex;
 `;
-const Avatar = styled.img`
-  width: 48px;
-  height: 48px;
-  object-fit: cover;
-  border-radius: 50%;
-  background-color: yellow;
-  align-self: center;
-`;
+
 const SendAndMore = styled.div`
   margin-top: 20px;
   display: flex;
@@ -36,6 +31,7 @@ const CommentInput = styled.input`
   height: 48px;
   border: none;
   width: 100%;
+  color: ${color.medium.Manatee};
 `;
 const Icon = styled.svg`
   fill: #fc5252;
@@ -78,7 +74,7 @@ export const SendComment = ({ setposts, posts }: Props) => {
       <Head>
         <Avatar
           src="https://www.writeups.org/wp-content/uploads/Punisher-netflix-daredevil-Bernthal.jpg"
-          alt="avatar of user"
+          size={iconSize.xl}
         />
         <CommentInput
           onChange={handleChange}
