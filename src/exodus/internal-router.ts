@@ -22,6 +22,7 @@ class CalendarAppRoutes {
 
 class SocialAppRoutes {
   social = () => `${socialApp}`;
+  comments = () => `${socialApp}comments`;
 }
 
 class ProfileAppRoutes {

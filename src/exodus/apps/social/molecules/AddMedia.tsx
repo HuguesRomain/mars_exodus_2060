@@ -1,30 +1,32 @@
 import React from "react";
 import styled from "styled-components";
-import icons from "../../../../assets/icons.svg";
+import { Icon } from "styles/atoms/icons";
+import { rem } from "polished";
+import { color } from "styles/const";
 
 const Content = styled.div`
-  padding: 12px 16px;
+  display: flex;
+  align-items: center;
   max-width: 500px;
   display: flex;
   border-radius: 8px;
-  background-color: #f8f8f8;
+  background-color: ${color.light.PureWhite};
+
+  @media (min-width: 1440px) {
+    padding: ${rem(10)};
+    background-color: ${color.light.WhiteSmoke};
+  }
 `;
-const Icon = styled.svg`
-  fill: #848897;
-  width: 15px;
-  height: 15px;
-  margin-right: 10px;
-`;
+
 const Description = styled.p`
-  color: #848897;
+  color: ${color.medium.Manatee};
+  margin-left: ${rem(5)};
 `;
 
 export const AddMedia = () => {
   return (
     <Content>
-      <Icon>
-        <use xlinkHref={`${icons}#addMedia`} />
-      </Icon>
+      <Icon color={color.medium.Manatee} name={"pics"} />
       <Description>Photos/Vidéos</Description>
     </Content>
   );
