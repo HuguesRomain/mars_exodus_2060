@@ -1,10 +1,9 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { PostItem } from "./organismes/PostItem";
-import { SendComment } from "./organismes/SendComment";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MobileComments from "./MobileComments";
 import { socialAppRouter } from "exodus/internal-router";
+import { SocialPage } from "./SocialPage";
 
 const SocialContent = styled.main``;
 
@@ -27,20 +26,6 @@ const postes = [
     ],
   },
 ];
-
-const SocialPage = ({ posts, setposts }: { posts: Posts[]; setposts: any }) => {
-  return (
-    <>
-      <SendComment setposts={setposts} posts={posts} />
-      <ul>
-        {posts &&
-          posts.map((value: Posts) => {
-            return <PostItem key={value.like} posts={value} />;
-          })}
-      </ul>{" "}
-    </>
-  );
-};
 
 const SocialApp = () => {
   const [posts, setposts] = useState<Posts[]>(postes);

@@ -4,7 +4,7 @@ import { Like } from "../atoms/Like";
 import { Comment } from "../atoms/Comment";
 import { Share } from "../atoms/Share";
 import { CommentItem } from "./CommentItem";
-import { iconSize, color } from "styles/const";
+import { iconSize, color, space } from "styles/const";
 import { rem } from "polished";
 import { isMobile } from "react-device-detect";
 import { AddComment } from "../molecules/AddComment";
@@ -15,7 +15,7 @@ const Item = styled.li`
   max-width: 500px;
   border-radius: 20px;
   background-color: white;
-  padding: 15px;
+  padding: ${space.s};
   margin: 20px auto;
 `;
 const UserInfo = styled.div`

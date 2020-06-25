@@ -16,6 +16,7 @@ import {
   Pics,
   Send,
   BackArrow,
+  Logo,
 } from "../assets/icons/icons";
 
 export class IconsMapping {
@@ -35,6 +36,7 @@ export class IconsMapping {
   pics = Pics;
   send = Send;
   backarrow = BackArrow;
+  logo = Logo;
 }
 
 export type IconName = keyof IconsMapping;

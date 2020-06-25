@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { rem } from "polished";
-import { color } from "styles/const";
+import { color, space } from "styles/const";
 import { isMobileOnly } from "react-device-detect";
 
 const Comment = styled.li`
@@ -19,12 +19,9 @@ const Avatar = styled.img`
   align-self: center;
 `;
 const Content = styled.div`
-  background-color: ${isMobileOnly
-    ? color.light.WhiteSmoke
-    : color.light.PureWhite};
+  background-color: ${isMobileOnly && color.light.PureWhite};
   border-radius: 20px;
-  padding: 10px 13px;
-  margin-left: ${rem(20)};
+  padding: ${space.s};
   width: 100%;
 `;
 const Author = styled.p`
