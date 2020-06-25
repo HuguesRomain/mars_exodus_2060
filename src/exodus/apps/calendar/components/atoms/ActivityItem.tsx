@@ -9,11 +9,20 @@ import {
 } from "date-fns";
 
 const Item = styled.li`
+  margin: 16px 0 0;
   list-style-type: none;
+  background-color: white;
+  min-width: 210px;
+  padding: 10px;
+  border-radius: 20px;
+  box-shadow: 0px 5px 15px rgba(153, 155, 168, 0.15);
+`;
+const ContentItem = styled.div`
+  margin: 24px 0 0;
 `;
 
 type Props = {
-  dateEvent: Dates
+  dateEvent: Dates;
 };
 
 export const ActivityItem = ({ dateEvent }: Props) => {
@@ -36,7 +45,7 @@ export const ActivityItem = ({ dateEvent }: Props) => {
   /*   const theHour = dateEvent.dateStr.split(","); */
 
   return (
-    <div>
+    <ContentItem>
       <h2>{isActual}</h2>
       <Item>
         <p>{dateEvent.status}</p>
@@ -45,6 +54,6 @@ export const ActivityItem = ({ dateEvent }: Props) => {
         <p>{dateEvent.title}</p>
         <p>{dateEvent.dateStr}</p>
       </Item>
-    </div>
+    </ContentItem>
   );
 };

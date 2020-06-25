@@ -2,9 +2,17 @@
 @import "~@fullcalendar/daygrid/main.css";
 @import "~@fullcalendar/timegrid/main.css";
 
+.fc {
+  padding: 0 50px 50px;
+}
+
+.fc .fc-body {
+  box-shadow: 0px 5px 15px rgba(153, 155, 168, 0.15);
+}
+
 .fc .fc-head-container {
   border: none;
-  background-color: #ddd;
+  background-color: #e8ecef;
 }
 
 .fc .fc-widget-header {
@@ -31,9 +39,17 @@
 .fc .fc-title {
   white-space: break-spaces;
 }
+.fc .fc-day {
+  background: white;
+}
+.fc .fc-today {
+}
 
 .fc .fc-event {
-  border-left: solid 5px black;
+  border: none;
+  border-left: solid 5px #269f6e;
+  background-color: #f8f8f8;
+  color: black;
 }
 
 .fc .fc-content {
