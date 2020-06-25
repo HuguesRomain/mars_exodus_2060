@@ -4,8 +4,8 @@ import { Timer } from "../molecules/Timer";
 import first from "../../../../assets/images/hero-1.png";
 import second from "../../../../assets/images/hero-2.png";
 import third from "../../../../assets/images/hero-3.png";
-import fourth from "../../../../assets/images/hero-4.png";
-import five from "../../../../assets/images/hero-5.png";
+/* import fourth from "../../../../assets/images/hero-4.png";
+import five from "../../../../assets/images/hero-5.png"; */
 import six from "../../../../assets/images/hero-6.png";
 import back from "../../../../assets/images/hero-7.jpg";
 import styled from "styled-components";
@@ -27,9 +27,13 @@ const TextContent = styled.div`
   align-items: center;
 `;
 const Title = styled.h1`
-  font-size: 90px;
+  text-align: center;
+  font-size: 35px;
   margin: 0;
   z-index: -1;
+  @media (min-width: 500px) {
+    font-size: 90px;
+  }
 `;
 const FistImage = styled.img`
   object-fit: cover;
@@ -39,11 +43,11 @@ const FistImage = styled.img`
   width: 100%;
   bottom: 0;
 `;
-const SecondImage = styled.img`
+/* const SecondImage = styled.img`
   position: absolute;
   width: 100%;
   bottom: 0;
-`;
+`; */
 const PlanetBack = styled.img`
   object-fit: cover;
   height: 644px;
