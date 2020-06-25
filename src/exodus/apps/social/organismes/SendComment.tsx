@@ -1,9 +1,9 @@
 import React, { useState, ChangeEvent, KeyboardEvent } from "react";
 import styled from "styled-components";
-import icons from "../../../../assets/icons.svg";
 import { AddMedia } from "../molecules/AddMedia";
 import { color, iconSize } from "styles/const";
 import { Avatar } from "../atoms/Avatar";
+import { Icon } from "styles/atoms/icons";
 
 const Content = styled.div`
   max-width: 500px;
@@ -32,12 +32,6 @@ const CommentInput = styled.input`
   border: none;
   width: 100%;
   color: ${color.medium.Manatee};
-`;
-const Icon = styled.svg`
-  fill: #fc5252;
-  width: 15px;
-  height: 15px;
-  margin-right: 10px;
 `;
 
 type Props = {
@@ -86,9 +80,7 @@ export const SendComment = ({ setposts, posts }: Props) => {
       </Head>
       <SendAndMore>
         <AddMedia />
-        <Icon onClick={handleSubmit}>
-          <use xlinkHref={`${icons}#send`} />
-        </Icon>
+        <Icon size={iconSize.s} onClick={handleSubmit} name={"send"} />
       </SendAndMore>
     </Content>
   );
