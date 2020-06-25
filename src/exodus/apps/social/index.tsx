@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { PostItem } from "./organismes/PostItem";
-import { SendComment } from "./organismes/SendComment";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import MobileComments from "./MobileComments";
+import { socialAppRouter } from "exodus/internal-router";
+import { SocialPage } from "./SocialPage";
 
-const SocialContent = styled.main`
-  padding-top: 30px;
-`;
+const SocialContent = styled.main``;
 
 const postes = [
   {
@@ -35,16 +33,16 @@ const SocialApp = () => {
     <Router>
       <SocialContent>
         <Switch>
-          <Route path="/app/social">
-            <SendComment setposts={setposts} posts={posts} />
-            <ul>
-              {posts &&
-                posts.map((value) => {
-                  return <PostItem key={value.like} posts={value} />;
-                })}
-            </ul>
-          </Route>
-          <Route path="/app/comments" component={MobileComments} />
+          <Route
+            exact
+            path={socialAppRouter.social()}
+            render={() => <SocialPage posts={posts} setposts={setposts} />}
+          />
+          <Route
+            exact
+            path={socialAppRouter.comments()}
+            render={() => <MobileComments />}
+          />
         </Switch>
       </SocialContent>
     </Router>

@@ -10,6 +10,13 @@ import {
   Moon,
   Pin,
   Disconnect,
+  Share,
+  Comment,
+  Like,
+  Pics,
+  Send,
+  BackArrow,
+  Logo,
 } from "../assets/icons/icons";
 
 export class IconsMapping {
@@ -23,6 +30,13 @@ export class IconsMapping {
   mars = Mars;
   pin = Pin;
   disconnect = Disconnect;
+  share = Share;
+  comment = Comment;
+  like = Like;
+  pics = Pics;
+  send = Send;
+  backarrow = BackArrow;
+  logo = Logo;
 }
 
 export type IconName = keyof IconsMapping;

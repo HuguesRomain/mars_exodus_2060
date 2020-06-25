@@ -1,5 +1,14 @@
 import React from "react";
 import { ActivityItem } from "../atoms/ActivityItem";
+import styled from "styled-components";
+
+const ActivityContent = styled.div`
+  background-color: #e8ecef;
+  padding: 0 82px 0 48px;
+`;
+const Title = styled.h1`
+  font-size: 24px;
+`;
 
 interface props {
   calendarEvents: Array<Dates>;
@@ -7,14 +16,14 @@ interface props {
 
 export const ActivityList = ({ calendarEvents }: props) => {
   return (
-    <div>
-      <h1>Prochains Evenements</h1>
+    <ActivityContent>
+      <Title>Prochains Evenements</Title>
       <ul>
         {calendarEvents &&
           calendarEvents.map((value) => {
             return <ActivityItem key={value.title} dateEvent={value} />;
           })}
       </ul>
-    </div>
+    </ActivityContent>
   );
 };
