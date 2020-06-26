@@ -71,6 +71,7 @@ export const Button = ({
               ? globalColors.light.PureWhite
               : globalColors.darker.LuckyPoint
           }
+          strokeColor={globalColors.light.PureWhite}
           name={iconName}
           size={14}
           style={{ marginLeft: space.xs }}
