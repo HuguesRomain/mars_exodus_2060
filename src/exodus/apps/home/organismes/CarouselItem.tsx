@@ -57,8 +57,14 @@ const ImageArticle = styled.img`
   }
 `;
 
+const ButtonText = styled.span`
+  @media (max-width: ${breakPoint.tabletLandscape}) {
+    display: none;
+  }
+`;
+
 const Styledutton = styled(Button)`
-  padding: 10px;
+  transform: translate(10px 10px);
 `;
 
 export const CarouselItem = () => {
@@ -74,8 +80,8 @@ export const CarouselItem = () => {
         <DescriptionArticle>
           Tout savoir sur notre nouvelle planète
         </DescriptionArticle>
-        <Styledutton style={{ marginRight: space.xs }} iconName={"back"}>
-          Lire l'article
+        <Styledutton style={{ marginRight: space.s }} iconName={"forward"}>
+          <ButtonText>Lire l'article</ButtonText>
         </Styledutton>
       </div>
     </ItemContent>

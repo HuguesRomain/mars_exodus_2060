@@ -569,19 +569,19 @@ export const Back = ({ size, style, strokeColor }: IconPropType) => {
   );
 };
 
-export const Forward = ({ size, style }: IconPropType) => {
+export const Forward = ({ size, style, strokeColor }: IconPropType) => {
   return (
     <svg
       width={size ? size : "24"}
       height={size ? size : "24"}
       style={style && style}
+      stroke={strokeColor ? strokeColor : "#848897"}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
         d="M7.5 21L16.5 12L7.5 3"
-        stroke="#848897"
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
