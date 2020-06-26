@@ -1,39 +1,34 @@
 import React from "react";
 import styled from "styled-components";
-import { rem } from "polished";
-import { color, space } from "styles/const";
-import { isMobileOnly } from "react-device-detect";
+import { color, space, iconSize } from "styles/const";
+import { Avatar } from "../atoms/Avatar";
+import { isMobileOnly } from "exodus/utils/checkWindowSize";
 
 const Comment = styled.li`
   list-style-type: none;
-  max-width: 500px;
   display: flex;
-  margin: 10px auto 0;
+  margin: ${space.xs} auto 0;
 `;
-const Avatar = styled.img`
-  width: 32px;
-  height: 32px;
-  object-fit: cover;
-  border-radius: 50%;
-  background-color: yellow;
-  align-self: center;
-`;
+
 const Content = styled.div`
-  background-color: ${isMobileOnly && color.light.PureWhite};
+  background-color: ${isMobileOnly() && color.light.PureWhite};
   border-radius: 20px;
   padding: ${space.s};
   width: 100%;
 `;
+
 const Author = styled.p`
   font-weight: 500;
 `;
+
 const Since = styled.p`
   display: inline;
-  margin-left: 10px;
+  margin-left: ${space.xs};
   color: ${color.medium.Manatee};
 `;
+
 const Text = styled.p`
-  margin-top: 5px;
+  margin-top: ${space.xs};
   color: ${color.darker.LuckyPoint};
 `;
 
@@ -51,9 +46,9 @@ export const CommentItem = ({ comments }: Props) => {
 
   return (
     <Comment>
-      <Avatar src={comments.avatar} alt="avatar of user" />
+      <Avatar src={comments.avatar} size={iconSize.l} />
       <Content>
-        <div style={{ display: "flex", marginBottom: rem(10) }}>
+        <div style={{ display: "flex", marginBottom: space.xs }}>
           <Author>{comments.author}</Author>
           <Since>il y a {theDay}</Since>
         </div>

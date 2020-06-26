@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { rem } from "polished";
-import { color } from "styles/const";
+import { color, fontSize, space, boxShadows, breakPoint } from "styles/const";
 import { LabeledInfo } from "../atoms/labeledInfo";
 import Profile from "../../../../styles/assets/pics/exempleProfile.png";
 import Finger from "../../../../styles/assets/pics/fingerprint.png";
@@ -10,8 +10,8 @@ import Signature from "../../../../styles/assets/pics/signature.png";
 const CardStyle = styled.div`
   display: flex;
   flex-direction: column;
-  margin: ${rem(10)} ${rem(15)};
-  box-shadow: 0px 5px 15px rgba(153, 155, 168, 0.15);
+  margin: ${space.xs} ${space.s};
+  box-shadow: ${boxShadows.light};
   border-radius: 20px;
 `;
 
@@ -22,7 +22,7 @@ const Header = styled.div`
   min-height: ${rem(50)};
   width: 100%;
   border-radius: 20px 20px 0px 0px;
-  font-size: 20px;
+  font-size: ${fontSize.l};
   background-color: ${color.medium.Manatee};
   color: ${color.light.PureWhite};
 `;
@@ -36,10 +36,10 @@ const Wrapper = styled.div`
   justify-content: center;
   border-radius: 0px 0px 20px 20px;
   background-color: ${color.light.PureWhite};
-  padding: ${rem(30)} ${rem(30)};
+  padding: ${space.m} ${space.m};
 
-  @media (min-width: 768px) {
-    padding: ${rem(30)} ${rem(50)};
+  @media (min-width: ${breakPoint.tabletPortrait}) {
+    padding: ${space.m} ${space.l};
   }
 `;
 
@@ -47,6 +47,7 @@ const Content = styled.div`
   display: grid;
   grid-row-gap: 20px;
   grid-column-gap: ${rem(50)};
+  grid-row-gap: ${space.m};
   grid-template-columns: repeat(2, 1fr);
 `;
 
@@ -54,7 +55,7 @@ export const IdentityCard = () => {
   return (
     <CardStyle>
       <Header>
-        <h2>Carte d’identité Martienne</h2>
+        <h2>MARS ID CARD N°08976589</h2>
       </Header>
       <Wrapper>
         <Content>

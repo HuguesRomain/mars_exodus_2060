@@ -57,8 +57,8 @@ const MobileComments = () => {
       </BackSection>
       <CommentList>
         {comments &&
-          comments.map((value) => {
-            return <CommentItem key={value.author} comments={value} />;
+          comments.map((value, i) => {
+            return <CommentItem key={i} comments={value} />;
           })}
       </CommentList>
     </MobileCommentStyle>

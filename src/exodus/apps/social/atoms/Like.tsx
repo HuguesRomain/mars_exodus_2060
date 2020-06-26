@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { color } from "styles/const";
+import { color, iconSize, fontSize, space } from "styles/const";
 import { Icon } from "styles/atoms/icons";
-import { rem } from "polished";
 
 const Item = styled.div`
   display: flex;
@@ -11,7 +10,8 @@ const Item = styled.div`
 
 const Text = styled.p`
   color: ${color.medium.Manatee};
-  margin-left: ${rem(10)};
+  margin-left: ${space.xs};
+  font-size: ${fontSize.s};
 `;
 
 type Props = {
@@ -30,7 +30,7 @@ export const Like = ({ quantity }: Props) => {
 
   return (
     <Item onClick={handleLike}>
-      <Icon color={color.medium.Manatee} name={"like"} />
+      <Icon size={iconSize.m} color={color.medium.Manatee} name={"like"} />
       <Text>{like}</Text>
     </Item>
   );

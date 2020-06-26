@@ -1,19 +1,19 @@
 import React, { useState, ChangeEvent, KeyboardEvent } from "react";
 import styled from "styled-components";
 import { AddMedia } from "../molecules/AddMedia";
-import { color, iconSize } from "styles/const";
+import { color, iconSize, space, breakPoint } from "styles/const";
 import { Avatar } from "../atoms/Avatar";
 import { Icon } from "styles/atoms/icons";
 
 const Content = styled.div`
-  max-width: 500px;
+  max-width: 550px;
   border-radius: 20px;
   background-color: white;
-  padding: 12px 21px;
+  padding: ${space.xs} ${space.m};
   margin: 0 auto;
 
-  @media (max-width: 500px) {
-    margin: 20px 20px;
+  @media (max-width: ${breakPoint.mobileOnly}) {
+    margin: ${space.m};
   }
 `;
 const Head = styled.div`
@@ -21,13 +21,13 @@ const Head = styled.div`
 `;
 
 const SendAndMore = styled.div`
-  margin-top: 20px;
+  margin-top: ${space.m};
   display: flex;
   justify-content: space-between;
   align-items: center;
 `;
 const CommentInput = styled.input`
-  margin-left: 20px;
+  margin-left: ${space.m};
   height: 48px;
   border: none;
   width: 100%;

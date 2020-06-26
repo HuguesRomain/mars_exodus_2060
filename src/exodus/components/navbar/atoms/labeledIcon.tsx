@@ -4,33 +4,36 @@ import { useHistory } from "react-router-dom";
 
 import { Icon } from "styles/atoms/icons";
 import { AppsTypes } from "../data";
-import { color, iconSize } from "styles/const";
+import { color, iconSize, fontSize, space, breakPoint } from "styles/const";
 import { LabelOverlay } from "..";
-import { isMobileOnly } from "react-device-detect";
 import { rem } from "polished";
-import { DeviceSize } from "exodus/utils/checkWindowSize";
+import {
+  isTabletPortrait,
+  isMobileOnly,
+  isDesktop,
+} from "exodus/utils/checkWindowSize";
 import { isLocation } from "exodus/utils/uriUtils";
 
 const ListItemMenuLink = styled.a<{ linkActive?: boolean }>`
   display: flex;
   align-items: center;
-  font-size: 14px;
+  font-size: ${fontSize.s};
   opacity: ${(props) => (!props.linkActive ? 0.7 : 1)};
-  @media (min-width: 768px) {
-    padding: ${rem(15)};
+  @media (min-width: ${breakPoint.tabletPortrait}) {
+    padding: ${space.s};
     border-radius: 10px;
     flex-direction: column;
   }
 
-  @media (min-width: 1440px) {
+  @media (min-width: ${breakPoint.desktop}) {
     max-width: ${rem(200)};
   }
 `;
 
 const IconWrapper = styled.div`
-  padding: ${rem(10)};
+  padding: ${space.xs};
   border-radius: 10px;
-  @media (min-width: 768px) {
+  @media (min-width: ${breakPoint.tabletLandscape}) {
     background: ${color.light.AliceBlue};
   }
 `;
@@ -57,16 +60,17 @@ export const LabeledIcon = ({ app }: { app: AppsTypes }) => {
           }
         />
       </IconWrapper>
-      {isMobileOnly && isLocation(app.uri) ? (
+      {isMobileOnly() && isLocation(app.uri) ? (
         <LabelOverlay linkActive={isLocation(app.uri)}>
           {app.label}
         </LabelOverlay>
       ) : (
-        DeviceSize.isMinVerticalTablet() && (
+        isTabletPortrait() ||
+        (isDesktop() && (
           <LabelOverlay linkActive={isLocation(app.uri)}>
             {app.label}
           </LabelOverlay>
-        )
+        ))
       )}
     </ListItemMenuLink>
   );

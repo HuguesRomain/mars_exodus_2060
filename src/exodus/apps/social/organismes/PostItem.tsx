@@ -4,19 +4,18 @@ import { Like } from "../atoms/Like";
 import { Comment } from "../atoms/Comment";
 import { Share } from "../atoms/Share";
 import { CommentItem } from "./CommentItem";
-import { iconSize, color, space } from "styles/const";
-import { rem } from "polished";
-import { isMobile } from "react-device-detect";
+import { iconSize, color, space, fontSize, fontWeight } from "styles/const";
 import { AddComment } from "../molecules/AddComment";
 import { Avatar } from "../atoms/Avatar";
+import { isMobile } from "exodus/utils/checkWindowSize";
 
 const Item = styled.li`
   list-style-type: none;
-  max-width: 500px;
+  max-width: 550px;
   border-radius: 20px;
   background-color: white;
   padding: ${space.s};
-  margin: 20px auto;
+  margin: ${space.m} auto;
 `;
 const UserInfo = styled.div`
   display: flex;
@@ -25,51 +24,56 @@ const UserInfo = styled.div`
 `;
 
 const Author = styled.h1`
-  font-weight: 600;
-  font-size: 14px;
-  padding-left: 10px;
+  font-weight: ${fontWeight.avenir.m};
+  font-size: ${fontSize.l};
+  padding-left: ${space.s};
   color: ${color.darker.LuckyPoint};
 `;
 const Since = styled.p`
   margin-left: auto;
   color: ${color.medium.Manatee};
+  font-size: ${fontSize.s};
 `;
 const PostText = styled.p`
-  padding: ${rem(10)} 0;
+  padding: ${space.s} 0;
   color: ${color.darker.LuckyPoint};
   line-height: 30px;
 `;
 const Interact = styled.div`
   display: flex;
   justify-content: flex-end;
-  padding: ${rem(10)} 0;
-  border-bottom: solid 1px ${color.light.WhiteSmoke};
+  padding: ${space.xs} 0;
 `;
 
 type Props = {
-  posts: Posts;
+  post: Posts;
 };
 
-export const PostItem = ({ posts }: Props) => {
-  const theDay = posts.date.toLocaleString("default", { weekday: "long" });
+export const PostItem = ({ post }: Props) => {
+  const theDay = post.date.toLocaleString("default", { weekday: "long" });
   return (
     <Item>
       <UserInfo>
-        <Avatar src={posts.avatar} size={isMobile ? iconSize.l : iconSize.xl} />
-        <Author>{posts.author}</Author>
+        <Avatar
+          src={post.avatar}
+          size={isMobile() ? iconSize.l : iconSize.xl}
+        />
+        <Author>{post.author}</Author>
         <Since>il y a {theDay}</Since>
       </UserInfo>
-      <PostText>{posts.text}</PostText>
+      <PostText>{post.text}</PostText>
       <Interact>
         <Share />
-        <Comment quantity={posts.comment.length} />
+        <Comment quantity={post.comment.length} />
         <Like quantity={0} />
       </Interact>
-      {!isMobile &&
-        posts.comment &&
-        posts.comment.map((value) => {
-          return <CommentItem key={value.author} comments={value} />;
-        })}
+      <ul>
+        {!isMobile &&
+          post.comment &&
+          post.comment.map((value, i) => {
+            return <CommentItem key={i} comments={value} />;
+          })}
+      </ul>
       {!isMobile && <AddComment />}
     </Item>
   );

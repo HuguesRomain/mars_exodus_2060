@@ -1,30 +1,27 @@
 import React from "react";
 import styled from "styled-components";
-import { color, space } from "styles/const";
-
-import { rem } from "polished";
+import { color, space, fontSize, breakPoint } from "styles/const";
 
 const WelcomeMessageStyled = styled.div`
   display: flex;
   flex-direction: column;
-  @media (max-width: 1024px) {
+  @media (max-width: ${breakPoint.tabletLandscape}) {
     width: 85vw;
     margin: ${space.l} 0 ${space.m} ${space.l};
   }
 `;
 
 const Title = styled.h1`
-  font-size: 42px;
+  font-size: ${fontSize.xxxl};
   margin: 0;
-  margin-bottom: ${rem(10)};
+  margin-bottom: ${space.xs};
   color: ${color.darker.LuckyPoint};
   font-weight: 500;
-  font-size: 42px;
 `;
 
 const Text = styled.p`
   color: ${color.medium.Manatee};
-  font-size: 16px;
+  font-size: ${fontSize.m};
 `;
 
 export const WelcomeMessage = () => {

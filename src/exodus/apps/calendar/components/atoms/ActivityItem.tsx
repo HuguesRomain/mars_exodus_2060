@@ -7,9 +7,10 @@ import {
   isThisMonth,
   getDate,
 } from "date-fns";
+import { space } from "styles/const";
 
 const Item = styled.li`
-  margin: 16px 0 0;
+  margin: ${space.s} 0 0;
   list-style-type: none;
   background-color: white;
   min-width: 210px;
@@ -18,7 +19,7 @@ const Item = styled.li`
   box-shadow: 0px 5px 15px rgba(153, 155, 168, 0.15);
 `;
 const ContentItem = styled.div`
-  margin: 24px 0 0;
+  margin: ${space.m} 0 0;
 `;
 
 type Props = {

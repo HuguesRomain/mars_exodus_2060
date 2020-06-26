@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { color, space } from "styles/const";
+import { color, space, fontSize, fontWeight } from "styles/const";
 import Bobafett from "../../../../styles/assets/pics/bobafett.png";
 import Dune from "../../../../styles/assets/pics/dune.png";
 import { rem } from "polished";
@@ -10,7 +10,7 @@ const AdvertisementStyled = styled.div`
   flex-direction: column;
   width: ${rem(350)};
   background-color: ${color.light.PureWhite};
-  margin: ${rem(36)};
+  margin-top: ${space.l};
   padding: ${space.s};
   border-radius: 20px;
 `;
@@ -22,11 +22,10 @@ const Articleimg = styled.img`
 
 const Article = styled.div`
   display: flex;
-  margin: ${rem(10)} 0 0 0;
+  margin: ${space.m} 0 0 0;
 `;
 
 const SectionName = styled.p`
-  margin: 0 0 ${rem(10)} 0;
   color: ${color.medium.Manatee};
 `;
 
@@ -37,20 +36,22 @@ const Content = styled.div`
 `;
 
 const Title = styled.p`
-  font-weight: 600;
-  font-size: 14px;
+  font-weight: ${fontWeight.avenir.l};
+  font-size: ${fontSize.s};
   color: ${color.darker.LuckyPoint};
   margin-bottom: ${rem(2)};
 `;
 
 const Link = styled.p`
-  font-size: 12px;
+  font-size: ${fontSize.xs};
   text-decoration: underline;
-  margin-bottom: ${rem(5)};
+  margin-bottom: ${rem(2)};
 `;
 
 const Description = styled.p`
+  font-size: ${fontSize.s};
   color: ${color.medium.Manatee};
+  line-height: 20px;
 `;
 
 type ArticleType = {
@@ -81,8 +82,8 @@ export const Advertisement = () => {
   return (
     <AdvertisementStyled>
       <SectionName>Sponsorisés</SectionName>
-      {articles.map((article) => (
-        <Article>
+      {articles.map((article, i) => (
+        <Article key={i}>
           <Articleimg src={article.img} alt="Image article" />
           <Content>
             <Title>{article.title}</Title>

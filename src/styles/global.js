@@ -1,12 +1,11 @@
 import { createGlobalStyle } from "styled-components";
+import JosefinSansItalic from "./assets/fonts/josefinSansItalic.ttf";
+import JosefinSans from "./assets/fonts/josefinSans.ttf";
 
 export const GlobalStyled = createGlobalStyle`
   *{
     box-sizing: border-box;
-  }
-
-  body{
-    background-color: #F8F8F8
+	
   }
 
 // Todo : init Normalize()
@@ -42,7 +41,8 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
-	font-family: Montserrat;
+	font-family: "Avenir";
+	background-color: #F8F8F8
 }
 ol, ul {
 	list-style: none;
@@ -59,4 +59,16 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
+
+@font-face {
+  font-family: "Josefin";
+	font-style: italic;
+  src: url(${JosefinSansItalic}) format("truetype");
+}
+
+@font-face {
+  font-family: "Josefin Sans";
+  src: url(${JosefinSans}) format("truetype");
+}
+
 `;

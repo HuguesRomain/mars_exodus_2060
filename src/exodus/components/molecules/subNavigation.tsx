@@ -3,13 +3,13 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { profileAppRouter, UriType } from "exodus/internal-router";
 import { rem } from "polished";
-import { color } from "styles/const";
+import { color, space } from "styles/const";
 
 const NavigationWrapper = styled.div`
   display: flex;
   justify-content: space-between;
-  margin-top: ${rem(10)};
-  padding: ${rem(10)};
+  margin-top: ${space.xs};
+  padding: ${space.xs};
   width: ${rem(210)};
 `;
 
@@ -28,7 +28,7 @@ const Dot = styled.span`
   height: ${rem(7)};
   border-radius: 50px;
   background-color: ${color.SunsetOrange};
-  margin-top: ${rem(10)};
+  margin-top: ${space.xs};
 `;
 
 type TypeData = {

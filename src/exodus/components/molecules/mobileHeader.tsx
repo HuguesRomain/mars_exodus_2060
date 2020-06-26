@@ -4,7 +4,7 @@ import { rem } from "polished";
 import { Icon } from "styles/atoms/icons";
 import { LabelOverlay } from "../navbar";
 import { ThemePicker } from "../navbar/atoms/themePicker";
-import { color } from "styles/const";
+import { color, fontSize } from "styles/const";
 
 const WrapperHeader = styled.div`
   display: flex;
@@ -24,6 +24,7 @@ const PopupStyled = styled.div`
   border-radius: 0.4em;
   transform: translateX(${rem(-60)}) translateY(${rem(15)});
   padding: ${rem(10)};
+  z-index: 100000;
   :after {
     content: "";
     position: absolute;
@@ -47,7 +48,7 @@ const Choise = styled.div`
 
 const Text = styled.p`
   color: ${color.medium.Manatee};
-  font-size: 14px;
+  font-size: ${fontSize.s};
   margin-left: ${rem(5)};
 `;
 

@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { color, space } from "styles/const";
+import { color, space, fontSize } from "styles/const";
 import Ticket from "../../../../styles/assets/pics/ticket.png";
 import { rem } from "polished";
 
@@ -14,12 +14,13 @@ const SectionWrapper = styled.section`
 const Title = styled.h3`
   font-weight: 600;
   padding: ${space.l} ${space.l};
-  font-size: 24px;
+  font-size: ${fontSize.xl};
   color: ${color.darker.LuckyPoint};
 `;
 
 const TicketCard = styled.img`
-  width: ${rem(430)};
+  width: ${rem(450)};
+  height: ${rem(630)};
   padding: 0 0 0 ${space.l};
 `;
 

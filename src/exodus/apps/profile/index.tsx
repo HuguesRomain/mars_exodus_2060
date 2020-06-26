@@ -2,7 +2,6 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { profileAppRouter } from "exodus/internal-router";
 import styled from "styled-components";
-import { isMobileOnly, isMobile } from "react-device-detect";
 import { SubNavigation } from "../../components/molecules/subNavigation";
 import { IdentityCard } from "./molecules/identityCard";
 import { Button } from "exodus/components/atoms/button";
@@ -11,6 +10,8 @@ import Ticket from "../../../styles/assets/pics/ticket.png";
 import { WelcomeMessage } from "./atoms/welcomeMessage";
 import { InfoSection } from "./organisms/infoSection";
 import { TicketSection } from "./organisms/ticketSection";
+import { fontSize, space } from "styles/const";
+import { isMobileOnly, isMobile } from "exodus/utils/checkWindowSize";
 
 const ProfileAppMobileStyled = styled.div`
   display: flex;
@@ -25,7 +26,7 @@ const ProfileAppStyled = styled.div`
 
 const ButtonWrapper = styled.div`
   display: flex;
-  font-size: 12px;
+  font-size: ${fontSize.xs};
   padding: ${rem(10)} 0;
 `;
 
@@ -39,11 +40,10 @@ export const apps = [
     uri: profileAppRouter.ticket("1"),
   },
 ];
-
 const ProfileApp = () => {
-  return isMobile ? (
+  return isMobile() ? (
     <ProfileAppMobileStyled>
-      {!isMobileOnly && <WelcomeMessage />}
+      {!isMobileOnly() && <WelcomeMessage />}
       <Router>
         <SubNavigation datas={apps} />
         <Switch>
@@ -61,7 +61,7 @@ const ProfileApp = () => {
       </Router>
       <ButtonWrapper>
         <Button
-          style={{ marginRight: rem(10) }}
+          style={{ marginRight: space.xs }}
           type={"primary"}
           iconName={"disconnect"}
         >

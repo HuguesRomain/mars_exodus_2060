@@ -1,8 +1,8 @@
 import * as React from "react";
 import styled from "styled-components";
 import { rem } from "polished";
-import { isMobileOnly } from "react-device-detect";
 import { AppFrame } from "./startup";
+import { breakPoint } from "styles/const";
 
 const AuthApp = React.lazy(() => import("./apps/auth"));
 const HomeApp = React.lazy(() => import("./apps/home"));
@@ -41,7 +41,10 @@ const getApp = () => {
 };
 
 const AppWrapper = styled.div`
-  padding: ${isMobileOnly ? `${rem(69)} 0 ${rem(10)} 0` : `0 0 0 ${rem(100)}`};
+  padding: ${rem(69)} 0 ${rem(90)} 0;
+  @media (min-width: ${breakPoint.tabletPortrait}) {
+    padding: 0 0 0 ${rem(80)};
+  }
 `;
 
 const AppWithContext = ({ App }) => {

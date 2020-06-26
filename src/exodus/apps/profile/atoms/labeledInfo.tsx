@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { color, space } from "styles/const";
+import { color, space, fontSize, fontWeight } from "styles/const";
 
 const LabeledInfoStyled = styled.div`
   display: flex;
@@ -10,12 +10,13 @@ const LabeledInfoStyled = styled.div`
 const Title = styled.p`
   color: ${color.SunsetOrange};
   margin-bottom: ${space.xs};
-  font-size: 12px;
+  font-size: ${fontSize.xs};
+  font-weight: ${fontWeight.avenir.l};
 `;
 
 const Value = styled.p`
   color: ${color.darker.LuckyPoint};
-  font-size: 18px;
+  font-size: ${fontSize.l};
 `;
 
 export const LabeledInfo = ({
