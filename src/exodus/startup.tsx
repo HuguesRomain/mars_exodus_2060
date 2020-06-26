@@ -7,7 +7,6 @@ export const AppFrame = ({ children }: { children: JSX.Element }) => {
   const [isDark, setIsDarkContext] = useState<boolean>(isDarkStorage());
 
   const setIsDark = () => {
-    console.log("yop");
     setIsDarkContext(!isDark);
   };
 

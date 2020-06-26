@@ -40,7 +40,6 @@ export const apps = [
     uri: profileAppRouter.ticket("1"),
   },
 ];
-console.log(isMobileOnly());
 const ProfileApp = () => {
   return isMobile() ? (
     <ProfileAppMobileStyled>
