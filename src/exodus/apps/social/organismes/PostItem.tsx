@@ -7,7 +7,7 @@ import { CommentItem } from "./CommentItem";
 import { iconSize, color, space, fontSize, fontWeight } from "styles/const";
 import { AddComment } from "../molecules/AddComment";
 import { Avatar } from "../atoms/Avatar";
-import { isMobile } from "exodus/utils/checkWindowSize";
+import { isMobile, isMobileOnly } from "exodus/utils/checkWindowSize";
 
 const Item = styled.li`
   list-style-type: none;
@@ -68,13 +68,13 @@ export const PostItem = ({ post }: Props) => {
         <Like quantity={0} />
       </Interact>
       <ul>
-        {!isMobile &&
+        {!isMobileOnly() &&
           post.comment &&
           post.comment.map((value, i) => {
             return <CommentItem key={i} comments={value} />;
           })}
       </ul>
-      {!isMobile && <AddComment />}
+      {!isMobileOnly() && <AddComment />}
     </Item>
   );
 };
