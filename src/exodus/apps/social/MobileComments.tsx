@@ -53,7 +53,7 @@ const MobileComments = () => {
           window.history.back();
         }}
       >
-        <Icon name={"backarrow"} />
+        <Icon name={"back"} />
       </BackSection>
       <CommentList>
         {comments &&

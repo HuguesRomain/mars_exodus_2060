@@ -17,6 +17,13 @@ import {
   Send,
   BackArrow,
   Logo,
+  Back,
+  Ticket,
+  Forward,
+  ForwardArrow,
+  Eye,
+  Check,
+  Clock,
 } from "../assets/icons/icons";
 
 export class IconsMapping {
@@ -37,6 +44,13 @@ export class IconsMapping {
   send = Send;
   backarrow = BackArrow;
   logo = Logo;
+  back = Back;
+  ticket = Ticket;
+  forward = Forward;
+  forwardArrow = ForwardArrow;
+  eye = Eye;
+  check = Check;
+  clock = Clock;
 }
 
 export type IconName = keyof IconsMapping;

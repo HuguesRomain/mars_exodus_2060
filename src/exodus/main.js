@@ -29,6 +29,12 @@ const AppWrapper = styled.div`
   }
 `;
 
+const currentPath = window.document.location.pathname;
+
+if (currentPath === "/") {
+  window.history.replaceState(null, null, "/app/home");
+}
+
 const AppWithContext = () => {
   return (
     <AppFrame>
