@@ -1,10 +1,10 @@
-import React, { useState, createContext } from "react";
+import React, { useState } from "react";
 import { isDarkStorage } from "styles/const";
+import { AppContext } from "./main";
 
-export const AppContext = createContext({});
-
-export const AppFrame = ({ children }: { children: JSX.Element }) => {
+export const AppFrame = ({ children }: { children: React.ReactNode }) => {
   const [isDark, setIsDarkContext] = useState<boolean>(isDarkStorage());
+  const [token, setToken] = useState<string | null>(null);
 
   const setIsDark = () => {
     setIsDarkContext(!isDark);
@@ -14,7 +14,7 @@ export const AppFrame = ({ children }: { children: JSX.Element }) => {
     <AppContext.Provider
       value={{
         isDarkContext: [isDark, setIsDark],
-        token: "jklasjdoilawd80sxkjl",
+        tokenContext: [token, setToken],
       }}
     >
       {children}

@@ -1,16 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { Icon } from "styles/atoms/icons";
-import {
-  color,
-  iconSize,
-  fontSize,
-  breakPoint,
-  space,
-  isDarkStorage,
-} from "styles/const";
+import { color, iconSize, fontSize, breakPoint, space } from "styles/const";
 import { rem } from "polished";
 import { isMinTabletPortrait } from "exodus/utils/checkWindowSize";
+import { AppContext } from "exodus/main";
 
 const Label = styled.p`
   font-size: ${fontSize.s};
@@ -39,7 +33,10 @@ const IconWrapper = styled.div`
 `;
 
 export const ThemePicker = () => {
-  const [darkMode, setDarkMode] = useState<boolean>(isDarkStorage());
+  const Context = React.useContext(AppContext);
+  const [isDark, setIsDark] = Context.isDarkContext;
+
+  const [darkMode] = useState<boolean>(isDark);
   useEffect(() => {
     localStorage.setItem("dark", JSON.stringify(darkMode));
   }, [darkMode]);
@@ -47,13 +44,14 @@ export const ThemePicker = () => {
   return (
     <ThemePickerStyled
       onClick={() => {
-        setDarkMode((prevState) => !prevState);
+        setIsDark();
       }}
     >
       <IconWrapper>
-        <Icon name={darkMode ? "sun" : "moon"} size={iconSize.m} />
+        {console.log(Context)}
+        <Icon name={!isDark ? "sun" : "moon"} size={iconSize.m} />
       </IconWrapper>
-      {isMinTabletPortrait() && <Label>{darkMode ? "Light" : "Dark"}</Label>}
+      {isMinTabletPortrait() && <Label>{!isDark ? "Light" : "Dark"}</Label>}
     </ThemePickerStyled>
   );
 };

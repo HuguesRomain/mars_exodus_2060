@@ -15,12 +15,27 @@ import {
   socialAppRouter,
   profileAppRouter,
 } from "./internal-router";
-import { breakPoint } from "styles/const";
+import { breakPoint, isDarkStorage } from "styles/const";
 import { isMobile } from "exodus/utils/checkWindowSize";
 import { MobileHeader } from "exodus/components/molecules/mobileHeader";
 import { isMobileOnly } from "exodus/utils/checkWindowSize";
 import { NavBarContainer } from "exodus/components/navbar/index";
 import { authApp } from "./internal-router";
+
+type ContextType = {
+  isDarkContext: [boolean, () => void];
+  tokenContext: [
+    string | null,
+    React.Dispatch<React.SetStateAction<string | null>>
+  ];
+};
+
+const InitialState: ContextType = {
+  isDarkContext: [isDarkStorage(), () => {}],
+  tokenContext: [null, () => {}],
+};
+
+export const AppContext = React.createContext(InitialState);
 
 const AppWrapper = styled.div`
   padding: ${rem(69)} 0 ${rem(90)} 0;
@@ -32,7 +47,7 @@ const AppWrapper = styled.div`
 const currentPath = window.document.location.pathname;
 
 if (currentPath === "/") {
-  window.history.replaceState(null, null, "/app/home");
+  window.history.replaceState(null, "", "/app/home");
 }
 
 const AppWithContext = () => {
@@ -80,4 +95,4 @@ const AppWithContext = () => {
 };
 
 // You're welcome to Mars Exodus 2060 🌕🚀
-export const App = () => <AppWithContext App={App} />;
+export const App = () => <AppWithContext />;
