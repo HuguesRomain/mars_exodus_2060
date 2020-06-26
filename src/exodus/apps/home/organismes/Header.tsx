@@ -9,6 +9,7 @@ import five from "../../../../assets/images/hero-5.png"; */
 import six from "../../../../assets/images/hero-6.png";
 import back from "../../../../assets/images/hero-7.jpg";
 import styled from "styled-components";
+import { font, titeFontsize, breakPoint } from "styles/const";
 
 const ContentHeader = styled.div`
   position: relative;
@@ -26,15 +27,18 @@ const TextContent = styled.div`
   height: 100%;
   align-items: center;
 `;
+
 const Title = styled.h1`
+  font-family: ${font.josefin};
   text-align: center;
-  font-size: 35px;
+  font-size: ${titeFontsize.m};
   margin: 0;
   z-index: -1;
-  @media (min-width: 500px) {
-    font-size: 90px;
+  @media (min-width: ${breakPoint.mobileOnly}) {
+    font-size: ${titeFontsize.l};
   }
 `;
+
 const FistImage = styled.img`
   object-fit: cover;
   height: 644px;
@@ -56,6 +60,7 @@ const PlanetBack = styled.img`
   width: 100%;
   bottom: 0;
 `;
+
 const FirstMontaine = styled.img`
   object-fit: cover;
   height: 644px;
@@ -64,6 +69,7 @@ const FirstMontaine = styled.img`
   width: 100%;
   margin-top: 120px;
 `;
+
 const Back = styled.img`
   object-fit: cover;
   height: 644px;

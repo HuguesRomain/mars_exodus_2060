@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { Icon } from "styles/atoms/icons";
 import { rem } from "polished";
-import { color, iconSize } from "styles/const";
+import { color, iconSize, space } from "styles/const";
 
 const PlanetsDateStyled = styled.div`
   display: flex;
@@ -27,6 +27,7 @@ const PlanetInfo = styled.div`
   border-radius: 0.4em;
   transform: translateX(${rem(95)});
   padding: ${rem(10)};
+  z-index: 100000;
   :after {
     content: "";
     position: absolute;
@@ -45,11 +46,11 @@ const PlanetInfo = styled.div`
 const PositionStyled = styled.div`
   display: flex;
   align-items: center;
-  margin-bottom: ${rem(5)};
+  margin-bottom: ${space.xs};
 `;
 
 const PositionText = styled.p`
-  margin-left: ${rem(5)};
+  margin-left: ${space.xs};
   color: #848897;
 `;
 

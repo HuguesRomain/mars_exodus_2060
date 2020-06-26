@@ -1,15 +1,19 @@
 import React from "react";
 import styled from "styled-components";
+import { fontWeight, fontSize, space } from "styles/const";
 
 const ContentCount = styled.div`
-  padding: 10px;
+  padding: ${space.xs};
 `;
+
 const Count = styled.p`
-  font-size: 40px;
-  padding: 20px;
+  font-size: ${fontSize.xxl};
+  padding: ${space.s};
 `;
+
 const Legend = styled.p`
-  font-size: 16px;
+  font-size: ${fontSize.m};
+  font-weight: ${fontWeight.avenir.l};
 `;
 
 type Props = {

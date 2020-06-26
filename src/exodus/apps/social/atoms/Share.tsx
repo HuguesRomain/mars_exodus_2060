@@ -1,8 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { Icon } from "styles/atoms/icons";
-import { color } from "styles/const";
-import { rem } from "polished";
+import { color, fontSize, iconSize, space } from "styles/const";
 
 const Item = styled.div`
   display: flex;
@@ -12,17 +11,14 @@ const Item = styled.div`
 
 const Text = styled.p`
   color: ${color.medium.Manatee};
-  margin-left: ${rem(10)};
+  margin-left: ${space.xs};
+  font-size: ${fontSize.s};
 `;
-
-type Props = {
-  quantity: number;
-};
 
 export const Share = () => {
   return (
     <Item>
-      <Icon color={color.medium.Manatee} name={"share"} />
+      <Icon size={iconSize.m} color={color.medium.Manatee} name={"share"} />
       <Text>Partager</Text>
     </Item>
   );

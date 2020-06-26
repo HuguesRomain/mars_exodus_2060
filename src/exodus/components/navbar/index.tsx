@@ -3,21 +3,18 @@ import styled from "styled-components";
 import { apps } from "./data/index";
 
 import { rem } from "polished";
-import { color } from "styles/const";
+import { color, breakPoint, space } from "styles/const";
 import { LabeledIcon } from "./atoms/labeledIcon";
-import { isMobileOnly } from "react-device-detect";
 import { IconMarsExodus } from "./atoms/IconMarsExodus";
 import { ThemePicker } from "./atoms/themePicker";
 import { PlanetsDate } from "./organisms/planetDate";
+import { isMobileOnly } from "exodus/utils/checkWindowSize";
 
 const WrapperMobileNavigation = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   width: 100%;
-`;
-
-const NavBarMobileWrapper = styled.nav`
   overflow: hidden;
   position: fixed;
   bottom: 0;
@@ -25,17 +22,7 @@ const NavBarMobileWrapper = styled.nav`
   padding: ${rem(15)} ${rem(20)};
   background-color: white;
   border-radius: 20px 20px 0px 0px;
-  z-index: 100;
-`;
-
-const NavBarWrapper = styled.nav`
-  overflow: hidden;
-  position: fixed;
-  left: 0;
-  width: ${rem(96)};
-  height: 100%;
-  background-color: white;
-  border-radius: 0px 20px 20px 0px;
+  z-index: 100000;
 `;
 
 const WrapperNavigation = styled.div`
@@ -44,14 +31,22 @@ const WrapperNavigation = styled.div`
   justify-content: space-between;
   height: 100%;
   padding: ${rem(15)} ${rem(20)};
+  overflow: hidden;
+  position: fixed;
+  left: 0;
+  width: ${rem(96)};
+  height: 100%;
+  background-color: white;
+  border-radius: 0px 20px 20px 0px;
+  z-index: 100000;
 `;
 
 export const LabelOverlay = styled.p<{ linkActive?: boolean }>`
   color: ${(props) =>
     !props.linkActive ? color.medium.Manatee : color.darker.BlackRussian};
 
-  @media (min-width: 1440px) {
-    padding-top: ${rem(10)};
+  @media (min-width: ${breakPoint.desktop}) {
+    padding-top: ${space.xs};
   }
 `;
 
@@ -90,17 +85,5 @@ const NavBar = () => {
 };
 
 export const NavBarContainer = () => {
-  return (
-    <>
-      {isMobileOnly ? (
-        <NavBarMobileWrapper>
-          <NavBarMobile />
-        </NavBarMobileWrapper>
-      ) : (
-        <NavBarWrapper>
-          <NavBar />
-        </NavBarWrapper>
-      )}
-    </>
-  );
+  return isMobileOnly() ? <NavBarMobile /> : <NavBar />;
 };

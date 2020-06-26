@@ -6,7 +6,7 @@ import {
   UriType,
 } from "../../../internal-router";
 import { IconName } from "styles/atoms/icons";
-import { isMobile } from "react-device-detect";
+import { isMobile } from "exodus/utils/checkWindowSize";
 
 export type AppsTypes = {
   label: string;
@@ -36,7 +36,9 @@ export const apps: AppsTypes[] = [
   },
   {
     label: "Compte",
-    uri: isMobile ? profileAppRouter.identity("1") : profileAppRouter.profile(),
+    uri: isMobile()
+      ? profileAppRouter.identity("1")
+      : profileAppRouter.profile(),
     icon: "profile",
     order: 4,
   },

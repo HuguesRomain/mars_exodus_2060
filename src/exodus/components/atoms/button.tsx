@@ -2,7 +2,7 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { Icon, IconName } from "styles/atoms/icons";
 import { rem } from "polished";
-import { color as globalColors } from "styles/const";
+import { color as globalColors, space } from "styles/const";
 
 const primary = css`
   background-color: ${globalColors.SunsetOrange};
@@ -73,7 +73,7 @@ export const Button = ({
           }
           name={iconName}
           size={14}
-          style={{ marginLeft: rem(10) }}
+          style={{ marginLeft: space.xs }}
         />
       )}
     </PrecomputeButton>

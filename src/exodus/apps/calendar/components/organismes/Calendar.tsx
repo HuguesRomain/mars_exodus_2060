@@ -8,6 +8,7 @@ import styled from "styled-components";
 /* import { isPast } from "date-fns"; */
 
 import "./test.css";
+import { fontWeight, color, fontSize } from "styles/const";
 
 const ClendarContent = styled.div`
   display: flex;
@@ -21,6 +22,12 @@ const ClendarContent = styled.div`
 interface props {
   calendarEvents: Array<Dates>;
 }
+
+const Title = styled.h1`
+  font-weight: ${fontWeight.avenir.l};
+  color: ${color.darker.LuckyPoint};
+  font-size: ${fontSize.xl};
+`;
 
 export const Calendar = ({ calendarEvents }: props) => {
   /* const [calendarEvents, setcalendarEvents] = useState<Dates[]>(
@@ -44,7 +51,7 @@ export const Calendar = ({ calendarEvents }: props) => {
 
   return (
     <ClendarContent>
-      <h1>Calendrier de l’expédition</h1>
+      <Title>Calendrier de l’expédition</Title>
       <FullCalendar
         defaultView="dayGridMonth"
         locales={[frLocale]}

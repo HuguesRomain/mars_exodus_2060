@@ -1,14 +1,19 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { TimeCount } from "../atomes/TimeCount";
+import { font, fontSize, space, fontWeight } from "styles/const";
 
 const ContentTime = styled.div`
   text-align: center;
 `;
+
 const CountTitel = styled.p`
-  font-size: 18px;
-  padding: 10px;
+  font-family: ${font.avenir};
+  font-size: ${fontSize.l};
+  padding: ${space.xs};
+  font-weight: ${fontWeight.avenir.m};
 `;
+
 const Counter = styled.div`
   display: flex;
   text-align: center;

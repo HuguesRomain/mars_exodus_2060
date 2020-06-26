@@ -2,7 +2,6 @@ import * as React from "react";
 import styled from "styled-components";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { rem } from "polished";
-import { isMobileOnly } from "react-device-detect";
 import { AppFrame } from "./startup";
 import AuthApp from "./apps/auth";
 import HomeApp from "./apps/home";
@@ -16,17 +15,25 @@ import {
   socialAppRouter,
   profileAppRouter,
 } from "./internal-router";
-import { isMobile } from "react-device-detect";
-
-export const AppContext = React.createContext(null);
+import { breakPoint } from "styles/const";
+import { isMobile } from "exodus/utils/checkWindowSize";
+import { MobileHeader } from "exodus/components/molecules/mobileHeader";
+import { isMobileOnly } from "exodus/utils/checkWindowSize";
+import { NavBarContainer } from "exodus/components/navbar/index";
+import { authApp } from "./internal-router";
 
 const AppWrapper = styled.div`
-  padding: ${isMobileOnly ? `${rem(69)} 0 ${rem(90)} 0` : `0 0 0 ${rem(100)}`};
+  padding: ${rem(69)} 0 ${rem(90)} 0;
+  @media (min-width: ${breakPoint.tabletPortrait}) {
+    padding: 0 0 0 ${rem(80)};
+  }
 `;
 
 const AppWithContext = () => {
   return (
     <AppFrame>
+      {isMobileOnly() && <MobileHeader />}
+      {!window.location.pathname.includes(authApp) && <NavBarContainer />}
       <AppWrapper>
         <Router>
           <Switch>
@@ -53,7 +60,7 @@ const AppWithContext = () => {
             <Route
               exact
               path={
-                isMobile
+                isMobile()
                   ? profileAppRouter.identity("1")
                   : profileAppRouter.profile()
               }
