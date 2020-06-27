@@ -51,7 +51,7 @@ const Send = styled.div<{ isDark: boolean }>`
   border: none;
   background-color: ${(props) =>
     !props.isDark ? color.light.WhiteSmoke : color.darker.BlackPearl};
-  padding: ${space.xs};
+  padding: ${space.xs} ${space.s};
   height: ${rem(40)};
   transition: ${transitionTime};
 `;
