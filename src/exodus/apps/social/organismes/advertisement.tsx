@@ -1,18 +1,32 @@
 import React from "react";
 import styled from "styled-components";
-import { color, space, fontSize, fontWeight } from "styles/const";
+import {
+  color,
+  space,
+  fontSize,
+  fontWeight,
+  transitionTime,
+  breakPoint,
+} from "styles/const";
 import Bobafett from "../../../../styles/assets/pics/bobafett.png";
 import Dune from "../../../../styles/assets/pics/dune.png";
 import { rem } from "polished";
+import { AppContext } from "exodus/context";
 
-const AdvertisementStyled = styled.div`
+const AdvertisementStyled = styled.div<{ isDark: boolean }>`
   display: flex;
   flex-direction: column;
   width: ${rem(350)};
-  background-color: ${color.light.PureWhite};
+  background-color: ${(props) =>
+    !props.isDark ? color.light.PureWhite : color.darker.BlackPearl};
   margin-top: ${space.l};
   padding: ${space.s};
   border-radius: 20px;
+  transition: ${transitionTime};
+
+  @media (max-width: ${breakPoint.tabletLandscape}) {
+    display: none;
+  }
 `;
 
 const Articleimg = styled.img`
@@ -35,17 +49,22 @@ const Content = styled.div`
   margin-left: ${space.s};
 `;
 
-const Title = styled.p`
+const Title = styled.p<{ isDark: boolean }>`
   font-weight: ${fontWeight.avenir.l};
   font-size: ${fontSize.s};
-  color: ${color.darker.LuckyPoint};
+  color: ${(props) =>
+    !props.isDark ? color.darker.LuckyPoint : color.light.PureWhite};
   margin-bottom: ${rem(2)};
+  transition: ${transitionTime};
 `;
 
-const Link = styled.p`
+const Link = styled.p<{ isDark: boolean }>`
   font-size: ${fontSize.xs};
   text-decoration: underline;
   margin-bottom: ${rem(2)};
+  color: ${(props) =>
+    !props.isDark ? color.darker.LuckyPoint : color.light.PureWhite};
+  transition: ${transitionTime};
 `;
 
 const Description = styled.p`
@@ -79,15 +98,17 @@ const articles: ArticleType[] = [
 ];
 
 export const Advertisement = () => {
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
   return (
-    <AdvertisementStyled>
+    <AdvertisementStyled isDark={isDark}>
       <SectionName>Sponsorisés</SectionName>
       {articles.map((article, i) => (
         <Article key={i}>
           <Articleimg src={article.img} alt="Image article" />
           <Content>
-            <Title>{article.title}</Title>
-            <Link>{article.url}</Link>
+            <Title isDark={isDark}>{article.title}</Title>
+            <Link isDark={isDark}>{article.url}</Link>
             <Description>{article.description}</Description>
           </Content>
         </Article>

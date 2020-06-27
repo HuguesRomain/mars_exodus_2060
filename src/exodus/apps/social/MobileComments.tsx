@@ -3,21 +3,28 @@ import { CommentItem } from "./organismes/CommentItem";
 import styled from "styled-components";
 import { Icon } from "styles/atoms/icons";
 import { rem } from "polished";
-import { color } from "styles/const";
+import { color, transitionTime } from "styles/const";
+import { AppContext } from "exodus/context";
 
 const CommentList = styled.ul`
   padding: 0 ${rem(10)};
 `;
 
-const BackSection = styled.div`
+const BackSection = styled.div<{ isDark: boolean }>`
   width: 100vw;
   padding: ${rem(10)} 0 0 ${rem(10)};
-  background-color: ${color.light.PureWhite};
+  background-color: ${(props) =>
+    !props.isDark ? color.light.PureWhite : color.darker.DarkestBlack};
+  transition: ${transitionTime};
 `;
 
-const MobileCommentStyle = styled.div`
+const MobileCommentStyle = styled.div<{ isDark: boolean }>`
   display: flex;
   flex-direction: column;
+  background-color: ${(props) =>
+    !props.isDark ? color.light.WhiteSmoke : color.darker.DarkestBlack};
+  height: 100vh;
+  transition: ${transitionTime};
 `;
 
 type Comments = {
@@ -45,13 +52,15 @@ const comment = [
 
 const MobileComments = () => {
   const [comments /* setComments */] = useState<Comments[]>(comment);
-
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
   return (
-    <MobileCommentStyle>
+    <MobileCommentStyle isDark={isDark}>
       <BackSection
         onClick={() => {
           window.history.back();
         }}
+        isDark={isDark}
       >
         <Icon name={"back"} />
       </BackSection>

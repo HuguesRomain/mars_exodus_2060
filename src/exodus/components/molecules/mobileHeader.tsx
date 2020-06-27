@@ -2,11 +2,17 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import { rem } from "polished";
 import { Icon } from "styles/atoms/icons";
-import { LabelOverlay } from "../navbar";
 import { ThemePicker } from "../navbar/atoms/themePicker";
-import { color, fontSize } from "styles/const";
+import {
+  color,
+  fontSize,
+  transitionTime,
+  breakPoint,
+  space,
+} from "styles/const";
+import { AppContext } from "exodus/context";
 
-const WrapperHeader = styled.div`
+const WrapperHeader = styled.div<{ isDark: boolean }>`
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -14,13 +20,16 @@ const WrapperHeader = styled.div`
   top: 0;
   width: 100%;
   height: ${rem(69)};
-  background-color: ${color.light.PureWhite};
+  background-color: ${(props) =>
+    !props.isDark ? color.light.PureWhite : color.darker.BlackRussian};
   border-radius: 0px 0px 20px 20px;
+  transition: ${transitionTime};
 `;
 
-const PopupStyled = styled.div`
+const PopupStyled = styled.div<{ isDark: boolean }>`
   position: fixed;
-  background: ${color.light.PureWhite};
+  background-color: ${(props) =>
+    !props.isDark ? color.light.PureWhite : color.darker.BlackPearl};
   border-radius: 0.4em;
   transform: translateX(${rem(-60)}) translateY(${rem(15)});
   padding: ${rem(10)};
@@ -33,11 +42,13 @@ const PopupStyled = styled.div`
     width: 0;
     height: 0;
     border: 1.156em solid transparent;
-    border-bottom-color: ${color.light.PureWhite};
+    border-right-color: ${(props) =>
+      !props.isDark ? color.light.PureWhite : color.darker.BlackPearl};
     border-top: 0;
     margin-left: -1.156em;
     margin-top: -1.156em;
   }
+  transition: ${transitionTime};
 `;
 
 const Choise = styled.div`
@@ -46,33 +57,49 @@ const Choise = styled.div`
   padding: ${rem(5)};
 `;
 
-const Text = styled.p`
-  color: ${color.medium.Manatee};
+const Text = styled.p<{ isDark: boolean }>`
+  color: ${(props) =>
+    !props.isDark ? color.medium.Manatee : color.light.PureWhite};
   font-size: ${fontSize.s};
   margin-left: ${rem(5)};
+  transition: ${transitionTime};
 `;
 
 const Popup = () => {
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
   return (
-    <PopupStyled>
+    <PopupStyled isDark={isDark}>
       <Choise>
         <Icon name={"earth"} size={"32"} />
-        <Text>Terre</Text>
+        <Text isDark={isDark}>Terre</Text>
       </Choise>
       <Choise>
         <Icon name={"mars"} size={"32"} />
-        <Text>Mars</Text>
+        <Text isDark={isDark}>Mars</Text>
       </Choise>
     </PopupStyled>
   );
 };
 
+const Hours = styled.p<{ isDark: boolean }>`
+  color: ${(props) =>
+    !props.isDark ? color.darker.BlackRussian : color.light.PureWhite};
+
+  @media (min-width: ${breakPoint.desktop}) {
+    padding-top: ${space.xs};
+  }
+  transition: ${transitionTime};
+`;
+
 export const MobileHeader = () => {
   const [displayMenu, setDisplayMenu] = useState<boolean>(false);
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
   return (
-    <WrapperHeader>
+    <WrapperHeader isDark={isDark}>
       <ThemePicker />
-      <LabelOverlay>Mercredi 10 Juin 09:48</LabelOverlay>
+      <Hours isDark={isDark}>Mercredi 10 Juin 09:48</Hours>
       <div
         onClick={() => {
           displayMenu ? setDisplayMenu(false) : setDisplayMenu(true);

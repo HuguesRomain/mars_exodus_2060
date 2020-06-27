@@ -5,9 +5,11 @@ import JosefinSans from "./assets/fonts/josefinSans.ttf";
 export const GlobalStyled = createGlobalStyle`
   *{
     box-sizing: border-box;
-	
+		transition: fill 4s ease;
+		:focus {
+    outline: none;
+}
   }
-
 // Todo : init Normalize()
 
   a {
@@ -42,7 +44,6 @@ footer, header, hgroup, menu, nav, section {
 body {
 	line-height: 1;
 	font-family: "Avenir";
-	background-color: #F8F8F8
 }
 ol, ul {
 	list-style: none;

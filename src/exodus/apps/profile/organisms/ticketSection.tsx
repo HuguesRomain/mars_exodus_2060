@@ -1,21 +1,26 @@
 import React from "react";
 import styled from "styled-components";
-import { color, space, fontSize } from "styles/const";
+import { color, space, fontSize, transitionTime } from "styles/const";
 import Ticket from "../../../../styles/assets/pics/ticket.png";
 import { rem } from "polished";
+import { AppContext } from "exodus/context";
 
-const SectionWrapper = styled.section`
+const SectionWrapper = styled.section<{ isDark: boolean }>`
   display: flex;
   flex-direction: column;
-  background-color: ${color.light.Solitude};
+  background-color: ${(props) =>
+    !props.isDark ? color.light.Solitude : color.darker.BlackPearl};
   width: 40vw;
+  transition: ${transitionTime};
 `;
 
-const Title = styled.h3`
+const Title = styled.h3<{ isDark: boolean }>`
   font-weight: 600;
   padding: ${space.l} ${space.l};
   font-size: ${fontSize.xl};
-  color: ${color.darker.LuckyPoint};
+  color: ${(props) =>
+    !props.isDark ? color.darker.LuckyPoint : color.light.PureWhite};
+  transition: ${transitionTime};
 `;
 
 const TicketCard = styled.img`
@@ -25,9 +30,11 @@ const TicketCard = styled.img`
 `;
 
 export const TicketSection = () => {
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
   return (
-    <SectionWrapper>
-      <Title>Votre billet</Title>
+    <SectionWrapper isDark={isDark}>
+      <Title isDark={isDark}>Votre billet</Title>
       <TicketCard src={Ticket} />
     </SectionWrapper>
   );
