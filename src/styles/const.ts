@@ -11,8 +11,9 @@ export const color = {
     Manatee: "#848897",
   },
   darker: {
+    DarkestBlack: "#090513",
     BlackRussian: "#091124",
-    BlackPearl: "#072033",
+    BlackPearl: "#0D2E47",
     LuckyPoint: "#292C59",
   },
 
@@ -23,13 +24,17 @@ export const color = {
 
 export const isDarkStorage = () => {
   const saveMode = JSON.parse(localStorage.getItem("dark") || "{}");
-  return saveMode || false;
+  return saveMode === true || saveMode === false
+    ? saveMode
+    : window.matchMedia
+    ? window.matchMedia("(prefers-color-scheme: dark)").matches
+    : false;
 };
 
 export const breakPoint = {
   mobileOnly: "599px",
   tabletPortrait: "600px",
-  tabletLandscape: "900px",
+  tabletLandscape: "1199px",
   desktop: "1200px",
 };
 
@@ -87,3 +92,5 @@ export const boxShadows = {
   light: "0px 5px 15px rgba(153, 155, 168, 0.15)",
   dark: "0px 5px 15px rgba(0, 0, 0, 0.15);",
 };
+
+export const transitionTime = "0.7s";

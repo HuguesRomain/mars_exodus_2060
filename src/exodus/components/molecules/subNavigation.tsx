@@ -3,7 +3,8 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 import { profileAppRouter, UriType } from "exodus/internal-router";
 import { rem } from "polished";
-import { color, space } from "styles/const";
+import { color, space, transitionTime } from "styles/const";
+import { AppContext } from "exodus/context";
 
 const NavigationWrapper = styled.div`
   display: flex;
@@ -19,8 +20,10 @@ const LinkWrapper = styled(Link)`
   flex-direction: column;
 `;
 
-const Text = styled.p`
-  color: ${color.darker.LuckyPoint};
+const Text = styled.p<{ isDark: boolean }>`
+  color: ${(props) =>
+    !props.isDark ? color.darker.LuckyPoint : color.light.PureWhite};
+  transition: ${transitionTime};
 `;
 
 const Dot = styled.span`
@@ -42,6 +45,8 @@ type TypeDatas = {
 
 export const SubNavigation = ({ datas }: TypeDatas) => {
   const [path, setPath] = useState<UriType>(profileAppRouter.identity("1"));
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
   return (
     <NavigationWrapper>
       {datas.map((data: any) => {
@@ -52,7 +57,7 @@ export const SubNavigation = ({ datas }: TypeDatas) => {
             }}
             to={data.uri}
           >
-            <Text>{data.label}</Text>
+            <Text isDark={isDark}>{data.label}</Text>
             {path === data.uri && <Dot />}
           </LinkWrapper>
         );

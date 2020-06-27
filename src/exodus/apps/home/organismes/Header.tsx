@@ -17,6 +17,7 @@ const ContentHeader = styled.div`
   width: 100%;
   height: 644px;
   border-bottom-right-radius: 40px;
+  z-index: 20;
 `;
 
 const TextContent = styled.div`

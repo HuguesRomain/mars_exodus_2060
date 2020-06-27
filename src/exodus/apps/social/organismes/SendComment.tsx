@@ -1,17 +1,25 @@
 import React, { useState, ChangeEvent, KeyboardEvent } from "react";
 import styled from "styled-components";
 import { AddMedia } from "../molecules/AddMedia";
-import { color, iconSize, space, breakPoint } from "styles/const";
+import {
+  color,
+  iconSize,
+  space,
+  breakPoint,
+  transitionTime,
+} from "styles/const";
 import { Avatar } from "../atoms/Avatar";
 import { Icon } from "styles/atoms/icons";
+import { AppContext } from "exodus/context";
 
-const Content = styled.div`
+const Content = styled.div<{ isDark: boolean }>`
   max-width: 550px;
   border-radius: 20px;
-  background-color: white;
+  background-color: ${(props) =>
+    !props.isDark ? color.light.PureWhite : color.darker.BlackRussian};
   padding: ${space.xs} ${space.m};
   margin: 0 auto;
-
+  transition: ${transitionTime};
   @media (max-width: ${breakPoint.mobileOnly}) {
     margin: ${space.m};
   }
@@ -26,12 +34,15 @@ const SendAndMore = styled.div`
   justify-content: space-between;
   align-items: center;
 `;
-const CommentInput = styled.input`
+const CommentInput = styled.input<{ isDark: boolean }>`
   margin-left: ${space.m};
   height: 48px;
   border: none;
   width: 100%;
   color: ${color.medium.Manatee};
+  transition: ${transitionTime};
+  background-color: ${(props) =>
+    !props.isDark ? color.light.PureWhite : color.darker.BlackRussian};
 `;
 
 type Props = {
@@ -40,6 +51,8 @@ type Props = {
 };
 
 export const SendComment = ({ setposts, posts }: Props) => {
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
   let [newComment, setNewComment] = useState("");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -64,7 +77,7 @@ export const SendComment = ({ setposts, posts }: Props) => {
     setNewComment("");
   };
   return (
-    <Content>
+    <Content isDark={isDark}>
       <Head>
         <Avatar
           src="https://www.writeups.org/wp-content/uploads/Punisher-netflix-daredevil-Bernthal.jpg"
@@ -76,6 +89,7 @@ export const SendComment = ({ setposts, posts }: Props) => {
           placeholder="Postez quelque chose..."
           value={newComment}
           type="text"
+          isDark={isDark}
         />
       </Head>
       <SendAndMore>

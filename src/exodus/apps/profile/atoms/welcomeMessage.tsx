@@ -1,6 +1,13 @@
 import React from "react";
 import styled from "styled-components";
-import { color, space, fontSize, breakPoint } from "styles/const";
+import {
+  color,
+  space,
+  fontSize,
+  breakPoint,
+  transitionTime,
+} from "styles/const";
+import { AppContext } from "exodus/context";
 
 const WelcomeMessageStyled = styled.div`
   display: flex;
@@ -11,12 +18,14 @@ const WelcomeMessageStyled = styled.div`
   }
 `;
 
-const Title = styled.h1`
+const Title = styled.h1<{ isDark: boolean }>`
   font-size: ${fontSize.xxxl};
   margin: 0;
   margin-bottom: ${space.xs};
-  color: ${color.darker.LuckyPoint};
+  color: ${(props) =>
+    !props.isDark ? color.darker.LuckyPoint : color.light.PureWhite};
   font-weight: 500;
+  transition: ${transitionTime};
 `;
 
 const Text = styled.p`
@@ -25,9 +34,11 @@ const Text = styled.p`
 `;
 
 export const WelcomeMessage = () => {
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
   return (
     <WelcomeMessageStyled>
-      <Title>Bonjour John !</Title>
+      <Title isDark={isDark}>Bonjour John !</Title>
       <Text>Prêt pour le départ ?</Text>
     </WelcomeMessageStyled>
   );

@@ -1,6 +1,6 @@
 const mobile = 599;
 const tabletPortrait = 600;
-const tabletLandscape = 900;
+const tabletLandscape = 1199;
 const desktop = 1200;
 
 const current = window.screen.width;

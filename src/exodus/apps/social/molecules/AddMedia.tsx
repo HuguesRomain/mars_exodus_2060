@@ -8,19 +8,22 @@ import {
   iconSize,
   fontWeight,
   breakPoint,
+  transitionTime,
 } from "styles/const";
+import { AppContext } from "exodus/context";
 
-const Content = styled.div`
+const Content = styled.div<{ isDark: boolean }>`
   display: flex;
   align-items: center;
   max-width: 500px;
   display: flex;
   border-radius: 8px;
-  background-color: ${color.light.PureWhite};
 
+  transition: ${transitionTime};
   @media (min-width: ${breakPoint.desktop}) {
     padding: ${space.xs};
-    background-color: ${color.light.WhiteSmoke};
+    background-color: ${(props) =>
+      !props.isDark ? color.light.WhiteSmoke : color.darker.BlackPearl};
   }
 `;
 
@@ -32,8 +35,10 @@ const Description = styled.p`
 `;
 
 export const AddMedia = () => {
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
   return (
-    <Content>
+    <Content isDark={isDark}>
       <Icon size={iconSize.s} color={color.medium.Manatee} name={"pics"} />
       <Description>Photos/Vidéos</Description>
     </Content>

@@ -1,8 +1,15 @@
 import React from "react";
 import styled from "styled-components";
-import { color, space, iconSize } from "styles/const";
+import {
+  color,
+  space,
+  iconSize,
+  transitionTime,
+  breakPoint,
+} from "styles/const";
 import { Avatar } from "../atoms/Avatar";
 import { isMobileOnly } from "exodus/utils/checkWindowSize";
+import { AppContext } from "exodus/context";
 
 const Comment = styled.li`
   list-style-type: none;
@@ -10,15 +17,30 @@ const Comment = styled.li`
   margin: ${space.xs} auto 0;
 `;
 
-const Content = styled.div`
-  background-color: ${isMobileOnly() && color.light.PureWhite};
+const Content = styled.div<{ isDark: boolean }>`
+  background-color: ${(props) =>
+    isMobileOnly()
+      ? !props.isDark
+        ? color.light.PureWhite
+        : color.darker.BlackPearl
+      : "transparent"};
   border-radius: 20px;
   padding: ${space.s};
   width: 100%;
+  transition: ${transitionTime};
+
+  @media (max-width: ${breakPoint.mobileOnly}) {
+    margin-left: ${space.s};
+    line-height: 30px;
+    padding: ${space.xs} ${space.s};
+  }
 `;
 
-const Author = styled.p`
+const Author = styled.p<{ isDark: boolean }>`
   font-weight: 500;
+  color: ${(props) =>
+    !props.isDark ? color.darker.BlackPearl : color.light.PureWhite};
+  transition: ${transitionTime};
 `;
 
 const Since = styled.p`
@@ -27,9 +49,11 @@ const Since = styled.p`
   color: ${color.medium.Manatee};
 `;
 
-const Text = styled.p`
+const Text = styled.p<{ isDark: boolean }>`
   margin-top: ${space.xs};
-  color: ${color.darker.LuckyPoint};
+  color: ${(props) =>
+    !props.isDark ? color.darker.LuckyPoint : color.light.PureWhite};
+  transition: ${transitionTime};
 `;
 
 type Props = {
@@ -43,16 +67,17 @@ type Props = {
 
 export const CommentItem = ({ comments }: Props) => {
   const theDay = comments.date.toLocaleString("default", { weekday: "long" });
-
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
   return (
     <Comment>
       <Avatar src={comments.avatar} size={iconSize.l} />
-      <Content>
+      <Content isDark={isDark}>
         <div style={{ display: "flex", marginBottom: space.xs }}>
-          <Author>{comments.author}</Author>
+          <Author isDark={isDark}>{comments.author}</Author>
           <Since>il y a {theDay}</Since>
         </div>
-        <Text>{comments.text}</Text>
+        <Text isDark={isDark}>{comments.text}</Text>
       </Content>
     </Comment>
   );
