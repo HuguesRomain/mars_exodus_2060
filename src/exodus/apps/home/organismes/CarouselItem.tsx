@@ -72,7 +72,7 @@ export const CarouselItem = () => {
     <ItemContent>
       <ImageArticle
         src="https://i.pinimg.com/originals/20/a8/9a/20a89acdab952dcedc577c06ae10fe1e.jpg"
-        alt=""
+        alt="Article Image"
       />
       <div>
         <TitleArticle>MARS</TitleArticle>
@@ -80,9 +80,11 @@ export const CarouselItem = () => {
         <DescriptionArticle>
           Tout savoir sur notre nouvelle planète
         </DescriptionArticle>
-        <Styledutton style={{ marginRight: space.s }} iconName={"forward"}>
-          <ButtonText>Lire l'article</ButtonText>
-        </Styledutton>
+        <div>
+          <Styledutton style={{ marginRight: space.s }} iconName={"forward"}>
+            <ButtonText>Lire l'article</ButtonText>
+          </Styledutton>
+        </div>
       </div>
     </ItemContent>
   );

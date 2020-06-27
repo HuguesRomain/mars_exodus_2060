@@ -5,6 +5,7 @@ import { CarouselInfo } from "./organismes/CarouselInfo";
 
 const HomeContent = styled.main`
   height: 200vh;
+  overflow: hidden;
 `;
 
 const HomeApp = () => {
