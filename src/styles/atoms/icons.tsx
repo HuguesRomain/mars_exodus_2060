@@ -60,6 +60,7 @@ const iconsMapping = new IconsMapping();
 export type IconProps = {
   name: IconName;
   color?: string | null;
+  strokeColor?: string | null;
   secondColor?: string | null;
   size?: number | string;
   onClick?: (e: any) => void;
@@ -75,6 +76,7 @@ export const Icon = (props: IconProps) => {
   return CorrespondingIcon ? (
     <CorrespondingIcon
       onClick={props.onClick}
+      strokeColor={props.strokeColor}
       size={props.size}
       color={props.color}
       style={style}

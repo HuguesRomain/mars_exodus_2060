@@ -1,0 +1,28 @@
+@import "~slick-carousel/slick/slick.css";
+@import "~slick-carousel/slick/slick-theme.css";
+
+.slick-slider {
+  overflow-y: hidden;
+  width: 125%;
+}
+
+/* @media (max-width: 900px) {
+  .slick-slider {
+    overflow-y: hidden;
+    width: 100%;
+  }
+} */
+
+@media (max-width: 1045px) and (min-width: 701px) {
+  .slick-slider {
+    overflow-y: hidden;
+    width: 140%;
+  }
+}
+
+@media (max-width: 550px) {
+  .slick-slider {
+    overflow-y: hidden;
+    width: 150%;
+  }
+}
