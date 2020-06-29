@@ -17,21 +17,6 @@ const CarouselContent = styled.div`
 
 export const CarouselInfo = () => {
   const CustomSlider = useRef<HTMLDivElement>(null);
-
-  const next = () => {
-    if (CustomSlider.current) {
-      // @ts-ignore
-      CustomSlider.current.slickNext();
-    }
-  };
-
-  const previous = () => {
-    if (CustomSlider.current) {
-      // @ts-ignore
-      CustomSlider.current.slickPrev();
-    }
-  };
-
   const settings = {
     dots: false,
     infinite: true,
@@ -81,7 +66,7 @@ export const CarouselInfo = () => {
 
   return (
     <CarouselContent>
-      <CarouselHead previous={previous} next={next} />
+      <CarouselHead customSlider={CustomSlider} />
       <Slider {...settings} ref={CustomSlider}>
         <CarouselItem />
         <CarouselItem />

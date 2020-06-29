@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { color, breakPoint, space, font, fontSize } from "styles/const";
 import { TimeRead } from "../atomes/TimeRead";
 import { Button } from "../../../components/atoms/button";
@@ -58,13 +58,20 @@ const ImageArticle = styled.img`
 `;
 
 const ButtonText = styled.span`
+  margin-right: ${space.xs};
+  font-size: ${fontSize.s};
   @media (max-width: ${breakPoint.tabletLandscape}) {
     display: none;
   }
 `;
 
-const Styledutton = styled(Button)`
-  transform: translate(10px 10px);
+const ButtonStyled = css`
+  position: absolute;
+  margin-left: ${rem(110)};
+  margin-right: ${space.s};
+  @media (max-width: ${breakPoint.tabletLandscape}) {
+    margin-left: ${rem(130)};
+  }
 `;
 
 export const CarouselItem = () => {
@@ -80,11 +87,9 @@ export const CarouselItem = () => {
         <DescriptionArticle>
           Tout savoir sur notre nouvelle planète
         </DescriptionArticle>
-        <div>
-          <Styledutton style={{ marginRight: space.s }} iconName={"forward"}>
-            <ButtonText>Lire l'article</ButtonText>
-          </Styledutton>
-        </div>
+        <Button styled={ButtonStyled} iconName={"forward"}>
+          <ButtonText>Lire l'article</ButtonText>
+        </Button>
       </div>
     </ItemContent>
   );
