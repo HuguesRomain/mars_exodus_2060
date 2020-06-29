@@ -8,20 +8,34 @@ import {
   color,
   transitionTime,
 } from "styles/const";
-import { Swipper } from "exodus/components/swipper";
+import { Swipper } from "exodus/components/atoms/swipper";
 import { AppContext } from "exodus/context";
 
-export const CarouselHead = ({
-  customSlider,
-}: {
+type Props = {
   customSlider: RefObject<HTMLDivElement>;
-}) => {
+};
+
+export const CarouselHead = ({ customSlider }: Props) => {
+  const next = () => {
+    if (customSlider.current) {
+      // @ts-ignore
+      customSlider.current.slickNext();
+    }
+  };
+
+  const previous = () => {
+    if (customSlider.current) {
+      // @ts-ignore
+      customSlider.current.slickPrev();
+    }
+  };
+
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
   return (
     <ContentHead>
       <CarouselTitel isDark={isDark}>Tout savoir sur l’Exodus</CarouselTitel>
-      <Swipper customSlider={customSlider} />
+      <Swipper LeftArrow={previous} RigthArrow={next} />
     </ContentHead>
   );
 };
