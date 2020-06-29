@@ -1,6 +1,13 @@
 import React, { RefObject } from "react";
 import styled from "styled-components";
-import { fontWeight, space, font, fontSize, color } from "styles/const";
+import {
+  fontWeight,
+  space,
+  font,
+  fontSize,
+  color,
+  transitionTime,
+} from "styles/const";
 import { Swipper } from "exodus/components/swipper";
 import { AppContext } from "exodus/context";
 
@@ -32,4 +39,5 @@ const CarouselTitel = styled.p<{ isDark: boolean }>`
   font-weight: ${fontWeight.avenir.m};
   color: ${(props) =>
     !props.isDark ? color.darker.BlackPearl : color.light.PureWhite};
+  transition: ${transitionTime};
 `;
