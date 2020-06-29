@@ -1,46 +1,25 @@
-import React, { RefObject } from "react";
+import React from "react";
 import styled from "styled-components";
 import { space, fontSize, color, breakPoint } from "styles/const";
 import { rem } from "polished";
 import { Icon } from "styles/atoms/icons";
 
-const next = (customSlider: RefObject<HTMLDivElement>) => {
-  if (customSlider.current) {
-    // @ts-ignore
-    customSlider.current.slickNext();
-  }
+type Props = {
+  LeftArrow?: () => void;
+  RigthArrow?: () => void;
 };
 
-const previous = (customSlider: RefObject<HTMLDivElement>) => {
-  if (customSlider.current) {
-    // @ts-ignore
-    customSlider.current.slickPrev();
-  }
-};
-
-export const Swipper = ({
-  customSlider,
-}: {
-  customSlider: RefObject<HTMLDivElement>;
-}) => {
+export const Swipper = ({ LeftArrow, RigthArrow }: Props) => {
   return (
     <ButtonContent>
-      <ButtonCarousel
-        onClick={() => {
-          previous(customSlider);
-        }}
-      >
+      <ButtonCarousel onClick={LeftArrow}>
         <Icon
           name={"back"}
           size={fontSize.m}
           strokeColor={color.light.PureWhite}
         />
       </ButtonCarousel>
-      <ButtonCarousel
-        onClick={() => {
-          next(customSlider);
-        }}
-      >
+      <ButtonCarousel onClick={RigthArrow}>
         <Icon
           name={"forward"}
           size={fontSize.m}
