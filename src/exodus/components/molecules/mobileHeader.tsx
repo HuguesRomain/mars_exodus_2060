@@ -12,6 +12,32 @@ import {
 } from "styles/const";
 import { AppContext } from "exodus/context";
 
+export const MobileHeader = () => {
+  const [displayMenu, setDisplayMenu] = useState<boolean>(false);
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
+  return (
+    <WrapperHeader isDark={isDark}>
+      <ThemePicker />
+      <Hours isDark={isDark}>Mercredi 10 Juin 09:48</Hours>
+      <div
+        onClick={() => {
+          displayMenu ? setDisplayMenu(false) : setDisplayMenu(true);
+        }}
+        onMouseEnter={() => {
+          setDisplayMenu(true);
+        }}
+        onMouseLeave={() => {
+          setDisplayMenu(false);
+        }}
+      >
+        <Icon name={"earth"} size={"32"} />
+        {displayMenu && <Popup />}
+      </div>
+    </WrapperHeader>
+  );
+};
+
 const WrapperHeader = styled.div<{ isDark: boolean }>`
   display: flex;
   justify-content: space-around;
@@ -95,29 +121,3 @@ const Hours = styled.p<{ isDark: boolean }>`
   }
   transition: ${transitionTime};
 `;
-
-export const MobileHeader = () => {
-  const [displayMenu, setDisplayMenu] = useState<boolean>(false);
-  const Context = React.useContext(AppContext);
-  const [isDark] = Context.isDarkContext;
-  return (
-    <WrapperHeader isDark={isDark}>
-      <ThemePicker />
-      <Hours isDark={isDark}>Mercredi 10 Juin 09:48</Hours>
-      <div
-        onClick={() => {
-          displayMenu ? setDisplayMenu(false) : setDisplayMenu(true);
-        }}
-        onMouseEnter={() => {
-          setDisplayMenu(true);
-        }}
-        onMouseLeave={() => {
-          setDisplayMenu(false);
-        }}
-      >
-        <Icon name={"earth"} size={"32"} />
-        {displayMenu && <Popup />}
-      </div>
-    </WrapperHeader>
-  );
-};
