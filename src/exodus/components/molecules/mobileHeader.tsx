@@ -24,7 +24,7 @@ const WrapperHeader = styled.div<{ isDark: boolean }>`
     !props.isDark ? color.light.PureWhite : color.darker.BlackRussian};
   border-radius: 0px 0px 20px 20px;
   transition: ${transitionTime};
-
+  z-index: 100000;
   @media (min-width: ${breakPoint.mobileOnly}) {
     display: none;
   }
