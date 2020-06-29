@@ -3,14 +3,15 @@ import styled from "styled-components";
 import { apps } from "./data/index";
 
 import { rem } from "polished";
-import { color, breakPoint, space } from "styles/const";
+import { color, breakPoint, space, transitionTime } from "styles/const";
 import { LabeledIcon } from "./atoms/labeledIcon";
 import { IconMarsExodus } from "./atoms/IconMarsExodus";
 import { ThemePicker } from "./atoms/themePicker";
 import { PlanetsDate } from "./organisms/planetDate";
 import { isMobileOnly } from "exodus/utils/checkWindowSize";
+import { AppContext } from "exodus/context";
 
-const WrapperMobileNavigation = styled.div`
+const WrapperMobileNavigation = styled.div<{ isDark: boolean }>`
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -20,12 +21,14 @@ const WrapperMobileNavigation = styled.div`
   bottom: 0;
   width: 100%;
   padding: ${rem(15)} ${rem(20)};
-  background-color: white;
+  background-color: ${(props) =>
+    !props.isDark ? color.light.PureWhite : color.darker.BlackRussian};
   border-radius: 20px 20px 0px 0px;
   z-index: 100000;
+  transition: ${transitionTime};
 `;
 
-const WrapperNavigation = styled.div`
+const WrapperNavigation = styled.div<{ isDark: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -36,18 +39,25 @@ const WrapperNavigation = styled.div`
   left: 0;
   width: ${rem(96)};
   height: 100%;
-  background-color: white;
+  background-color: ${(props) =>
+    !props.isDark ? color.light.PureWhite : color.darker.BlackRussian};
   border-radius: 0px 20px 20px 0px;
   z-index: 100000;
+  transition: ${transitionTime};
 `;
 
-export const LabelOverlay = styled.p<{ linkActive?: boolean }>`
+export const LabelOverlay = styled.p<{ isDark: boolean; linkActive?: boolean }>`
   color: ${(props) =>
-    !props.linkActive ? color.medium.Manatee : color.darker.BlackRussian};
+    !props.linkActive
+      ? color.medium.Manatee
+      : !props.isDark
+      ? color.darker.BlackRussian
+      : color.light.PureWhite};
 
   @media (min-width: ${breakPoint.desktop}) {
     padding-top: ${space.xs};
   }
+  transition: ${transitionTime};
 `;
 
 const ListItemMenuLinkWrapper = styled.div`
@@ -58,8 +68,10 @@ const ListItemMenuLinkWrapper = styled.div`
 `;
 
 const NavBarMobile = () => {
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
   return (
-    <WrapperMobileNavigation>
+    <WrapperMobileNavigation isDark={isDark}>
       {apps.map((app, i) => {
         return <LabeledIcon key={i} app={app} />;
       })}
@@ -68,8 +80,10 @@ const NavBarMobile = () => {
 };
 
 const NavBar = () => {
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
   return (
-    <WrapperNavigation>
+    <WrapperNavigation isDark={isDark}>
       <IconMarsExodus />
       <ListItemMenuLinkWrapper>
         {apps.map((app, i) => {

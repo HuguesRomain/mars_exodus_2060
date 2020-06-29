@@ -5,6 +5,7 @@ import { font, fontSize, space, fontWeight } from "styles/const";
 
 const ContentTime = styled.div`
   text-align: center;
+  z-index: 100;
 `;
 
 const CountTitel = styled.p`

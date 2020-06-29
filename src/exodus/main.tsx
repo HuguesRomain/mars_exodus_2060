@@ -32,7 +32,7 @@ const AppWrapper = styled.div`
 const currentPath = window.document.location.pathname;
 
 if (currentPath === "/") {
-  window.history.replaceState(null, null, "/app/home");
+  window.history.replaceState(null, "", "/app/home");
 }
 
 const AppWithContext = () => {
@@ -80,4 +80,4 @@ const AppWithContext = () => {
 };
 
 // You're welcome to Mars Exodus 2060 🌕🚀
-export const App = () => <AppWithContext App={App} />;
+export const App = () => <AppWithContext />;

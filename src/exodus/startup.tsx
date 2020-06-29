@@ -1,10 +1,11 @@
-import React, { useState, createContext } from "react";
-import { isDarkStorage } from "styles/const";
+import React, { useState } from "react";
+import { isDarkStorage, color, transitionTime } from "styles/const";
+import { AppContext } from "./context";
+import styled from "styled-components";
 
-export const AppContext = createContext({});
-
-export const AppFrame = ({ children }: { children: JSX.Element }) => {
+export const AppFrame = ({ children }: { children: React.ReactNode }) => {
   const [isDark, setIsDarkContext] = useState<boolean>(isDarkStorage());
+  const [token, setToken] = useState<string | null>(null);
 
   const setIsDark = () => {
     setIsDarkContext(!isDark);
@@ -14,10 +15,17 @@ export const AppFrame = ({ children }: { children: JSX.Element }) => {
     <AppContext.Provider
       value={{
         isDarkContext: [isDark, setIsDark],
-        token: "jklasjdoilawd80sxkjl",
+        tokenContext: [token, setToken],
       }}
     >
-      {children}
+      <Backgroundcontext isDark={isDark}>{children}</Backgroundcontext>
     </AppContext.Provider>
   );
 };
+
+const Backgroundcontext = styled.div<{ isDark: boolean }>`
+  background-color: ${(props) =>
+    !props.isDark ? color.light.WhiteSmoke : color.darker.DarkestBlack};
+  transition: ${transitionTime};
+  z-index: -1000;
+`;
