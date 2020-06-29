@@ -10,7 +10,13 @@ import { Button } from "../../../../components/atoms/button";
 import { AppContext } from "exodus/context";
 
 import "./calendar.css";
-import { fontWeight, color, fontSize, space } from "styles/const";
+import {
+  fontWeight,
+  color,
+  fontSize,
+  space,
+  transitionTime,
+} from "styles/const";
 
 interface props {
   calendarEvents: Array<Dates>;
@@ -66,6 +72,7 @@ const ClendarContent = styled.div<{ isDark: boolean }>`
   flex-direction: column;
   background-color: ${(props) =>
     !props.isDark ? color.light.WhiteSmoke : color.darker.DarkestBlack};
+  transition: background-color ${transitionTime};
 `;
 
 const Title = styled.h1<{ isDark: boolean }>`

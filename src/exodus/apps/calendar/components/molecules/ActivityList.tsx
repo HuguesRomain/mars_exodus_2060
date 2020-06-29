@@ -1,13 +1,14 @@
 import React from "react";
 import { ActivityItem } from "../atoms/ActivityItem";
 import styled from "styled-components";
-import { fontSize, fontWeight, color } from "styles/const";
+import { fontSize, fontWeight, color, transitionTime } from "styles/const";
 import { AppContext } from "exodus/context";
 
 const ActivityContent = styled.div<{ isDark: boolean }>`
   background-color: ${(props) =>
     !props.isDark ? color.light.PureWhite : color.darker.BlackRussian};
   padding: 0 82px 0 48px;
+  transition: background-color ${transitionTime};
 `;
 
 const Title = styled.h1<{ isDark: boolean }>`
