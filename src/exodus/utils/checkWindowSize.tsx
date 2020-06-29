@@ -3,18 +3,17 @@ const tabletPortrait = 600;
 const tabletLandscape = 1199;
 const desktop = 1200;
 
-const current = window.screen.width;
+export const isMobileOnly = (current: number) => current <= mobile;
 
-export const isMobileOnly = () => current <= mobile;
-
-export const isTabletPortrait = () =>
+export const isTabletPortrait = (current: number) =>
   current < tabletLandscape && current > mobile;
 
-export const isMobile = () => current < desktop;
+export const isMobile = (current: number) => current < desktop;
 
-export const isTabletLandscape = () =>
+export const isTabletLandscape = (current: number) =>
   current < desktop && current > tabletPortrait;
 
-export const isDesktop = () => current >= desktop;
+export const isDesktop = (current: number) => current >= desktop;
 
-export const isMinTabletPortrait = () => current >= tabletPortrait;
+export const isMinTabletPortrait = (current: number) =>
+  current >= tabletPortrait;

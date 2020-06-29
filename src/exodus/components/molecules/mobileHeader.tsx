@@ -24,6 +24,10 @@ const WrapperHeader = styled.div<{ isDark: boolean }>`
     !props.isDark ? color.light.PureWhite : color.darker.BlackRussian};
   border-radius: 0px 0px 20px 20px;
   transition: ${transitionTime};
+
+  @media (min-width: ${breakPoint.mobileOnly}) {
+    display: none;
+  }
 `;
 
 const PopupStyled = styled.div<{ isDark: boolean }>`

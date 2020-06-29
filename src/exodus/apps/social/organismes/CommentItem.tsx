@@ -8,7 +8,6 @@ import {
   breakPoint,
 } from "styles/const";
 import { Avatar } from "../atoms/Avatar";
-import { isMobileOnly } from "exodus/utils/checkWindowSize";
 import { AppContext } from "exodus/context";
 
 const Comment = styled.li`
@@ -18,18 +17,15 @@ const Comment = styled.li`
 `;
 
 const Content = styled.div<{ isDark: boolean }>`
-  background-color: ${(props) =>
-    isMobileOnly()
-      ? !props.isDark
-        ? color.light.PureWhite
-        : color.darker.BlackPearl
-      : "transparent"};
+  background-color: transparent;
   border-radius: 20px;
   padding: ${space.s};
   width: 100%;
   transition: ${transitionTime};
 
   @media (max-width: ${breakPoint.mobileOnly}) {
+    background-color: ${(props) =>
+      !props.isDark ? color.light.PureWhite : color.darker.BlackPearl};
     margin-left: ${space.s};
     line-height: 30px;
     padding: ${space.xs} ${space.s};

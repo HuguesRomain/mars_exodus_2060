@@ -12,6 +12,7 @@ import { InfoSection } from "./organisms/infoSection";
 import { TicketSection } from "./organisms/ticketSection";
 import { fontSize, space } from "styles/const";
 import { isMobileOnly, isMobile } from "exodus/utils/checkWindowSize";
+import { AppContext } from "exodus/context";
 
 const ProfileAppMobileStyled = styled.div`
   display: flex;
@@ -41,9 +42,11 @@ export const apps = [
   },
 ];
 const ProfileApp = () => {
-  return isMobile() ? (
+  const Context = React.useContext(AppContext);
+  const [windowSize] = Context.windowSizeContext;
+  return isMobile(windowSize) ? (
     <ProfileAppMobileStyled>
-      {!isMobileOnly() && <WelcomeMessage />}
+      {!isMobileOnly(windowSize) && <WelcomeMessage />}
       <Router>
         <SubNavigation datas={apps} />
         <Switch>

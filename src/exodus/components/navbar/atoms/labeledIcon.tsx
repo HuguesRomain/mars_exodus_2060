@@ -52,6 +52,7 @@ export const LabeledIcon = ({ app }: { app: AppsTypes }) => {
   const history = useHistory();
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
+  const [windowSize] = Context.windowSizeContext;
   return (
     <ListItemMenuLink
       linkActive={isLocation(app.uri)}
@@ -74,13 +75,13 @@ export const LabeledIcon = ({ app }: { app: AppsTypes }) => {
           }
         />
       </IconWrapper>
-      {isMobileOnly() && isLocation(app.uri) ? (
+      {isMobileOnly(windowSize) && isLocation(app.uri) ? (
         <LabelOverlay isDark={isDark} linkActive={isLocation(app.uri)}>
           {app.label}
         </LabelOverlay>
       ) : (
-        isTabletPortrait() ||
-        (isDesktop() && (
+        isTabletPortrait(windowSize) ||
+        (isDesktop(windowSize) && (
           <LabelOverlay isDark={isDark} linkActive={isLocation(app.uri)}>
             {app.label}
           </LabelOverlay>

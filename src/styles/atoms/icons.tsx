@@ -25,7 +25,6 @@ import {
   Check,
   Clock,
 } from "../assets/icons/icons";
-import { transitionTime } from "styles/const";
 
 export class IconsMapping {
   home = Home;
@@ -69,10 +68,11 @@ export type IconProps = {
 
 export const Icon = (props: IconProps) => {
   const CorrespondingIcon = iconsMapping[props.name];
+
   const style: CSSProperties = {
-    transition: transitionTime,
     ...props.style,
   };
+
   return CorrespondingIcon ? (
     <CorrespondingIcon
       onClick={props.onClick}
