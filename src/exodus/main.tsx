@@ -18,7 +18,6 @@ import {
 import { breakPoint } from "styles/const";
 import { isMobile } from "exodus/utils/checkWindowSize";
 import { MobileHeader } from "exodus/components/molecules/mobileHeader";
-import { isMobileOnly } from "exodus/utils/checkWindowSize";
 import { NavBarContainer } from "exodus/components/navbar/index";
 import { authApp } from "./internal-router";
 
@@ -38,7 +37,7 @@ if (currentPath === "/") {
 const AppWithContext = () => {
   return (
     <AppFrame>
-      {isMobileOnly() && <MobileHeader />}
+      <MobileHeader />
       {!window.location.pathname.includes(authApp) && <NavBarContainer />}
       <AppWrapper>
         <Router>
@@ -66,7 +65,7 @@ const AppWithContext = () => {
             <Route
               exact
               path={
-                isMobile()
+                isMobile(window.innerWidth)
                   ? profileAppRouter.identity("1")
                   : profileAppRouter.profile()
               }

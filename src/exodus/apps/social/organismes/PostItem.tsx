@@ -74,12 +74,13 @@ export const PostItem = ({ post }: Props) => {
   const theDay = post.date.toLocaleString("default", { weekday: "long" });
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
+  const [windowSize] = Context.windowSizeContext;
   return (
     <Item isDark={isDark}>
       <UserInfo>
         <Avatar
           src={post.avatar}
-          size={isMobile() ? iconSize.l : iconSize.xl}
+          size={isMobile(windowSize) ? iconSize.l : iconSize.xl}
         />
         <Author isDark={isDark}>{post.author}</Author>
         <Since>il y a {theDay}</Since>
@@ -91,13 +92,13 @@ export const PostItem = ({ post }: Props) => {
         <Like quantity={0} />
       </Interact>
       <ul>
-        {!isMobileOnly() &&
+        {!isMobileOnly(windowSize) &&
           post.comment &&
           post.comment.map((value, i) => {
             return <CommentItem key={i} comments={value} />;
           })}
       </ul>
-      {!isMobileOnly() && <AddComment />}
+      {!isMobileOnly(windowSize) && <AddComment />}
     </Item>
   );
 };

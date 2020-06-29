@@ -99,5 +99,7 @@ const NavBar = () => {
 };
 
 export const NavBarContainer = () => {
-  return isMobileOnly() ? <NavBarMobile /> : <NavBar />;
+  const Context = React.useContext(AppContext);
+  const [windowSize] = Context.windowSizeContext;
+  return isMobileOnly(windowSize) ? <NavBarMobile /> : <NavBar />;
 };

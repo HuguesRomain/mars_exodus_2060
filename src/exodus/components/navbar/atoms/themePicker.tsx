@@ -44,6 +44,7 @@ const IconWrapper = styled.div`
 export const ThemePicker = () => {
   const Context = React.useContext(AppContext);
   const [isDark, setIsDark] = Context.isDarkContext;
+  const [windowSize] = Context.windowSizeContext;
 
   const [darkMode, setDarkMode] = useState<boolean>(isDark);
   useEffect(() => {
@@ -64,7 +65,7 @@ export const ThemePicker = () => {
           size={iconSize.m}
         />
       </IconWrapper>
-      {isMinTabletPortrait() && (
+      {isMinTabletPortrait(windowSize) && (
         <Label isDark={isDark}>{!isDark ? "Light" : "Dark"}</Label>
       )}
     </ThemePickerStyled>

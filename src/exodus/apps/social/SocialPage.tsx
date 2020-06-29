@@ -6,13 +6,14 @@ import { rem } from "polished";
 import { Advertisement } from "./organismes/advertisement";
 import { isMobile } from "exodus/utils/checkWindowSize";
 import { breakPoint } from "styles/const";
+import { AppContext } from "exodus/context";
 
 const SocialPart = styled.div`
   display: flex;
   justify-content: center;
   padding: 0;
   width: 100vw;
-
+  height: 100vh;
   @media (min-width: ${breakPoint.tabletPortrait}) {
     padding: ${rem(50)};
     width: 100vw;
@@ -37,6 +38,8 @@ export const SocialPage = ({
   posts: Posts[];
   setposts: any;
 }) => {
+  const Context = React.useContext(AppContext);
+  const [windowSize] = Context.windowSizeContext;
   return (
     <div style={{ display: "flex", height: "100vh" }}>
       <SocialPart>
@@ -50,7 +53,7 @@ export const SocialPage = ({
           </ul>
         </div>
       </SocialPart>
-      {!isMobile() && (
+      {!isMobile(windowSize) && (
         <Pub>
           <Advertisement />
         </Pub>
