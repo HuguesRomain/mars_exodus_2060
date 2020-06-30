@@ -36,9 +36,11 @@ const HomeContent = styled.main`
 
 const SecondSection = styled.div`
   display: flex;
-  width: 100%;
   flex-direction: column;
-
+  justify-content: space-between;
+  width: 100%;
+  padding-right: ${space.l};
+  margin-bottom: ${space.m};
   @media (min-width: ${breakPoint.desktop}) {
     flex-direction: row;
   }

@@ -3,12 +3,12 @@
 
 .slick-slider {
   overflow-y: hidden;
-  width: 100%;
+  width: 120%;
 }
 
 .slick-slider-places {
   overflow-y: hidden;
-  width: 100%;
+  width: 120%;
 }
 
 /* @media (max-width: 900px) {
@@ -33,7 +33,7 @@
 @media (min-width: 701px) {
   .slick-slider {
     overflow-y: hidden;
-    width: 120%;
+    width: 1#$0%;
   }
 }
 
@@ -45,6 +45,6 @@
 
   .slick-slider-places {
     overflow-y: hidden;
-    width: 120%;
+    width: 130%;
   }
 }

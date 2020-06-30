@@ -24,6 +24,7 @@ export const Weather = () => {
 };
 
 const WeatherWrapper = styled.div`
+  width: 100%;
   display: flex;
   flex-direction: column;
   @media (min-width: ${breakPoint.desktop}) {
@@ -35,12 +36,13 @@ const WeatherImgWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
   flex-direction: column;
+  background-size: cover;
+  background-repeat: no-repeat;
   background-image: url(${WeatherImg});
-  width: ${rem(343)};
+  border-radius: 10px;
   height: ${rem(175)};
   background-size: cover;
   @media (min-width: ${breakPoint.desktop}) {
-    width: ${rem(350)};
     height: ${rem(300)};
   }
 `;
