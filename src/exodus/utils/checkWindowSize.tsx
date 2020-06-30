@@ -8,6 +8,8 @@ export const isMobileOnly = (current: number) => current <= mobile;
 export const isTabletPortrait = (current: number) =>
   current < tabletLandscape && current > mobile;
 
+export const isPortrait = (current: number) => current <= tabletPortrait;
+
 export const isMobile = (current: number) => current < desktop;
 
 export const isTabletLandscape = (current: number) =>

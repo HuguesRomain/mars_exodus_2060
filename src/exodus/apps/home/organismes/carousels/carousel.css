@@ -3,7 +3,12 @@
 
 .slick-slider {
   overflow-y: hidden;
-  width: 125%;
+  width: 120%;
+}
+
+.slick-slider-places {
+  overflow-y: hidden;
+  width: 120%;
 }
 
 /* @media (max-width: 900px) {
@@ -13,10 +18,22 @@
   }
 } */
 
-@media (max-width: 1045px) and (min-width: 701px) {
+@media (max-width: 1045px) {
   .slick-slider {
     overflow-y: hidden;
-    width: 140%;
+    width: 90%;
+  }
+
+  .slick-slider-places {
+    overflow-y: hidden;
+    width: 90%;
+  }
+}
+
+@media (min-width: 701px) {
+  .slick-slider {
+    overflow-y: hidden;
+    width: 1#$0%;
   }
 }
 
@@ -24,5 +41,10 @@
   .slick-slider {
     overflow-y: hidden;
     width: 150%;
+  }
+
+  .slick-slider-places {
+    overflow-y: hidden;
+    width: 130%;
   }
 }
