@@ -70,6 +70,7 @@ const ButtonCarousel = styled.button`
 `;
 
 const ButtonContent = styled.div`
+  margin-bottom: ${space.m};
   @media (max-width: ${breakPoint.mobileOnly}) {
     display: none;
   }

@@ -13,6 +13,30 @@ import { Button } from "../../../components/atoms/button";
 import { rem } from "polished";
 import { AppContext } from "exodus/context";
 
+export const CarouselItem = () => {
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
+
+  return (
+    <ItemContent isDark={isDark}>
+      <ImageArticle
+        src="https://i.pinimg.com/originals/20/a8/9a/20a89acdab952dcedc577c06ae10fe1e.jpg"
+        alt="Article Image"
+      />
+      <div>
+        <TitleArticle isDark={isDark}>MARS</TitleArticle>
+        <TimeRead />
+        <DescriptionArticle isDark={isDark}>
+          Tout savoir sur notre nouvelle planète
+        </DescriptionArticle>
+        <Button styled={ButtonStyled} iconName={"forward"}>
+          <ButtonText>Lire l'article</ButtonText>
+        </Button>
+      </div>
+    </ItemContent>
+  );
+};
+
 const ItemContent = styled.div<{ isDark: boolean }>`
   display: flex;
   background-color: ${(props) =>
@@ -22,7 +46,6 @@ const ItemContent = styled.div<{ isDark: boolean }>`
   width: ${rem(243)};
   height: ${rem(164)};
   padding: 24px;
-  margin-right: ${space.m};
   transition: ${transitionTime};
   @media (min-width: ${breakPoint.tabletLandscape}) {
     width: 350px;
@@ -87,26 +110,3 @@ const ButtonStyled = css`
     margin-left: ${rem(130)};
   }
 `;
-
-export const CarouselItem = () => {
-  const Context = React.useContext(AppContext);
-  const [isDark] = Context.isDarkContext;
-  return (
-    <ItemContent isDark={isDark}>
-      <ImageArticle
-        src="https://i.pinimg.com/originals/20/a8/9a/20a89acdab952dcedc577c06ae10fe1e.jpg"
-        alt="Article Image"
-      />
-      <div>
-        <TitleArticle isDark={isDark}>MARS</TitleArticle>
-        <TimeRead />
-        <DescriptionArticle isDark={isDark}>
-          Tout savoir sur notre nouvelle planète
-        </DescriptionArticle>
-        <Button styled={ButtonStyled} iconName={"forward"}>
-          <ButtonText>Lire l'article</ButtonText>
-        </Button>
-      </div>
-    </ItemContent>
-  );
-};
