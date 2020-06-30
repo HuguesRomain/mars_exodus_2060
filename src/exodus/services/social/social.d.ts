@@ -16,3 +16,11 @@ type Login = {
   username: string;
   password: string;
 };
+
+type Comment = {
+  author?: string;
+  blogPost?: string;
+  content?: string;
+  id?: number;
+  published?: Date;
+};
