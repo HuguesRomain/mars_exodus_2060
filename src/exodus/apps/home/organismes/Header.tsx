@@ -1,96 +1,17 @@
 import React, { useEffect } from "react";
 import Rellax from "rellax";
 import { Timer } from "../molecules/Timer";
-import first from "../../../../assets/images/hero-1.png";
-import second from "../../../../assets/images/hero-2.png";
-import third from "../../../../assets/images/hero-3.png";
-/* import fourth from "../../../../assets/images/hero-4.png";
-import five from "../../../../assets/images/hero-5.png"; */
-import six from "../../../../assets/images/hero-6.png";
-import back from "../../../../assets/images/hero-7.jpg";
+import first from "../../../../assets/images/hero_1.png";
+import second from "../../../../assets/images/hero_2.png";
+import third from "../../../../assets/images/hero_3.png";
+import six from "../../../../assets/images/hero_6.png";
+import back from "../../../../assets/images/hero_7.jpg";
 import styled from "styled-components";
 import { font, titeFontsize, breakPoint } from "styles/const";
 
-const ContentHeader = styled.div`
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  height: 644px;
-  border-bottom-right-radius: 40px;
-  z-index: 20;
-`;
-
-const TextContent = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  color: white;
-  height: 100%;
-  align-items: center;
-`;
-
-const Title = styled.h1`
-  font-family: ${font.josefin};
-  text-align: center;
-  font-size: ${titeFontsize.m};
-  margin: 0;
-  z-index: -1;
-  @media (min-width: ${breakPoint.mobileOnly}) {
-    font-size: ${titeFontsize.l};
-  }
-`;
-
-const FistImage = styled.img`
-  object-fit: cover;
-  height: 644px;
-  position: absolute;
-  z-index: 2;
-  width: 100%;
-  bottom: 0;
-`;
-/* const SecondImage = styled.img`
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-`; */
-const PlanetBack = styled.img`
-  object-fit: cover;
-  height: 644px;
-  z-index: -1;
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-`;
-
-const FirstMontaine = styled.img`
-  object-fit: cover;
-  height: 644px;
-  z-index: 1;
-  position: absolute;
-  width: 100%;
-  margin-top: 120px;
-`;
-
-const Back = styled.img`
-  object-fit: cover;
-  height: 644px;
-  position: absolute;
-  width: 100%;
-  bottom: 0;
-  z-index: -2;
-`;
-
 export const Header = () => {
   useEffect(() => {
-    new Rellax(".dune", {
-      speed: -9,
-      center: false,
-      wrapper: null,
-      round: true,
-      vertical: true,
-      horizontal: false,
-    });
-    new Rellax(".animate", {
+    new Rellax(".title", {
       speed: -8,
       center: false,
       wrapper: null,
@@ -98,23 +19,15 @@ export const Header = () => {
       vertical: true,
       horizontal: false,
     });
-    new Rellax(".title", {
-      speed: -9,
+    new Rellax(".first", {
+      speed: -1,
       center: false,
       wrapper: null,
       round: true,
       vertical: true,
       horizontal: false,
     });
-    new Rellax(".pic", {
-      speed: -9,
-      center: false,
-      wrapper: null,
-      round: true,
-      vertical: true,
-      horizontal: false,
-    });
-    new Rellax(".montaine", {
+    new Rellax(".two", {
       speed: -5,
       center: false,
       wrapper: null,
@@ -122,16 +35,24 @@ export const Header = () => {
       vertical: true,
       horizontal: false,
     });
-    /* new Rellax(".largeMontaine", {
-      speed: -20,
+    new Rellax(".three", {
+      speed: -7,
       center: false,
       wrapper: null,
       round: true,
       vertical: true,
       horizontal: false,
-    }); */
-    new Rellax(".planet", {
-      speed: -8,
+    });
+    new Rellax(".six", {
+      speed: -9,
+      center: false,
+      wrapper: null,
+      round: true,
+      vertical: true,
+      horizontal: false,
+    });
+    new Rellax(".seven", {
+      speed: -9,
       center: false,
       wrapper: null,
       round: true,
@@ -145,13 +66,145 @@ export const Header = () => {
         <Title>MARS EXODUS 2060</Title>
         <Timer />
       </TextContent>
-      <FistImage src={first} alt="" />
-      <FirstMontaine className="dune" src={second} alt="" />
-      <FirstMontaine className="pic" src={third} alt="" />
-      {/* <SecondImage className="animate" src={fourth} alt="" /> */}
-      {/* <SecondImage className="largeMontaine" src={five} alt="" /> */}
-      <PlanetBack className="planet" src={six} alt="" />
-      <Back className="animate" src={back} alt="" />
+      <FistImage className="first" src={first} alt="" />
+      <SecondImage className="two" src={second} alt="" />
+      <ThirdImage className="three" src={third} alt="" />
+      <SixImage className="six" src={six} alt="" />
+      <SevenImage className="seven" src={back} alt="" />
     </ContentHeader>
   );
 };
+
+const ContentHeader = styled.div`
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  height: 644px;
+  border-bottom-right-radius: 40px;
+  z-index: 20;
+  @media (max-width: 1220px) {
+    height: 440px;
+  }
+  @media (max-width: 865px) {
+    height: 330px;
+  }
+`;
+
+const TextContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: white;
+  height: 100%;
+  align-items: center;
+  z-index: 10;
+`;
+
+const Title = styled.h1`
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(252, 82, 82, 1) 150%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: ${font.josefin};
+  text-align: center;
+  font-size: ${titeFontsize.s};
+  margin: 0;
+  z-index: -1;
+  @media (min-width: ${breakPoint.tabletPortrait}) {
+    font-size: ${titeFontsize.m};
+  }
+  @media (min-width: ${breakPoint.desktop}) {
+    font-size: ${titeFontsize.l};
+  }
+`;
+
+const FistImage = styled.img`
+  object-fit: cover;
+  position: absolute;
+  z-index: 0;
+  width: 100%;
+  bottom: 0;
+  @media (max-width: 650px) {
+    width: 140%;
+    left: -80px;
+  }
+  @media (max-width: 450px) {
+    width: 190%;
+    left: -80px;
+    bottom: -20px;
+  }
+`;
+
+const SecondImage = styled.img`
+  bottom: 0;
+  object-fit: cover;
+  z-index: -1;
+  position: absolute;
+  width: 100%;
+  @media (max-width: 650px) {
+    width: 140%;
+    left: -80px;
+  }
+  @media (max-width: 450px) {
+    width: 190%;
+    left: -80px;
+    bottom: -20px;
+    display: none;
+  }
+`;
+
+const ThirdImage = styled.img`
+  bottom: 0;
+  object-fit: cover;
+  z-index: -2;
+  position: absolute;
+  width: 100%;
+  @media (max-width: 650px) {
+    width: 140%;
+    left: -80px;
+  }
+  @media (max-width: 450px) {
+    width: 190%;
+    left: -80px;
+    bottom: -20px;
+    display: none;
+  }
+`;
+
+const SixImage = styled.img`
+  bottom: 0;
+  object-fit: cover;
+  z-index: -5;
+  position: absolute;
+  width: 100%;
+  @media (max-width: 650px) {
+    width: 140%;
+    left: -80px;
+  }
+  @media (max-width: 450px) {
+    width: 190%;
+    left: -80px;
+    bottom: -20px;
+    display: none;
+  }
+`;
+
+const SevenImage = styled.img`
+  bottom: 0;
+  object-fit: cover;
+  z-index: -6;
+  position: absolute;
+  width: 100%;
+  @media (max-width: 650px) {
+    width: 140%;
+    left: -80px;
+  }
+  @media (max-width: 450px) {
+    width: 190%;
+    left: -80px;
+    bottom: -20px;
+  }
+`;
