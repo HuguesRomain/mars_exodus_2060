@@ -3,6 +3,7 @@ import { CSSProperties } from "styled-components";
 
 type IconPropType = {
   color?: string | undefined | null;
+  strokeColor?: string | null;
   secondColor?: string;
   size?: string | number | undefined;
   onClick?: (e: any) => void;
@@ -547,19 +548,19 @@ export const Send = ({ size, style, color }: IconPropType) => {
   );
 };
 
-export const Back = ({ size, style }: IconPropType) => {
+export const Back = ({ size, style, strokeColor }: IconPropType) => {
   return (
     <svg
       width={size ? size : "24"}
       height={size ? size : "24"}
       style={style && style}
+      stroke={strokeColor ? strokeColor : "#848897"}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
         d="M16.5 21L7.5 12L16.5 3"
-        stroke="#848897"
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -568,19 +569,19 @@ export const Back = ({ size, style }: IconPropType) => {
   );
 };
 
-export const Forward = ({ size, style }: IconPropType) => {
+export const Forward = ({ size, style, strokeColor }: IconPropType) => {
   return (
     <svg
       width={size ? size : "24"}
       height={size ? size : "24"}
       style={style && style}
+      stroke={strokeColor ? strokeColor : "#848897"}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
         d="M7.5 21L16.5 12L7.5 3"
-        stroke="#848897"
         stroke-width="2"
         stroke-linecap="round"
         stroke-linejoin="round"
@@ -854,6 +855,22 @@ export const Check = ({ size, style, color }: IconPropType) => {
           <rect width="24" height="24" fill="white" />
         </clipPath>
       </defs>
+    </svg>
+  );
+};
+
+export const Step = ({ size, style }: IconPropType) => {
+  return (
+    <svg
+      width={size ? size : "24"}
+      height={size ? size : "24"}
+      style={style && style}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle opacity="0.2" cx="12" cy="12" r="12" fill="#FC5252" />
+      <circle cx="12" cy="12" r="6" fill="#FC5252" />
     </svg>
   );
 };

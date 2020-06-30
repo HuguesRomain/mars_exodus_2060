@@ -4,7 +4,14 @@ import { useHistory } from "react-router-dom";
 
 import { Icon } from "styles/atoms/icons";
 import { AppsTypes } from "../data";
-import { color, iconSize, fontSize, space, breakPoint } from "styles/const";
+import {
+  color,
+  iconSize,
+  fontSize,
+  space,
+  breakPoint,
+  transitionTime,
+} from "styles/const";
 import { LabelOverlay } from "..";
 import { rem } from "polished";
 import {
@@ -13,6 +20,7 @@ import {
   isDesktop,
 } from "exodus/utils/checkWindowSize";
 import { isLocation } from "exodus/utils/uriUtils";
+import { AppContext } from "exodus/context";
 
 const ListItemMenuLink = styled.a<{ linkActive?: boolean }>`
   display: flex;
@@ -30,23 +38,28 @@ const ListItemMenuLink = styled.a<{ linkActive?: boolean }>`
   }
 `;
 
-const IconWrapper = styled.div`
+const IconWrapper = styled.div<{ isDark: boolean }>`
   padding: ${space.xs};
   border-radius: 10px;
   @media (min-width: ${breakPoint.tabletLandscape}) {
-    background: ${color.light.AliceBlue};
+    background: ${(props) =>
+      !props.isDark ? color.light.AliceBlue : color.darker.BlackPearl};
   }
+  transition: ${transitionTime};
 `;
 
 export const LabeledIcon = ({ app }: { app: AppsTypes }) => {
   const history = useHistory();
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
+  const [windowSize] = Context.windowSizeContext;
   return (
     <ListItemMenuLink
       linkActive={isLocation(app.uri)}
       key={app.icon}
       href={app.uri}
     >
-      <IconWrapper>
+      <IconWrapper isDark={isDark}>
         <Icon
           onClick={() => {
             history.push(app.uri);
@@ -55,19 +68,21 @@ export const LabeledIcon = ({ app }: { app: AppsTypes }) => {
           size={iconSize.m}
           color={
             isLocation(app.uri)
-              ? color.darker.BlackRussian
+              ? !isDark
+                ? color.darker.BlackRussian
+                : color.light.PureWhite
               : color.medium.Manatee
           }
         />
       </IconWrapper>
-      {isMobileOnly() && isLocation(app.uri) ? (
-        <LabelOverlay linkActive={isLocation(app.uri)}>
+      {isMobileOnly(windowSize) && isLocation(app.uri) ? (
+        <LabelOverlay isDark={isDark} linkActive={isLocation(app.uri)}>
           {app.label}
         </LabelOverlay>
       ) : (
-        isTabletPortrait() ||
-        (isDesktop() && (
-          <LabelOverlay linkActive={isLocation(app.uri)}>
+        isTabletPortrait(windowSize) ||
+        (isDesktop(windowSize) && (
+          <LabelOverlay isDark={isDark} linkActive={isLocation(app.uri)}>
             {app.label}
           </LabelOverlay>
         ))

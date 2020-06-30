@@ -1,8 +1,8 @@
 import React from "react";
-import styled, { css } from "styled-components";
+import styled, { css, FlattenSimpleInterpolation } from "styled-components";
 import { Icon, IconName } from "styles/atoms/icons";
 import { rem } from "polished";
-import { color as globalColors, space } from "styles/const";
+import { color as globalColors } from "styles/const";
 
 const primary = css`
   background-color: ${globalColors.SunsetOrange};
@@ -29,17 +29,18 @@ const PrecomputeButton = styled.div<ButtonProps>`
   justify-content: center;
   align-items: center;
   border-radius: 8px;
-  width: 100%;
   height: ${rem(40)};
-  min-width: ${rem(134)};
+  min-width: ${rem(45)};
   padding: 0 ${rem(10)};
   cursor: pointer;
+  ${(props) => props.styled && props.styled}
 `;
 
 type ButtonProps = {
   onClick?: any;
   type?: "primary" | "secondary";
   children?: React.ReactNode;
+  styled?: FlattenSimpleInterpolation;
   style?: React.CSSProperties;
   iconName?: IconName;
   color?: string;
@@ -53,6 +54,7 @@ export const Button = ({
   color,
   onClick,
   href,
+  styled,
   style,
 }: ButtonProps) => {
   return (
@@ -62,6 +64,7 @@ export const Button = ({
       onClick={onClick}
       href={href}
       style={style}
+      styled={styled}
     >
       {children && children}
       {iconName && (
@@ -71,9 +74,9 @@ export const Button = ({
               ? globalColors.light.PureWhite
               : globalColors.darker.LuckyPoint
           }
+          strokeColor={globalColors.light.PureWhite}
           name={iconName}
           size={14}
-          style={{ marginLeft: space.xs }}
         />
       )}
     </PrecomputeButton>

@@ -7,6 +7,7 @@ import { color, fontSize, space } from "styles/const";
 import { rem } from "polished";
 import { Icon } from "styles/atoms/icons";
 import { isMobile } from "exodus/utils/checkWindowSize";
+import { AppContext } from "exodus/context";
 
 const Item = styled.div`
   display: flex;
@@ -29,16 +30,17 @@ type Props = {
 
 export const Comment = ({ quantity }: Props) => {
   const history = useHistory();
-
+  const Context = React.useContext(AppContext);
+  const [windowSize] = Context.windowSizeContext;
   return (
     <Item
       onClick={() => {
-        isMobile() && history.push(socialAppRouter.comments());
+        isMobile(windowSize) && history.push(socialAppRouter.comments());
       }}
     >
       <IconStyled color={color.medium.Manatee} name={"comment"} />
       <Text style={{ margin: `0 ${rem(2)} 0 ${space.xs}` }}>{quantity}</Text>
-      {!isMobile() && <Text>Commentaires</Text>}
+      {!isMobile(windowSize) && <Text>Commentaires</Text>}
     </Item>
   );
 };
