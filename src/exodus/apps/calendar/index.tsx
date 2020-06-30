@@ -17,7 +17,7 @@ const BaseEvent = [
   },
   {
     title: "Conférence de presse à NYC",
-    start: new Date("2020-06-30T10:00:00"),
+    start: new Date("2020-07-16T10:00:00"),
     dateStr: "10:00, 13:00",
     status: "Obligatoire",
   },

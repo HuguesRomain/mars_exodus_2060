@@ -1,11 +1,12 @@
 import React from "react";
 import { Header } from "./organismes/Header";
 import styled from "styled-components";
-import { space } from "styles/const";
+import { space, breakPoint } from "styles/const";
 import { isMobile } from "exodus/utils/checkWindowSize";
 import { AppContext } from "exodus/context";
 import { CarouselInfo, CarouselPlaces } from "./organismes/carousels/carousels";
 import { MapComponent } from "./organismes/map";
+import { Weather } from "./organismes/weather";
 
 const HomeApp = () => {
   const Context = React.useContext(AppContext);
@@ -17,7 +18,7 @@ const HomeApp = () => {
         <CarouselInfo />
         <SecondSection>
           {!isMobile(windowSize) ? <MapComponent /> : <CarouselPlaces />}
-          {/* <Weather /> */}
+          <Weather />
         </SecondSection>
       </HomeContent>
     </>
@@ -35,6 +36,12 @@ const HomeContent = styled.main`
 
 const SecondSection = styled.div`
   display: flex;
+  width: 100%;
+  flex-direction: column;
+
+  @media (min-width: ${breakPoint.desktop}) {
+    flex-direction: row;
+  }
 `;
 
 export default HomeApp;
