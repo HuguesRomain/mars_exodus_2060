@@ -858,3 +858,19 @@ export const Check = ({ size, style, color }: IconPropType) => {
     </svg>
   );
 };
+
+export const Step = ({ size, style }: IconPropType) => {
+  return (
+    <svg
+      width={size ? size : "24"}
+      height={size ? size : "24"}
+      style={style && style}
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle opacity="0.2" cx="12" cy="12" r="12" fill="#FC5252" />
+      <circle cx="12" cy="12" r="6" fill="#FC5252" />
+    </svg>
+  );
+};

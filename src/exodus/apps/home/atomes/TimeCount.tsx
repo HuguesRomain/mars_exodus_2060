@@ -4,6 +4,7 @@ import { fontWeight, fontSize, space } from "styles/const";
 
 const ContentCount = styled.div`
   padding: ${space.xs};
+  z-index: 100;
 `;
 
 const Count = styled.p`
