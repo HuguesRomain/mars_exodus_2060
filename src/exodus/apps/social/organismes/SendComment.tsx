@@ -11,6 +11,7 @@ import {
 import { Avatar } from "../atoms/Avatar";
 import { Icon } from "styles/atoms/icons";
 import { AppContext } from "exodus/context";
+import { usePostBlog } from "exodus/services/social/social.hook";
 
 const Content = styled.div<{ isDark: boolean }>`
   max-width: 550px;
@@ -50,7 +51,7 @@ type Props = {
   setposts: (value: Posts[]) => void;
 };
 
-export const SendComment = ({ setposts, posts }: Props) => {
+export const SendComment = () => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
   let [newComment, setNewComment] = useState("");
@@ -59,22 +60,10 @@ export const SendComment = ({ setposts, posts }: Props) => {
     setNewComment(e.target.value);
   };
   const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") handleSubmit();
+    if (e.key === "Enter") HandleSubmit();
   };
-  const handleSubmit = () => {
-    setposts([
-      ...posts,
-      {
-        author: "Frank Castle",
-        avatar:
-          "https://www.writeups.org/wp-content/uploads/Punisher-netflix-daredevil-Bernthal.jpg",
-        date: new Date(),
-        text: newComment,
-        like: 0,
-        comment: [],
-      },
-    ]);
-    setNewComment("");
+  const HandleSubmit = () => {
+    usePostBlog("test");
   };
   return (
     <Content isDark={isDark}>
@@ -94,7 +83,7 @@ export const SendComment = ({ setposts, posts }: Props) => {
       </Head>
       <SendAndMore>
         <AddMedia />
-        <Icon size={iconSize.s} onClick={handleSubmit} name={"send"} />
+        <Icon size={iconSize.s} onClick={HandleSubmit} name={"send"} />
       </SendAndMore>
     </Content>
   );

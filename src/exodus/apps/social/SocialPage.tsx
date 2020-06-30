@@ -7,13 +7,13 @@ import { Advertisement } from "./organismes/advertisement";
 import { isMobile } from "exodus/utils/checkWindowSize";
 import { breakPoint } from "styles/const";
 import { AppContext } from "exodus/context";
+import { useGetPosts } from "exodus/services/social/social.hook";
 
 const SocialPart = styled.div`
   display: flex;
   justify-content: center;
   padding: 0;
   width: 100vw;
-  height: 100vh;
   @media (min-width: ${breakPoint.tabletPortrait}) {
     padding: ${rem(50)};
     width: 100vw;
@@ -31,24 +31,22 @@ const Pub = styled.div`
   height: 100vh;
 `;
 
-export const SocialPage = ({
-  posts,
-  setposts,
-}: {
-  posts: Posts[];
-  setposts: any;
-}) => {
+export const SocialPage = () => {
   const Context = React.useContext(AppContext);
   const [windowSize] = Context.windowSizeContext;
+
+  const InitialPost: any = useGetPosts();
+  const allPosts = InitialPost["hydra:member"];
+
   return (
-    <div style={{ display: "flex", height: "100vh" }}>
+    <div style={{ display: "flex" }}>
       <SocialPart>
         <div>
-          <SendComment setposts={setposts} posts={posts} />
+          <SendComment />
           <ul>
-            {posts &&
-              posts.map((post: Posts, i) => {
-                return <PostItem key={i} post={post} />;
+            {allPosts &&
+              allPosts.map((value: Posts) => {
+                return <PostItem key={value.id} post={value} />;
               })}
           </ul>
         </div>

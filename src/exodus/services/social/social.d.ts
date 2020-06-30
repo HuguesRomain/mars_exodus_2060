@@ -1,15 +1,21 @@
 type Posts = {
   author: string;
-  avatar: string;
-  date: Date;
-  text: string;
-  like: number;
-  comment: Array<{
-    author: string;
-    avatar: string;
-    date: Date;
-    text: string;
-  }>;
+  avatar?: string | undefined;
+  comment?: Array<string>;
+  content?: string;
+  id?: number;
+  date?: Date;
+  images?: Array<string>;
+  published?: Date;
+  text?: string;
+};
+
+type User = {
+  avatar?: string | undefined;
+  comment?: Array<string>;
+  id?: number;
+  name: string;
+  posts?: Array<string>;
 };
 
 type Login = {

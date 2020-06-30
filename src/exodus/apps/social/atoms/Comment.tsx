@@ -25,7 +25,7 @@ const IconStyled = styled(Icon)`
 `;
 
 type Props = {
-  quantity: number;
+  quantity: number | undefined;
 };
 
 export const Comment = ({ quantity }: Props) => {
