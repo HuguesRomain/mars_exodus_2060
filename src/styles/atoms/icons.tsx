@@ -1,41 +1,89 @@
 import React, { CSSProperties } from "react";
-// import styled from "styled-components";
-import { Home, Calendar, Social, Profile } from "../assets/icons/icons";
+import {
+  Home,
+  Calendar,
+  Social,
+  Profile,
+  Sun,
+  Earth,
+  Mars,
+  Moon,
+  Pin,
+  Disconnect,
+  Share,
+  Comment,
+  Like,
+  Pics,
+  Send,
+  BackArrow,
+  Logo,
+  Back,
+  Ticket,
+  Forward,
+  ForwardArrow,
+  Eye,
+  Check,
+  Clock,
+  Step,
+  Ok,
+} from "../assets/icons/icons";
 
 export class IconsMapping {
   home = Home;
   calendar = Calendar;
   social = Social;
   profile = Profile;
+  sun = Sun;
+  moon = Moon;
+  earth = Earth;
+  mars = Mars;
+  pin = Pin;
+  disconnect = Disconnect;
+  share = Share;
+  comment = Comment;
+  like = Like;
+  pics = Pics;
+  send = Send;
+  backarrow = BackArrow;
+  logo = Logo;
+  back = Back;
+  ticket = Ticket;
+  forward = Forward;
+  forwardArrow = ForwardArrow;
+  eye = Eye;
+  check = Check;
+  clock = Clock;
+  step = Step;
+  ok = Ok;
 }
 
 export type IconName = keyof IconsMapping;
 const iconsMapping = new IconsMapping();
 
-type Props = {
+export type IconProps = {
   name: IconName;
   color?: string | null;
+  strokeColor?: string | null;
+  secondColor?: string | null;
   size?: number | string;
-  className?: string;
-  style?: React.CSSProperties;
   onClick?: (e: any) => void;
+  style?: CSSProperties;
 };
 
-export const Icon = (props: Props) => {
-  const style: CSSProperties = {
-    fill: props.color ? props.color : "grey",
-    ...props.style,
-    maxHeight: `${props.size}px`,
-    maxWidth: `${props.size}px`,
-  };
-
+export const Icon = (props: IconProps) => {
   const CorrespondingIcon = iconsMapping[props.name];
 
+  const style: CSSProperties = {
+    ...props.style,
+  };
+
   return CorrespondingIcon ? (
-    <svg style={style} onClick={props.onClick}>
-      <CorrespondingIcon />
-    </svg>
+    <CorrespondingIcon
+      onClick={props.onClick}
+      strokeColor={props.strokeColor}
+      size={props.size}
+      color={props.color}
+      style={style}
+    />
   ) : null;
 };
-
-// Todo : Change the svg logic or found a adequate lib

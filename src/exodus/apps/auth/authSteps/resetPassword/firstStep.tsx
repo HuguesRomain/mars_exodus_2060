@@ -1,18 +1,21 @@
 import React, { useState } from "react";
 
 import { Input } from "../../atoms/input";
-import { Button } from "../../atoms/button";
 import { Title, Paragraph, FormStyle } from "../../style";
 import { Link } from "react-router-dom";
 import { authAppRouter } from "exodus/internal-router";
-import { RightArrow } from "styles/assets/icons/icons";
+import { AppContext } from "exodus/context";
+import { Button } from "exodus/components/atoms/button";
+import { space } from "styles/const";
 
 export const ResetPasswordFirstStep = () => {
   const [email, setEmail] = useState<string | null>();
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
   return (
     <>
-      <Title>Mot de passe oublié</Title>
-      <Paragraph style={{ marginBottom: "10px" }}>
+      <Title isDark={isDark}>Mot de passe oublié</Title>
+      <Paragraph isDark={isDark} style={{ marginBottom: "10px" }}>
         Veuillez renseigner votre adresse e-mail afin de réinitialiser votre mot
         de passe.
       </Paragraph>
@@ -21,17 +24,14 @@ export const ResetPasswordFirstStep = () => {
           value={email ? email : ""}
           onChange={(e) => {
             setEmail(e.target.value);
-            console.log(e.target.value);
           }}
           placeholder={"Adresse e-mail"}
           type={"email"}
         />
         <Link to={authAppRouter.resetPasswordSecondStep()}>
-          <Button
-            type={"submit"}
-            placeholder={"Valider"}
-            children={<RightArrow />}
-          />
+          <Button iconSize={20} iconName={"forwardArrow"}>
+            <p style={{ marginRight: space.xs }}>Valider</p>
+          </Button>
         </Link>
       </FormStyle>
     </>

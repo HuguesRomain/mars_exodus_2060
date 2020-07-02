@@ -4,6 +4,7 @@ import { rem } from "polished";
 
 import { Ok } from "styles/assets/icons/icons";
 import { Title, Paragraph } from "../../style";
+import { AppContext } from "exodus/context";
 
 const Wrapper = styled.div`
   display: flex;
@@ -13,13 +14,15 @@ const Wrapper = styled.div`
 `;
 
 export const ResetPasswordFinalStep = () => {
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
   return (
     <Wrapper>
       <Ok style={{ marginTop: rem(60), marginBottom: rem(10) }} />
-      <Title style={{ marginBottom: "30px", width: rem(250) }}>
+      <Title isDark={isDark} style={{ marginBottom: "30px", width: rem(250) }}>
         Nouveau mot de passe enregistré
       </Title>
-      <Paragraph>
+      <Paragraph isDark={isDark}>
         Un e-mail vient de vous être envoyé afin de confirmer votre nouveau mot
         de passe.
       </Paragraph>

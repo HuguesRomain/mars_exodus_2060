@@ -1,26 +1,29 @@
 import React, { useState } from "react";
 
 import { Input } from "../../atoms/input";
-import { Button } from "../../atoms/button";
 import { Title, Paragraph, FormStyle } from "../../style";
-import { Link } from "react-router-dom";
-import { authAppRouter } from "exodus/internal-router";
-import { RightArrow } from "styles/assets/icons/icons";
+import { AppContext } from "exodus/context";
+import { space, fontSize } from "styles/const";
+import { Button } from "exodus/components/atoms/button";
+import { NewPasswordDataType, ChangePassword } from "exodus/services/auth/auth";
+import styled, { css } from "styled-components";
 
-type NewPassword = {
-  password: string;
-  confirm: string;
-};
-
-export const RegisterSecondStep = () => {
-  const [newPassword, setNewPassword] = useState<NewPassword>({
-    password: "",
-    confirm: "",
+export const RegisterSecondStep = ({
+  setModalStep,
+}: {
+  setModalStep: React.Dispatch<React.SetStateAction<number>>;
+}) => {
+  const [resetPassword, setResetPassword] = useState<NewPasswordDataType>({
+    newPassword: "",
+    oldPassword: "",
   });
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
+
   return (
     <>
-      <Title>Bonjour, John</Title>
-      <Paragraph>
+      <Title isDark={isDark}>Bonjour voyageur !</Title>
+      <Paragraph isDark={isDark}>
         Veuillez personnaliser votre mot de passe afin de valider
         l’enregistrement de votre compte.
       </Paragraph>
@@ -28,33 +31,60 @@ export const RegisterSecondStep = () => {
         <Input
           onChange={(e) => {
             const password = e.target.value;
-            setNewPassword((prevState) => ({
+            setResetPassword((prevState) => ({
               ...prevState,
-              password: password,
+              oldPassword: password,
             }));
           }}
-          value={newPassword.password}
-          placeholder={"Nouveau mot de passe "}
+          value={resetPassword.oldPassword}
+          placeholder={"Ancien mot de passe"}
         />
         <Input
           onChange={(e) => {
-            const confirm = e.target.value;
-            setNewPassword((prevState) => ({
+            const newPassword = e.target.value;
+            setResetPassword((prevState) => ({
               ...prevState,
-              confirm: confirm,
+              newPassword: newPassword,
             }));
           }}
-          value={newPassword.confirm}
-          placeholder={"Confirmer le mot de passe"}
+          value={resetPassword.newPassword}
+          placeholder={"Nouveau mot de passe"}
         />
-        <Link to={authAppRouter.loginFinalStep()}>
+        <ButtonWrapper>
           <Button
-            type={"submit"}
-            placeholder={"Valider et s’enregistrer"}
-            children={<RightArrow />}
-          />
-        </Link>
+            onClick={() => {
+              setModalStep(0);
+            }}
+            type={"secondary"}
+            style={{ marginRight: space.xs }}
+            styled={CustomButton}
+          >
+            <p style={{ marginRight: space.xs, fontSize: fontSize.s }}>
+              Annuler
+            </p>
+          </Button>
+          <Button
+            onClick={() => {
+              setModalStep(2);
+              ChangePassword(resetPassword);
+            }}
+            iconSize={20}
+            iconName={"forwardArrow"}
+            styled={CustomButton}
+          >
+            <p style={{ marginRight: space.xs }}>Valider</p>
+          </Button>
+        </ButtonWrapper>
       </FormStyle>
     </>
   );
 };
+
+const ButtonWrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+`;
+
+const CustomButton = css`
+  width: 100%;
+`;

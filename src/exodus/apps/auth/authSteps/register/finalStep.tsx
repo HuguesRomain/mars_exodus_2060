@@ -1,31 +1,52 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { rem } from "polished";
 
-import { Ok } from "styles/assets/icons/icons";
-import { Title, Paragraph, Question, RedirectText } from "../../style";
+import { Title, Paragraph } from "../../style";
+import { Icon } from "styles/atoms/icons";
+import { AppContext } from "exodus/context";
+import { Button } from "exodus/components/atoms/button";
+import { space } from "styles/const";
+
+export const RegisterFinalStep = ({
+  setModalStep,
+}: {
+  setModalStep: React.Dispatch<React.SetStateAction<number>>;
+}) => {
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
+  return (
+    <>
+      <Icon name={"ok"} size={35} style={{ marginBottom: space.l }} />
+      <Title isDark={isDark} style={{ marginBottom: space.l, width: rem(250) }}>
+        Nouveau mot de passe enregistré
+      </Title>
+      <Paragraph isDark={isDark}>
+        Votre mot de passe a bien été enregistré.
+      </Paragraph>
+      <BottomContent>
+        <Button
+          onClick={() => {
+            setModalStep(0);
+          }}
+          iconSize={20}
+          styled={CustomButton}
+        >
+          <p>Valider</p>
+        </Button>
+      </BottomContent>
+    </>
+  );
+};
+
+const CustomButton = css`
+  width: ${rem(200)};
+  margin-top: ${space.m};
+`;
 
 const BottomContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: ${rem(50)};
 `;
-
-export const RegisterFinalStep = () => {
-  return (
-    <>
-      <Ok style={{ marginTop: rem(60), marginBottom: rem(10) }} />
-      <Title style={{ width: rem(250) }}>Nouveau mot de passe enregistré</Title>
-      <Paragraph>
-        Un e-mail vient de vous être envoyé afin de confirmer votre nouveau mot
-        de passe.
-      </Paragraph>
-      <BottomContent>
-        <Question>Vous n’avez pas reçu d’e-mail ?</Question>
-        <RedirectText>Cliquez ici pour un nouvel envoi</RedirectText>
-      </BottomContent>
-    </>
-  );
-};

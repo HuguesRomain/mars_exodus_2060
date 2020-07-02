@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import { rem } from "polished";
+import { Link } from "react-router-dom";
 
 type ButtonType = {
   placeholder: string;
@@ -27,10 +28,8 @@ export const Button = ({
   children,
   onClick,
 }: ButtonType) => {
-  return (
-    <ButtonStyled type={type} onClick={onClick}>
-      {placeholder}
-      {children && children}
-    </ButtonStyled>
-  );
+  <ButtonStyled type={type} onClick={onClick}>
+    {placeholder}
+    {children && children}
+  </ButtonStyled>;
 };
