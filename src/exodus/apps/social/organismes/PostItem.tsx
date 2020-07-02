@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
 import { Like } from "../atoms/Like";
 import { Comment } from "../atoms/Comment";
@@ -72,23 +72,18 @@ type Props = {
   post: Posts;
 };
 
-export const PostItem = ({ post }: any) => {
-  const [allComments, setAllComments] = useState<
-    (CommentBase | string)[] | undefined
-  >();
+export const PostItem = ({ post }: Props) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
   const [windowSize] = Context.windowSizeContext;
-  useEffect(() => {
-    setAllComments(post.comments);
-  }, [post]);
   const User = useGetUser(post.author);
 
   const PublishDate = (() => {
-    return formatDistanceToNow(post.published && new Date(post.published), {
-      addSuffix: true,
-      includeSeconds: true,
-    });
+    if (post.published)
+      return formatDistanceToNow(new Date(post.published), {
+        addSuffix: true,
+        includeSeconds: true,
+      });
   })();
 
   return (
@@ -107,17 +102,11 @@ export const PostItem = ({ post }: any) => {
         <Comment quantity={post.comments?.length} />
         <Like quantity={0} />
       </Interact>
-      {!isMobileOnly(windowSize) && (
-        <AddComment
-          allComments={allComments}
-          setAllComments={setAllComments}
-          postId={post["@id"]}
-        />
-      )}
+      {!isMobileOnly(windowSize) && <AddComment postId={post["@id"]} />}
       <ul>
         {!isMobileOnly(windowSize) &&
-          allComments &&
-          allComments.map((value, i) => {
+          post.comments &&
+          post.comments.map((value, i) => {
             return <CommentItem key={i} comment={value} />;
           })}
       </ul>

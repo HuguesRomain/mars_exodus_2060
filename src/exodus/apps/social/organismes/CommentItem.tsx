@@ -53,11 +53,9 @@ const Text = styled.p<{ isDark: boolean }>`
     !props.isDark ? color.darker.LuckyPoint : color.light.PureWhite};
   transition: ${transitionTime};
 `;
-
 type Props = {
-  comment?: CommentBase | string;
+  comment: string;
 };
-
 export const CommentItem = ({ comment }: Props) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;

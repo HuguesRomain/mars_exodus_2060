@@ -46,12 +46,7 @@ const CommentInput = styled.input<{ isDark: boolean }>`
     !props.isDark ? color.light.PureWhite : color.darker.BlackRussian};
 `;
 
-type Props = {
-  postItems: Posts[] | undefined;
-  setPostItems: (value: Posts[]) => void;
-};
-
-export const SendComment = ({ postItems, setPostItems }: Props) => {
+export const SendComment = () => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
   let [newPost, setnewPost] = useState("");
@@ -64,11 +59,6 @@ export const SendComment = ({ postItems, setPostItems }: Props) => {
   };
   const HandleSubmit = () => {
     PostBlog(newPost);
-    if (postItems)
-      setPostItems([
-        { author: "/api/users/103", content: newPost, published: new Date() },
-        ...postItems,
-      ]);
     setnewPost("");
   };
   return (

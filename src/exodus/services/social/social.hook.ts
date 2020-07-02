@@ -2,7 +2,7 @@ import { useState, useEffect, useContext } from "react";
 import { AppContext } from "exodus/context";
 
 const token =
-  "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1OTM3MDUxNTMsImV4cCI6MTU5MzcwODc1Mywicm9sZXMiOlsiUk9MRV9XUklURVIiXSwidXNlcm5hbWUiOiIxMzQ2NTQ3In0.H9_13iH0xDxge02K7qx7aqK4ex2dvCQUlkKXsyzWlDr8he_KmChLkxkmTt2aF1j0zB6Tk486XE0e6jZVIbOp9Q";
+  "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1OTM3MjY5MjQsImV4cCI6MTU5Mzc2MjkyNCwicm9sZXMiOlsiUk9MRV9XUklURVIiXSwidXNlcm5hbWUiOiIxMzQ2NTQ3In0.cNmJFszDmBvG_TtdY93M0V093DsYM3w5XqtWjZ-9nlskOq_lWEivzeVw3f0vFUkQVIXoPwlKz5dzzAyeLve_Jw";
 export const useGetPosts = () => {
   const [Posts, setPosts] = useState<Posts[]>([]);
   /* const Context = useContext(AppContext);
@@ -58,16 +58,12 @@ export const useGetUser = (url: string) => {
   return User;
 };
 
-export const useGetComment = (url?: string | CommentBase) => {
+export const useGetComment = (url: string) => {
   const [Comment, setComment] = useState<CommentBase>();
   const Context = useContext(AppContext);
   const Token = Context.tokenContext;
 
   useEffect(() => {
-    if (typeof url === "object") {
-      setComment(url);
-      return;
-    }
     fetch(`https://symfony-xmt3.frb.io${url}`, {
       headers: {
         Authorization: `Bearer ${Token}`,

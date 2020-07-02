@@ -58,12 +58,10 @@ const Send = styled.div<{ isDark: boolean }>`
 `;
 
 type Props = {
-  allComments?: (CommentBase | string)[];
-  setAllComments: (value: (CommentBase | string)[]) => void;
   postId?: string;
 };
 
-const InputComment = ({ allComments, setAllComments, postId }: Props) => {
+const InputComment = ({ postId }: Props) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
   let [newComment, setNewComment] = useState("");
@@ -76,14 +74,6 @@ const InputComment = ({ allComments, setAllComments, postId }: Props) => {
   };
   const HandleSubmit = () => {
     PostComment({ newComment, postId });
-    if (allComments)
-      setAllComments(
-        allComments.concat({
-          author: "/api/users/85",
-          content: newComment,
-          published: new Date(),
-        }),
-      );
     setNewComment("");
   };
 
@@ -103,7 +93,7 @@ const InputComment = ({ allComments, setAllComments, postId }: Props) => {
   );
 };
 
-export const AddComment = ({ allComments, setAllComments, postId }: Props) => {
+export const AddComment = ({ postId }: Props) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
 
@@ -115,11 +105,7 @@ export const AddComment = ({ allComments, setAllComments, postId }: Props) => {
         }
         size={iconSize.l}
       />
-      <InputComment
-        allComments={allComments}
-        setAllComments={setAllComments}
-        postId={postId}
-      />
+      <InputComment postId={postId} />
     </Content>
   );
 };

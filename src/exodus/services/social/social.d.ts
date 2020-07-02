@@ -6,7 +6,7 @@ type Posts = {
   id?: number;
   date?: Date;
   images?: Array<string>;
-  published?: Date;
+  published?: Date | number;
   text?: string;
   "@id"?: string;
 };
@@ -27,7 +27,7 @@ type Login = {
 type CommentBase = {
   author?: string;
   avatar?: string;
-  published?: Date | string | undefined;
+  published?: Date | string;
   content?: string;
 };
 

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import styled from "styled-components";
 import { SendComment } from "./organismes/SendComment";
 import { PostItem } from "./organismes/PostItem";
@@ -7,6 +7,7 @@ import { Advertisement } from "./organismes/advertisement";
 import { isMobile } from "exodus/utils/checkWindowSize";
 import { breakPoint } from "styles/const";
 import { AppContext } from "exodus/context";
+import { useGetPosts } from "exodus/services/social/social.hook";
 
 const SocialPart = styled.div`
   display: flex;
@@ -30,27 +31,22 @@ const Pub = styled.div`
   height: 100vh;
 `;
 
-export const SocialPage = ({ allPosts }: any) => {
-  const [postItems, setPostItems] = useState<Posts[]>();
+export const SocialPage = () => {
   const Context = React.useContext(AppContext);
   const [windowSize] = Context.windowSizeContext;
 
-  useEffect(() => {
-    setPostItems(allPosts);
-  }, [allPosts]);
+  const InitialPost: any = useGetPosts();
+  const allPosts = InitialPost["hydra:member"];
 
   return (
     <div style={{ display: "flex", minHeight: "100vh" }}>
       <SocialPart>
         <div>
-          <SendComment
-            postItems={postItems && postItems}
-            setPostItems={setPostItems}
-          />
+          <SendComment />
           <ul>
-            {postItems &&
-              postItems.map((value: Posts, i) => {
-                return <PostItem key={i} post={value} />;
+            {allPosts &&
+              allPosts.map((value: Posts) => {
+                return <PostItem key={value.id} post={value} />;
               })}
           </ul>
         </div>
