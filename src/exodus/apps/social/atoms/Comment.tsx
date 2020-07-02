@@ -39,7 +39,9 @@ export const Comment = ({ quantity }: Props) => {
       }}
     >
       <IconStyled color={color.medium.Manatee} name={"comment"} />
-      <Text style={{ margin: `0 ${rem(2)} 0 ${space.xs}` }}>{quantity}</Text>
+      <Text style={{ margin: `0 ${rem(2)} 0 ${space.xs}` }}>
+        {quantity && quantity}
+      </Text>
       {!isMobile(windowSize) && <Text>Commentaires</Text>}
     </Item>
   );

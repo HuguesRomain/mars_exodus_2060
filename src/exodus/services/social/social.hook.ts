@@ -2,12 +2,11 @@ import { useState, useEffect, useContext } from "react";
 import { AppContext } from "exodus/context";
 
 const token =
-  "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1OTM1NTcyNjcsImV4cCI6MTU5MzU2MDg2Nywicm9sZXMiOlsiUk9MRV9XUklURVIiXSwidXNlcm5hbWUiOiIxMzQ2NTQ3In0.Rj2a5rUMLOzaA4e7EBDKLZ42qEYTfKf_2i1NWRvBraGvTgb60bZYL86ttS_vsSWB-I7_FcD4Idjqv85FHjRFKQ";
-
+  "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1OTM3MDUxNTMsImV4cCI6MTU5MzcwODc1Mywicm9sZXMiOlsiUk9MRV9XUklURVIiXSwidXNlcm5hbWUiOiIxMzQ2NTQ3In0.H9_13iH0xDxge02K7qx7aqK4ex2dvCQUlkKXsyzWlDr8he_KmChLkxkmTt2aF1j0zB6Tk486XE0e6jZVIbOp9Q";
 export const useGetPosts = () => {
   const [Posts, setPosts] = useState<Posts[]>([]);
-  const Context = useContext(AppContext);
-  const Token = Context.tokenContext;
+  /* const Context = useContext(AppContext);
+  const Token = Context.tokenContext; */
 
   useEffect(() => {
     fetch("https://symfony-xmt3.frb.io/api/blog_posts", {
@@ -24,33 +23,28 @@ export const useGetPosts = () => {
   return Posts;
 };
 
-/* type BlogPost = {
-  blogPost: Object;
-}; */
-
-export const usePostBlog = (blogPost: string) => {
-  const Context = useContext(AppContext);
-  const Token = Context.tokenContext;
-
-  useEffect(() => {
-    fetch("https://symfony-xmt3.frb.io/api/blog_posts", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify(blogPost),
-    }).catch((err) => console.log(err));
-  }, []);
+export const PostBlog = (contentPost: string) => {
+  fetch("https://symfony-xmt3.frb.io/api/blog_posts", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: JSON.stringify({
+      title: "A new way to live in this place",
+      content: contentPost,
+      slug: "a-new-day",
+    }),
+  }).catch((err) => console.log(err));
 };
 
 export const useGetUser = (url: string) => {
-  const [User, setUser] = useState<Posts[]>([]);
+  const [User, setUser] = useState<User>();
   const Context = useContext(AppContext);
   const Token = Context.tokenContext;
 
   useEffect(() => {
-    fetch(`https://symfony-xmt3.frb.io/api${url}`, {
+    fetch(`https://symfony-xmt3.frb.io${url}`, {
       headers: {
         Authorization: `Bearer ${token}`,
         "Content-Type": "application/json",
@@ -59,18 +53,22 @@ export const useGetUser = (url: string) => {
       .then((resp) => resp.json())
       .then((resp) => setUser(resp))
       .catch((err) => console.log(err));
-  }, []);
+  }, [url, Token]);
 
   return User;
 };
 
-export const useGetComment = (url: string) => {
-  const [Comment, setComment] = useState<Comment[]>([]);
+export const useGetComment = (url?: string | CommentBase) => {
+  const [Comment, setComment] = useState<CommentBase>();
   const Context = useContext(AppContext);
   const Token = Context.tokenContext;
 
   useEffect(() => {
-    fetch(`https://symfony-xmt3.frb.io/${url}`, {
+    if (typeof url === "object") {
+      setComment(url);
+      return;
+    }
+    fetch(`https://symfony-xmt3.frb.io${url}`, {
       headers: {
         Authorization: `Bearer ${Token}`,
         "Content-Type": "application/json",
@@ -79,30 +77,23 @@ export const useGetComment = (url: string) => {
       .then((resp) => resp.json())
       .then((resp) => setComment(resp))
       .catch((err) => console.log(err));
-  });
+  }, [url, Token]);
 
   return Comment;
 };
 
-type PostCommentProps = {
-  comment: Comment;
-};
-
-export const usePostComment = ({ comment }: PostCommentProps) => {
-  const Context = useContext(AppContext);
-  const Token = Context.tokenContext;
-
-  useEffect(() => {
-    fetch("https://symfony-xmt3.frb.io/api/comments", {
-      headers: {
-        Authorization: `Bearer ${Token}`,
-        "Content-Type": "application/json",
-      },
-      method: "POST",
-      body: JSON.stringify(comment),
-    })
-      .then((resp) => resp.json())
-      .then((resp) => (Context.tokenContext = resp))
-      .catch((err) => console.log(err));
-  });
+export const PostComment = ({ newComment, postId }: PostCommentProps) => {
+  fetch("https://symfony-xmt3.frb.io/api/comments", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    body: JSON.stringify({
+      content: newComment,
+      blogPost: postId,
+    }),
+  })
+    .then((resp) => resp.json())
+    .catch((err) => console.log(err));
 };

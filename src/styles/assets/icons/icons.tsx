@@ -523,9 +523,10 @@ export const Pics = ({ size, style, color }: IconPropType) => {
   );
 };
 
-export const Send = ({ size, style, color }: IconPropType) => {
+export const Send = ({ size, style, color, onClick }: IconPropType) => {
   return (
     <svg
+      onClick={onClick}
       width={size ? size : "24"}
       height={size ? size : "24"}
       style={style && style}

@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState, ChangeEvent, KeyboardEvent } from "react";
 import styled from "styled-components";
 import { Avatar } from "../atoms/Avatar";
 import { iconSize, color, fontSize, space, transitionTime } from "styles/const";
 import { rem } from "polished";
 import { Icon } from "styles/atoms/icons";
 import { AppContext } from "exodus/context";
+import { PostComment } from "exodus/services/social/social.hook";
 
 const Content = styled.div<{ isDark: boolean }>`
   display: flex;
@@ -56,12 +57,45 @@ const Send = styled.div<{ isDark: boolean }>`
   transition: ${transitionTime};
 `;
 
-const InputComment = () => {
+type Props = {
+  allComments?: (CommentBase | string)[];
+  setAllComments: (value: (CommentBase | string)[]) => void;
+  postId?: string;
+};
+
+const InputComment = ({ allComments, setAllComments, postId }: Props) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
+  let [newComment, setNewComment] = useState("");
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setNewComment(e.target.value);
+  };
+  const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") HandleSubmit();
+  };
+  const HandleSubmit = () => {
+    PostComment({ newComment, postId });
+    if (allComments)
+      setAllComments(
+        allComments.concat({
+          author: "/api/users/85",
+          content: newComment,
+          published: new Date(),
+        }),
+      );
+    setNewComment("");
+  };
+
   return (
     <InputCommentStyled>
-      <InputStyled isDark={isDark} placeholder={"Votre commentaire..."} />
+      <InputStyled
+        onChange={handleChange}
+        onKeyPress={handleEnter}
+        isDark={isDark}
+        placeholder="Votre commentaire..."
+        value={newComment}
+      />
       <Send isDark={isDark}>
         <Icon color={color.SunsetOrange} name={"send"} size={iconSize.s} />
       </Send>
@@ -69,9 +103,10 @@ const InputComment = () => {
   );
 };
 
-export const AddComment = () => {
+export const AddComment = ({ allComments, setAllComments, postId }: Props) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
+
   return (
     <Content isDark={isDark}>
       <Avatar
@@ -80,7 +115,11 @@ export const AddComment = () => {
         }
         size={iconSize.l}
       />
-      <InputComment />
+      <InputComment
+        allComments={allComments}
+        setAllComments={setAllComments}
+        postId={postId}
+      />
     </Content>
   );
 };

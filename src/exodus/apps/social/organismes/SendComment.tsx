@@ -11,7 +11,7 @@ import {
 import { Avatar } from "../atoms/Avatar";
 import { Icon } from "styles/atoms/icons";
 import { AppContext } from "exodus/context";
-import { usePostBlog } from "exodus/services/social/social.hook";
+import { PostBlog } from "exodus/services/social/social.hook";
 
 const Content = styled.div<{ isDark: boolean }>`
   max-width: 550px;
@@ -47,23 +47,29 @@ const CommentInput = styled.input<{ isDark: boolean }>`
 `;
 
 type Props = {
-  posts: Posts[];
-  setposts: (value: Posts[]) => void;
+  postItems: Posts[] | undefined;
+  setPostItems: (value: Posts[]) => void;
 };
 
-export const SendComment = () => {
+export const SendComment = ({ postItems, setPostItems }: Props) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
-  let [newComment, setNewComment] = useState("");
+  let [newPost, setnewPost] = useState("");
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setNewComment(e.target.value);
+    setnewPost(e.target.value);
   };
   const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") HandleSubmit();
   };
   const HandleSubmit = () => {
-    usePostBlog("test");
+    PostBlog(newPost);
+    if (postItems)
+      setPostItems([
+        { author: "/api/users/103", content: newPost, published: new Date() },
+        ...postItems,
+      ]);
+    setnewPost("");
   };
   return (
     <Content isDark={isDark}>
@@ -76,7 +82,7 @@ export const SendComment = () => {
           onChange={handleChange}
           onKeyPress={handleEnter}
           placeholder="Postez quelque chose..."
-          value={newComment}
+          value={newPost}
           type="text"
           isDark={isDark}
         />

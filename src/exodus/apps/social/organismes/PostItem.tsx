@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import { Like } from "../atoms/Like";
 import { Comment } from "../atoms/Comment";
 import { Share } from "../atoms/Share";
-/* import { CommentItem } from "./CommentItem"; */
+import { CommentItem } from "./CommentItem";
 import {
   iconSize,
   color,
@@ -17,6 +17,7 @@ import { Avatar } from "../atoms/Avatar";
 import { isMobile, isMobileOnly } from "exodus/utils/checkWindowSize";
 import { AppContext } from "exodus/context";
 import { useGetUser } from "exodus/services/social/social.hook";
+import { formatDistanceToNow } from "date-fns";
 
 const dark = css`
   color: ${color.light.PureWhite};
@@ -71,16 +72,24 @@ type Props = {
   post: Posts;
 };
 
-export const PostItem = ({ post }: Props) => {
-  console.log(post);
-  const theDay =
-    post.published &&
-    post.published.toLocaleString("default", { weekday: "long" });
+export const PostItem = ({ post }: any) => {
+  const [allComments, setAllComments] = useState<
+    (CommentBase | string)[] | undefined
+  >();
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
   const [windowSize] = Context.windowSizeContext;
+  useEffect(() => {
+    setAllComments(post.comments);
+  }, [post]);
+  const User = useGetUser(post.author);
 
-  const [name] = useGetUser(post.author);
+  const PublishDate = (() => {
+    return formatDistanceToNow(post.published && new Date(post.published), {
+      addSuffix: true,
+      includeSeconds: true,
+    });
+  })();
 
   return (
     <Item isDark={isDark}>
@@ -89,23 +98,29 @@ export const PostItem = ({ post }: Props) => {
           src="https://pbs.twimg.com/media/EapZFw1XgAA1LEW?format=jpg&name=small"
           size={isMobile(windowSize) ? iconSize.l : iconSize.xl}
         />
-        <Author isDark={isDark}>{name && name}</Author>
-        <Since>il y a {theDay}</Since>
+        <Author isDark={isDark}>{User && User.name}</Author>
+        <Since>{PublishDate}</Since>
       </UserInfo>
       <PostText isDark={isDark}>{post.content}</PostText>
       <Interact>
         <Share />
-        <Comment quantity={post.comment && post.comment.length} />
+        <Comment quantity={post.comments?.length} />
         <Like quantity={0} />
       </Interact>
-      {/* <ul>
+      {!isMobileOnly(windowSize) && (
+        <AddComment
+          allComments={allComments}
+          setAllComments={setAllComments}
+          postId={post["@id"]}
+        />
+      )}
+      <ul>
         {!isMobileOnly(windowSize) &&
-          post.comment &&
-          post.comment.map((value, i) => {
-            return <CommentItem key={i} comments={value} />;
+          allComments &&
+          allComments.map((value, i) => {
+            return <CommentItem key={i} comment={value} />;
           })}
-      </ul> */}
-      {!isMobileOnly(windowSize) && <AddComment />}
+      </ul>
     </Item>
   );
 };

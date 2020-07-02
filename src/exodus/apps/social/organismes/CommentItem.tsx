@@ -9,6 +9,8 @@ import {
 } from "styles/const";
 import { Avatar } from "../atoms/Avatar";
 import { AppContext } from "exodus/context";
+import { useGetComment } from "exodus/services/social/social.hook";
+import { formatDistanceToNow } from "date-fns";
 
 const Comment = styled.li`
   list-style-type: none;
@@ -53,27 +55,39 @@ const Text = styled.p<{ isDark: boolean }>`
 `;
 
 type Props = {
-  comments: {
-    author: string;
-    avatar: string;
-    date: Date;
-    text: string;
-  };
+  comment?: CommentBase | string;
 };
 
-export const CommentItem = ({ comments }: Props) => {
-  const theDay = comments.date.toLocaleString("default", { weekday: "long" });
+export const CommentItem = ({ comment }: Props) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
+  const itemOfComment = useGetComment(comment);
+
+  const PublishDate = (() => {
+    if (itemOfComment) {
+      return formatDistanceToNow(
+        // @ts-ignore
+        itemOfComment && new Date(itemOfComment.published),
+        {
+          addSuffix: true,
+          includeSeconds: true,
+        },
+      );
+    }
+  })();
+
   return (
     <Comment>
-      <Avatar src={comments.avatar} size={iconSize.l} />
+      <Avatar
+        src="https://www.premiere.fr/sites/default/files/styles/scale_crop_1280x720/public/2019-07/The-Boys-Season-1-Episode-2-Homelander.jpg"
+        size={iconSize.l}
+      />
       <Content isDark={isDark}>
         <div style={{ display: "flex", marginBottom: space.xs }}>
-          <Author isDark={isDark}>{comments.author}</Author>
-          <Since>il y a {theDay}</Since>
+          <Author isDark={isDark}>Fline</Author>
+          <Since>{PublishDate}</Since>
         </div>
-        <Text isDark={isDark}>{comments.text}</Text>
+        <Text isDark={isDark}>{itemOfComment && itemOfComment.content}</Text>
       </Content>
     </Comment>
   );

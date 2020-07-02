@@ -1,13 +1,14 @@
 type Posts = {
   author: string;
   avatar?: string | undefined;
-  comment?: Array<string>;
+  comments?: Array<string>;
   content?: string;
   id?: number;
   date?: Date;
   images?: Array<string>;
   published?: Date;
   text?: string;
+  "@id"?: string;
 };
 
 type User = {
@@ -23,10 +24,14 @@ type Login = {
   password: string;
 };
 
-type Comment = {
+type CommentBase = {
   author?: string;
-  blogPost?: string;
+  avatar?: string;
+  published?: Date | string | undefined;
   content?: string;
-  id?: number;
-  published?: Date;
+};
+
+type PostCommentProps = {
+  newComment: string;
+  postId?: string;
 };
