@@ -582,9 +582,9 @@ export const Forward = ({ size, style, strokeColor }: IconPropType) => {
     >
       <path
         d="M7.5 21L16.5 12L7.5 3"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
     </svg>
   );
