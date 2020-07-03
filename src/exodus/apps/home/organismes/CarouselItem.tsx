@@ -35,14 +35,8 @@ export const CarouselItem = ({ article }: { article: ArticleType }) => {
           </DescriptionArticle>
         </div>
       </ItemContent>
-      <Link to={homeAppRouter.article(article.id)}>
-        <Button
-          onClick={() => {
-            homeAppRouter.article(article.id);
-          }}
-          styled={ButtonStyled}
-          iconName={"forward"}
-        >
+      <Link to={homeAppRouter.place(1)}>
+        <Button styled={ButtonStyled} iconName={"forward"}>
           <ButtonText>Lire l'article</ButtonText>
         </Button>
       </Link>

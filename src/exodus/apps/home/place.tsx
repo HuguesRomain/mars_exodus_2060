@@ -1,36 +1,22 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import styled from "styled-components";
-import {
-  ArticleType,
-  getArticlesSection,
-  SectionType,
-} from "exodus/services/home";
-// import CoverImage from "../../../styles/assets/pics/hero/hero_7.jpg";
+import { PlaceType } from "exodus/services/home";
 import {
   space,
   color,
-  transitionTime,
-  font,
   fontSize,
   iconSize,
+  transitionTime,
+  font,
 } from "styles/const";
+import { Icon } from "styles/atoms/icons";
 import { AppContext } from "exodus/context";
 import { rem } from "polished";
-import { Icon } from "styles/atoms/icons";
 import { isYoutubeUrl } from "exodus/utils/uriUtils";
 
-export const Article = ({ article }: { article: ArticleType }) => {
+export const Place = ({ place }: { place: PlaceType }) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
-  const [sections, setSections] = useState<SectionType[]>([]);
-
-  useEffect(() => {
-    getArticlesSection(article.id).then((resp) => {
-      console.log(resp);
-      setSections(resp["hydra:member"]);
-    });
-  }, [article.id]);
-
   return (
     <div
       style={{
@@ -39,7 +25,7 @@ export const Article = ({ article }: { article: ArticleType }) => {
         alignItems: "center",
       }}
     >
-      <Header img={`https://symfony-xmt3.frb.io${article.coverImage}`}>
+      <Header img={`https://symfony-xmt3.frb.io${place.coverImage}`}>
         <HeaderContent>
           <ContentBackButton
             onClick={() => {
@@ -47,6 +33,7 @@ export const Article = ({ article }: { article: ArticleType }) => {
             }}
             style={{}}
           >
+            {console.log("place", place)}
             <Icon
               style={{ marginRight: space.xs }}
               name={"backarrow"}
@@ -56,78 +43,48 @@ export const Article = ({ article }: { article: ArticleType }) => {
           </ContentBackButton>
           <HeaderFoooter>
             <TitleInfo>
+              <Text isDark={isDark}>{place.Category}</Text>
               <TitleText style={{ fontSize: fontSize.xxl }} isDark={isDark}>
-                {article.title}
+                {place.PlaceName}
               </TitleText>
-              <Text isDark={isDark}>{article.intro}</Text>
-              <TimeToRead>
-                <Icon
-                  size={iconSize.s}
-                  color={color.light.PureWhite}
-                  name={"clock"}
-                />
-                <Text style={{ margin: `0 0 0 ${space.xs}` }} isDark={isDark}>
-                  Temps de lecture : 3 min
-                </Text>
-              </TimeToRead>
             </TitleInfo>
           </HeaderFoooter>
         </HeaderContent>
       </Header>
       <Sections>
-        {sections.map((section, i) => {
-          return (
-            <div key={i}>
-              <Title>
-                <TitleText isDark={isDark}>{section.title}</TitleText>
-                <TitleDecoration />
-              </Title>
-              {section.image.map((img, i) => {
+        <div>
+          {place.Text.map((text, i) => {
+            return (
+              <Text key={i} isDark={isDark}>
+                {text}
+              </Text>
+            );
+          })}
+          {place.DoubleMedia.length > 0 && (
+            <DoubleMedia>
+              {place.DoubleMedia.map((media) => {
                 return (
-                  <Image key={i} src={`https://symfony-xmt3.frb.io${img}`} />
-                );
-              })}
-              {section.text.map((text, i) => {
-                return (
-                  <Text key={i} isDark={isDark}>
-                    {text}
-                  </Text>
-                );
-              })}
-              {section.doubleMedia.length > 0 && (
-                <DoubleMedia>
-                  {section.doubleMedia.map((media) => {
-                    return (
+                  <>
+                    {isYoutubeUrl(media) ? (
                       <>
-                        {isYoutubeUrl(media) ? (
-                          <>
-                            <DoubleMediaVideo
-                              src={media}
-                              allowFullScreen={true}
-                            />
-                          </>
-                        ) : (
-                          <DoubleMediaPhoto
-                            src={`https://symfony-xmt3.frb.io${media}`}
-                          />
-                        )}
+                        <DoubleMediaVideo src={media} allowFullScreen={true} />
                       </>
-                    );
-                  })}
-                </DoubleMedia>
-              )}
-            </div>
-          );
-        })}
+                    ) : (
+                      <DoubleMediaPhoto
+                        src={`https://symfony-xmt3.frb.io${media}`}
+                      />
+                    )}
+                  </>
+                );
+              })}
+            </DoubleMedia>
+          )}
+        </div>
+        );
       </Sections>
     </div>
   );
 };
-
-const TimeToRead = styled.div`
-  display: flex;
-  align-items: center;
-`;
 
 const DoubleMedia = styled.div`
   display: flex;
@@ -156,12 +113,6 @@ const DoubleMediaPhoto = styled.img`
   @media (max-width: 550px) {
     width: 100%;
   }
-`;
-
-const Image = styled.img`
-  width: 100%;
-  border-radius: 10px;
-  margin-top: ${space.m};
 `;
 
 const TitleInfo = styled.div`

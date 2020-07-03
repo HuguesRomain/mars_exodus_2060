@@ -6,8 +6,9 @@ import { space, breakPoint, color } from "styles/const";
 import { HomeTitle } from "../globalStyle";
 import { AppContext } from "exodus/context";
 import Img from "../../../../styles/assets/pics/hero/hero_7.jpg";
+import { PlaceType } from "exodus/services/home";
 
-const Places = [
+const PlacesPosition = [
   { position: "translateY(175px) translateX(50px)" },
   { position: "translateY(200px) translateX(110px)" },
   { position: "translateY(120px) translateX(155px)" },
@@ -20,14 +21,20 @@ const Places = [
   { position: "translateY(190px) translateX(700px)" },
 ];
 
-export const MapComponent = () => {
+export const MapComponent = ({ places }: { places: PlaceType[] }) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
   return (
     <MapWrapper>
       <HomeTitle isDark={isDark}>Lieux à visiter</HomeTitle>
-      {Places.map((place, i) => {
-        return <PinAndPopup key={i} place={place.position} />;
+      {PlacesPosition.map((PlacePosition, i) => {
+        return (
+          <PinAndPopup
+            key={i}
+            place={places[i]}
+            PlacePosition={PlacePosition.position}
+          />
+        );
       })}
       <MapStyled />
     </MapWrapper>
@@ -52,7 +59,13 @@ const MapWrapper = styled.div`
   flex-direction: column;
 `;
 
-const PinAndPopup = ({ place }: { place: string }) => {
+const PinAndPopup = ({
+  place,
+  PlacePosition,
+}: {
+  place: PlaceType;
+  PlacePosition: string;
+}) => {
   const [isPinHovered, setIsPinHovered] = useState<boolean>(false);
   const [isPopupHovered, setIsPopupHovered] = useState<boolean>(false);
 
@@ -67,7 +80,7 @@ const PinAndPopup = ({ place }: { place: string }) => {
   return (
     <PinContent
       style={{
-        transform: place,
+        transform: PlacePosition,
       }}
     >
       <Popup

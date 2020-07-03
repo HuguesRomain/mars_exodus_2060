@@ -17,6 +17,7 @@ import {
   getPlaces,
   PlaceType,
 } from "exodus/services/home";
+import { Place } from "./place";
 // import { ThemePicker } from "exodus/components/navbar/atoms/themePicker";
 
 const HomeApp = () => {
@@ -43,7 +44,7 @@ const HomeApp = () => {
                 <CarouselInfo articles={articles} />
                 <SecondSection>
                   {!isMobile(windowSize) ? (
-                    <MapComponent />
+                    <MapComponent places={places} />
                   ) : (
                     <CarouselPlaces places={places} />
                   )}
@@ -63,16 +64,16 @@ const HomeApp = () => {
             />
           );
         })}
-        {/* {places.map((place, i) => {
+        {places.map((place, i) => {
           return (
             <Route
               exact
               key={i}
-              path={homeAppRouter.place(place.id)}
-              render={() => <Article article={place} />}
+              path={homeAppRouter.place(i)}
+              render={() => <Place place={place} />}
             />
           );
-        })} */}
+        })}
       </Switch>
     </Router>
   );
