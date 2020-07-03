@@ -16,3 +16,8 @@ export const UsernameStorage = () => {
   const Username = JSON.parse(localStorage.getItem("username") || "{}");
   return typeof Username === "string" ? Username : null;
 };
+
+export const UserStorage = () => {
+  const User = JSON.parse(localStorage.getItem("user") || "{}");
+  return typeof User === "string" ? User : null;
+};

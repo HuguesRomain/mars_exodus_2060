@@ -43,7 +43,7 @@ export const GetUser = (url: string | undefined) => {
     .catch((err) => console.log(err));
 };
 
-export const GetUserByName = (url: string) => {
+export const GetUserByName = (url: string | null) => {
   return fetch(`https://symfony-xmt3.frb.io/api/users/${url}`, {
     headers: {
       Authorization: `Bearer ${TokenStorage()}`,

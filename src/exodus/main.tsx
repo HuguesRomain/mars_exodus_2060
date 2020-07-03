@@ -20,7 +20,8 @@ import { isMobile } from "exodus/utils/checkWindowSize";
 import { MobileHeader } from "exodus/components/molecules/mobileHeader";
 import { NavBarContainer } from "exodus/components/navbar/index";
 import { authApp } from "./internal-router";
-import { TokenStorage } from "./utils/accessStorage";
+import { TokenStorage, UsernameStorage } from "./utils/accessStorage";
+import { GetUserByName } from "./services/social/social.hook";
 
 const AppWrapper = styled.div<{ token: string | null }>`
   padding: ${rem(69)} 0 ${rem(90)} 0;
@@ -49,6 +50,10 @@ const AppWithContext = () => {
     !isValidPath() &&
       window.history.replaceState(null, "", homeAppRouter.home());
   }
+
+  GetUserByName(UsernameStorage()).then((resp) => {
+    localStorage.setItem("user", JSON.stringify(resp));
+  });
 
   return tokenWithoutContext ? (
     <AppFrame>
