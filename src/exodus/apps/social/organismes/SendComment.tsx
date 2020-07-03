@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, KeyboardEvent } from "react";
+import React, { useState, ChangeEvent, KeyboardEvent, useEffect } from "react";
 import styled from "styled-components";
 import { AddMedia } from "../molecules/AddMedia";
 import {
@@ -11,6 +11,67 @@ import {
 import { Avatar } from "../atoms/Avatar";
 import { Icon } from "styles/atoms/icons";
 import { AppContext } from "exodus/context";
+import { PostBlog, GetUserByName } from "exodus/services/social/social.hook";
+
+type Props = {
+  callBack: () => void;
+};
+
+export const SendComment = ({ callBack }: Props) => {
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
+  const [userName] = Context.usernameContext;
+  let [newPost, setnewPost] = useState("");
+  let [UserInfo, setUserInfo] = useState<UserInfoType>();
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setnewPost(e.target.value);
+  };
+  const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") HandleSubmit();
+  };
+  const HandleSubmit = () => {
+    PostBlog(newPost)
+      .then(() => callBack())
+      .catch((err) => console.log(err))
+      .finally(() => setnewPost(""));
+  };
+  useEffect(() => {
+    if (userName) {
+      GetUserByName(userName)
+        .then((data) => {
+          setUserInfo(data);
+        })
+        .catch(() => {});
+    }
+  }, [userName]);
+
+  const avatarPicture = (() => {
+    return UserInfo && UserInfo.profilePicture
+      ? `https://symfony-xmt3.frb.io${UserInfo.profilePicture}`
+      : "https://www.writeups.org/wp-content/uploads/Punisher-netflix-daredevil-Bernthal.jpg";
+  })();
+
+  return (
+    <Content isDark={isDark}>
+      <Head>
+        <Avatar src={avatarPicture} size={iconSize.xl} />
+        <CommentInput
+          onChange={handleChange}
+          onKeyPress={handleEnter}
+          placeholder="Postez quelque chose..."
+          value={newPost}
+          type="text"
+          isDark={isDark}
+        />
+      </Head>
+      <SendAndMore>
+        <AddMedia />
+        <Icon size={iconSize.s} onClick={HandleSubmit} name={"send"} />
+      </SendAndMore>
+    </Content>
+  );
+};
 
 const Content = styled.div<{ isDark: boolean }>`
   max-width: 550px;
@@ -44,58 +105,3 @@ const CommentInput = styled.input<{ isDark: boolean }>`
   background-color: ${(props) =>
     !props.isDark ? color.light.PureWhite : color.darker.BlackRussian};
 `;
-
-type Props = {
-  posts: Posts[];
-  setposts: (value: Posts[]) => void;
-};
-
-export const SendComment = ({ setposts, posts }: Props) => {
-  const Context = React.useContext(AppContext);
-  const [isDark] = Context.isDarkContext;
-  let [newComment, setNewComment] = useState("");
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setNewComment(e.target.value);
-  };
-  const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") handleSubmit();
-  };
-  const handleSubmit = () => {
-    setposts([
-      ...posts,
-      {
-        author: "Frank Castle",
-        avatar:
-          "https://www.writeups.org/wp-content/uploads/Punisher-netflix-daredevil-Bernthal.jpg",
-        date: new Date(),
-        text: newComment,
-        like: 0,
-        comment: [],
-      },
-    ]);
-    setNewComment("");
-  };
-  return (
-    <Content isDark={isDark}>
-      <Head>
-        <Avatar
-          src="https://www.writeups.org/wp-content/uploads/Punisher-netflix-daredevil-Bernthal.jpg"
-          size={iconSize.xl}
-        />
-        <CommentInput
-          onChange={handleChange}
-          onKeyPress={handleEnter}
-          placeholder="Postez quelque chose..."
-          value={newComment}
-          type="text"
-          isDark={isDark}
-        />
-      </Head>
-      <SendAndMore>
-        <AddMedia />
-        <Icon size={iconSize.s} onClick={handleSubmit} name={"send"} />
-      </SendAndMore>
-    </Content>
-  );
-};

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import {
   color,
@@ -9,6 +9,61 @@ import {
 } from "styles/const";
 import { Avatar } from "../atoms/Avatar";
 import { AppContext } from "exodus/context";
+import { useGetComment } from "exodus/services/social/social.hook";
+import { formatDistanceToNow } from "date-fns";
+import { GetUser } from "exodus/services/social/social.hook";
+
+type Props = {
+  comment: string;
+};
+export const CommentItem = ({ comment }: Props) => {
+  const [infoUser, setInfoUser] = useState<User>();
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
+  const itemOfComment = useGetComment(comment);
+
+  useEffect(() => {
+    if (itemOfComment) {
+      GetUser(itemOfComment.author)
+        .then((data) => {
+          setInfoUser(data);
+        })
+        .catch(() => {});
+    }
+  }, [itemOfComment]);
+
+  const avatarPicture = (() => {
+    return infoUser && infoUser.profilePicture
+      ? `https://symfony-xmt3.frb.io${infoUser.profilePicture}`
+      : "https://pbs.twimg.com/media/EapZFw1XgAA1LEW?format=jpg&name=small";
+  })();
+
+  const PublishDate = (() => {
+    if (itemOfComment) {
+      return formatDistanceToNow(
+        // @ts-ignore
+        itemOfComment && new Date(itemOfComment.published),
+        {
+          addSuffix: true,
+          includeSeconds: true,
+        },
+      );
+    }
+  })();
+
+  return (
+    <Comment>
+      <Avatar src={avatarPicture} size={iconSize.l} />
+      <Content isDark={isDark}>
+        <div style={{ display: "flex", marginBottom: space.xs }}>
+          <Author isDark={isDark}>{infoUser && infoUser?.name}</Author>
+          <Since>{PublishDate}</Since>
+        </div>
+        <Text isDark={isDark}>{itemOfComment && itemOfComment.content}</Text>
+      </Content>
+    </Comment>
+  );
+};
 
 const Comment = styled.li`
   list-style-type: none;
@@ -51,30 +106,3 @@ const Text = styled.p<{ isDark: boolean }>`
     !props.isDark ? color.darker.LuckyPoint : color.light.PureWhite};
   transition: ${transitionTime};
 `;
-
-type Props = {
-  comments: {
-    author: string;
-    avatar: string;
-    date: Date;
-    text: string;
-  };
-};
-
-export const CommentItem = ({ comments }: Props) => {
-  const theDay = comments.date.toLocaleString("default", { weekday: "long" });
-  const Context = React.useContext(AppContext);
-  const [isDark] = Context.isDarkContext;
-  return (
-    <Comment>
-      <Avatar src={comments.avatar} size={iconSize.l} />
-      <Content isDark={isDark}>
-        <div style={{ display: "flex", marginBottom: space.xs }}>
-          <Author isDark={isDark}>{comments.author}</Author>
-          <Since>il y a {theDay}</Since>
-        </div>
-        <Text isDark={isDark}>{comments.text}</Text>
-      </Content>
-    </Comment>
-  );
-};

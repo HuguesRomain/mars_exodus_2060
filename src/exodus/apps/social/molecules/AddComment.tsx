@@ -1,10 +1,69 @@
-import React from "react";
+import React, { useState, ChangeEvent, KeyboardEvent } from "react";
 import styled from "styled-components";
 import { Avatar } from "../atoms/Avatar";
 import { iconSize, color, fontSize, space, transitionTime } from "styles/const";
 import { rem } from "polished";
 import { Icon } from "styles/atoms/icons";
 import { AppContext } from "exodus/context";
+import { PostComment } from "exodus/services/social/social.hook";
+
+type Props = {
+  callBack?: () => void;
+  postId?: string;
+};
+
+const InputComment = ({ callBack, postId }: Props) => {
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
+  let [newComment, setNewComment] = useState("");
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setNewComment(e.target.value);
+  };
+  const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") HandleSubmit();
+  };
+  const HandleSubmit = () => {
+    PostComment({ newComment, postId })
+      .then(() => {
+        if (callBack) callBack();
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setNewComment(""));
+  };
+
+  return (
+    <InputCommentStyled>
+      <InputStyled
+        onChange={handleChange}
+        onKeyPress={handleEnter}
+        isDark={isDark}
+        placeholder="Votre commentaire..."
+        value={newComment}
+      />
+      <Send isDark={isDark}>
+        <Icon color={color.SunsetOrange} name={"send"} size={iconSize.s} />
+      </Send>
+    </InputCommentStyled>
+  );
+};
+
+export const AddComment = ({ callBack, postId }: Props) => {
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
+
+  return (
+    <Content isDark={isDark}>
+      <Avatar
+        src={
+          "https://www.writeups.org/wp-content/uploads/Punisher-netflix-daredevil-Bernthal.jpg"
+        }
+        size={iconSize.l}
+      />
+      <InputComment callBack={callBack} postId={postId} />
+    </Content>
+  );
+};
 
 const Content = styled.div<{ isDark: boolean }>`
   display: flex;
@@ -55,32 +114,3 @@ const Send = styled.div<{ isDark: boolean }>`
   height: ${rem(40)};
   transition: ${transitionTime};
 `;
-
-const InputComment = () => {
-  const Context = React.useContext(AppContext);
-  const [isDark] = Context.isDarkContext;
-  return (
-    <InputCommentStyled>
-      <InputStyled isDark={isDark} placeholder={"Votre commentaire..."} />
-      <Send isDark={isDark}>
-        <Icon color={color.SunsetOrange} name={"send"} size={iconSize.s} />
-      </Send>
-    </InputCommentStyled>
-  );
-};
-
-export const AddComment = () => {
-  const Context = React.useContext(AppContext);
-  const [isDark] = Context.isDarkContext;
-  return (
-    <Content isDark={isDark}>
-      <Avatar
-        src={
-          "https://www.writeups.org/wp-content/uploads/Punisher-netflix-daredevil-Bernthal.jpg"
-        }
-        size={iconSize.l}
-      />
-      <InputComment />
-    </Content>
-  );
-};
