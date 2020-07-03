@@ -8,30 +8,36 @@ import {
   fontSize,
   transitionTime,
 } from "styles/const";
-import { TimeRead } from "../atomes/TimeRead";
+import { TimeRead } from "../atoms/TimeRead";
 import { Button } from "../../../components/atoms/button";
 import { rem } from "polished";
 import { AppContext } from "exodus/context";
+import { ArticleType } from "exodus/services/home";
+import { Link } from "react-router-dom";
+import { homeAppRouter } from "exodus/internal-router";
 
-export const CarouselItem = () => {
+export const CarouselItem = ({ article }: { article: ArticleType }) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
 
   return (
     <ItemContent isDark={isDark}>
-      <ImageArticle
-        src="https://i.pinimg.com/originals/20/a8/9a/20a89acdab952dcedc577c06ae10fe1e.jpg"
-        alt="Article Image"
-      />
+      <ImageArticle src={article.coverImage} alt="Article Image" />
       <div>
-        <TitleArticle isDark={isDark}>MARS</TitleArticle>
-        <TimeRead />
-        <DescriptionArticle isDark={isDark}>
-          Tout savoir sur notre nouvelle planète
-        </DescriptionArticle>
-        <Button styled={ButtonStyled} iconName={"forward"}>
-          <ButtonText>Lire l'article</ButtonText>
-        </Button>
+        <TitleArticle isDark={isDark}>{article.title}</TitleArticle>
+        <TimeRead timeToRead={article.timeToRead} />
+        <DescriptionArticle isDark={isDark}>{article.intro}</DescriptionArticle>
+        <Link to={homeAppRouter.article(article.id)}>
+          <Button
+            onClick={() => {
+              homeAppRouter.article(article.id);
+            }}
+            styled={ButtonStyled}
+            iconName={"forward"}
+          >
+            <ButtonText>Lire l'article</ButtonText>
+          </Button>
+        </Link>
       </div>
     </ItemContent>
   );

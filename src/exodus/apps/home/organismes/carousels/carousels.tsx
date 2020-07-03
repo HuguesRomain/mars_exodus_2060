@@ -9,6 +9,7 @@ import "./carousel.css";
 import { CarouselPlacesItems } from "../../molecules/itemCarouselPlaces";
 import { HomeTitle } from "../../globalStyle";
 import { AppContext } from "exodus/context";
+import { ArticleType } from "exodus/services/home";
 
 const CarouselContent = styled.div`
   margin-bottom: ${space.l};
@@ -61,18 +62,16 @@ const settings = {
   ],
 };
 
-export const CarouselInfo = () => {
+export const CarouselInfo = ({ articles }: { articles: ArticleType[] }) => {
   const CustomSlider = useRef<HTMLDivElement>(null);
   return (
     <CarouselContent>
       <CarouselHead customSlider={CustomSlider} />
       <Slider {...settings} ref={CustomSlider}>
-        <CarouselItem />
-        <CarouselItem />
-        <CarouselItem />
-        <CarouselItem />
-        <CarouselItem />
-        <CarouselItem />
+        {articles &&
+          articles.map((article: ArticleType, i: number) => {
+            return <CarouselItem article={article} key={i} />;
+          })}
       </Slider>
     </CarouselContent>
   );

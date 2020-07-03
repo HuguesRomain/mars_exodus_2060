@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Header } from "./organismes/Header";
 import styled from "styled-components";
 import { space, breakPoint } from "styles/const";
@@ -7,21 +7,58 @@ import { AppContext } from "exodus/context";
 import { CarouselInfo, CarouselPlaces } from "./organismes/carousels/carousels";
 import { MapComponent } from "./organismes/map";
 import { Weather } from "./organismes/weather";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { homeAppRouter } from "exodus/internal-router";
+import { Article } from "./article";
+import { ArticleType, getArticles } from "exodus/services/home";
 
 const HomeApp = () => {
   const Context = React.useContext(AppContext);
   const [windowSize] = Context.windowSizeContext;
+  const [articles, setArticles] = useState<ArticleType[]>([]);
+  useEffect((): any => {
+    let mounted = true;
+    if (mounted) {
+      getArticles().then((resp) => setArticles(resp["hydra:member"]));
+    }
+    return () => (mounted = false);
+  }, []);
+
   return (
-    <>
-      <Header />
-      <HomeContent>
-        <CarouselInfo />
-        <SecondSection>
-          {!isMobile(windowSize) ? <MapComponent /> : <CarouselPlaces />}
-          <Weather />
-        </SecondSection>
-      </HomeContent>
-    </>
+    <Router>
+      <Switch>
+        <Route
+          exact
+          path={homeAppRouter.home()}
+          render={() => (
+            <>
+              <Header />
+              <HomeContent>
+                <CarouselInfo articles={articles} />
+                <SecondSection>
+                  {!isMobile(windowSize) ? (
+                    <MapComponent />
+                  ) : (
+                    <CarouselPlaces />
+                  )}
+                  <Weather />
+                </SecondSection>
+              </HomeContent>
+            </>
+          )}
+        />
+        {articles.map((article, i) => {
+          return (
+            <Route
+              exact
+              key={i}
+              path={homeAppRouter.article(article.id)}
+              render={() => <Article article={article} />}
+            />
+          );
+        })}
+      </Switch>
+    </Router>
   );
 };
 

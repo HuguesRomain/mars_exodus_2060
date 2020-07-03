@@ -5,7 +5,7 @@ import JosefinSans from "./assets/fonts/josefinSans.ttf";
 export const GlobalStyled = createGlobalStyle`
   *{
     box-sizing: border-box;
-		transition: fill 4s ease;
+		transition: fill 1s ease;
 		:focus {
     outline: none;
 }
