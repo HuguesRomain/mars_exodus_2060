@@ -19,6 +19,61 @@ import { AppContext } from "exodus/context";
 import { useGetUser } from "exodus/services/social/social.hook";
 import { formatDistanceToNow } from "date-fns";
 
+type Props = {
+  post: Posts;
+  callBack: () => void;
+};
+
+export const PostItem = ({ callBack, post }: Props) => {
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
+  const [windowSize] = Context.windowSizeContext;
+  const User = useGetUser(post.author);
+
+  const avatarPicture = (() => {
+    return User && User.profilePicture
+      ? `https://symfony-xmt3.frb.io${User.profilePicture}`
+      : "https://pbs.twimg.com/media/EapZFw1XgAA1LEW?format=jpg&name=small";
+  })();
+
+  const PublishDate = (() => {
+    if (post.published)
+      return formatDistanceToNow(new Date(post.published), {
+        addSuffix: true,
+        includeSeconds: true,
+      });
+  })();
+
+  return (
+    <Item isDark={isDark}>
+      <UserInfo>
+        <Avatar
+          src={avatarPicture}
+          size={isMobile(windowSize) ? iconSize.l : iconSize.xl}
+        />
+        <Author isDark={isDark}>{User && User.name}</Author>
+        <Since>{PublishDate}</Since>
+      </UserInfo>
+      <PostText isDark={isDark}>{post.content}</PostText>
+      <Interact>
+        <Share />
+        <Comment quantity={post.comments?.length} />
+        <Like quantity={0} />
+      </Interact>
+      {!isMobileOnly(windowSize) && (
+        <AddComment callBack={callBack} postId={post["@id"]} />
+      )}
+      <ul>
+        {!isMobileOnly(windowSize) &&
+          post.comments &&
+          post.comments.map((value, i) => {
+            return <CommentItem key={i} comment={value} />;
+          })}
+      </ul>
+    </Item>
+  );
+};
+
 const dark = css`
   color: ${color.light.PureWhite};
 `;
@@ -67,52 +122,3 @@ const Interact = styled.div`
   justify-content: flex-end;
   padding: ${space.xs} 0;
 `;
-
-type Props = {
-  post: Posts;
-  callBack: () => void;
-};
-
-export const PostItem = ({ callBack, post }: Props) => {
-  const Context = React.useContext(AppContext);
-  const [isDark] = Context.isDarkContext;
-  const [windowSize] = Context.windowSizeContext;
-  const User = useGetUser(post.author);
-
-  const PublishDate = (() => {
-    if (post.published)
-      return formatDistanceToNow(new Date(post.published), {
-        addSuffix: true,
-        includeSeconds: true,
-      });
-  })();
-
-  return (
-    <Item isDark={isDark}>
-      <UserInfo>
-        <Avatar
-          src="https://pbs.twimg.com/media/EapZFw1XgAA1LEW?format=jpg&name=small"
-          size={isMobile(windowSize) ? iconSize.l : iconSize.xl}
-        />
-        <Author isDark={isDark}>{User && User.name}</Author>
-        <Since>{PublishDate}</Since>
-      </UserInfo>
-      <PostText isDark={isDark}>{post.content}</PostText>
-      <Interact>
-        <Share />
-        <Comment quantity={post.comments?.length} />
-        <Like quantity={0} />
-      </Interact>
-      {!isMobileOnly(windowSize) && (
-        <AddComment callBack={callBack} postId={post["@id"]} />
-      )}
-      <ul>
-        {!isMobileOnly(windowSize) &&
-          post.comments &&
-          post.comments.map((value, i) => {
-            return <CommentItem key={i} comment={value} />;
-          })}
-      </ul>
-    </Item>
-  );
-};

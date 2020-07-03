@@ -17,6 +17,7 @@ type User = {
   id?: number;
   name: string;
   posts?: Array<string>;
+  profilePicture?: string;
 };
 
 type Login = {
