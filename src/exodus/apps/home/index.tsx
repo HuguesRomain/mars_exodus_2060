@@ -7,10 +7,13 @@ import { AppContext } from "exodus/context";
 import { CarouselInfo, CarouselPlaces } from "./organismes/carousels/carousels";
 import { MapComponent } from "./organismes/map";
 import { Weather } from "./organismes/weather";
+
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { homeAppRouter } from "exodus/internal-router";
 import { Article } from "./article";
 import { ArticleType, getArticles } from "exodus/services/home";
+// import { ThemePicker } from "exodus/components/navbar/atoms/themePicker";
+
 
 const HomeApp = () => {
   const Context = React.useContext(AppContext);
@@ -32,6 +35,7 @@ const HomeApp = () => {
           path={homeAppRouter.home()}
           render={() => (
             <>
+              {/* <ThemePicker />  Maksym : à positioné dans le header comme sur la maquette */}
               <Header />
               <HomeContent>
                 <CarouselInfo articles={articles} />
