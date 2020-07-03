@@ -13,6 +13,51 @@ import { Icon } from "styles/atoms/icons";
 import { AppContext } from "exodus/context";
 import { PostBlog } from "exodus/services/social/social.hook";
 
+type Props = {
+  callBack: () => void;
+};
+
+export const SendComment = ({ callBack }: Props) => {
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
+  let [newPost, setnewPost] = useState("");
+
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    setnewPost(e.target.value);
+  };
+  const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === "Enter") HandleSubmit();
+  };
+  const HandleSubmit = () => {
+    PostBlog(newPost)
+      .then(() => callBack())
+      .catch((err) => console.log(err))
+      .finally(() => setnewPost(""));
+  };
+  return (
+    <Content isDark={isDark}>
+      <Head>
+        <Avatar
+          src="https://www.writeups.org/wp-content/uploads/Punisher-netflix-daredevil-Bernthal.jpg"
+          size={iconSize.xl}
+        />
+        <CommentInput
+          onChange={handleChange}
+          onKeyPress={handleEnter}
+          placeholder="Postez quelque chose..."
+          value={newPost}
+          type="text"
+          isDark={isDark}
+        />
+      </Head>
+      <SendAndMore>
+        <AddMedia />
+        <Icon size={iconSize.s} onClick={HandleSubmit} name={"send"} />
+      </SendAndMore>
+    </Content>
+  );
+};
+
 const Content = styled.div<{ isDark: boolean }>`
   max-width: 550px;
   border-radius: 20px;
@@ -45,47 +90,3 @@ const CommentInput = styled.input<{ isDark: boolean }>`
   background-color: ${(props) =>
     !props.isDark ? color.light.PureWhite : color.darker.BlackRussian};
 `;
-
-type Props = {
-  callBack: () => void;
-};
-
-export const SendComment = ({ callBack }: Props) => {
-  const Context = React.useContext(AppContext);
-  const [isDark] = Context.isDarkContext;
-  let [newPost, setnewPost] = useState("");
-
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setnewPost(e.target.value);
-  };
-  const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") HandleSubmit();
-  };
-  const HandleSubmit = () => {
-    PostBlog(newPost);
-    callBack();
-    setnewPost("");
-  };
-  return (
-    <Content isDark={isDark}>
-      <Head>
-        <Avatar
-          src="https://www.writeups.org/wp-content/uploads/Punisher-netflix-daredevil-Bernthal.jpg"
-          size={iconSize.xl}
-        />
-        <CommentInput
-          onChange={handleChange}
-          onKeyPress={handleEnter}
-          placeholder="Postez quelque chose..."
-          value={newPost}
-          type="text"
-          isDark={isDark}
-        />
-      </Head>
-      <SendAndMore>
-        <AddMedia />
-        <Icon size={iconSize.s} onClick={HandleSubmit} name={"send"} />
-      </SendAndMore>
-    </Content>
-  );
-};

@@ -16,15 +16,11 @@ export const getPosts = () => {
     .then((json) => ({
       date,
       posts: json["hydra:member"],
-    }))
-    .catch((err) => {
-      console.log(err);
-      throw err;
-    });
+    }));
 };
 
 export const PostBlog = (contentPost: string) => {
-  fetch("https://symfony-xmt3.frb.io/api/blog_posts", {
+  return fetch("https://symfony-xmt3.frb.io/api/blog_posts", {
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
@@ -35,7 +31,7 @@ export const PostBlog = (contentPost: string) => {
       content: contentPost,
       slug: "a-new-day",
     }),
-  }).catch((err) => console.log(err));
+  });
 };
 
 export const useGetUser = (url: string) => {
@@ -79,7 +75,7 @@ export const useGetComment = (url: string) => {
 };
 
 export const PostComment = ({ newComment, postId }: PostCommentProps) => {
-  fetch("https://symfony-xmt3.frb.io/api/comments", {
+  return fetch("https://symfony-xmt3.frb.io/api/comments", {
     headers: {
       Authorization: `Bearer ${token}`,
       "Content-Type": "application/json",
@@ -89,7 +85,5 @@ export const PostComment = ({ newComment, postId }: PostCommentProps) => {
       content: newComment,
       blogPost: postId,
     }),
-  })
-    .then((resp) => resp.json())
-    .catch((err) => console.log(err));
+  }).then((resp) => resp.json());
 };

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { SendComment } from "./organismes/SendComment";
 import { PostItem } from "./organismes/PostItem";
@@ -47,7 +47,11 @@ export const SocialPage = () => {
       })
       .catch(() => {});
 
-  fetchPosts();
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  console.log("test");
 
   return (
     <div style={{ display: "flex", minHeight: "100vh" }}>
@@ -55,12 +59,11 @@ export const SocialPage = () => {
         <div>
           <SendComment callBack={fetchPosts} />
           <ul>
-            {Posts &&
-              Posts.map((value: Posts) => {
-                return (
-                  <PostItem callBack={fetchPosts} key={value.id} post={value} />
-                );
-              })}
+            {Posts.map((value: Posts) => {
+              return (
+                <PostItem callBack={fetchPosts} key={value.id} post={value} />
+              );
+            })}
           </ul>
         </div>
       </SocialPart>

@@ -74,9 +74,12 @@ const InputComment = ({ callBack, postId }: Props) => {
     if (e.key === "Enter") HandleSubmit();
   };
   const HandleSubmit = () => {
-    PostComment({ newComment, postId });
-    if (callBack) callBack();
-    setNewComment("");
+    PostComment({ newComment, postId })
+      .then(() => {
+        if (callBack) callBack();
+      })
+      .catch((err) => console.log(err))
+      .finally(() => setNewComment(""));
   };
 
   return (
