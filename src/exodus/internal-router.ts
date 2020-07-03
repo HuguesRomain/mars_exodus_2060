@@ -7,8 +7,12 @@ export const socialApp = "/app/social/";
 export const profileApp = "/app/profile/";
 
 class AuthAppRoutes {
-  login = () => `${authApp}/login`;
-  register = () => `${authApp}/register`;
+  login = () => `${authApp}login`;
+  loginSecondStep = () => `${authApp}login/1`;
+  loginFinalStep = () => `${authApp}login/2`;
+  resetPassword = () => `${authApp}reset_password`;
+  resetPasswordSecondStep = () => `${authApp}reset_password/1`;
+  resetPasswordFinalStep = () => `${authApp}reset_password/2`;
 }
 
 class HomeAppRoutes {

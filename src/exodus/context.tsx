@@ -1,18 +1,21 @@
 import React from "react";
-import { isDarkStorage } from "styles/const";
+import { isDarkStorage, TokenStorage } from "./utils/accessStorage";
 
 type ContextType = {
   isDarkContext: [boolean, () => void];
-  tokenContext: [
-    string | null,
-    React.Dispatch<React.SetStateAction<string | null>>
-  ];
+  tokenContext: [string | null];
+  setTokenContext: [(token: string | null) => void];
+  usernameContext: [string | null];
+  setUsernameContext: [(username: string | null) => void];
   windowSizeContext: [number, React.Dispatch<React.SetStateAction<number>>];
 };
 
 const InitialState: ContextType = {
   isDarkContext: [isDarkStorage(), () => {}],
-  tokenContext: [null, () => {}],
+  tokenContext: [TokenStorage()],
+  setTokenContext: [() => {}],
+  usernameContext: [null],
+  setUsernameContext: [() => {}],
   windowSizeContext: [0, () => {}],
 };
 

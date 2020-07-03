@@ -26,15 +26,6 @@ export const color = {
   Lipstick: "#9B1D44",
 };
 
-export const isDarkStorage = () => {
-  const saveMode = JSON.parse(localStorage.getItem("dark") || "{}");
-  return saveMode === true || saveMode === false
-    ? saveMode
-    : window.matchMedia
-    ? window.matchMedia("(prefers-color-scheme: dark)").matches
-    : false;
-};
-
 export const breakPoint = {
   mobileOnly: "599px",
   tabletPortrait: "600px",
