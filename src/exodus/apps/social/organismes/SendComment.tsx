@@ -11,8 +11,8 @@ import {
 import { Avatar } from "../atoms/Avatar";
 import { Icon } from "styles/atoms/icons";
 import { AppContext } from "exodus/context";
-import { PostBlog, GetUserByName } from "exodus/services/social/social.hook";
-import { UsernameStorage } from "exodus/utils/accessStorage";
+import { PostBlog } from "exodus/services/social/social.hook";
+import { UserStorage } from "exodus/utils/accessStorage";
 
 type Props = {
   callBack: () => void;
@@ -21,7 +21,6 @@ type Props = {
 export const SendComment = ({ callBack }: Props) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
-  const [userName] = useState(UsernameStorage());
   let [newPost, setnewPost] = useState("");
   let [UserInfo, setUserInfo] = useState<UserInfoType>();
 
@@ -37,15 +36,10 @@ export const SendComment = ({ callBack }: Props) => {
       .catch((err) => console.log(err))
       .finally(() => setnewPost(""));
   };
+
   useEffect(() => {
-    if (userName) {
-      GetUserByName(userName)
-        .then((data) => {
-          setUserInfo(data);
-        })
-        .catch(() => {});
-    }
-  }, [userName]);
+    setUserInfo(UserStorage());
+  }, []);
 
   const avatarPicture = (() => {
     return UserInfo && UserInfo.profilePicture
