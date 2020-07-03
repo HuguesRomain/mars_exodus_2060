@@ -46,7 +46,11 @@ const CommentInput = styled.input<{ isDark: boolean }>`
     !props.isDark ? color.light.PureWhite : color.darker.BlackRussian};
 `;
 
-export const SendComment = () => {
+type Props = {
+  callBack: () => void;
+};
+
+export const SendComment = ({ callBack }: Props) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
   let [newPost, setnewPost] = useState("");
@@ -59,6 +63,7 @@ export const SendComment = () => {
   };
   const HandleSubmit = () => {
     PostBlog(newPost);
+    callBack();
     setnewPost("");
   };
   return (

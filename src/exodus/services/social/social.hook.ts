@@ -2,25 +2,25 @@ import { useState, useEffect, useContext } from "react";
 import { AppContext } from "exodus/context";
 
 const token =
-  "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1OTM3MjY5MjQsImV4cCI6MTU5Mzc2MjkyNCwicm9sZXMiOlsiUk9MRV9XUklURVIiXSwidXNlcm5hbWUiOiIxMzQ2NTQ3In0.cNmJFszDmBvG_TtdY93M0V093DsYM3w5XqtWjZ-9nlskOq_lWEivzeVw3f0vFUkQVIXoPwlKz5dzzAyeLve_Jw";
-export const useGetPosts = () => {
-  const [Posts, setPosts] = useState<Posts[]>([]);
-  /* const Context = useContext(AppContext);
-  const Token = Context.tokenContext; */
+  "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1OTM3Njc2NzMsImV4cCI6MTU5MzgwMzY3Mywicm9sZXMiOlsiUk9MRV9XUklURVIiXSwidXNlcm5hbWUiOiIxMzQ2NTQ3In0.Igj0ni4-EOj8Za9IGeaNiP6tXTbhUutucwJ2shBrB_LFTqfN9PrEQr6J0t-bzqRY746EIH8gqB8ZIlNTUcEq_w";
 
-  useEffect(() => {
-    fetch("https://symfony-xmt3.frb.io/api/blog_posts", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((resp) => resp.json())
-      .then((resp) => setPosts(resp))
-      .catch((err) => console.log(err));
-  }, []);
-
-  return Posts;
+export const getPosts = () => {
+  const date = Date.now();
+  return fetch("https://symfony-xmt3.frb.io/api/blog_posts", {
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-Type": "application/json",
+    },
+  })
+    .then((resp) => resp.json())
+    .then((json) => ({
+      date,
+      posts: json["hydra:member"],
+    }))
+    .catch((err) => {
+      console.log(err);
+      throw err;
+    });
 };
 
 export const PostBlog = (contentPost: string) => {

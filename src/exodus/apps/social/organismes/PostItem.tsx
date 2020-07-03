@@ -70,9 +70,10 @@ const Interact = styled.div`
 
 type Props = {
   post: Posts;
+  callBack: () => void;
 };
 
-export const PostItem = ({ post }: Props) => {
+export const PostItem = ({ callBack, post }: Props) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
   const [windowSize] = Context.windowSizeContext;
@@ -102,7 +103,9 @@ export const PostItem = ({ post }: Props) => {
         <Comment quantity={post.comments?.length} />
         <Like quantity={0} />
       </Interact>
-      {!isMobileOnly(windowSize) && <AddComment postId={post["@id"]} />}
+      {!isMobileOnly(windowSize) && (
+        <AddComment callBack={callBack} postId={post["@id"]} />
+      )}
       <ul>
         {!isMobileOnly(windowSize) &&
           post.comments &&

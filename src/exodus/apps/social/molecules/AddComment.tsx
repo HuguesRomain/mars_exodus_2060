@@ -58,10 +58,11 @@ const Send = styled.div<{ isDark: boolean }>`
 `;
 
 type Props = {
+  callBack?: () => void;
   postId?: string;
 };
 
-const InputComment = ({ postId }: Props) => {
+const InputComment = ({ callBack, postId }: Props) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
   let [newComment, setNewComment] = useState("");
@@ -74,6 +75,7 @@ const InputComment = ({ postId }: Props) => {
   };
   const HandleSubmit = () => {
     PostComment({ newComment, postId });
+    if (callBack) callBack();
     setNewComment("");
   };
 
@@ -93,7 +95,7 @@ const InputComment = ({ postId }: Props) => {
   );
 };
 
-export const AddComment = ({ postId }: Props) => {
+export const AddComment = ({ callBack, postId }: Props) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
 
@@ -105,7 +107,7 @@ export const AddComment = ({ postId }: Props) => {
         }
         size={iconSize.l}
       />
-      <InputComment postId={postId} />
+      <InputComment callBack={callBack} postId={postId} />
     </Content>
   );
 };
