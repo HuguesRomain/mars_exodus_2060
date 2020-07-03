@@ -5,7 +5,7 @@ import {
   getArticlesSection,
   SectionType,
 } from "exodus/services/home";
-import CoverImage from "../../../styles/assets/pics/hero/hero_7.jpg";
+// import CoverImage from "../../../styles/assets/pics/hero/hero_7.jpg";
 import {
   space,
   color,
@@ -110,9 +110,8 @@ export const Article = ({ article }: { article: ArticleType }) => {
                       <>
                         {isYoutubeUrl(media) ? (
                           <>
-                            {console.log(media)}
                             <DoubleMediaVideo
-                              src={"https://www.youtube.com/embed/nHxO-zmqdLM"}
+                              src={media}
                               allowFullScreen={true}
                             />
                           </>

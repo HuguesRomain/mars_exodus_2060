@@ -11,20 +11,22 @@ import { Weather } from "./organismes/weather";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { homeAppRouter } from "exodus/internal-router";
 import { Article } from "./article";
-import { ArticleType, getArticles } from "exodus/services/home";
+import {
+  ArticleType,
+  getArticles,
+  getPlaces,
+  PlaceType,
+} from "exodus/services/home";
 // import { ThemePicker } from "exodus/components/navbar/atoms/themePicker";
-
 
 const HomeApp = () => {
   const Context = React.useContext(AppContext);
   const [windowSize] = Context.windowSizeContext;
   const [articles, setArticles] = useState<ArticleType[]>([]);
+  const [places, setPlaces] = useState<PlaceType[]>([]);
   useEffect((): any => {
-    let mounted = true;
-    if (mounted) {
-      getArticles().then((resp) => setArticles(resp["hydra:member"]));
-    }
-    return () => (mounted = false);
+    getArticles().then((resp) => setArticles(resp["hydra:member"]));
+    getPlaces().then((resp) => setPlaces(resp["hydra:member"]));
   }, []);
 
   return (
@@ -43,7 +45,7 @@ const HomeApp = () => {
                   {!isMobile(windowSize) ? (
                     <MapComponent />
                   ) : (
-                    <CarouselPlaces />
+                    <CarouselPlaces places={places} />
                   )}
                   <Weather />
                 </SecondSection>
@@ -61,6 +63,16 @@ const HomeApp = () => {
             />
           );
         })}
+        {/* {places.map((place, i) => {
+          return (
+            <Route
+              exact
+              key={i}
+              path={homeAppRouter.place(place.id)}
+              render={() => <Article article={place} />}
+            />
+          );
+        })} */}
       </Switch>
     </Router>
   );

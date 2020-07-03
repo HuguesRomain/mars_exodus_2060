@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import { TimeCount } from "../atoms/TimeCount";
 import { font, fontSize, space, fontWeight } from "styles/const";
@@ -27,9 +27,9 @@ function TimeLeft(): TimeType[] {
 export const Timer = () => {
   const [time, setTime] = useState<TimeType[]>();
 
-  // setTimeout(() => {
-  //   setTime(TimeLeft());
-  // }, 1000);
+  setTimeout(() => {
+    setTime(TimeLeft());
+  }, 1000);
 
   return (
     <ContentTime>

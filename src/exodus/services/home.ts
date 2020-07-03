@@ -1,8 +1,24 @@
-type GetArticleType = {
+type GetArticlesType = {
   ["@context"]: string;
   ["@id"]: string;
   ["@type"]: string;
   ["hydra:member"]: ArticleType[];
+  ["hydra:totalItems"]: number;
+};
+
+type GetSectionType = {
+  ["@context"]: string;
+  ["@id"]: string;
+  ["@type"]: string;
+  ["hydra:member"]: SectionType[];
+  ["hydra:totalItems"]: number;
+};
+
+type GetPlacesType = {
+  ["@context"]: string;
+  ["@id"]: string;
+  ["@type"]: string;
+  ["hydra:member"]: PlaceType[];
   ["hydra:totalItems"]: number;
 };
 
@@ -12,17 +28,20 @@ export type ArticleType = {
   coverImage: string;
   id: number;
   intro: string;
-  sections: [];
+  sections: string[];
   timeToRead: string;
   title: string;
 };
 
-type getSectionType = {
-  ["@context"]: string;
+export type PlaceType = {
   ["@id"]: string;
   ["@type"]: string;
-  ["hydra:member"]: SectionType[];
-  ["hydra:totalItems"]: number;
+  Category: string;
+  coverImage: string;
+  DoubleMedia: string[];
+  PlaceName: string;
+  Text: string[];
+  id: number;
 };
 
 export type SectionType = {
@@ -37,7 +56,7 @@ export type SectionType = {
   title: string;
 };
 
-export const getArticles = (): Promise<GetArticleType> => {
+export const getArticles = (): Promise<GetArticlesType> => {
   return fetch("https://symfony-xmt3.frb.io/api/articles", {
     headers: {
       "Content-Type": "application/json",
@@ -54,8 +73,23 @@ export const getArticles = (): Promise<GetArticleType> => {
 
 export const getArticlesSection = (
   id: number | null
-): Promise<getSectionType> => {
+): Promise<GetSectionType> => {
   return fetch(`https://symfony-xmt3.frb.io/api/articles/${id}/sections`, {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "GET",
+  })
+    .then((resp) => {
+      return resp.json();
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+
+export const getPlaces = (): Promise<GetPlacesType> => {
+  return fetch("https://symfony-xmt3.frb.io/api/lieus", {
     headers: {
       "Content-Type": "application/json",
     },

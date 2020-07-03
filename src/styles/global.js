@@ -62,6 +62,16 @@ table {
 	border-spacing: 0;
 }
 
+@keyframes pulse {
+ 0% {
+	 opacity: 0.5;
+ }
+ 100%{
+	 transform: scale(3);
+	 opacity: 0;
+ }
+}
+
 @font-face {
   font-family: "Josefin";
 	font-style: italic;

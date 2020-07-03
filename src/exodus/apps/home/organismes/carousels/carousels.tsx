@@ -9,7 +9,7 @@ import "./carousel.css";
 import { CarouselPlacesItems } from "../../molecules/itemCarouselPlaces";
 import { HomeTitle } from "../../globalStyle";
 import { AppContext } from "exodus/context";
-import { ArticleType } from "exodus/services/home";
+import { ArticleType, PlaceType } from "exodus/services/home";
 
 const CarouselContent = styled.div`
   margin-bottom: ${space.l};
@@ -77,7 +77,7 @@ export const CarouselInfo = ({ articles }: { articles: ArticleType[] }) => {
   );
 };
 
-export const CarouselPlaces = () => {
+export const CarouselPlaces = ({ places }: { places: PlaceType[] }) => {
   const CustomSlider = useRef<HTMLDivElement>(null);
 
   const Context = React.useContext(AppContext);
@@ -92,12 +92,10 @@ export const CarouselPlaces = () => {
         {...settings}
         ref={CustomSlider}
       >
-        <CarouselPlacesItems />
-        <CarouselPlacesItems />
-        <CarouselPlacesItems />
-        <CarouselPlacesItems />
-        <CarouselPlacesItems />
-        <CarouselPlacesItems />
+        {console.log(places)}
+        {places.map((place, i) => {
+          return <CarouselPlacesItems place={place} />;
+        })}
       </Slider>
     </CarouselContent>
   );
