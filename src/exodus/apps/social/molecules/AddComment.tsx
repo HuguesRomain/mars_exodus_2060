@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, KeyboardEvent } from "react";
+import React, { useState, ChangeEvent, KeyboardEvent, useEffect } from "react";
 import styled from "styled-components";
 import { Avatar } from "../atoms/Avatar";
 import { iconSize, color, fontSize, space, transitionTime } from "styles/const";
@@ -6,6 +6,7 @@ import { rem } from "polished";
 import { Icon } from "styles/atoms/icons";
 import { AppContext } from "exodus/context";
 import { PostComment } from "exodus/services/social/social.hook";
+import { UserStorage } from "exodus/utils/accessStorage";
 
 type Props = {
   callBack?: () => void;
@@ -51,15 +52,21 @@ const InputComment = ({ callBack, postId }: Props) => {
 export const AddComment = ({ callBack, postId }: Props) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
+  let [UserInfo, setUserInfo] = useState<UserInfoType>();
+
+  const avatarPicture = (() => {
+    return UserInfo && UserInfo.profilePicture
+      ? `https://symfony-xmt3.frb.io${UserInfo.profilePicture}`
+      : "https://www.writeups.org/wp-content/uploads/Punisher-netflix-daredevil-Bernthal.jpg";
+  })();
+
+  useEffect(() => {
+    setUserInfo(UserStorage());
+  }, []);
 
   return (
     <Content isDark={isDark}>
-      <Avatar
-        src={
-          "https://www.writeups.org/wp-content/uploads/Punisher-netflix-daredevil-Bernthal.jpg"
-        }
-        size={iconSize.l}
-      />
+      <Avatar src={avatarPicture} size={iconSize.l} />
       <InputComment callBack={callBack} postId={postId} />
     </Content>
   );
