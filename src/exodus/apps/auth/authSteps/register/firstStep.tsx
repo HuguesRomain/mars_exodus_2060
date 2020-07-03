@@ -14,6 +14,7 @@ export const RegisterFirstStep = () => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
   const [setToken] = Context.setTokenContext;
+  const [setUsername] = Context.setUsernameContext;
 
   const [connectionData, setConnectionData] = useState<userConnectionData>({
     username: "",
@@ -29,11 +30,13 @@ export const RegisterFirstStep = () => {
       if (connectionData.password === "") setPasswordError(true);
       return;
     }
+
     connect(connectionData).then((resp) => {
       if (resp.code === 401) {
         setGobalerror(true);
       } else {
         setToken(resp.token);
+        setUsername(connectionData.username);
       }
     });
   };
