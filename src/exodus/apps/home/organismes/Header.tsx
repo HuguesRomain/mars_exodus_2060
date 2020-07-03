@@ -18,56 +18,42 @@ import {
 import { Button } from "exodus/components/atoms/button";
 import { authAppRouter } from "exodus/internal-router";
 import { rem } from "polished";
-
+const paramParallax = {
+  center: false,
+  wrapper: null,
+  round: true,
+  vertical: true,
+  horizontal: false,
+};
 export const Header = () => {
   useEffect(() => {
     new Rellax(".title", {
       speed: -8,
-      center: false,
-      wrapper: null,
-      round: true,
-      vertical: true,
-      horizontal: false,
+      paramParallax,
+    });
+    new Rellax(".button", {
+      speed: -7,
+      paramParallax,
     });
     new Rellax(".first", {
       speed: -1,
-      center: false,
-      wrapper: null,
-      round: true,
-      vertical: true,
-      horizontal: false,
+      paramParallax,
     });
     new Rellax(".two", {
       speed: -5,
-      center: false,
-      wrapper: null,
-      round: true,
-      vertical: true,
-      horizontal: false,
+      paramParallax,
     });
     new Rellax(".three", {
       speed: -7,
-      center: false,
-      wrapper: null,
-      round: true,
-      vertical: true,
-      horizontal: false,
+      paramParallax,
     });
     new Rellax(".six", {
       speed: -9,
-      center: false,
-      wrapper: null,
-      round: true,
-      vertical: true,
-      horizontal: false,
+      paramParallax,
     });
     new Rellax(".seven", {
       speed: -9,
-      center: false,
-      wrapper: null,
-      round: true,
-      vertical: true,
-      horizontal: false,
+      paramParallax,
     });
   }, []);
   return (
@@ -75,6 +61,8 @@ export const Header = () => {
       <TextContent className="title">
         <Title>MARS EXODUS 2060</Title>
         <Timer />
+      </TextContent>
+      <ButtonContainer className="button">
         <Button
           onClick={() => {
             authAppRouter.login();
@@ -87,7 +75,7 @@ export const Header = () => {
             S’enregistrer
           </p>
         </Button>
-      </TextContent>
+      </ButtonContainer>
       <FistImage className="first" src={first} alt="" />
       <SecondImage className="two" src={second} alt="" />
       <ThirdImage className="three" src={third} alt="" />
@@ -97,7 +85,15 @@ export const Header = () => {
   );
 };
 
+const ButtonContainer = styled.div`
+  position: relative;
+  z-index: 1;
+`;
+
 const ButtonCustom = css`
+  position: relative;
+  margin-right: auto;
+  margin-left: auto;
   flex-direction: row-reverse;
   margin-top: ${rem(30)};
   width: ${rem(134)};
@@ -120,13 +116,13 @@ const ContentHeader = styled.div`
 `;
 
 const TextContent = styled.div`
+  margin-top: 7%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   color: white;
-  height: 100%;
   align-items: center;
-  z-index: 10;
+  position: relative;
 `;
 
 const Title = styled.h1`
@@ -153,7 +149,6 @@ const Title = styled.h1`
 const FistImage = styled.img`
   object-fit: cover;
   position: absolute;
-  z-index: 0;
   width: 100%;
   bottom: 0;
   @media (max-width: 650px) {
@@ -163,7 +158,7 @@ const FistImage = styled.img`
   @media (max-width: 450px) {
     width: 190%;
     left: -80px;
-    bottom: -20px;
+    bottom: 0;
   }
 `;
 
@@ -178,9 +173,6 @@ const SecondImage = styled.img`
     left: -80px;
   }
   @media (max-width: 450px) {
-    width: 190%;
-    left: -80px;
-    bottom: -20px;
     display: none;
   }
 `;
@@ -196,9 +188,6 @@ const ThirdImage = styled.img`
     left: -80px;
   }
   @media (max-width: 450px) {
-    width: 190%;
-    left: -80px;
-    bottom: -20px;
     display: none;
   }
 `;
@@ -214,9 +203,6 @@ const SixImage = styled.img`
     left: -80px;
   }
   @media (max-width: 450px) {
-    width: 190%;
-    left: -80px;
-    bottom: -20px;
     display: none;
   }
 `;
@@ -234,6 +220,6 @@ const SevenImage = styled.img`
   @media (max-width: 450px) {
     width: 190%;
     left: -80px;
-    bottom: -20px;
+    bottom: 0;
   }
 `;
