@@ -15,12 +15,14 @@ export const Article = ({ article }: { article: ArticleType }) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
   const [sections, setSections] = useState<SectionType[]>([]);
+
   useEffect(() => {
     getArticlesSection(article.id).then((resp) => {
       console.log(resp);
       setSections(resp["hydra:member"]);
     });
   }, [article.id]);
+
   return (
     <div
       style={{
@@ -30,26 +32,70 @@ export const Article = ({ article }: { article: ArticleType }) => {
       }}
     >
       {console.log(sections)}
-      <Header />
-      <Icon name={"backarrow"} />
+      <Header>
+        <HeaderContent>
+          <div
+            style={{
+              fontSize: fontSize.m,
+              color: color.light.PureWhite,
+              display: "flex",
+              alignItems: "center",
+            }}
+          >
+            <Icon
+              style={{ marginRight: space.xs }}
+              name={"backarrow"}
+              color={color.light.PureWhite}
+            />
+            Retour
+          </div>
+        </HeaderContent>
+      </Header>
       <Sections>
-        {sections.map((section) => {
+        {sections.map((section, i) => {
           return (
-            <>
+            <div key={i}>
               <Title>
                 <TitleText isDark={isDark}>{section.title}</TitleText>
                 <TitleDecoration />
               </Title>
-              {section.text.map((text) => {
-                return <Text isDark={isDark}>{text}</Text>;
+              {section.text.map((text, i) => {
+                return (
+                  <Text key={i} isDark={isDark}>
+                    {text}
+                  </Text>
+                );
               })}
-            </>
+            </div>
           );
         })}
       </Sections>
     </div>
   );
 };
+
+const TimeToRead = styled.div`
+  margin-top: ${space.l};
+  display: flex;
+`;
+
+const TitleInfo = styled.div`
+  display: flex;
+  flex-directionm: column;
+`;
+
+const HeaderFoooter = styled.div`
+  display: flex;
+`;
+
+const HeaderContent = styled.div`
+  overflow: hidden;
+  margin: ${space.l} 0 0 ${space.s};
+
+  @media (min-width: 550px) {
+    margin: ${space.l} 0 0 ${space.l};
+  }
+`;
 
 const Sections = styled.div`
   margin: ${space.l} 0 0 ${space.s};

@@ -65,6 +65,8 @@ export type IconProps = {
   secondColor?: string | null;
   size?: number | string;
   onClick?: (e: any) => void;
+  onMouseEnter?: (e: any) => void;
+  onMouseLeave?: (e: any) => void;
   style?: CSSProperties;
 };
 

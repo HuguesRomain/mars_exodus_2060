@@ -45,11 +45,9 @@ function TimeLeft(): TimeType[] {
 export const Timer = () => {
   const [time, setTime] = useState<TimeType[]>();
 
-  useEffect(() => {
-    setTimeout(() => {
-      setTime(TimeLeft());
-    }, 1000);
-  }, []);
+  // setTimeout(() => {
+  //   setTime(TimeLeft());
+  // }, 1000);
 
   return (
     <ContentTime>

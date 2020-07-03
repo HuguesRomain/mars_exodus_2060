@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import MapImg from "../../../../styles/assets/pics/marsMap.jpg";
 import { rem } from "polished";
-import { space, breakPoint } from "styles/const";
+import { space, breakPoint, transitionTime } from "styles/const";
 import { HomeTitle } from "../globalStyle";
 import { AppContext } from "exodus/context";
 import { Icon } from "styles/atoms/icons";
@@ -29,10 +29,13 @@ export const MapComponent = () => {
       {Places.map((place, i) => {
         return (
           <Icon
+            onMouseEnter={() => {}}
             key={i}
             style={{
               position: "absolute",
               transform: place.position,
+              opacity: "0.5",
+              transition: transitionTime,
             }}
             name={"step"}
           />
