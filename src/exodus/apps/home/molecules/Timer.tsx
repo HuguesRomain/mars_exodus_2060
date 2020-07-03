@@ -3,24 +3,6 @@ import styled from "styled-components";
 import { TimeCount } from "../atoms/TimeCount";
 import { font, fontSize, space, fontWeight } from "styles/const";
 
-const ContentTime = styled.div`
-  text-align: center;
-  z-index: 100;
-`;
-
-const CountTitel = styled.p`
-  font-family: ${font.avenir};
-  font-size: ${fontSize.l};
-  padding: ${space.xs};
-  font-weight: ${fontWeight.avenir.m};
-`;
-
-const Counter = styled.div`
-  display: flex;
-  text-align: center;
-  justify-content: center;
-`;
-
 type TimeType = {
   content: number;
   label: string;
@@ -61,3 +43,24 @@ export const Timer = () => {
     </ContentTime>
   );
 };
+
+const ContentTime = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  z-index: 100;
+`;
+
+const CountTitel = styled.p`
+  font-family: ${font.avenir};
+  font-size: ${fontSize.l};
+  padding: ${space.xs};
+  font-weight: ${fontWeight.avenir.m};
+`;
+
+const Counter = styled.div`
+  display: flex;
+  text-align: center;
+  justify-content: center;
+`;

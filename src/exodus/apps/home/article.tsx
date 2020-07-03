@@ -5,11 +5,27 @@ import {
   getArticlesSection,
   SectionType,
 } from "exodus/services/home";
-import CoverImage from "../../../assets/images/hero_7.jpg";
-import { space, color, transitionTime, font, fontSize } from "styles/const";
+import CoverImage from "../../../styles/assets/pics/hero/hero_7.jpg";
+import {
+  space,
+  color,
+  transitionTime,
+  font,
+  fontSize,
+  iconSize,
+} from "styles/const";
 import { AppContext } from "exodus/context";
 import { rem } from "polished";
 import { Icon } from "styles/atoms/icons";
+
+const isYoutubeUrl = (url: string) => {
+  var p: RegExp = /^(?:https?:\/\/)?(?:m\.|www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+  if (url.match(p)) {
+    // @ts-ignore
+    return url.match(p)[1];
+  }
+  return false;
+};
 
 export const Article = ({ article }: { article: ArticleType }) => {
   const Context = React.useContext(AppContext);
@@ -32,15 +48,13 @@ export const Article = ({ article }: { article: ArticleType }) => {
       }}
     >
       {console.log(sections)}
-      <Header>
+      <Header img={`https://symfony-xmt3.frb.io${article.coverImage}`}>
         <HeaderContent>
-          <div
-            style={{
-              fontSize: fontSize.m,
-              color: color.light.PureWhite,
-              display: "flex",
-              alignItems: "center",
+          <ContentBackButton
+            onClick={() => {
+              window.history.back();
             }}
+            style={{}}
           >
             <Icon
               style={{ marginRight: space.xs }}
@@ -48,7 +62,25 @@ export const Article = ({ article }: { article: ArticleType }) => {
               color={color.light.PureWhite}
             />
             Retour
-          </div>
+          </ContentBackButton>
+          <HeaderFoooter>
+            <TitleInfo>
+              <TitleText style={{ fontSize: fontSize.xxl }} isDark={isDark}>
+                {article.title}
+              </TitleText>
+              <Text isDark={isDark}>{article.intro}</Text>
+              <TimeToRead>
+                <Icon
+                  size={iconSize.s}
+                  color={color.light.PureWhite}
+                  name={"clock"}
+                />
+                <Text style={{ margin: `0 0 0 ${space.xs}` }} isDark={isDark}>
+                  Temps de lecture : 3 min
+                </Text>
+              </TimeToRead>
+            </TitleInfo>
+          </HeaderFoooter>
         </HeaderContent>
       </Header>
       <Sections>
@@ -59,6 +91,11 @@ export const Article = ({ article }: { article: ArticleType }) => {
                 <TitleText isDark={isDark}>{section.title}</TitleText>
                 <TitleDecoration />
               </Title>
+              {section.image.map((img, i) => {
+                return (
+                  <Image key={i} src={`https://symfony-xmt3.frb.io${img}`} />
+                );
+              })}
               {section.text.map((text, i) => {
                 return (
                   <Text key={i} isDark={isDark}>
@@ -66,6 +103,29 @@ export const Article = ({ article }: { article: ArticleType }) => {
                   </Text>
                 );
               })}
+              {section.doubleMedia.length > 0 && (
+                <DoubleMedia>
+                  {section.doubleMedia.map((media) => {
+                    return (
+                      <>
+                        {isYoutubeUrl(media) ? (
+                          <>
+                            {console.log(media)}
+                            <DoubleMediaVideo
+                              src={"https://www.youtube.com/embed/nHxO-zmqdLM"}
+                              allowFullScreen={true}
+                            />
+                          </>
+                        ) : (
+                          <DoubleMediaPhoto
+                            src={`https://symfony-xmt3.frb.io${media}`}
+                          />
+                        )}
+                      </>
+                    );
+                  })}
+                </DoubleMedia>
+              )}
             </div>
           );
         })}
@@ -75,20 +135,67 @@ export const Article = ({ article }: { article: ArticleType }) => {
 };
 
 const TimeToRead = styled.div`
-  margin-top: ${space.l};
   display: flex;
+  align-items: center;
+`;
+
+const DoubleMedia = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin: ${space.m} 0;
+
+  @media (max-width: 550px) {
+    height: ${rem(370)};
+    flex-direction: column;
+  }
+`;
+
+const DoubleMediaVideo = styled.iframe`
+  width: 48%;
+  border-radius: 10px;
+
+  @media (max-width: 550px) {
+    width: 100%;
+  }
+`;
+
+const DoubleMediaPhoto = styled.img`
+  width: 48%;
+  border-radius: 10px;
+
+  @media (max-width: 550px) {
+    width: 100%;
+  }
+`;
+
+const Image = styled.img`
+  width: 100%;
+  border-radius: 10px;
+  margin-top: ${space.m};
 `;
 
 const TitleInfo = styled.div`
   display: flex;
-  flex-directionm: column;
+  flex-direction: column;
 `;
 
 const HeaderFoooter = styled.div`
   display: flex;
 `;
 
+const ContentBackButton = styled.div`
+  font-size: ${fontSize.m};
+  color: ${color.light.PureWhite};
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+`;
+
 const HeaderContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 80%;
   overflow: hidden;
   margin: ${space.l} 0 0 ${space.s};
 
@@ -102,7 +209,7 @@ const Sections = styled.div`
   width: 50%;
   @media (max-width: 550px) {
     margin: 0;
-    padding: ${space.l} ${space.xs};
+    padding: ${space.l} ${space.s};
     width: 100%;
   }
 `;
@@ -136,10 +243,10 @@ const TitleText = styled.h2<{ isDark: boolean }>`
   font-size: ${fontSize.xl};
 `;
 
-const Header = styled.div`
-  background-image: url(${CoverImage});
+const Header = styled.div<{ img: string }>`
+  background-image: ${(props) => `url(${props.img})`};
   background-size: cover;
   width: 100%;
   height: 60vh;
-  border-radius: 0 0 20px 0;
+  border-bottom-right-radius: 40px;
 `;

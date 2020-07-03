@@ -2,7 +2,8 @@ import React from "react";
 import styled, { css, FlattenSimpleInterpolation } from "styled-components";
 import { Icon, IconName } from "styles/atoms/icons";
 import { rem } from "polished";
-import { color as globalColors } from "styles/const";
+import { color as globalColors, transitionTime } from "styles/const";
+import { AppContext } from "exodus/context";
 
 const primary = css`
   background-color: ${globalColors.SunsetOrange};
@@ -23,8 +24,23 @@ const secondary = css`
   }
 `;
 
-const PrecomputeButton = styled.div<ButtonProps>`
-  ${(props) => (props.type === "secondary" ? secondary : primary)}
+const darkSecondary = css`
+  border: solid 1px ${globalColors.light.PureWhite};
+  color: ${globalColors.light.PureWhite};
+
+  :hover {
+    color: ${globalColors.darker.LuckyPoint};
+    background-color: ${globalColors.light.PureWhite};
+  }
+`;
+
+const PrecomputeButton = styled.div<ButtonPropsStyled>`
+  ${(props) =>
+    props.type === "secondary"
+      ? !props.isDark
+        ? secondary
+        : darkSecondary
+      : primary}
   display: flex;
   justify-content: center;
   align-items: center;
@@ -33,7 +49,8 @@ const PrecomputeButton = styled.div<ButtonProps>`
   min-width: ${rem(45)};
   padding: 0 ${rem(10)};
   cursor: pointer;
-  ${(props) => props.styled && props.styled}
+  ${(props) => props.styled && props.styled};
+  transition: ${transitionTime};
 `;
 
 type ButtonProps = {
@@ -43,20 +60,28 @@ type ButtonProps = {
   styled?: FlattenSimpleInterpolation;
   style?: React.CSSProperties;
   iconName?: IconName;
+  iconSize?: number;
   color?: string;
   href?: string;
 };
+
+interface ButtonPropsStyled extends ButtonProps {
+  isDark: boolean;
+}
 
 export const Button = ({
   type = "primary",
   children,
   iconName,
+  iconSize,
   color,
   onClick,
   href,
   styled,
   style,
 }: ButtonProps) => {
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
   return (
     <PrecomputeButton
       type={type}
@@ -65,6 +90,7 @@ export const Button = ({
       href={href}
       style={style}
       styled={styled}
+      isDark={isDark}
     >
       {children && children}
       {iconName && (
@@ -72,11 +98,13 @@ export const Button = ({
           color={
             type === "primary"
               ? globalColors.light.PureWhite
-              : globalColors.darker.LuckyPoint
+              : !isDark
+              ? globalColors.darker.LuckyPoint
+              : globalColors.light.PureWhite
           }
           strokeColor={globalColors.light.PureWhite}
           name={iconName}
-          size={14}
+          size={iconSize}
         />
       )}
     </PrecomputeButton>

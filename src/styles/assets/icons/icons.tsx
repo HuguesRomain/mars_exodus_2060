@@ -554,7 +554,7 @@ export const Back = ({ size, style, strokeColor }: IconPropType) => {
       width={size ? size : "24"}
       height={size ? size : "24"}
       style={style && style}
-      stroke={strokeColor ? strokeColor : "#848897"}
+      stroke={strokeColor ? strokeColor : "#C1C6D7"}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -575,7 +575,7 @@ export const Forward = ({ size, style, color }: IconPropType) => {
       width={size ? size : "24"}
       height={size ? size : "24"}
       style={style && style}
-      stroke={color ? color : "white"}
+      stroke={color ? color : "#C1C6D7"}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -590,7 +590,7 @@ export const Forward = ({ size, style, color }: IconPropType) => {
   );
 };
 
-export const BackArrow = ({ size, style, color }: IconPropType) => {
+export const BackArrow = ({ color, size, style }: IconPropType) => {
   return (
     <svg
       width={size ? size : "24"}
@@ -602,22 +602,22 @@ export const BackArrow = ({ size, style, color }: IconPropType) => {
     >
       <path
         d="M9.27386 5.00002L2.55957 11.7143L9.27386 18.4286"
-        stroke={color ? color : "#848897"}
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        stroke={color ? color : "#C1C6D7"}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M21.5835 11.7144L2.55969 11.7144"
-        stroke={color ? color : "#848897"}
-        stroke-width="2"
-        stroke-linecap="round"
+        stroke={color ? color : "#C1C6D7"}
+        strokeWidth="2"
+        strokeLinecap="round"
       />
     </svg>
   );
 };
 
-export const ForwardArrow = ({ size, style, color }: IconPropType) => {
+export const ForwardArrow = ({ color, size, style }: IconPropType) => {
   return (
     <svg
       width={size ? size : "24"}
@@ -629,16 +629,16 @@ export const ForwardArrow = ({ size, style, color }: IconPropType) => {
     >
       <path
         d="M14.8687 5.00002L21.583 11.7143L14.8687 18.4286"
-        stroke={color ? color : "#848897"}
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
+        stroke={color ? color : "#C1C6D7"}
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
       />
       <path
         d="M2.55908 11.7144L21.5829 11.7144"
-        stroke={color ? color : "#848897"}
-        stroke-width="2"
-        stroke-linecap="round"
+        stroke={color ? color : "#C1C6D7"}
+        strokeWidth="2"
+        strokeLinecap="round"
       />
     </svg>
   );
@@ -871,6 +871,37 @@ export const Step = ({ size, style }: IconPropType) => {
     >
       <circle opacity="0.2" cx="12" cy="12" r="12" fill="#FC5252" />
       <circle cx="12" cy="12" r="6" fill="#FC5252" />
+    </svg>
+  );
+};
+
+export const Ok = ({ size, style }: IconPropType) => {
+  return (
+    <svg
+      width={size ? size : "24"}
+      height={size ? size : "24"}
+      style={style && style}
+      viewBox="0 0 48 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <circle opacity="0.4" cx="24" cy="24" r="24" fill="#FC5252" />
+      <g clipPath="url(#clip0)">
+        <path
+          d="M21.19 32.9656C20.9609 33.196 20.6484 33.3246 20.3237 33.3246C19.999 33.3246 19.6864 33.196 19.4574 32.9656L12.5385 26.0456C11.8205 25.3276 11.8205 24.1633 12.5385 23.4466L13.4049 22.58C14.1231 21.862 15.2861 21.862 16.0041 22.58L20.3237 26.8999L31.9958 15.2275C32.7141 14.5095 33.8782 14.5095 34.5951 15.2275L35.4614 16.094C36.1795 16.8121 36.1795 17.9762 35.4614 18.6931L21.19 32.9656Z"
+          fill="#FC5252"
+        />
+      </g>
+      <defs>
+        <clipPath id="clip0">
+          <rect
+            width="24"
+            height="24"
+            fill="white"
+            transform="translate(12 12)"
+          />
+        </clipPath>
+      </defs>
     </svg>
   );
 };

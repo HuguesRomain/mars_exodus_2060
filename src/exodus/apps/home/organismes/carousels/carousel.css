@@ -3,7 +3,7 @@
 
 .slick-slider {
   overflow-y: hidden;
-  width: 120%;
+  width: 130%;
 }
 
 .slick-slider-places {
@@ -31,7 +31,7 @@
 @media (min-width: 701px) {
   .slick-slider {
     overflow-y: hidden;
-    width: 1#$0%;
+    width: 140%;
   }
 }
 

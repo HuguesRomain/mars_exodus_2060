@@ -9,7 +9,6 @@ export const GlobalStyled = createGlobalStyle`
 		:focus {
     outline: none;
 }
-  }
 // Todo : init Normalize()
 
   a {
@@ -35,6 +34,8 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	font-family: Montserrat;
+  }
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
@@ -71,5 +72,4 @@ table {
   font-family: "Josefin Sans";
   src: url(${JosefinSans}) format("truetype");
 }
-
 `;

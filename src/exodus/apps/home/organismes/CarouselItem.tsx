@@ -21,27 +21,39 @@ export const CarouselItem = ({ article }: { article: ArticleType }) => {
   const [isDark] = Context.isDarkContext;
 
   return (
-    <ItemContent isDark={isDark}>
-      <ImageArticle src={article.coverImage} alt="Article Image" />
-      <div>
-        <TitleArticle isDark={isDark}>{article.title}</TitleArticle>
-        <TimeRead timeToRead={article.timeToRead} />
-        <DescriptionArticle isDark={isDark}>{article.intro}</DescriptionArticle>
-        <Link to={homeAppRouter.article(article.id)}>
-          <Button
-            onClick={() => {
-              homeAppRouter.article(article.id);
-            }}
-            styled={ButtonStyled}
-            iconName={"forward"}
-          >
-            <ButtonText>Lire l'article</ButtonText>
-          </Button>
-        </Link>
-      </div>
-    </ItemContent>
+    <Card>
+      <ItemContent isDark={isDark}>
+        <ImageArticle
+          src={`https://symfony-xmt3.frb.io${article.coverImage}`}
+          alt="Article Image"
+        />
+        <div>
+          <TitleArticle isDark={isDark}>{article.title}</TitleArticle>
+          <TimeRead timeToRead={article.timeToRead} />
+          <DescriptionArticle isDark={isDark}>
+            {article.intro}
+          </DescriptionArticle>
+        </div>
+      </ItemContent>
+      <Link to={homeAppRouter.article(article.id)}>
+        <Button
+          onClick={() => {
+            homeAppRouter.article(article.id);
+          }}
+          styled={ButtonStyled}
+          iconName={"forward"}
+        >
+          <ButtonText>Lire l'article</ButtonText>
+        </Button>
+      </Link>
+    </Card>
   );
 };
+
+const Card = styled.div`
+  display: flex;
+  align-items: flex-end;
+`;
 
 const ItemContent = styled.div<{ isDark: boolean }>`
   display: flex;
@@ -109,10 +121,9 @@ const ButtonText = styled.span`
 `;
 
 const ButtonStyled = css`
-  position: absolute;
-  margin-left: ${rem(110)};
-  margin-right: ${space.s};
+  margin: 0 0 ${rem(20)} ${rem(-90)};
   @media (max-width: ${breakPoint.tabletLandscape}) {
-    margin-left: ${rem(130)};
+    width: ${rem(30)};
+    margin: 0 0 ${rem(20)} ${rem(-30)};
   }
 `;

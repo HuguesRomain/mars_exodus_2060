@@ -25,6 +25,7 @@ import {
   Check,
   Clock,
   Step,
+  Ok,
 } from "../assets/icons/icons";
 
 export class IconsMapping {
@@ -53,6 +54,7 @@ export class IconsMapping {
   check = Check;
   clock = Clock;
   step = Step;
+  ok = Ok;
 }
 
 export type IconName = keyof IconsMapping;

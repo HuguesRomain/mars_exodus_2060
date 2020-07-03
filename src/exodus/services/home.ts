@@ -52,21 +52,6 @@ export const getArticles = (): Promise<GetArticleType> => {
     });
 };
 
-export const getArticlesImage = (fetchedImage: any) => {
-  return fetch(`https://symfony-xmt3.frb.io${fetchedImage}`, {
-    headers: {
-      "Content-Type": "application/image/jpeg",
-    },
-    method: "GET",
-  })
-    .then((resp) => {
-      return resp.blob();
-    })
-    .catch((err) => {
-      return err;
-    });
-};
-
 export const getArticlesSection = (
   id: number | null
 ): Promise<getSectionType> => {
