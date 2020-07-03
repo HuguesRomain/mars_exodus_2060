@@ -14,7 +14,6 @@ export const RegisterFirstStep = () => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
   const [setToken] = Context.setTokenContext;
-  const [setUsername] = Context.setUsernameContext;
 
   const [connectionData, setConnectionData] = useState<userConnectionData>({
     username: "",
@@ -36,9 +35,9 @@ export const RegisterFirstStep = () => {
         setGobalerror(true);
       } else {
         setToken(resp.token);
-        setUsername(connectionData.username);
       }
     });
+    localStorage.setItem("username", JSON.stringify(connectionData.username));
   };
 
   return (

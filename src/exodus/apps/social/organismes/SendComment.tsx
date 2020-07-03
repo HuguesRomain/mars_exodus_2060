@@ -12,6 +12,7 @@ import { Avatar } from "../atoms/Avatar";
 import { Icon } from "styles/atoms/icons";
 import { AppContext } from "exodus/context";
 import { PostBlog, GetUserByName } from "exodus/services/social/social.hook";
+import { UsernameStorage } from "exodus/utils/accessStorage";
 
 type Props = {
   callBack: () => void;
@@ -20,7 +21,7 @@ type Props = {
 export const SendComment = ({ callBack }: Props) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
-  const [userName] = Context.usernameContext;
+  const [userName] = useState(UsernameStorage());
   let [newPost, setnewPost] = useState("");
   let [UserInfo, setUserInfo] = useState<UserInfoType>();
 
