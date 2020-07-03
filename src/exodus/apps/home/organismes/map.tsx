@@ -26,9 +26,10 @@ export const MapComponent = () => {
   return (
     <MapWrapper>
       <HomeTitle isDark={isDark}>Lieux à visiter</HomeTitle>
-      {Places.map((place) => {
+      {Places.map((place, i) => {
         return (
           <Icon
+            key={i}
             style={{
               position: "absolute",
               transform: place.position,

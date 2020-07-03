@@ -1,13 +1,23 @@
 import React, { useEffect } from "react";
 import Rellax from "rellax";
 import { Timer } from "../molecules/Timer";
-import first from "../../../../assets/images/hero_1.png";
-import second from "../../../../assets/images/hero_2.png";
-import third from "../../../../assets/images/hero_3.png";
-import six from "../../../../assets/images/hero_6.png";
-import back from "../../../../assets/images/hero_7.jpg";
-import styled from "styled-components";
-import { font, titeFontsize, breakPoint } from "styles/const";
+import first from "../../../../styles/assets/pics/hero/hero_1.png";
+import second from "../../../../styles/assets/pics/hero/hero_2.png";
+import third from "../../../../styles/assets/pics/hero/hero_3.png";
+import six from "../../../../styles/assets/pics/hero/hero_6.png";
+import back from "../../../../styles/assets/pics/hero/hero_7.jpg";
+import styled, { css } from "styled-components";
+import {
+  font,
+  fontSize,
+  titeFontsize,
+  breakPoint,
+  color,
+  space,
+} from "styles/const";
+import { Button } from "exodus/components/atoms/button";
+import { authAppRouter } from "exodus/internal-router";
+import { rem } from "polished";
 
 export const Header = () => {
   useEffect(() => {
@@ -65,6 +75,18 @@ export const Header = () => {
       <TextContent className="title">
         <Title>MARS EXODUS 2060</Title>
         <Timer />
+        <Button
+          onClick={() => {
+            authAppRouter.login();
+          }}
+          color={color.light.PureWhite}
+          iconName={"ticket"}
+          styled={ButtonCustom}
+        >
+          <p style={{ marginLeft: space.xs, fontSize: fontSize.s }}>
+            S’enregistrer
+          </p>
+        </Button>
       </TextContent>
       <FistImage className="first" src={first} alt="" />
       <SecondImage className="two" src={second} alt="" />
@@ -74,6 +96,13 @@ export const Header = () => {
     </ContentHeader>
   );
 };
+
+const ButtonCustom = css`
+  flex-direction: row-reverse;
+  margin-top: ${rem(30)};
+  width: ${rem(134)};
+  z-index: 1000000;
+`;
 
 const ContentHeader = styled.div`
   position: relative;

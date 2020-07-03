@@ -20,33 +20,43 @@ import { isMobile } from "exodus/utils/checkWindowSize";
 import { MobileHeader } from "exodus/components/molecules/mobileHeader";
 import { NavBarContainer } from "exodus/components/navbar/index";
 import { authApp } from "./internal-router";
+import { TokenStorage } from "./utils/accessStorage";
 
-const AppWrapper = styled.div`
+const AppWrapper = styled.div<{ token: string | null }>`
   padding: ${rem(69)} 0 ${rem(90)} 0;
   @media (min-width: ${breakPoint.tabletPortrait}) {
-    padding: 0 0 0 ${rem(80)};
+    padding: ${(props) => (props.token ? `0 0 0 ${rem(80)}` : `0`)};
   }
 `;
 
 const currentPath = window.document.location.pathname;
 
 if (currentPath === "/") {
-  window.history.replaceState(null, "", "/app/home");
+  window.history.replaceState(null, "", homeAppRouter.home());
 }
 
 const AppWithContext = () => {
-  return (
+  const [tokenWithoutContext] = React.useState<string | null>(TokenStorage());
+
+  const isValidPath = () => {
+    return (
+      currentPath === authAppRouter.login() ||
+      currentPath === homeAppRouter.home()
+    );
+  };
+
+  if (!tokenWithoutContext) {
+    !isValidPath() &&
+      window.history.replaceState(null, "", homeAppRouter.home());
+  }
+
+  return tokenWithoutContext ? (
     <AppFrame>
       <MobileHeader />
       {!window.location.pathname.includes(authApp) && <NavBarContainer />}
-      <AppWrapper>
+      <AppWrapper token={tokenWithoutContext}>
         <Router>
           <Switch>
-            <Route
-              exact
-              path={authAppRouter.login()}
-              render={() => <AuthApp />}
-            />
             <Route
               exact
               path={homeAppRouter.home()}
@@ -74,6 +84,19 @@ const AppWithContext = () => {
           </Switch>
         </Router>
       </AppWrapper>
+    </AppFrame>
+  ) : (
+    <AppFrame>
+      <Router>
+        <Switch>
+          <Route exact path={homeAppRouter.home()} render={() => <HomeApp />} />
+          <Route
+            exact
+            path={authAppRouter.login()}
+            render={() => <AuthApp />}
+          />
+        </Switch>
+      </Router>
     </AppFrame>
   );
 };

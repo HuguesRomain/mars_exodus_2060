@@ -5,7 +5,6 @@ import JosefinSans from "./assets/fonts/josefinSans.ttf";
 export const GlobalStyled = createGlobalStyle`
   *{
     box-sizing: border-box;
-		transition: fill 4s ease;
 		:focus {
     outline: none;
 }
@@ -35,6 +34,8 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
+	font-family: Montserrat;
+  }
 }
 /* HTML5 display-role reset for older browsers */
 article, aside, details, figcaption, figure, 
