@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import {
   color,
@@ -11,22 +11,32 @@ import { Avatar } from "../atoms/Avatar";
 import { AppContext } from "exodus/context";
 import { useGetComment } from "exodus/services/social/social.hook";
 import { formatDistanceToNow } from "date-fns";
-/* import { useGetUser } from "exodus/services/social/social.hook"; */
+import { GetUser } from "exodus/services/social/social.hook";
 
 type Props = {
   comment: string;
 };
 export const CommentItem = ({ comment }: Props) => {
+  const [infoUser, setInfoUser] = useState<User>();
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
   const itemOfComment = useGetComment(comment);
-  /* const User = useGetUser(itemOfComment && itemOfComment.author); */
 
-  /* const avatarPicture = (() => {
-    return User && User.profilePicture
-      ? `https://symfony-xmt3.frb.io${User.profilePicture}`
+  useEffect(() => {
+    if (itemOfComment) {
+      GetUser(itemOfComment.author)
+        .then((data) => {
+          setInfoUser(data);
+        })
+        .catch(() => {});
+    }
+  }, [itemOfComment]);
+
+  const avatarPicture = (() => {
+    return infoUser && infoUser.profilePicture
+      ? `https://symfony-xmt3.frb.io${infoUser.profilePicture}`
       : "https://pbs.twimg.com/media/EapZFw1XgAA1LEW?format=jpg&name=small";
-  })(); */
+  })();
 
   const PublishDate = (() => {
     if (itemOfComment) {
@@ -43,13 +53,10 @@ export const CommentItem = ({ comment }: Props) => {
 
   return (
     <Comment>
-      <Avatar
-        src="https://www.premiere.fr/sites/default/files/styles/scale_crop_1280x720/public/2019-07/The-Boys-Season-1-Episode-2-Homelander.jpg"
-        size={iconSize.l}
-      />
+      <Avatar src={avatarPicture} size={iconSize.l} />
       <Content isDark={isDark}>
         <div style={{ display: "flex", marginBottom: space.xs }}>
-          <Author isDark={isDark}>Fline</Author>
+          <Author isDark={isDark}>{infoUser && infoUser?.name}</Author>
           <Since>{PublishDate}</Since>
         </div>
         <Text isDark={isDark}>{itemOfComment && itemOfComment.content}</Text>

@@ -1,4 +1,4 @@
-import React, { useState, ChangeEvent, KeyboardEvent } from "react";
+import React, { useState, ChangeEvent, KeyboardEvent, useEffect } from "react";
 import styled from "styled-components";
 import { AddMedia } from "../molecules/AddMedia";
 import {
@@ -11,7 +11,7 @@ import {
 import { Avatar } from "../atoms/Avatar";
 import { Icon } from "styles/atoms/icons";
 import { AppContext } from "exodus/context";
-import { PostBlog } from "exodus/services/social/social.hook";
+import { PostBlog, GetUserByName } from "exodus/services/social/social.hook";
 
 type Props = {
   callBack: () => void;
@@ -20,7 +20,9 @@ type Props = {
 export const SendComment = ({ callBack }: Props) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
+  const [userName] = Context.usernameContext;
   let [newPost, setnewPost] = useState("");
+  let [UserInfo, setUserInfo] = useState<UserInfoType>();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setnewPost(e.target.value);
@@ -34,13 +36,26 @@ export const SendComment = ({ callBack }: Props) => {
       .catch((err) => console.log(err))
       .finally(() => setnewPost(""));
   };
+  useEffect(() => {
+    if (userName) {
+      GetUserByName(userName)
+        .then((data) => {
+          setUserInfo(data);
+        })
+        .catch(() => {});
+    }
+  }, [userName]);
+
+  const avatarPicture = (() => {
+    return UserInfo && UserInfo.profilePicture
+      ? `https://symfony-xmt3.frb.io${UserInfo.profilePicture}`
+      : "https://www.writeups.org/wp-content/uploads/Punisher-netflix-daredevil-Bernthal.jpg";
+  })();
+
   return (
     <Content isDark={isDark}>
       <Head>
-        <Avatar
-          src="https://www.writeups.org/wp-content/uploads/Punisher-netflix-daredevil-Bernthal.jpg"
-          size={iconSize.xl}
-        />
+        <Avatar src={avatarPicture} size={iconSize.xl} />
         <CommentInput
           onChange={handleChange}
           onKeyPress={handleEnter}

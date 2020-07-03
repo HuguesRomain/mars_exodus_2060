@@ -1,14 +1,11 @@
-import { useState, useEffect, useContext } from "react";
-import { AppContext } from "exodus/context";
-
-const token =
-  "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE1OTM3Njc2NzMsImV4cCI6MTU5MzgwMzY3Mywicm9sZXMiOlsiUk9MRV9XUklURVIiXSwidXNlcm5hbWUiOiIxMzQ2NTQ3In0.Igj0ni4-EOj8Za9IGeaNiP6tXTbhUutucwJ2shBrB_LFTqfN9PrEQr6J0t-bzqRY746EIH8gqB8ZIlNTUcEq_w";
+import { useState, useEffect } from "react";
+import { TokenStorage } from "exodus/utils/accessStorage";
 
 export const getPosts = () => {
   const date = Date.now();
   return fetch("https://symfony-xmt3.frb.io/api/blog_posts", {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${TokenStorage()}`,
       "Content-Type": "application/json",
     },
   })
@@ -22,7 +19,7 @@ export const getPosts = () => {
 export const PostBlog = (contentPost: string) => {
   return fetch("https://symfony-xmt3.frb.io/api/blog_posts", {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${TokenStorage()}`,
       "Content-Type": "application/json",
     },
     method: "POST",
@@ -34,42 +31,43 @@ export const PostBlog = (contentPost: string) => {
   });
 };
 
-export const useGetUser = (url: string) => {
-  const [User, setUser] = useState<User>();
-  const Context = useContext(AppContext);
-  const Token = Context.tokenContext;
+export const GetUser = (url: string | undefined) => {
+  return fetch(`https://symfony-xmt3.frb.io${url}`, {
+    headers: {
+      Authorization: `Bearer ${TokenStorage()}`,
+      "Content-Type": "application/json",
+    },
+  })
+    .then((resp) => resp.json())
+    .then((resp) => resp)
+    .catch((err) => console.log(err));
+};
 
-  useEffect(() => {
-    fetch(`https://symfony-xmt3.frb.io${url}`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-        "Content-Type": "application/json",
-      },
-    })
-      .then((resp) => resp.json())
-      .then((resp) => setUser(resp))
-      .catch((err) => console.log(err));
-  }, [url, Token]);
-
-  return User;
+export const GetUserByName = (url: string) => {
+  return fetch(`https://symfony-xmt3.frb.io/api/users/${url}`, {
+    headers: {
+      Authorization: `Bearer ${TokenStorage()}`,
+      "Content-Type": "application/json",
+    },
+  })
+    .then((resp) => resp.json())
+    .then((resp) => resp);
 };
 
 export const useGetComment = (url: string) => {
-  const [Comment, setComment] = useState<CommentBase>();
-  const Context = useContext(AppContext);
-  const Token = Context.tokenContext;
+  const [Comment, setComment] = useState<CommentBaseType>();
 
   useEffect(() => {
     fetch(`https://symfony-xmt3.frb.io${url}`, {
       headers: {
-        Authorization: `Bearer ${Token}`,
+        Authorization: `Bearer ${TokenStorage()}`,
         "Content-Type": "application/json",
       },
     })
       .then((resp) => resp.json())
       .then((resp) => setComment(resp))
       .catch((err) => console.log(err));
-  }, [url, Token]);
+  }, [url]);
 
   return Comment;
 };
@@ -77,7 +75,7 @@ export const useGetComment = (url: string) => {
 export const PostComment = ({ newComment, postId }: PostCommentProps) => {
   return fetch("https://symfony-xmt3.frb.io/api/comments", {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${TokenStorage()}`,
       "Content-Type": "application/json",
     },
     method: "POST",

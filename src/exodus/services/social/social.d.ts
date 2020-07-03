@@ -20,12 +20,23 @@ type User = {
   profilePicture?: string;
 };
 
+type UserInfoType = {
+  age?: string;
+  birthDate?: string;
+  birthPlace?: string;
+  firstName?: string;
+  name?: string;
+  height?: string;
+  profilePicture?: string;
+  ticketUrl?: string;
+};
+
 type Login = {
   username: string;
   password: string;
 };
 
-type CommentBase = {
+type CommentBaseType = {
   author?: string;
   avatar?: string;
   published?: Date | string;

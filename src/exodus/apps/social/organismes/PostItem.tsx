@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
 import { Like } from "../atoms/Like";
 import { Comment } from "../atoms/Comment";
@@ -16,7 +16,7 @@ import { AddComment } from "../molecules/AddComment";
 import { Avatar } from "../atoms/Avatar";
 import { isMobile, isMobileOnly } from "exodus/utils/checkWindowSize";
 import { AppContext } from "exodus/context";
-import { useGetUser } from "exodus/services/social/social.hook";
+import { GetUser } from "exodus/services/social/social.hook";
 import { formatDistanceToNow } from "date-fns";
 
 type Props = {
@@ -25,14 +25,21 @@ type Props = {
 };
 
 export const PostItem = ({ callBack, post }: Props) => {
+  const [infoUser, setInfoUser] = useState<User>();
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
   const [windowSize] = Context.windowSizeContext;
-  const User = useGetUser(post.author);
+  useEffect(() => {
+    GetUser(post.author)
+      .then((data) => {
+        setInfoUser(data);
+      })
+      .catch(() => {});
+  }, [post]);
 
   const avatarPicture = (() => {
-    return User && User.profilePicture
-      ? `https://symfony-xmt3.frb.io${User.profilePicture}`
+    return infoUser && infoUser.profilePicture
+      ? `https://symfony-xmt3.frb.io${infoUser.profilePicture}`
       : "https://pbs.twimg.com/media/EapZFw1XgAA1LEW?format=jpg&name=small";
   })();
 
@@ -51,7 +58,7 @@ export const PostItem = ({ callBack, post }: Props) => {
           src={avatarPicture}
           size={isMobile(windowSize) ? iconSize.l : iconSize.xl}
         />
-        <Author isDark={isDark}>{User && User.name}</Author>
+        <Author isDark={isDark}>{infoUser && infoUser.name}</Author>
         <Since>{PublishDate}</Since>
       </UserInfo>
       <PostText isDark={isDark}>{post.content}</PostText>

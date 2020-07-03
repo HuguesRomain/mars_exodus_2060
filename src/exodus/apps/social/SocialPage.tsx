@@ -9,28 +9,6 @@ import { breakPoint } from "styles/const";
 import { AppContext } from "exodus/context";
 import { getPosts } from "exodus/services/social/social.hook";
 
-const SocialPart = styled.div`
-  display: flex;
-  justify-content: center;
-  padding: 0;
-  width: 100vw;
-  @media (min-width: ${breakPoint.tabletPortrait}) {
-    padding: ${rem(50)};
-    width: 100vw;
-  }
-
-  @media (min-width: ${breakPoint.desktop}) {
-    width: 60vw;
-  }
-`;
-
-const Pub = styled.div`
-  width: 30vw;
-  right: 0;
-  position: fixed;
-  height: 100vh;
-`;
-
 export const SocialPage = () => {
   let date = Date.now();
   const [Posts, setPosts] = useState<Posts[]>([]);
@@ -49,6 +27,7 @@ export const SocialPage = () => {
 
   useEffect(() => {
     fetchPosts();
+    // eslint-disable-next-line
   }, []);
 
   console.log("test");
@@ -75,3 +54,25 @@ export const SocialPage = () => {
     </div>
   );
 };
+
+const SocialPart = styled.div`
+  display: flex;
+  justify-content: center;
+  padding: 0;
+  width: 100vw;
+  @media (min-width: ${breakPoint.tabletPortrait}) {
+    padding: ${rem(50)};
+    width: 100vw;
+  }
+
+  @media (min-width: ${breakPoint.desktop}) {
+    width: 60vw;
+  }
+`;
+
+const Pub = styled.div`
+  width: 30vw;
+  right: 0;
+  position: fixed;
+  height: 100vh;
+`;
