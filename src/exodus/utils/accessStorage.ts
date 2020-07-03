@@ -11,3 +11,8 @@ export const TokenStorage = () => {
   const Token = JSON.parse(localStorage.getItem("token") || "{}");
   return typeof Token === "string" ? Token : null;
 };
+
+export const UsernameStorage = () => {
+  const Username = JSON.parse(localStorage.getItem("username") || "{}");
+  return typeof Username === "string" ? Username : null;
+};

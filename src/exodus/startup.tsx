@@ -2,12 +2,17 @@ import React, { useState, useLayoutEffect } from "react";
 import { color, transitionTime } from "styles/const";
 import { AppContext } from "./context";
 import styled from "styled-components";
-import { isDarkStorage, TokenStorage } from "./utils/accessStorage";
+import {
+  isDarkStorage,
+  TokenStorage,
+  UsernameStorage,
+} from "./utils/accessStorage";
 import { authAppRouter } from "./internal-router";
 
 export const AppFrame = ({ children }: { children: React.ReactNode }) => {
   const [isDark, setIsDarkContext] = useState<boolean>(isDarkStorage());
   const [token, setToken] = useState<string | null>(TokenStorage());
+  const [username, setUsername] = useState<string | null>(UsernameStorage());
   const [windowSize, setWindowSize] = useState<number>(window.innerWidth);
 
   const setIsDark = () => {
@@ -24,6 +29,11 @@ export const AppFrame = ({ children }: { children: React.ReactNode }) => {
     document.location.reload(true);
   };
 
+  const setUsernameContext = (username: string | null) => {
+    localStorage.setItem("username", JSON.stringify(username));
+    setUsername(username);
+  };
+
   useLayoutEffect(() => {
     const updateSize = () => {
       setWindowSize(window.innerWidth);
@@ -38,6 +48,8 @@ export const AppFrame = ({ children }: { children: React.ReactNode }) => {
         isDarkContext: [isDark, setIsDark],
         tokenContext: [token],
         setTokenContext: [setTokenContext],
+        usernameContext: [username],
+        setUsernameContext: [setUsernameContext],
         windowSizeContext: [windowSize, setWindowSize],
       }}
     >
