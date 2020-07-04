@@ -5,6 +5,19 @@ import { rem } from "polished";
 import { AppContext } from "exodus/context";
 import { UserStorage } from "exodus/utils/accessStorage";
 
+export const TicketSection = () => {
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
+  return (
+    <SectionWrapper isDark={isDark}>
+      <Title isDark={isDark}>Votre billet</Title>
+      <TicketCard
+        src={`https://symfony-xmt3.frb.io${UserStorage().ticketUrl}`}
+      />
+    </SectionWrapper>
+  );
+};
+
 const SectionWrapper = styled.section<{ isDark: boolean }>`
   display: flex;
   flex-direction: column;
@@ -28,16 +41,3 @@ const TicketCard = styled.img`
   height: ${rem(630)};
   padding: 0 0 0 ${space.l};
 `;
-
-export const TicketSection = () => {
-  const Context = React.useContext(AppContext);
-  const [isDark] = Context.isDarkContext;
-  return (
-    <SectionWrapper isDark={isDark}>
-      <Title isDark={isDark}>Votre billet</Title>
-      <TicketCard
-        src={`https://symfony-xmt3.frb.io${UserStorage().ticketUrl}`}
-      />
-    </SectionWrapper>
-  );
-};

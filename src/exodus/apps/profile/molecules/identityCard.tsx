@@ -4,8 +4,47 @@ import { rem } from "polished";
 import { color, fontSize, space, boxShadows, breakPoint } from "styles/const";
 import { LabeledInfo } from "../atoms/labeledInfo";
 import Finger from "../../../../styles/assets/pics/fingerprint.png";
-import Signature from "../../../../styles/assets/pics/signature.png";
 import { UserStorage } from "exodus/utils/accessStorage";
+
+export const IdentityCard = () => {
+  let [UserInfo, setUserInfo] = useState<UserInfoType>();
+
+  useEffect(() => {
+    setUserInfo(UserStorage());
+  }, []);
+
+  return (
+    <CardStyle>
+      <Header>
+        <h2>MARS ID CARD N°08976589</h2>
+      </Header>
+      <Wrapper>
+        <Content>
+          <ProfileImage
+            src={`https://symfony-xmt3.frb.io${UserInfo?.profilePicture}`}
+          />
+          <Img src={Finger} />
+          <LabeledInfo title={"NOM"} value={UserInfo?.name} />
+          <LabeledInfo title={"PRÉNOM"} value={UserInfo?.firstName} />
+          <LabeledInfo
+            title={"DATE DE NAISSANCE"}
+            value={UserInfo?.birthDate}
+          />
+          <LabeledInfo title={"SEXE"} value={"Masculin"} />
+          <LabeledInfo title={"PROFESSION"} value={UserInfo?.work} />
+          <LabeledInfo
+            title={"LIEU DE NAISSANCE"}
+            value={UserInfo?.birthPlace}
+          />
+          <LabeledInfo title={"YEUX"} value={UserInfo?.eyeColor} />
+          <LabeledInfo title={"CHEVEUX"} value={UserInfo?.hairColor} />
+          <LabeledInfo title={"TAILLE"} value={UserInfo?.height} />
+          <LabeledInfo title={"POIDS"} value={UserInfo?.weight} />
+        </Content>
+      </Wrapper>
+    </CardStyle>
+  );
+};
 
 const CardStyle = styled.div`
   display: flex;
@@ -56,42 +95,3 @@ const Content = styled.div`
   grid-row-gap: ${space.m};
   grid-template-columns: repeat(2, 1fr);
 `;
-
-export const IdentityCard = () => {
-  let [UserInfo, setUserInfo] = useState<UserInfoType>();
-
-  useEffect(() => {
-    setUserInfo(UserStorage());
-  }, []);
-
-  return (
-    <CardStyle>
-      <Header>
-        <h2>MARS ID CARD N°08976589</h2>
-      </Header>
-      <Wrapper>
-        <Content>
-          <ProfileImage
-            src={`https://symfony-xmt3.frb.io${UserInfo?.profilePicture}`}
-          />
-          <Img src={Finger} />
-          <LabeledInfo title={"NOM"} value={UserInfo?.name} />
-          <LabeledInfo title={"PRÉNOM"} value={UserInfo?.firstName} />
-          <LabeledInfo
-            title={"DATE DE NAISSANCE"}
-            value={UserInfo?.birthDate}
-          />
-          <LabeledInfo title={"SEXE"} value={"Masculin"} />
-          <LabeledInfo title={"PROFESSION"} value={UserInfo?.work} />
-          <LabeledInfo
-            title={"LIEU DE NAISSANCE"}
-            value={UserInfo?.birthPlace}
-          />
-          <LabeledInfo title={"TAILLE"} value={UserInfo?.height} />
-          <LabeledInfo title={"POIDS"} value={UserInfo?.weight} />
-          <LabeledInfo title={"SIGNATURE"} value={<Img src={Signature} />} />
-        </Content>
-      </Wrapper>
-    </CardStyle>
-  );
-};

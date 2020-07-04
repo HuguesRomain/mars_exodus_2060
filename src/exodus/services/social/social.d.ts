@@ -31,6 +31,8 @@ type UserInfoType = {
   ticketUrl?: string;
   work?: string;
   weight?: string;
+  hairColor?: string;
+  eyeColor?: string;
 };
 
 type Login = {
