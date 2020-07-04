@@ -38,11 +38,12 @@ export const SocialPage = () => {
         <div>
           <SendComment callBack={fetchPosts} />
           <ul>
-            {Posts.map((value: Posts) => {
-              return (
-                <PostItem callBack={fetchPosts} key={value.id} post={value} />
-              );
-            })}
+            {Posts &&
+              Posts.map((value: Posts) => {
+                return (
+                  <PostItem callBack={fetchPosts} key={value.id} post={value} />
+                );
+              })}
           </ul>
         </div>
       </SocialPart>
