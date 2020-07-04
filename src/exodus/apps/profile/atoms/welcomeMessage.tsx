@@ -8,6 +8,7 @@ import {
   transitionTime,
 } from "styles/const";
 import { AppContext } from "exodus/context";
+import { UserStorage } from "exodus/utils/accessStorage";
 
 const WelcomeMessageStyled = styled.div`
   display: flex;
@@ -38,7 +39,7 @@ export const WelcomeMessage = () => {
   const [isDark] = Context.isDarkContext;
   return (
     <WelcomeMessageStyled>
-      <Title isDark={isDark}>Bonjour John !</Title>
+      <Title isDark={isDark}>Bonjour {UserStorage().firstName} !</Title>
       <Text>Prêt pour le départ ?</Text>
     </WelcomeMessageStyled>
   );

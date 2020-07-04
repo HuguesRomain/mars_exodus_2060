@@ -24,7 +24,7 @@ export const LabeledInfo = ({
   value,
 }: {
   title: string;
-  value: string | JSX.Element;
+  value: string | JSX.Element | undefined;
 }) => {
   return (
     <LabeledInfoStyled>

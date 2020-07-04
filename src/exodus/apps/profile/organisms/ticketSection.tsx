@@ -1,9 +1,9 @@
 import React from "react";
 import styled from "styled-components";
 import { color, space, fontSize, transitionTime } from "styles/const";
-import Ticket from "../../../../styles/assets/pics/ticket.png";
 import { rem } from "polished";
 import { AppContext } from "exodus/context";
+import { UserStorage } from "exodus/utils/accessStorage";
 
 const SectionWrapper = styled.section<{ isDark: boolean }>`
   display: flex;
@@ -35,7 +35,9 @@ export const TicketSection = () => {
   return (
     <SectionWrapper isDark={isDark}>
       <Title isDark={isDark}>Votre billet</Title>
-      <TicketCard src={Ticket} />
+      <TicketCard
+        src={`https://symfony-xmt3.frb.io${UserStorage().ticketUrl}`}
+      />
     </SectionWrapper>
   );
 };
