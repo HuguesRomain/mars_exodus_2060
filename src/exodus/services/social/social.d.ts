@@ -29,6 +29,8 @@ type UserInfoType = {
   height?: string;
   profilePicture?: string;
   ticketUrl?: string;
+  work?: string;
+  weight?: string;
 };
 
 type Login = {
