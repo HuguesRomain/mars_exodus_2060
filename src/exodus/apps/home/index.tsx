@@ -34,7 +34,6 @@ const HomeApp = () => {
 
   return (
     <Router>
-      {console.log("test")}
       <Switch>
         <Route
           exact
