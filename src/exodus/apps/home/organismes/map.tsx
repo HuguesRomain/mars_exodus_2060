@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import MapImg from "../../../../styles/assets/pics/marsMap.jpg";
 import { rem } from "polished";
-import { space, breakPoint, color } from "styles/const";
+import { space, breakPoint, color, fontSize } from "styles/const";
 import { HomeTitle } from "../globalStyle";
 import { AppContext } from "exodus/context";
-import Img from "../../../../styles/assets/pics/hero/hero_7.jpg";
 import { PlaceType } from "exodus/services/home";
+import { Button } from "exodus/components/atoms/button";
+import { Link } from "react-router-dom";
+import { homeAppRouter } from "exodus/internal-router";
 
 const PlacesPosition = [
   { position: "translateY(175px) translateX(50px)" },
@@ -77,6 +79,11 @@ const PinAndPopup = ({
     }
   };
 
+  const CustomButton = css`
+    margin: 0 ${space.xs} ${space.xs} ${space.xs};
+    display: ${isPopupOpen() ? "flex" : "none"};
+  `;
+
   return (
     <PinContent
       style={{
@@ -84,6 +91,7 @@ const PinAndPopup = ({
       }}
     >
       <Popup
+        image={`https://symfony-xmt3.frb.io${place && place.CoverImage}`}
         isPopupOpen={isPopupOpen()}
         onMouseEnter={() => {
           setIsPopupHovered((prevState) => !prevState);
@@ -94,7 +102,21 @@ const PinAndPopup = ({
           }, 200);
         }}
       >
-        <ContentPopup></ContentPopup>
+        <ContentPopup isPopupOpen={isPopupOpen()}>
+          <TextContent isPopupOpen={isPopupOpen()}>
+            <TextPopup isPopupOpen={isPopupOpen()}>
+              {place && place.Category}
+            </TextPopup>
+            <TextPopup isPopupOpen={isPopupOpen()} isTitle>
+              {place && place.PlaceName}
+            </TextPopup>
+          </TextContent>
+          <Link to={homeAppRouter.place(place && place.id)}>
+            <ContentButton isPopupOpen={isPopupOpen()}>
+              <Button styled={CustomButton} iconName={"forward"} />
+            </ContentButton>
+          </Link>
+        </ContentPopup>
       </Popup>
       <Pin
         onMouseEnter={() => {
@@ -138,10 +160,10 @@ const Pulser = styled.div`
   }
 `;
 
-const Popup = styled.div<{ isPopupOpen: boolean }>`
+const Popup = styled.div<{ image: string | null; isPopupOpen: boolean }>`
   z-index: 10;
   position: absolute;
-  background-image: url(${Img});
+  background-image: ${(props) => `url(${props.image})`};
   background-size: cover;
   background-repeat: no-repeat;
   border-radius: 10px;
@@ -167,9 +189,31 @@ const Popup = styled.div<{ isPopupOpen: boolean }>`
   }
 `;
 
-const ContentPopup = styled.div`
+const ContentPopup = styled.div<{ isPopupOpen: boolean }>`
+  display: flex;
+  align-items: flex-end;
   width: inherit;
-  height: inherit;
+  height: ${(props) => (props.isPopupOpen ? rem(143.98) : "0")};
   border-radius: inherit;
   background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, #000000 111.18%);
+  transition: height 0.3s;
+`;
+
+const TextPopup = styled.p<{ isPopupOpen: boolean; isTitle?: boolean }>`
+  display: ${(props) => (props.isPopupOpen ? "block" : "none")};
+  color: ${color.light.PureWhite};
+  font-size: ${(props) => (props.isTitle ? fontSize.m : fontSize.xs)};
+  margin-top: ${(props) => (props.isTitle ? rem(2) : "0")};
+`;
+
+const TextContent = styled.div<{ isPopupOpen: boolean }>`
+  flex-direction: column;
+  margin: 0 0 ${space.xs} ${space.xs};
+  opacity: ${(props) => (props.isPopupOpen ? "1" : "0")};
+  transition: opacity 1s;
+`;
+
+const ContentButton = styled.div<{ isPopupOpen: boolean }>`
+  opacity: ${(props) => (props.isPopupOpen ? "1" : "0")};
+  transition: opacity 1s;
 `;

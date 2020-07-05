@@ -37,7 +37,7 @@ export type PlaceType = {
   ["@id"]: string;
   ["@type"]: string;
   Category: string;
-  coverImage: string;
+  CoverImage: string;
   DoubleMedia: string[];
   PlaceName: string;
   Text: string[];

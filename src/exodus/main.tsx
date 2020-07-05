@@ -57,20 +57,16 @@ const AppWithContext = () => {
       <AppWrapper token={tokenWithoutContext}>
         <Router>
           <Switch>
-            <Route
-              exact
-              path={homeAppRouter.home()}
-              render={() => <HomeApp />}
-            />
+            <Route exact path={homeAppRouter.home()} component={HomeApp} />
             <Route
               exact
               path={calendarAppRouter.calendar()}
-              render={() => <CalendarApp />}
+              component={CalendarApp}
             />
             <Route
               exact
               path={socialAppRouter.social()}
-              render={() => <SocialApp />}
+              component={SocialApp}
             />
             <Route
               exact
@@ -79,7 +75,7 @@ const AppWithContext = () => {
                   ? profileAppRouter.identity("1")
                   : profileAppRouter.profile()
               }
-              render={() => <ProfileApp />}
+              component={ProfileApp}
             />
           </Switch>
         </Router>
@@ -89,12 +85,8 @@ const AppWithContext = () => {
     <AppFrame>
       <Router>
         <Switch>
-          <Route exact path={homeAppRouter.home()} render={() => <HomeApp />} />
-          <Route
-            exact
-            path={authAppRouter.login()}
-            render={() => <AuthApp />}
-          />
+          <Route exact path={homeAppRouter.home()} component={HomeApp} />
+          <Route exact path={authAppRouter.login()} component={AuthApp} />
         </Switch>
       </Router>
     </AppFrame>

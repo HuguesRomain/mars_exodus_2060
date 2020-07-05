@@ -26,12 +26,15 @@ const HomeApp = () => {
   const [articles, setArticles] = useState<ArticleType[]>([]);
   const [places, setPlaces] = useState<PlaceType[]>([]);
   useEffect((): any => {
-    getArticles().then((resp) => setArticles(resp["hydra:member"]));
+    getArticles().then((resp) => {
+      setArticles(resp["hydra:member"]);
+    });
     getPlaces().then((resp) => setPlaces(resp["hydra:member"]));
   }, []);
 
   return (
     <Router>
+      {console.log("test")}
       <Switch>
         <Route
           exact
@@ -60,7 +63,7 @@ const HomeApp = () => {
               exact
               key={i}
               path={homeAppRouter.article(article.id)}
-              render={() => <Article article={article} />}
+              render={() => <Article articles={articles} article={article} />}
             />
           );
         })}
@@ -69,8 +72,8 @@ const HomeApp = () => {
             <Route
               exact
               key={i}
-              path={homeAppRouter.place(i)}
-              render={() => <Place place={place} />}
+              path={homeAppRouter.place(place.id)}
+              render={() => <Place places={places} place={place} />}
             />
           );
         })}

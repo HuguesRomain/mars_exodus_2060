@@ -18,109 +18,120 @@ import { AppContext } from "exodus/context";
 import { rem } from "polished";
 import { Icon } from "styles/atoms/icons";
 import { isYoutubeUrl } from "exodus/utils/uriUtils";
+import { CarouselInfo } from "./organismes/carousels/carousels";
 
-export const Article = ({ article }: { article: ArticleType }) => {
+export const Article = ({
+  articles,
+  article,
+}: {
+  articles: ArticleType[];
+  article: ArticleType;
+}) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
   const [sections, setSections] = useState<SectionType[]>([]);
 
   useEffect(() => {
-    getArticlesSection(article.id).then((resp) => {
-      console.log(resp);
-      setSections(resp["hydra:member"]);
-    });
+    getArticlesSection(article.id).then((resp) =>
+      setSections(resp["hydra:member"])
+    );
   }, [article.id]);
 
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <Header img={`https://symfony-xmt3.frb.io${article.coverImage}`}>
-        <HeaderContent>
-          <ContentBackButton
-            onClick={() => {
-              window.history.back();
-            }}
-            style={{}}
-          >
-            <Icon
-              style={{ marginRight: space.xs }}
-              name={"backarrow"}
-              color={color.light.PureWhite}
-            />
-            Retour
-          </ContentBackButton>
-          <HeaderFoooter>
-            <TitleInfo>
-              <TitleText style={{ fontSize: fontSize.xxl }} isDark={isDark}>
-                {article.title}
-              </TitleText>
-              <Text isDark={isDark}>{article.intro}</Text>
-              <TimeToRead>
-                <Icon
-                  size={iconSize.s}
-                  color={color.light.PureWhite}
-                  name={"clock"}
-                />
-                <Text style={{ margin: `0 0 0 ${space.xs}` }} isDark={isDark}>
-                  Temps de lecture : 3 min
-                </Text>
-              </TimeToRead>
-            </TitleInfo>
-          </HeaderFoooter>
-        </HeaderContent>
-      </Header>
-      <Sections>
-        {sections.map((section, i) => {
-          return (
-            <div key={i}>
-              <Title>
-                <TitleText isDark={isDark}>{section.title}</TitleText>
-                <TitleDecoration />
-              </Title>
-              {section.image.map((img, i) => {
-                return (
-                  <Image key={i} src={`https://symfony-xmt3.frb.io${img}`} />
-                );
-              })}
-              {section.text.map((text, i) => {
-                return (
-                  <Text key={i} isDark={isDark}>
-                    {text}
+    <>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Header img={`https://symfony-xmt3.frb.io${article.coverImage}`}>
+          <HeaderContent>
+            <ContentBackButton
+              onClick={() => {
+                window.history.back();
+              }}
+              style={{}}
+            >
+              <Icon
+                style={{ marginRight: space.xs }}
+                name={"backarrow"}
+                color={color.light.PureWhite}
+              />
+              Retour
+            </ContentBackButton>
+            <HeaderFoooter>
+              <TitleInfo>
+                <TitleText style={{ fontSize: fontSize.xxl }} isDark={isDark}>
+                  {article.title}
+                </TitleText>
+                <Text isDark={isDark}>{article.intro}</Text>
+                <TimeToRead>
+                  <Icon
+                    size={iconSize.s}
+                    color={color.light.PureWhite}
+                    name={"clock"}
+                  />
+                  <Text style={{ margin: `0 0 0 ${space.xs}` }} isDark={isDark}>
+                    Temps de lecture : 3 min
                   </Text>
-                );
-              })}
-              {section.doubleMedia.length > 0 && (
-                <DoubleMedia>
-                  {section.doubleMedia.map((media) => {
-                    return (
-                      <>
-                        {isYoutubeUrl(media) ? (
-                          <>
-                            <DoubleMediaVideo
-                              src={media}
-                              allowFullScreen={true}
+                </TimeToRead>
+              </TitleInfo>
+            </HeaderFoooter>
+          </HeaderContent>
+        </Header>
+        <Sections>
+          {sections.map((section, i) => {
+            return (
+              <div key={i}>
+                <Title>
+                  <TitleText isDark={isDark}>{section.title}</TitleText>
+                  <TitleDecoration />
+                </Title>
+                {section.image.map((img, i) => {
+                  return (
+                    <Image key={i} src={`https://symfony-xmt3.frb.io${img}`} />
+                  );
+                })}
+                {section.text.map((text, i) => {
+                  return (
+                    <Text key={i} isDark={isDark}>
+                      {text}
+                    </Text>
+                  );
+                })}
+                {section.doubleMedia.length > 0 && (
+                  <DoubleMedia>
+                    {section.doubleMedia.map((media) => {
+                      return (
+                        <>
+                          {isYoutubeUrl(media) ? (
+                            <>
+                              <DoubleMediaVideo
+                                src={media}
+                                allowFullScreen={true}
+                              />
+                            </>
+                          ) : (
+                            <DoubleMediaPhoto
+                              src={`https://symfony-xmt3.frb.io${media}`}
                             />
-                          </>
-                        ) : (
-                          <DoubleMediaPhoto
-                            src={`https://symfony-xmt3.frb.io${media}`}
-                          />
-                        )}
-                      </>
-                    );
-                  })}
-                </DoubleMedia>
-              )}
-            </div>
-          );
-        })}
-      </Sections>
-    </div>
+                          )}
+                        </>
+                      );
+                    })}
+                  </DoubleMedia>
+                )}
+              </div>
+            );
+          })}
+        </Sections>
+      </div>
+      <CarouselContent>
+        <CarouselInfo articles={articles.filter((a) => a.id !== article.id)} />
+      </CarouselContent>
+    </>
   );
 };
 
@@ -239,4 +250,13 @@ const Header = styled.div<{ img: string }>`
   width: 100%;
   height: 60vh;
   border-bottom-right-radius: 40px;
+`;
+
+const CarouselContent = styled.div`
+  overflow: hidden;
+  margin: ${space.l} 0 0 ${space.s};
+
+  @media (min-width: 550px) {
+    margin: ${space.l} 0 0 ${space.l};
+  }
 `;

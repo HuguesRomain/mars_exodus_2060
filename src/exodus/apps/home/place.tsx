@@ -1,88 +1,97 @@
 import React from "react";
 import styled from "styled-components";
 import { PlaceType } from "exodus/services/home";
-import {
-  space,
-  color,
-  fontSize,
-  iconSize,
-  transitionTime,
-  font,
-} from "styles/const";
+import { space, color, fontSize, transitionTime, font } from "styles/const";
 import { Icon } from "styles/atoms/icons";
 import { AppContext } from "exodus/context";
 import { rem } from "polished";
 import { isYoutubeUrl } from "exodus/utils/uriUtils";
+import { CarouselPlaces } from "./organismes/carousels/carousels";
 
-export const Place = ({ place }: { place: PlaceType }) => {
+export const Place = ({
+  place,
+  places,
+}: {
+  places: PlaceType[];
+  place: PlaceType;
+}) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
   return (
-    <div
-      style={{
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-      }}
-    >
-      <Header img={`https://symfony-xmt3.frb.io${place.coverImage}`}>
-        <HeaderContent>
-          <ContentBackButton
-            onClick={() => {
-              window.history.back();
-            }}
-            style={{}}
-          >
-            {console.log("place", place)}
-            <Icon
-              style={{ marginRight: space.xs }}
-              name={"backarrow"}
-              color={color.light.PureWhite}
-            />
-            Retour
-          </ContentBackButton>
-          <HeaderFoooter>
-            <TitleInfo>
-              <Text isDark={isDark}>{place.Category}</Text>
-              <TitleText style={{ fontSize: fontSize.xxl }} isDark={isDark}>
-                {place.PlaceName}
-              </TitleText>
-            </TitleInfo>
-          </HeaderFoooter>
-        </HeaderContent>
-      </Header>
-      <Sections>
-        <div>
-          {place.Text.map((text, i) => {
-            return (
-              <Text key={i} isDark={isDark}>
-                {text}
-              </Text>
-            );
-          })}
-          {place.DoubleMedia.length > 0 && (
-            <DoubleMedia>
-              {place.DoubleMedia.map((media) => {
-                return (
-                  <>
-                    {isYoutubeUrl(media) ? (
-                      <>
-                        <DoubleMediaVideo src={media} allowFullScreen={true} />
-                      </>
-                    ) : (
-                      <DoubleMediaPhoto
-                        src={`https://symfony-xmt3.frb.io${media}`}
-                      />
-                    )}
-                  </>
-                );
-              })}
-            </DoubleMedia>
-          )}
-        </div>
-        );
-      </Sections>
-    </div>
+    <>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+        }}
+      >
+        <Header img={`https://symfony-xmt3.frb.io${place.CoverImage}`}>
+          <HeaderContent>
+            <ContentBackButton
+              onClick={() => {
+                window.history.back();
+              }}
+              style={{}}
+            >
+              <Icon
+                style={{ marginRight: space.xs }}
+                name={"backarrow"}
+                color={color.light.PureWhite}
+              />
+              Retour
+            </ContentBackButton>
+            <HeaderFoooter>
+              <TitleInfo>
+                <Text isDark={isDark}>{place.Category}</Text>
+                <TitleText style={{ fontSize: fontSize.xxl }} isDark={isDark}>
+                  {place.PlaceName}
+                </TitleText>
+              </TitleInfo>
+            </HeaderFoooter>
+          </HeaderContent>
+        </Header>
+        <Sections>
+          <div>
+            {place.Text.map((text, i) => {
+              return (
+                <Text key={i} isDark={isDark}>
+                  {text}
+                </Text>
+              );
+            })}
+            {place.DoubleMedia.length > 0 && (
+              <DoubleMedia>
+                {place.DoubleMedia.map((media, i) => {
+                  return (
+                    <div key={i}>
+                      {isYoutubeUrl(media) ? (
+                        <>
+                          <DoubleMediaVideo
+                            src={media}
+                            allowFullScreen={true}
+                          />
+                        </>
+                      ) : (
+                        <>
+                          <DoubleMediaPhoto
+                            src={`https://symfony-xmt3.frb.io${media}`}
+                          />
+                        </>
+                      )}
+                    </div>
+                  );
+                })}
+              </DoubleMedia>
+            )}
+          </div>
+          );
+        </Sections>
+      </div>
+      <CarouselContent>
+        <CarouselPlaces places={places.filter((p) => p.id !== place.id)} />
+      </CarouselContent>
+    </>
   );
 };
 
@@ -107,11 +116,13 @@ const DoubleMediaVideo = styled.iframe`
 `;
 
 const DoubleMediaPhoto = styled.img`
-  width: 48%;
+  width: 90%;
+  height: 100%;
   border-radius: 10px;
 
   @media (max-width: 550px) {
     width: 100%;
+    height: 100%;
   }
 `;
 
@@ -146,7 +157,6 @@ const HeaderContent = styled.div`
 `;
 
 const Sections = styled.div`
-  margin: ${space.l} 0 0 ${space.s};
   width: 50%;
   @media (max-width: 550px) {
     margin: 0;
@@ -164,18 +174,6 @@ const Text = styled.p<{ isDark: boolean }>`
   transition: ${transitionTime};
 `;
 
-const Title = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const TitleDecoration = styled.span`
-  margin-top: ${space.xs};
-  width: ${rem(40)};
-  height: ${rem(5)};
-  background-color: ${color.SunsetOrange};
-`;
-
 const TitleText = styled.h2<{ isDark: boolean }>`
   color: ${(props) =>
     !props.isDark ? color.darker.BlackPearl : color.light.PureWhite};
@@ -190,4 +188,13 @@ const Header = styled.div<{ img: string }>`
   width: 100%;
   height: 60vh;
   border-bottom-right-radius: 40px;
+`;
+
+const CarouselContent = styled.div`
+  overflow: hidden;
+  margin: ${space.l} 0 0 ${space.s};
+
+  @media (min-width: 550px) {
+    margin: ${space.l} 0 0 ${space.l};
+  }
 `;

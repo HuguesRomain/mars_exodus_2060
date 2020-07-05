@@ -7,11 +7,15 @@ import { PlaceType } from "exodus/services/home";
 
 export const CarouselPlacesItems = ({ place }: { place: PlaceType }) => {
   return (
-    <Card img={`https://symfony-xmt3.frb.io${place.coverImage}`}>
+    <Card
+      onClick={() => {
+        window.scrollTo(0, 0);
+      }}
+      img={`https://symfony-xmt3.frb.io${place.CoverImage}`}
+    >
       <TextContent>
         <Category>{place.Category}</Category>
         <Name>{place.PlaceName}</Name>
-        {console.log(place)}
       </TextContent>
     </Card>
   );
