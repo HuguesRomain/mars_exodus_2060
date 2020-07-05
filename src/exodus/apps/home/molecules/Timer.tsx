@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { TimeCount } from "../atomes/TimeCount";
+import { TimeCount } from "../atoms/TimeCount";
 import { font, fontSize, space, fontWeight } from "styles/const";
 
 type TimeType = {
@@ -27,19 +27,17 @@ function TimeLeft(): TimeType[] {
 export const Timer = () => {
   const [time, setTime] = useState<TimeType[]>();
 
-  useEffect(() => {
-    setTimeout(() => {
-      setTime(TimeLeft());
-    }, 1000);
-  });
+  setTimeout(() => {
+    setTime(TimeLeft());
+  }, 1000);
 
   return (
     <ContentTime>
       <CountTitel>Décollage des navettes Starship dans</CountTitel>
       <Counter>
         {time &&
-          time.map((value) => {
-            return <TimeCount key={value.label} timeValue={value} />;
+          time.map((value, i) => {
+            return <TimeCount key={i} timeValue={value} />;
           })}
       </Counter>
     </ContentTime>

@@ -25,12 +25,12 @@ const Time = styled.p`
   padding-left: ${space.xs};
 `;
 
-export const TimeRead = () => {
+export const TimeRead = ({ timeToRead }: { timeToRead: string }) => {
   return (
     <ContentTimeRead>
       <Icon color={color.medium.Manatee} name={"clock"} size={fontSize.m} />
       <TimeText>Temps de lecture:</TimeText>
-      <Time>4min</Time>
+      <Time>{timeToRead}</Time>
     </ContentTimeRead>
   );
 };

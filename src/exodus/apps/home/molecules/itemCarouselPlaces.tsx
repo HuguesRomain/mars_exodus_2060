@@ -2,30 +2,33 @@ import React from "react";
 import styled from "styled-components";
 import { color, space, fontSize } from "styles/const";
 import { rem } from "polished";
-import Proctor from "../../../../styles/assets/pics/proctor.jpg";
+// import Proctor from "../../../../styles/assets/pics/proctor.jpg";
+import { PlaceType } from "exodus/services/home";
 
-export const CarouselPlacesItems = () => {
+export const CarouselPlacesItems = ({ place }: { place: PlaceType }) => {
   return (
-    <Card>
+    <Card
+      onClick={() => {
+        window.scrollTo(0, 0);
+      }}
+      img={`https://symfony-xmt3.frb.io${place.CoverImage}`}
+    >
       <TextContent>
-        <Category>Catégorie</Category>
-        <Name>Nom lieux</Name>
+        <Category>{place.Category}</Category>
+        <Name>{place.PlaceName}</Name>
       </TextContent>
-      <ItemContent src={Proctor} />
     </Card>
   );
 };
 
-const Card = styled.div`
+const Card = styled.div<{ img: string }>`
   display: flex;
   justify-content: center;
   align-items: flex-end;
-`;
-
-const ItemContent = styled.img`
   width: ${rem(190)};
   height: ${rem(220)};
   border-radius: 10px;
+  background-image: ${(props) => `url(${props.img})`};
 `;
 
 const TextContent = styled.div`

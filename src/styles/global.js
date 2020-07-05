@@ -5,10 +5,10 @@ import JosefinSans from "./assets/fonts/josefinSans.ttf";
 export const GlobalStyled = createGlobalStyle`
   *{
     box-sizing: border-box;
+		transition: fill 1s ease;
 		:focus {
     outline: none;
 }
-  }
 // Todo : init Normalize()
 
   a {
@@ -62,6 +62,16 @@ table {
 	border-spacing: 0;
 }
 
+@keyframes pulse {
+ 0% {
+	 opacity: 0.5;
+ }
+ 100%{
+	 transform: scale(3);
+	 opacity: 0;
+ }
+}
+
 @font-face {
   font-family: "Josefin";
 	font-style: italic;
@@ -72,5 +82,4 @@ table {
   font-family: "Josefin Sans";
   src: url(${JosefinSans}) format("truetype");
 }
-
 `;

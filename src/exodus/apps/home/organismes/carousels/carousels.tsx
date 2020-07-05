@@ -9,6 +9,9 @@ import "./carousel.css";
 import { CarouselPlacesItems } from "../../molecules/itemCarouselPlaces";
 import { HomeTitle } from "../../globalStyle";
 import { AppContext } from "exodus/context";
+import { ArticleType, PlaceType } from "exodus/services/home";
+import { Link } from "react-router-dom";
+import { homeAppRouter } from "exodus/internal-router";
 
 const CarouselContent = styled.div`
   margin-bottom: ${space.l};
@@ -61,24 +64,22 @@ const settings = {
   ],
 };
 
-export const CarouselInfo = () => {
+export const CarouselInfo = ({ articles }: { articles: ArticleType[] }) => {
   const CustomSlider = useRef<HTMLDivElement>(null);
   return (
     <CarouselContent>
       <CarouselHead customSlider={CustomSlider} />
       <Slider {...settings} ref={CustomSlider}>
-        <CarouselItem />
-        <CarouselItem />
-        <CarouselItem />
-        <CarouselItem />
-        <CarouselItem />
-        <CarouselItem />
+        {articles &&
+          articles.map((article: ArticleType, i: number) => {
+            return <CarouselItem article={article} key={i} />;
+          })}
       </Slider>
     </CarouselContent>
   );
 };
 
-export const CarouselPlaces = () => {
+export const CarouselPlaces = ({ places }: { places: PlaceType[] }) => {
   const CustomSlider = useRef<HTMLDivElement>(null);
 
   const Context = React.useContext(AppContext);
@@ -93,12 +94,13 @@ export const CarouselPlaces = () => {
         {...settings}
         ref={CustomSlider}
       >
-        <CarouselPlacesItems />
-        <CarouselPlacesItems />
-        <CarouselPlacesItems />
-        <CarouselPlacesItems />
-        <CarouselPlacesItems />
-        <CarouselPlacesItems />
+        {places.map((place, i) => {
+          return (
+            <Link to={homeAppRouter.place(place.id)}>
+              <CarouselPlacesItems key={i} place={place} />
+            </Link>
+          );
+        })}
       </Slider>
     </CarouselContent>
   );
