@@ -7,7 +7,6 @@ import {
 } from "../../../internal-router";
 import { IconName } from "styles/atoms/icons";
 import { isMobile } from "exodus/utils/checkWindowSize";
-import { TokenStorage } from "exodus/utils/accessStorage";
 
 export type AppsTypes = {
   label: string;

@@ -19,7 +19,6 @@ const WrapperMobileNavigation = styled.div<{ isDark: boolean }>`
   overflow: hidden;
   position: fixed;
   bottom: 0;
-  width: 100%;
   padding: ${rem(15)} ${rem(20)};
   background-color: ${(props) =>
     !props.isDark ? color.light.PureWhite : color.darker.BlackRussian};
@@ -32,7 +31,7 @@ const WrapperNavigation = styled.div<{ isDark: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
+  height: 100;
   padding: ${rem(15)} ${rem(20)};
   overflow: hidden;
   position: fixed;

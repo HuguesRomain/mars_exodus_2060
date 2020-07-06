@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import styled, { css } from "styled-components";
 import { TimeEventType } from "exodus/services/home";
 import { rem } from "polished";
@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { Button } from "exodus/components/atoms/button";
 import { space, fontSize, color, transitionTime } from "styles/const";
 import { AppContext } from "exodus/context";
+import { calendarAppRouter } from "exodus/internal-router";
 
 export const PopupTimeline = ({
   onMouseEnter,
@@ -33,9 +34,15 @@ export const PopupTimeline = ({
       <TextContent>
         <Title isDark={isDark}>{event.title}</Title>
         <Text>{event.text}</Text>
-        <Button styled={customButtom} type={"secondary"} iconName={"calendar"}>
-          <p style={{ marginLeft: rem(2) }}>Accéder au calendrier</p>
-        </Button>
+        <Link to={calendarAppRouter.calendar()}>
+          <Button
+            styled={customButtom}
+            type={"secondary"}
+            iconName={"calendar"}
+          >
+            <p style={{ marginLeft: rem(2) }}>Accéder au calendrier</p>
+          </Button>
+        </Link>
       </TextContent>
     </PopupTimelineStyled>
   );
@@ -54,7 +61,7 @@ const PopupTimelineStyled = styled.div<{
   z-index: 10;
   width: ${rem(288)};
   height: ${rem(364.28)};
-  margin-top: ${rem(50)};
+  margin-top: ${rem(30)};
   background-color: red;
   transition: height 0.3s;
   border-radius: 8px;
@@ -63,6 +70,9 @@ const PopupTimelineStyled = styled.div<{
   display: flex;
   align-items: center;
   flex-direction: column;
+  border: 1px solid
+    ${(props) =>
+      !props.isDark ? color.darker.BlackPearl : color.light.PureWhite};
 `;
 
 const Image = styled.div<{ image: string }>`
@@ -71,6 +81,7 @@ const Image = styled.div<{ image: string }>`
   background-repeat: no-repeat;
   height: 45%;
   width: 100%;
+  border-radius: 8px;
 `;
 
 const ContentImage = styled.div<{ isDark: boolean }>`

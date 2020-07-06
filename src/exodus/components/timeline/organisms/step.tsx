@@ -23,13 +23,16 @@ export const Step = ({
       return false;
     }
   };
+
   const isDateValide = () => {
-    return Date.now() < 1230403 ? true : false;
+    const DateMillisecond = new Date(event.Date);
+    const Datenow = new Date();
+    return Datenow < DateMillisecond ? true : false;
   };
 
   return (
     <StepContent>
-      {isPopupOpen() && (
+      {isDateValide() && isPopupOpen() && (
         <PopupTimeline
           onMouseEnter={() => {
             setIsPopupHovered((prevState) => !prevState);
@@ -44,7 +47,7 @@ export const Step = ({
         />
       )}
       <StepStyled>
-        {index !== 0 && <Line isGrey={isDateValide()} />}
+        {index !== 0 && <Line isGrey={!isDateValide()} />}
         <Pulser
           onMouseEnter={() => {
             setIsPulserHovered((prevState) => !prevState);
@@ -54,7 +57,7 @@ export const Step = ({
               setIsPulserHovered((prevState) => !prevState);
             }, 200);
           }}
-          isGrey={isDateValide()}
+          isGrey={!isDateValide()}
         />
       </StepStyled>
     </StepContent>
@@ -68,29 +71,14 @@ const StepStyled = styled.div`
 
 const Line = styled.span<{ isGrey: boolean | undefined }>`
   height: ${rem(2)};
-  min-width: 10vw;
+  width: 10vw;
   background-color: ${(props) =>
     props.isGrey ? color.medium.Manatee : color.SunsetOrange};
-  /* @media (max-width: ${breakPoint.tabletPortrait}) {
+  @media (max-width: ${breakPoint.tabletPortrait}) {
     width: 9vw;
-  } */
+  }
 `;
 
 const StepContent = styled.div`
   display: flex;
-`;
-
-const Box = styled.div`
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.6);
-  z-index: 2000000;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow-x: hidden;
-  overflow-y: auto;
 `;

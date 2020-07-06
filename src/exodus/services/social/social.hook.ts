@@ -16,7 +16,7 @@ export const getPosts = () => {
     }));
 };
 
-export const PostBlog = (contentPost: string) => {
+export const PostBlog = (contentPost: string, image?: string) => {
   return fetch("https://symfony-xmt3.frb.io/api/blog_posts", {
     headers: {
       Authorization: `Bearer ${TokenStorage()}`,
@@ -27,8 +27,15 @@ export const PostBlog = (contentPost: string) => {
       title: "A new way to live in this place",
       content: contentPost,
       slug: "a-new-day",
+      images: [image],
     }),
   });
+};
+
+export const GetImage = (url: string | undefined) => {
+  return fetch(`https://symfony-xmt3.frb.io${url}`)
+    .then((resp) => resp.json())
+    .then((json) => `https://symfony-xmt3.frb.io${json.url}`);
 };
 
 export const PostImage = (file: any) => {
@@ -38,9 +45,7 @@ export const PostImage = (file: any) => {
     },
     method: "POST",
     body: file,
-  })
-    .then((resp) => console.log(resp.json()))
-    .catch((err) => console.log(err));
+  }).then((resp) => resp.json());
 };
 
 export const GetUser = (url: string | undefined) => {

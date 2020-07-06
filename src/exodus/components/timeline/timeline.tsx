@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { getTimeEvent, TimeEventType } from "exodus/services/home";
-import { UserStorage } from "exodus/utils/accessStorage";
 import { Step } from "./organisms/step";
-import { breakPoint, space } from "styles/const";
+import { space } from "styles/const";
 import { rem } from "polished";
 import Hero from "../../../styles/assets/pics/hero/hero_7.jpg";
-import { PopupTimeline } from "./molecule/popup";
 
 export const Timeline = ({ isHome }: { isHome?: boolean }) => {
   const [events, setEvents] = useState<TimeEventType[]>([]);
@@ -25,12 +23,15 @@ export const Timeline = ({ isHome }: { isHome?: boolean }) => {
 };
 
 const TimelineStyle = styled.div<{ isHome?: boolean }>`
+  position: ${(props) => (props.isHome ? "relative" : "none")};
   display: flex;
   z-index: 1000000;
-  height: ${rem(50)};
+  height: ${(props) => (props.isHome ? rem(500) : "none")};
   overflow: hidden;
   margin: 0 0 0 ${space.l};
-  transform: ${(props) => (props.isHome ? "translateY(-20px)" : "none")};
+  padding-top: ${rem(10)};
+  transform: ${(props) => (props.isHome ? "translateY(-65px)" : "none")};
+  align-items: flex-start;
 `;
 
 export const TimelinePage = () => {
@@ -51,7 +52,7 @@ const Background = styled.div`
   background-size: cover;
   top: 0;
   height: ${rem(68)};
-  width: 95vw;
+  width: 97vw;
   border-bottom-right-radius: 80px;
   z-index: 10000;
 `;

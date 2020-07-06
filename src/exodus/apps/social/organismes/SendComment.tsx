@@ -1,4 +1,10 @@
-import React, { useState, ChangeEvent, KeyboardEvent, useEffect } from "react";
+import React, {
+  useState,
+  ChangeEvent,
+  KeyboardEvent,
+  useEffect,
+  useRef,
+} from "react";
 import styled from "styled-components";
 import { AddMedia } from "../molecules/AddMedia";
 import {
@@ -11,7 +17,7 @@ import {
 import { Avatar } from "../atoms/Avatar";
 import { Icon } from "styles/atoms/icons";
 import { AppContext } from "exodus/context";
-import { PostBlog /* PostImage  */ } from "exodus/services/social/social.hook";
+import { PostBlog, PostImage } from "exodus/services/social/social.hook";
 import { UserStorage } from "exodus/utils/accessStorage";
 
 type Props = {
@@ -25,15 +31,7 @@ export const SendComment = ({ callBack }: Props) => {
   /* let [newImage, setNewImage] = useState<FileList | null>(null); */
   let [UserInfo, setUserInfo] = useState<UserInfoType>();
 
-  /* const handleFile = (e: ChangeEvent<HTMLInputElement>) => {
-    let file = e.target.files;
-    let formdata = new FormData();
-    if (file) {
-      formdata.append("inpFile", file[0], "Tank");
-      PostImage(formdata);
-      console.log(formdata);
-    }
-  }; */
+  const inputEl = useRef(null);
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setNewPost(e.target.value);
@@ -42,8 +40,12 @@ export const SendComment = ({ callBack }: Props) => {
     if (e.key === "Enter") HandleSubmit();
   };
   const HandleSubmit = () => {
-    PostBlog(newPost)
-      /* .then(() => PostImage(newImage)) */
+    // @ts-ignore
+    let files = inputEl.current.files;
+    const formdata = new FormData();
+    if (files && files.length) formdata.append("file", files[0]);
+    PostImage(formdata)
+      .then((item) => PostBlog(newPost, `/api/images/${item.id}`))
       .then(() => callBack())
       .catch((err) => console.log(err))
       .finally(() => setNewPost(""));
@@ -73,9 +75,11 @@ export const SendComment = ({ callBack }: Props) => {
         />
       </Head>
       <SendAndMore>
-        <AddMedia />
+        <AddPhoto type="file" id="fileId" ref={inputEl} />
+        <label htmlFor="fileId">
+          <AddMedia />
+        </label>
         <Icon size={iconSize.s} onClick={HandleSubmit} name={"send"} />
-        {/* <input type="file" id="fileId" onChange={handleFile} /> */}
       </SendAndMore>
     </Content>
   );
@@ -112,4 +116,14 @@ const CommentInput = styled.input<{ isDark: boolean }>`
   transition: ${transitionTime};
   background-color: ${(props) =>
     !props.isDark ? color.light.PureWhite : color.darker.BlackRussian};
+`;
+const AddPhoto = styled.input.attrs({ type: "file" })`
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute !important;
+  white-space: nowrap;
+  width: 1px;
 `;
