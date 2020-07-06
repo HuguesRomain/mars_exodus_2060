@@ -30,8 +30,6 @@ export const SocialPage = () => {
     // eslint-disable-next-line
   }, []);
 
-  console.log("test");
-
   return (
     <div style={{ display: "flex", minHeight: "100vh" }}>
       <SocialPart>
