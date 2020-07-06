@@ -13,6 +13,43 @@ import Dune from "../../../../styles/assets/pics/dune.png";
 import { rem } from "polished";
 import { AppContext } from "exodus/context";
 
+const articles: ArticleType[] = [
+  {
+    img: Bobafett,
+    title: "Devenez Chasseur d’Alien",
+    url: "welcometothegalaxy.mar",
+    description:
+      "Apprenez les clés du métier, constituez votre réseau et décrochez un job sur Welcome to the Galaxy !",
+  },
+  {
+    img: Dune,
+    title: "Résidences Planitia Real Estate",
+    url: "planitiarealeastate.mar",
+    description:
+      "Découvrez nos résidences modernes avec vue sur les pyramides d’Elysium.",
+  },
+];
+
+export const Advertisement = () => {
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
+  return (
+    <AdvertisementStyled isDark={isDark}>
+      <SectionName>Sponsorisés</SectionName>
+      {articles.map((article, i) => (
+        <Article key={i}>
+          <Articleimg src={article.img} alt="Image article" />
+          <Content>
+            <Title isDark={isDark}>{article.title}</Title>
+            <Link isDark={isDark}>{article.url}</Link>
+            <Description>{article.description}</Description>
+          </Content>
+        </Article>
+      ))}
+    </AdvertisementStyled>
+  );
+};
+
 const AdvertisementStyled = styled.div<{ isDark: boolean }>`
   display: flex;
   flex-direction: column;
@@ -78,41 +115,4 @@ type ArticleType = {
   title: string;
   url: string;
   description: string;
-};
-
-const articles: ArticleType[] = [
-  {
-    img: Bobafett,
-    title: "Devenez Chasseur d’Alien",
-    url: "welcometothegalaxy.mar",
-    description:
-      "Apprenez les clés du métier, constituez votre réseau et décrochez un job sur Welcome to the Galaxy !",
-  },
-  {
-    img: Dune,
-    title: "Résidences Planitia Real Estate",
-    url: "planitiarealeastate.mar",
-    description:
-      "Découvrez nos résidences modernes avec vue sur les pyramides d’Elysium.",
-  },
-];
-
-export const Advertisement = () => {
-  const Context = React.useContext(AppContext);
-  const [isDark] = Context.isDarkContext;
-  return (
-    <AdvertisementStyled isDark={isDark}>
-      <SectionName>Sponsorisés</SectionName>
-      {articles.map((article, i) => (
-        <Article key={i}>
-          <Articleimg src={article.img} alt="Image article" />
-          <Content>
-            <Title isDark={isDark}>{article.title}</Title>
-            <Link isDark={isDark}>{article.url}</Link>
-            <Description>{article.description}</Description>
-          </Content>
-        </Article>
-      ))}
-    </AdvertisementStyled>
-  );
 };

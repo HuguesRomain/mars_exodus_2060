@@ -31,6 +31,18 @@ export const PostBlog = (contentPost: string) => {
   });
 };
 
+export const PostImage = (file: any) => {
+  return fetch("https://symfony-xmt3.frb.io/api/images", {
+    headers: {
+      Authorization: `Bearer ${TokenStorage()}`,
+    },
+    method: "POST",
+    body: file,
+  })
+    .then((resp) => console.log(resp.json()))
+    .catch((err) => console.log(err));
+};
+
 export const GetUser = (url: string | undefined) => {
   return fetch(`https://symfony-xmt3.frb.io${url}`, {
     headers: {

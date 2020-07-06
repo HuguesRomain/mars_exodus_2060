@@ -64,7 +64,11 @@ export const PostItem = ({ callBack, post }: Props) => {
       <PostText isDark={isDark}>{post.content}</PostText>
       <Interact>
         <Share />
-        <Comment quantity={post.comments?.length} />
+        <Comment
+          postId={post["@id"]}
+          comments={post.comments}
+          quantity={post.comments?.length}
+        />
         <Like quantity={0} />
       </Interact>
       {!isMobileOnly(windowSize) && (

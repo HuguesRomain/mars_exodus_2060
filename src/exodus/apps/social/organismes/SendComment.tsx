@@ -11,7 +11,7 @@ import {
 import { Avatar } from "../atoms/Avatar";
 import { Icon } from "styles/atoms/icons";
 import { AppContext } from "exodus/context";
-import { PostBlog } from "exodus/services/social/social.hook";
+import { PostBlog /* PostImage  */ } from "exodus/services/social/social.hook";
 import { UserStorage } from "exodus/utils/accessStorage";
 
 type Props = {
@@ -21,20 +21,32 @@ type Props = {
 export const SendComment = ({ callBack }: Props) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
-  let [newPost, setnewPost] = useState("");
+  let [newPost, setNewPost] = useState("");
+  /* let [newImage, setNewImage] = useState<FileList | null>(null); */
   let [UserInfo, setUserInfo] = useState<UserInfoType>();
 
+  /* const handleFile = (e: ChangeEvent<HTMLInputElement>) => {
+    let file = e.target.files;
+    let formdata = new FormData();
+    if (file) {
+      formdata.append("inpFile", file[0], "Tank");
+      PostImage(formdata);
+      console.log(formdata);
+    }
+  }; */
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setnewPost(e.target.value);
+    setNewPost(e.target.value);
   };
   const handleEnter = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") HandleSubmit();
   };
   const HandleSubmit = () => {
     PostBlog(newPost)
+      /* .then(() => PostImage(newImage)) */
       .then(() => callBack())
       .catch((err) => console.log(err))
-      .finally(() => setnewPost(""));
+      .finally(() => setNewPost(""));
   };
 
   useEffect(() => {
@@ -63,6 +75,7 @@ export const SendComment = ({ callBack }: Props) => {
       <SendAndMore>
         <AddMedia />
         <Icon size={iconSize.s} onClick={HandleSubmit} name={"send"} />
+        {/* <input type="file" id="fileId" onChange={handleFile} /> */}
       </SendAndMore>
     </Content>
   );

@@ -12,6 +12,17 @@ import {
 } from "styles/const";
 import { AppContext } from "exodus/context";
 
+export const AddMedia = () => {
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
+  return (
+    <Content isDark={isDark}>
+      <Icon size={iconSize.s} color={color.medium.Manatee} name={"pics"} />
+      <Description>Photos/Vidéos</Description>
+    </Content>
+  );
+};
+
 const Content = styled.div<{ isDark: boolean }>`
   display: flex;
   align-items: center;
@@ -33,14 +44,3 @@ const Description = styled.p`
   font-size: ${fontSize.xs};
   font-weight: ${fontWeight.avenir.m};
 `;
-
-export const AddMedia = () => {
-  const Context = React.useContext(AppContext);
-  const [isDark] = Context.isDarkContext;
-  return (
-    <Content isDark={isDark}>
-      <Icon size={iconSize.s} color={color.medium.Manatee} name={"pics"} />
-      <Description>Photos/Vidéos</Description>
-    </Content>
-  );
-};
