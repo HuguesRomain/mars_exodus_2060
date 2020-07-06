@@ -25,7 +25,7 @@ type Props = {
 };
 
 export const PostItem = ({ callBack, post }: Props) => {
-  const [infoUser, setInfoUser] = useState<User>();
+  const [infoUser, setInfoUser] = useState<UserType>();
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
   const [windowSize] = Context.windowSizeContext;

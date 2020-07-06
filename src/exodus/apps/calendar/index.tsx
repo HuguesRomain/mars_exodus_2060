@@ -2,11 +2,10 @@ import React, { useState } from "react";
 import { ActivityList } from "./components/molecules/ActivityList";
 import { Calendar } from "./components/organismes/Calendar";
 import styled from "styled-components";
-
-const Content = styled.main`
-  display: flex;
-  flex-direction: row-reverse;
-`;
+import { TimelinePage } from "exodus/components/timeline/timeline";
+import { isMinTabletPortrait } from "exodus/utils/checkWindowSize";
+import { AppContext } from "exodus/context";
+import { rem } from "polished";
 
 const BaseEvent = [
   {
@@ -25,12 +24,22 @@ const BaseEvent = [
 
 const CalendarApp = () => {
   const [calendarEvents] = useState<Dates[]>(BaseEvent);
+  const Context = React.useContext(AppContext);
+  const [windowSize] = Context.windowSizeContext;
   return (
-    <Content>
-      <ActivityList calendarEvents={calendarEvents} />
-      <Calendar calendarEvents={calendarEvents} />
-    </Content>
+    <>
+      {isMinTabletPortrait(windowSize) && <TimelinePage />}
+      <Content>
+        <ActivityList calendarEvents={calendarEvents} />
+        <Calendar calendarEvents={calendarEvents} />
+      </Content>
+    </>
   );
 };
 
+const Content = styled.main`
+  display: flex;
+  flex-direction: row-reverse;
+  padding-top: ${rem(40)};
+`;
 export default CalendarApp;

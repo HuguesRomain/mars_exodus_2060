@@ -7,9 +7,9 @@ export const isDarkStorage = () => {
     : false;
 };
 
-export const TokenStorage = () => {
+export const TokenStorage = (): string => {
   const Token = JSON.parse(localStorage.getItem("token") || "{}");
-  return typeof Token === "string" ? Token : null;
+  return typeof Token === "string" ? Token : "";
 };
 
 export const UsernameStorage = () => {
@@ -17,7 +17,7 @@ export const UsernameStorage = () => {
   return typeof Username === "string" ? Username : null;
 };
 
-export const UserStorage = () => {
+export const UserStorage = (): UserInfoType => {
   const User = JSON.parse(localStorage.getItem("user") || "{}");
   return typeof User === "object" ? User : null;
 };

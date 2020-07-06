@@ -12,15 +12,17 @@ import { isMobileOnly, isMobile } from "exodus/utils/checkWindowSize";
 import { AppContext } from "exodus/context";
 import { Button } from "exodus/components/atoms/button";
 import { UserStorage } from "exodus/utils/accessStorage";
+import { TimelinePage } from "exodus/components/timeline/timeline";
+import { rem } from "polished";
 
 export const apps = [
   {
     label: "Identité",
-    uri: profileAppRouter.identity("1"),
+    uri: profileAppRouter.identity(),
   },
   {
     label: "Billet",
-    uri: profileAppRouter.ticket("1"),
+    uri: profileAppRouter.ticket(),
   },
 ];
 const ProfileApp = () => {
@@ -35,12 +37,12 @@ const ProfileApp = () => {
         <Switch>
           <Route
             exact
-            path={profileAppRouter.identity("1")}
+            path={profileAppRouter.identity()}
             render={() => <IdentityCard />}
           />
           <Route
             exact
-            path={profileAppRouter.ticket("1")}
+            path={profileAppRouter.ticket()}
             render={() => (
               <Ticket
                 alt="your ticket"
@@ -65,10 +67,13 @@ const ProfileApp = () => {
       </Button>
     </ProfileAppMobileStyled>
   ) : (
-    <ProfileAppStyled>
-      <InfoSection />
-      <TicketSection />
-    </ProfileAppStyled>
+    <>
+      <TimelinePage />
+      <ProfileAppStyled>
+        <InfoSection />
+        <TicketSection />
+      </ProfileAppStyled>
+    </>
   );
 };
 
@@ -85,6 +90,7 @@ const ProfileAppMobileStyled = styled.div`
 const ProfileAppStyled = styled.div`
   display: flex;
   height: 100vh;
+  padding-top: ${rem(30)};
 `;
 
 export default ProfileApp;

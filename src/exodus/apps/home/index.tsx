@@ -18,6 +18,7 @@ import {
   PlaceType,
 } from "exodus/services/home";
 import { Place } from "./place";
+import { Timeline } from "exodus/components/timeline/timeline";
 // import { ThemePicker } from "exodus/components/navbar/atoms/themePicker";
 
 const HomeApp = () => {
@@ -85,7 +86,7 @@ const HomeContent = styled.main`
   overflow: hidden;
   margin: ${space.l} 0 0 ${space.s};
 
-  @media (min-width: 550px) {
+  @media (min-width: ${breakPoint.mobileOnly}) {
     margin: ${space.l} 0 0 ${space.l};
   }
 `;

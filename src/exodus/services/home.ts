@@ -1,3 +1,5 @@
+import { TokenStorage } from "exodus/utils/accessStorage";
+
 type GetArticlesType = {
   ["@context"]: string;
   ["@id"]: string;
@@ -19,6 +21,14 @@ type GetPlacesType = {
   ["@id"]: string;
   ["@type"]: string;
   ["hydra:member"]: PlaceType[];
+  ["hydra:totalItems"]: number;
+};
+
+type GetTimeEventType = {
+  ["@context"]: string;
+  ["@id"]: string;
+  ["@type"]: string;
+  ["hydra:member"]: TimeEventType[];
   ["hydra:totalItems"]: number;
 };
 
@@ -56,6 +66,19 @@ export type SectionType = {
   title: string;
 };
 
+export type TimeEventType = {
+  ["@context"]: string;
+  ["@id"]: string;
+  ["@type"]: string;
+  id: number;
+  title: string;
+  text: string;
+  picture: string;
+  buttonLabel: string;
+  buttonUrl: string;
+  Date: string;
+};
+
 export const getArticles = (): Promise<GetArticlesType> => {
   return fetch("https://symfony-xmt3.frb.io/api/articles", {
     headers: {
@@ -91,6 +114,22 @@ export const getArticlesSection = (
 export const getPlaces = (): Promise<GetPlacesType> => {
   return fetch("https://symfony-xmt3.frb.io/api/lieus", {
     headers: {
+      "Content-Type": "application/json",
+    },
+    method: "GET",
+  })
+    .then((resp) => {
+      return resp.json();
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+
+export const getTimeEvent = (): Promise<GetTimeEventType> => {
+  return fetch(`https://symfony-xmt3.frb.io/api/time_events`, {
+    headers: {
+      Authorization: `Bearer ${TokenStorage()}`,
       "Content-Type": "application/json",
     },
     method: "GET",

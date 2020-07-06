@@ -1,7 +1,14 @@
 import React from "react";
 import styled from "styled-components";
 import { PlaceType } from "exodus/services/home";
-import { space, color, fontSize, transitionTime, font } from "styles/const";
+import {
+  space,
+  color,
+  fontSize,
+  transitionTime,
+  font,
+  breakPoint,
+} from "styles/const";
 import { Icon } from "styles/atoms/icons";
 import { AppContext } from "exodus/context";
 import { rem } from "polished";
@@ -100,7 +107,7 @@ const DoubleMedia = styled.div`
   justify-content: space-between;
   margin: ${space.m} 0;
 
-  @media (max-width: 550px) {
+  @media (max-width: ${breakPoint.mobileOnly}) {
     height: ${rem(370)};
     flex-direction: column;
   }
@@ -110,7 +117,7 @@ const DoubleMediaVideo = styled.iframe`
   width: 48%;
   border-radius: 10px;
 
-  @media (max-width: 550px) {
+  @media (max-width: ${breakPoint.mobileOnly}) {
     width: 100%;
   }
 `;
@@ -120,7 +127,7 @@ const DoubleMediaPhoto = styled.img`
   height: 100%;
   border-radius: 10px;
 
-  @media (max-width: 550px) {
+  @media (max-width: ${breakPoint.mobileOnly}) {
     width: 100%;
     height: 100%;
   }
@@ -151,14 +158,14 @@ const HeaderContent = styled.div`
   overflow: hidden;
   margin: ${space.l} 0 0 ${space.s};
 
-  @media (min-width: 550px) {
+  @media (min-width: ${breakPoint.mobileOnly}) {
     margin: ${space.l} 0 0 ${space.l};
   }
 `;
 
 const Sections = styled.div`
   width: 50%;
-  @media (max-width: 550px) {
+  @media (max-width: ${breakPoint.mobileOnly}) {
     margin: 0;
     padding: ${space.l} ${space.s};
     width: 100%;
@@ -194,7 +201,7 @@ const CarouselContent = styled.div`
   overflow: hidden;
   margin: ${space.l} 0 0 ${space.s};
 
-  @media (min-width: 550px) {
+  @media (min-width: ${breakPoint.mobileOnly}) {
     margin: ${space.l} 0 0 ${space.l};
   }
 `;

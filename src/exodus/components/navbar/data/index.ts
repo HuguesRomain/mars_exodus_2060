@@ -7,6 +7,7 @@ import {
 } from "../../../internal-router";
 import { IconName } from "styles/atoms/icons";
 import { isMobile } from "exodus/utils/checkWindowSize";
+import { TokenStorage } from "exodus/utils/accessStorage";
 
 export type AppsTypes = {
   label: string;
@@ -37,7 +38,7 @@ export const apps: AppsTypes[] = [
   {
     label: "Compte",
     uri: isMobile(window.innerWidth)
-      ? profileAppRouter.identity("1")
+      ? profileAppRouter.identity()
       : profileAppRouter.profile(),
     icon: "profile",
     order: 4,

@@ -9,6 +9,7 @@ import { PlaceType } from "exodus/services/home";
 import { Button } from "exodus/components/atoms/button";
 import { Link } from "react-router-dom";
 import { homeAppRouter } from "exodus/internal-router";
+import { Pulser } from "exodus/components/atoms/pulser";
 
 const PlacesPosition = [
   { position: "translateY(175px) translateX(50px)" },
@@ -31,7 +32,7 @@ export const MapComponent = ({ places }: { places: PlaceType[] }) => {
       <HomeTitle isDark={isDark}>Lieux à visiter</HomeTitle>
       {PlacesPosition.map((PlacePosition, i) => {
         return (
-          <PinAndPopup
+          <PulserAndPopup
             key={i}
             place={places[i]}
             PlacePosition={PlacePosition.position}
@@ -61,18 +62,18 @@ const MapWrapper = styled.div`
   flex-direction: column;
 `;
 
-const PinAndPopup = ({
+const PulserAndPopup = ({
   place,
   PlacePosition,
 }: {
   place: PlaceType;
   PlacePosition: string;
 }) => {
-  const [isPinHovered, setIsPinHovered] = useState<boolean>(false);
+  const [isPulserHovered, setIsPulserHovered] = useState<boolean>(false);
   const [isPopupHovered, setIsPopupHovered] = useState<boolean>(false);
 
   const isPopupOpen = (): boolean => {
-    if (isPinHovered === true || isPopupHovered === true) {
+    if (isPulserHovered === true || isPopupHovered === true) {
       return true;
     } else {
       return false;
@@ -85,7 +86,7 @@ const PinAndPopup = ({
   `;
 
   return (
-    <PinContent
+    <PulserContent
       style={{
         transform: PlacePosition,
       }}
@@ -118,46 +119,25 @@ const PinAndPopup = ({
           </Link>
         </ContentPopup>
       </Popup>
-      <Pin
+      <Pulser
         onMouseEnter={() => {
-          setIsPinHovered((prevState) => !prevState);
+          setIsPulserHovered((prevState) => !prevState);
         }}
         onMouseLeave={() => {
           setTimeout(() => {
-            setIsPinHovered((prevState) => !prevState);
+            setIsPulserHovered((prevState) => !prevState);
           }, 200);
         }}
-      >
-        <Pulser />
-      </Pin>
-    </PinContent>
+      />
+    </PulserContent>
   );
 };
 
-const PinContent = styled.div`
+const PulserContent = styled.div`
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: flex-end;
-`;
-
-const Pin = styled.div`
-  z-index: 1;
-  width: ${rem(12)};
-  height: ${rem(12)};
-  border-radius: 50%;
-  background-color: ${color.SunsetOrange};
-`;
-
-const Pulser = styled.div`
-  position: absolute;
-  width: inherit;
-  height: inherit;
-  border-radius: inherit;
-  background-color: inherit;
-  :hover {
-    animation: pulse 1.75s ease-out infinite;
-  }
 `;
 
 const Popup = styled.div<{ image: string | null; isPopupOpen: boolean }>`

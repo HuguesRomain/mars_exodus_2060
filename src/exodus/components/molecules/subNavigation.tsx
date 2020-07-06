@@ -44,7 +44,7 @@ type TypeDatas = {
 };
 
 export const SubNavigation = ({ datas }: TypeDatas) => {
-  const [path, setPath] = useState<UriType>(profileAppRouter.identity("1"));
+  const [path, setPath] = useState<UriType>(profileAppRouter.identity());
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
   return (

@@ -17,7 +17,7 @@ type Props = {
   comment: string;
 };
 export const CommentItem = ({ comment }: Props) => {
-  const [infoUser, setInfoUser] = useState<User>();
+  const [infoUser, setInfoUser] = useState<UserType>();
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
   const itemOfComment = useGetComment(comment);
@@ -46,7 +46,7 @@ export const CommentItem = ({ comment }: Props) => {
         {
           addSuffix: true,
           includeSeconds: true,
-        },
+        }
       );
     }
   })();

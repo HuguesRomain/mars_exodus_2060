@@ -17,8 +17,8 @@ class AuthAppRoutes {
 
 class HomeAppRoutes {
   home = () => `${homeApp}`;
-  article = (articleId: number) => `${homeApp}article/${articleId}`;
-  place = (placeId: number) => `${homeApp}place/${placeId}`;
+  article = (articleId: number) => `${homeApp}article/:${articleId}`;
+  place = (placeId: number) => `${homeApp}place/:${placeId}`;
 }
 
 class CalendarAppRoutes {
@@ -32,8 +32,8 @@ class SocialAppRoutes {
 
 class ProfileAppRoutes {
   profile = () => `${profileApp}`;
-  identity = (token: string) => `${profileApp}identity/${token}`;
-  ticket = (token: string) => `${profileApp}ticket/${token}`;
+  identity = () => `${profileApp}identity`;
+  ticket = () => `${profileApp}ticket`;
 }
 
 const authAppRoutes = new AuthAppRoutes();

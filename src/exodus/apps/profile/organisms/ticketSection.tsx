@@ -24,6 +24,7 @@ const SectionWrapper = styled.section<{ isDark: boolean }>`
   background-color: ${(props) =>
     !props.isDark ? color.light.Solitude : color.darker.BlackPearl};
   width: 40vw;
+  padding-top: ${rem(20)};
   transition: ${transitionTime};
 `;
 

@@ -13,6 +13,7 @@ import {
   font,
   fontSize,
   iconSize,
+  breakPoint,
 } from "styles/const";
 import { AppContext } from "exodus/context";
 import { rem } from "polished";
@@ -145,7 +146,7 @@ const DoubleMedia = styled.div`
   justify-content: space-between;
   margin: ${space.m} 0;
 
-  @media (max-width: 550px) {
+  @media (max-width: ${breakPoint.mobileOnly}) {
     height: ${rem(370)};
     flex-direction: column;
   }
@@ -155,7 +156,7 @@ const DoubleMediaVideo = styled.iframe`
   width: 48%;
   border-radius: 10px;
 
-  @media (max-width: 550px) {
+  @media (max-width: ${breakPoint.mobileOnly}) {
     width: 100%;
   }
 `;
@@ -164,7 +165,7 @@ const DoubleMediaPhoto = styled.img`
   width: 48%;
   border-radius: 10px;
 
-  @media (max-width: 550px) {
+  @media (max-width: ${breakPoint.mobileOnly}) {
     width: 100%;
   }
 `;
@@ -200,7 +201,7 @@ const HeaderContent = styled.div`
   overflow: hidden;
   margin: ${space.l} 0 0 ${space.s};
 
-  @media (min-width: 550px) {
+  @media (min-width: ${breakPoint.mobileOnly}) {
     margin: ${space.l} 0 0 ${space.l};
   }
 `;
@@ -208,7 +209,7 @@ const HeaderContent = styled.div`
 const Sections = styled.div`
   margin: ${space.l} 0 0 ${space.s};
   width: 50%;
-  @media (max-width: 550px) {
+  @media (max-width: ${breakPoint.mobileOnly}) {
     margin: 0;
     padding: ${space.l} ${space.s};
     width: 100%;

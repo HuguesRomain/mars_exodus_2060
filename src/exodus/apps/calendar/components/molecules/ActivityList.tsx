@@ -3,20 +3,7 @@ import { ActivityItem } from "../atoms/ActivityItem";
 import styled from "styled-components";
 import { fontSize, fontWeight, color, transitionTime } from "styles/const";
 import { AppContext } from "exodus/context";
-
-const ActivityContent = styled.div<{ isDark: boolean }>`
-  background-color: ${(props) =>
-    !props.isDark ? color.light.PureWhite : color.darker.BlackRussian};
-  padding: 0 82px 0 48px;
-  transition: background-color ${transitionTime};
-`;
-
-const Title = styled.h1<{ isDark: boolean }>`
-  font-weight: ${fontWeight.avenir.l};
-  color: ${(props) =>
-    !props.isDark ? color.darker.BlackPearl : color.light.PureWhite};
-  font-size: ${fontSize.xl};
-`;
+import { rem } from "polished";
 
 interface props {
   calendarEvents: Array<Dates>;
@@ -38,3 +25,18 @@ export const ActivityList = ({ calendarEvents }: props) => {
     </ActivityContent>
   );
 };
+
+const ActivityContent = styled.div<{ isDark: boolean }>`
+  background-color: ${(props) =>
+    !props.isDark ? color.light.PureWhite : color.darker.BlackRussian};
+  padding: 0 82px 0 48px;
+  transition: background-color ${transitionTime};
+  padding-top: ${rem(30)};
+`;
+
+const Title = styled.h1<{ isDark: boolean }>`
+  font-weight: ${fontWeight.avenir.l};
+  color: ${(props) =>
+    !props.isDark ? color.darker.BlackPearl : color.light.PureWhite};
+  font-size: ${fontSize.xl};
+`;
