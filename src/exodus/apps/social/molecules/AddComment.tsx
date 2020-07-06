@@ -14,6 +14,9 @@ import { Icon } from "styles/atoms/icons";
 import { AppContext } from "exodus/context";
 import { PostComment } from "exodus/services/social/social.hook";
 import { UserStorage } from "exodus/utils/accessStorage";
+import { isMobile } from "exodus/utils/checkWindowSize";
+import { useHistory } from "react-router-dom";
+import { socialAppRouter } from "exodus/internal-router";
 
 type Props = {
   callBack?: () => void;
@@ -23,7 +26,10 @@ type Props = {
 const InputComment = ({ callBack, postId }: Props) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
+  const [windowSize] = Context.windowSizeContext;
   let [newComment, setNewComment] = useState("");
+
+  const history = useHistory();
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     setNewComment(e.target.value);
@@ -38,6 +44,7 @@ const InputComment = ({ callBack, postId }: Props) => {
       })
       .catch((err) => console.log(err))
       .finally(() => setNewComment(""));
+    if (isMobile(windowSize)) history.push(socialAppRouter.social());
   };
 
   return (
@@ -91,8 +98,9 @@ const Content = styled.div<{ isDark: boolean }>`
   transition: ${transitionTime};
   @media (max-width: ${breakPoint.mobileOnly}) {
     border: none;
-    position: sticky;
+    position: fixed;
     bottom: 73px;
+    padding-bottom: ${space.s};
   }
 `;
 

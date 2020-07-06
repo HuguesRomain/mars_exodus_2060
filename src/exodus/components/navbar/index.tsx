@@ -32,13 +32,12 @@ const WrapperNavigation = styled.div<{ isDark: boolean }>`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 100%;
+  height: 100vh;
   padding: ${rem(15)} ${rem(20)};
   overflow: hidden;
   position: fixed;
   left: 0;
   width: ${rem(96)};
-  height: 100%;
   background-color: ${(props) =>
     !props.isDark ? color.light.PureWhite : color.darker.BlackRussian};
   border-radius: 0px 20px 20px 0px;

@@ -17,6 +17,7 @@ export const getPosts = () => {
 };
 
 export const PostBlog = (contentPost: string, image?: string) => {
+  let urlImage = `/api/images/${image}`;
   return fetch("https://symfony-xmt3.frb.io/api/blog_posts", {
     headers: {
       Authorization: `Bearer ${TokenStorage()}`,
@@ -27,7 +28,7 @@ export const PostBlog = (contentPost: string, image?: string) => {
       title: "A new way to live in this place",
       content: contentPost,
       slug: "a-new-day",
-      images: [image],
+      images: image ? [urlImage] : [],
     }),
   });
 };

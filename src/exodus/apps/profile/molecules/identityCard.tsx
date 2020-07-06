@@ -84,7 +84,7 @@ const Wrapper = styled.div`
   padding: ${space.m} ${space.m};
 
   @media (min-width: ${breakPoint.tabletPortrait}) {
-    padding: ${space.m} ${space.l};
+    padding: ${space.xl} ${space.l};
   }
 `;
 
