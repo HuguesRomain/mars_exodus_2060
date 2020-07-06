@@ -16,7 +16,7 @@ import { AddComment } from "../molecules/AddComment";
 import { Avatar } from "../atoms/Avatar";
 import { isMobile, isMobileOnly } from "exodus/utils/checkWindowSize";
 import { AppContext } from "exodus/context";
-import { GetUser } from "exodus/services/social/social.hook";
+import { GetUser, GetImage } from "exodus/services/social/social.hook";
 import { formatDistanceToNow } from "date-fns";
 
 type Props = {
@@ -26,6 +26,7 @@ type Props = {
 
 export const PostItem = ({ callBack, post }: Props) => {
   const [infoUser, setInfoUser] = useState<User>();
+  const [Images, setImages] = useState<string>();
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
   const [windowSize] = Context.windowSizeContext;
@@ -35,7 +36,12 @@ export const PostItem = ({ callBack, post }: Props) => {
         setInfoUser(data);
       })
       .catch(() => {});
-  }, [post]);
+    if (post.images && post.images[0]) {
+      GetImage(post.images && post.images[0]).then((data) => {
+        setImages(data);
+      });
+    }
+  }, [post, Images]);
 
   const avatarPicture = (() => {
     return infoUser && infoUser.profilePicture
@@ -62,6 +68,12 @@ export const PostItem = ({ callBack, post }: Props) => {
         <Since>{PublishDate}</Since>
       </UserInfo>
       <PostText isDark={isDark}>{post.content}</PostText>
+      <PostImage
+        style={!Images ? { display: "none" } : {}}
+        src={Images}
+        alt="Image of post"
+      />
+
       <Interact>
         <Share />
         <Comment
@@ -87,6 +99,13 @@ export const PostItem = ({ callBack, post }: Props) => {
 
 const dark = css`
   color: ${color.light.PureWhite};
+`;
+
+const PostImage = styled.img`
+  width: 100%;
+  height: 228px;
+  object-fit: cover;
+  border-radius: 5px;
 `;
 
 const Item = styled.li<{ isDark: boolean }>`
