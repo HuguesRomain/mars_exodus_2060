@@ -1,7 +1,14 @@
 import React, { useState, ChangeEvent, KeyboardEvent, useEffect } from "react";
 import styled from "styled-components";
 import { Avatar } from "../atoms/Avatar";
-import { iconSize, color, fontSize, space, transitionTime } from "styles/const";
+import {
+  iconSize,
+  color,
+  fontSize,
+  space,
+  transitionTime,
+  breakPoint,
+} from "styles/const";
 import { rem } from "polished";
 import { Icon } from "styles/atoms/icons";
 import { AppContext } from "exodus/context";
@@ -66,7 +73,7 @@ export const AddComment = ({ callBack, postId }: Props) => {
 
   return (
     <Content isDark={isDark}>
-      <Avatar src={avatarPicture} size={iconSize.l} />
+      <ImageAvatar src={avatarPicture} size={iconSize.l} />
       <InputComment callBack={callBack} postId={postId} />
     </Content>
   );
@@ -77,11 +84,16 @@ const Content = styled.div<{ isDark: boolean }>`
   align-items: center;
   padding-top: ${space.s};
   width: 100%;
-  margin-top: ${space.xs};
+  margin-top: ${space.xs} 0;
   border-top: 1px solid
     ${(props) =>
       !props.isDark ? color.light.WhiteSmoke : color.darker.LuckyPoint};
   transition: ${transitionTime};
+  @media (max-width: ${breakPoint.mobileOnly}) {
+    border: none;
+    position: sticky;
+    bottom: 73px;
+  }
 `;
 
 const InputCommentStyled = styled.div`
@@ -107,6 +119,13 @@ const InputStyled = styled.input<{ isDark: boolean }>`
     padding-left: ${space.xs};
   }
   transition: ${transitionTime};
+  @media (max-width: ${breakPoint.mobileOnly}) {
+    background-color: ${(props) =>
+      !props.isDark ? color.light.PureWhite : color.darker.BlackPearl};
+    border: none;
+    position: sticky;
+    bottom: 73px;
+  }
 `;
 
 const Send = styled.div<{ isDark: boolean }>`
@@ -120,4 +139,15 @@ const Send = styled.div<{ isDark: boolean }>`
   padding: ${space.xs} ${space.s};
   height: ${rem(40)};
   transition: ${transitionTime};
+  @media (max-width: ${breakPoint.mobileOnly}) {
+    background-color: ${(props) =>
+      !props.isDark ? color.light.PureWhite : color.darker.BlackPearl};
+  }
+`;
+
+const ImageAvatar = styled(Avatar)`
+  @media (max-width: ${breakPoint.mobileOnly}) {
+    margin-left: ${rem(130)};
+    display: none;
+  }
 `;

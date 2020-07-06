@@ -1,18 +1,20 @@
 import React from "react";
-/* import { CommentItem } from "./organismes/CommentItem"; */
+import { CommentItem } from "./organismes/CommentItem";
 import styled from "styled-components";
 import { Icon } from "styles/atoms/icons";
 import { rem } from "polished";
 import { color, transitionTime } from "styles/const";
 import { AppContext } from "exodus/context";
+import { useLocation } from "react-router-dom";
+import { AddComment } from "./molecules/AddComment";
 
-/* const CommentList = styled.ul`
+const CommentList = styled.ul`
   padding: 0 ${rem(10)};
-`; */
+`;
 
 const BackSection = styled.div<{ isDark: boolean }>`
   width: 100vw;
-  padding: ${rem(10)} 0 0 ${rem(10)};
+  padding: ${rem(20)};
   background-color: ${(props) =>
     !props.isDark ? color.light.PureWhite : color.darker.DarkestBlack};
   transition: ${transitionTime};
@@ -23,7 +25,6 @@ const MobileCommentStyle = styled.div<{ isDark: boolean }>`
   flex-direction: column;
   background-color: ${(props) =>
     !props.isDark ? color.light.WhiteSmoke : color.darker.DarkestBlack};
-  height: 100vh;
   transition: ${transitionTime};
 `;
 
@@ -31,6 +32,12 @@ const MobileComments = () => {
   /* const [comments, setComments] = useState<Comments[]>(comment); */
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
+  const location = useLocation();
+  // @ts-ignore
+  const comments: string[] = location.param1;
+  // @ts-ignore
+  const postId = location.param2;
+
   return (
     <MobileCommentStyle isDark={isDark}>
       <BackSection
@@ -41,12 +48,13 @@ const MobileComments = () => {
       >
         <Icon name={"back"} />
       </BackSection>
-      {/* <CommentList>
+      <CommentList>
         {comments &&
           comments.map((value, i) => {
-            return <CommentItem key={i} comments={value} />;
+            return <CommentItem key={i} comment={value} />;
           })}
-      </CommentList> */}
+      </CommentList>
+      <AddComment postId={postId} />
     </MobileCommentStyle>
   );
 };
