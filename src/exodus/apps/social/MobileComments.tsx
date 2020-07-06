@@ -8,26 +8,6 @@ import { AppContext } from "exodus/context";
 import { useLocation } from "react-router-dom";
 import { AddComment } from "./molecules/AddComment";
 
-const CommentList = styled.ul`
-  padding: 0 ${rem(10)};
-`;
-
-const BackSection = styled.div<{ isDark: boolean }>`
-  width: 100vw;
-  padding: ${rem(20)};
-  background-color: ${(props) =>
-    !props.isDark ? color.light.PureWhite : color.darker.DarkestBlack};
-  transition: ${transitionTime};
-`;
-
-const MobileCommentStyle = styled.div<{ isDark: boolean }>`
-  display: flex;
-  flex-direction: column;
-  background-color: ${(props) =>
-    !props.isDark ? color.light.WhiteSmoke : color.darker.DarkestBlack};
-  transition: ${transitionTime};
-`;
-
 const MobileComments = () => {
   /* const [comments, setComments] = useState<Comments[]>(comment); */
   const Context = React.useContext(AppContext);
@@ -48,7 +28,7 @@ const MobileComments = () => {
       >
         <Icon name={"back"} />
       </BackSection>
-      <CommentList>
+      <CommentList isDark={isDark}>
         {comments &&
           comments.map((value, i) => {
             return <CommentItem key={i} comment={value} />;
@@ -60,3 +40,27 @@ const MobileComments = () => {
 };
 
 export default MobileComments;
+
+const CommentList = styled.ul<{ isDark: boolean }>`
+  padding: 0 ${rem(10)};
+  padding-bottom: 140px;
+  background-color: ${(props) =>
+    !props.isDark ? color.light.WhiteSmoke : color.darker.DarkestBlack};
+`;
+
+const BackSection = styled.div<{ isDark: boolean }>`
+  width: 100vw;
+  padding: ${rem(20)};
+  background-color: ${(props) =>
+    !props.isDark ? color.light.PureWhite : color.darker.DarkestBlack};
+  transition: ${transitionTime};
+`;
+
+const MobileCommentStyle = styled.div<{ isDark: boolean }>`
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  background-color: ${(props) =>
+    !props.isDark ? color.light.WhiteSmoke : color.darker.DarkestBlack};
+  transition: ${transitionTime};
+`;
