@@ -62,19 +62,13 @@ const AppWithContext = () => {
       <AppWrapper token={tokenWithoutContext}>
         <Router>
           <Switch>
-            <Route exact path={homeAppRouter.home()} component={HomeApp} />
+            <Route path={homeAppRouter.home()} component={HomeApp} />
             <Route
-              exact
               path={calendarAppRouter.calendar()}
               component={CalendarApp}
             />
+            <Route path={socialAppRouter.social()} component={SocialApp} />
             <Route
-              exact
-              path={socialAppRouter.social()}
-              component={SocialApp}
-            />
-            <Route
-              exact
               path={
                 isMobile(window.innerWidth)
                   ? profileAppRouter.identity("1")
@@ -90,8 +84,8 @@ const AppWithContext = () => {
     <AppFrame>
       <Router>
         <Switch>
-          <Route exact path={homeAppRouter.home()} component={HomeApp} />
-          <Route exact path={authAppRouter.login()} component={AuthApp} />
+          <Route path={homeAppRouter.home()} component={HomeApp} />
+          <Route path={authAppRouter.login()} component={AuthApp} />
         </Switch>
       </Router>
     </AppFrame>
