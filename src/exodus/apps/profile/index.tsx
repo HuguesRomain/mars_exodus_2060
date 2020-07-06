@@ -78,13 +78,14 @@ const ProfileApp = () => {
 };
 
 const Ticket = styled.img`
-  width: 100vw;
+  width: 65vw;
 `;
 
 const ProfileAppMobileStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
 `;
 
 const ProfileAppStyled = styled.div`

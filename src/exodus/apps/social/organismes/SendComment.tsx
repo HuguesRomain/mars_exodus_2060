@@ -45,7 +45,7 @@ export const SendComment = ({ callBack }: Props) => {
     const formdata = new FormData();
     if (files && files.length) formdata.append("file", files[0]);
     PostImage(formdata)
-      .then((item) => PostBlog(newPost, `/api/images/${item.id}`))
+      .then((item) => PostBlog(newPost, item.id))
       .then(() => callBack())
       .catch((err) => console.log(err))
       .finally(() => setNewPost(""));
