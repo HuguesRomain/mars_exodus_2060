@@ -35,6 +35,7 @@ const ButtonCarousel = styled.button`
   border: none;
   background-color: ${color.SunsetOrange};
   border-radius: ${rem(50)};
+  cursor: pointer;
   padding: ${rem(12)} ${rem(11)} ${rem(8)} ${rem(11)};
   &:focus {
     outline: 0;
