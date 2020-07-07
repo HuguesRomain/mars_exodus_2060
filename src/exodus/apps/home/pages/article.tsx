@@ -18,7 +18,7 @@ import { AppContext } from "exodus/context";
 import { rem } from "polished";
 import { Icon } from "styles/atoms/icons";
 import { isYoutubeUrl } from "exodus/utils/uriUtils";
-import { CarouselInfo } from "./organismes/carousels/carousels";
+import { CarouselInfo } from "../organismes/carousels/carousels";
 
 export const Article = ({
   articles,
