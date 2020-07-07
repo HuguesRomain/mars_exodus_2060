@@ -19,35 +19,46 @@ type Props = {
 export const ActivityItem = ({ dateEvent }: Props) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
-  const day = dateEvent.start;
+  // @ts-ignore
+  const day = dateEvent && new window.Date(dateEvent.date);
 
   const isActual = (() => {
-    if (isToday(day)) return "Aujourd'hui";
-    if (isTomorrow(day)) return "Demain";
-    if (isThisWeek(day)) return "Cette semaine";
-    if (isThisMonth(day)) return "Ce mois-ci";
-    return "A venir";
+    if (day) {
+      if (isToday(day)) return "Aujourd'hui";
+      if (isTomorrow(day)) return "Demain";
+      if (isThisWeek(day)) return "Cette semaine";
+      if (isThisMonth(day)) return "Ce mois-ci";
+      return "A venir";
+    }
   })();
 
-  const theDay = day.toLocaleString("default", { weekday: "long" });
+  const theDay = day && day.toLocaleString("default", { weekday: "long" });
 
-  const theMounth = `${getDate(day)} ${day.toLocaleString("default", {
-    month: "long",
-  })}`;
+  const theMounth =
+    day &&
+    `${getDate(day)} ${day.toLocaleString("default", {
+      month: "long",
+    })}`;
 
-  /*   const theHour = dateEvent.dateStr.split(","); */
+  const hoursEvent = (() => {
+    if (dateEvent.startTime && dateEvent.endTime) {
+      const start = new window.Date(dateEvent.startTime).getHours();
+      const end = new window.Date(dateEvent.endTime).getHours();
+      return `${start}h - ${end}h`;
+    }
+  })();
 
   return (
     <ContentItem>
       <FromActual isDark={isDark}>{isActual}</FromActual>
       <Item isDark={isDark}>
-        <Status isDark={isDark}>{dateEvent.status}</Status>
+        <Status isDark={isDark}>{dateEvent.type}</Status>
         <Day>{theDay}</Day>
         <Date isDark={isDark}>{theMounth}</Date>
         <Description isDark={isDark}>{dateEvent.title}</Description>
         <FromTo>
           <Icon color={color.medium.Manatee} name={"clock"} size={fontSize.m} />
-          <p>{dateEvent.dateStr}</p>
+          <p>{hoursEvent}</p>
         </FromTo>
       </Item>
     </ContentItem>

@@ -30,7 +30,7 @@ export const IdentityCard = () => {
             title={"DATE DE NAISSANCE"}
             value={UserInfo?.birthDate}
           />
-          <LabeledInfo title={"SEXE"} value={"Masculin"} />
+          <LabeledInfo title={"SEXE"} value={UserInfo?.gender} />
           <LabeledInfo title={"PROFESSION"} value={UserInfo?.work} />
           <LabeledInfo
             title={"LIEU DE NAISSANCE"}

@@ -1,6 +1,7 @@
 type Dates = {
-  title: string;
-  start: Date;
-  dateStr: string;
-  status: string;
+  title?: string;
+  type?: string;
+  endTime?: Date;
+  startTime?: Date;
+  date?: Date;
 };
