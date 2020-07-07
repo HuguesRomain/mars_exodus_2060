@@ -7,9 +7,11 @@ import { color, breakPoint } from "styles/const";
 import { PopupTimeline } from "../molecule/popup";
 
 export const Step = ({
+  isHome,
   event,
   index,
 }: {
+  isHome: boolean | undefined;
   event: TimeEventType;
   index: number;
 }) => {
@@ -44,6 +46,7 @@ export const Step = ({
           }}
           isPopupOpen={isPopupOpen()}
           event={event}
+          isHome={isHome}
         />
       )}
       <StepStyled>

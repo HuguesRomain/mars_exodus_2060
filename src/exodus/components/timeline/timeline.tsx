@@ -16,7 +16,7 @@ export const Timeline = ({ isHome }: { isHome?: boolean }) => {
   return (
     <TimelineStyle isHome={isHome}>
       {events.map((event, i) => (
-        <Step key={i} event={event} index={i} />
+        <Step isHome={isHome} key={i} event={event} index={i} />
       ))}
     </TimelineStyle>
   );
@@ -30,8 +30,8 @@ const TimelineStyle = styled.div<{ isHome?: boolean }>`
   overflow: hidden;
   margin: 0 0 0 ${space.l};
   padding-top: ${rem(10)};
-  transform: ${(props) => (props.isHome ? "translateY(-65px)" : "none")};
-  align-items: flex-start;
+  transform: ${(props) => (props.isHome ? "translateY(-540px)" : "none")};
+  align-items: flex-end;
 `;
 
 export const TimelinePage = () => {

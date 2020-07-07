@@ -13,11 +13,13 @@ export const PopupTimeline = ({
   onMouseLeave,
   isPopupOpen,
   event,
+  isHome,
 }: {
   onMouseEnter: () => void;
   onMouseLeave: () => void;
   isPopupOpen: boolean;
   event: TimeEventType;
+  isHome: boolean | undefined;
 }) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
@@ -27,6 +29,7 @@ export const PopupTimeline = ({
       onMouseLeave={onMouseLeave}
       isPopupOpen={isPopupOpen}
       isDark={isDark}
+      isHome={isHome}
     >
       <Image image={`https://symfony-xmt3.frb.io${event.picture}`}>
         <ContentImage isDark={isDark} />
@@ -56,12 +59,15 @@ const customButtom = css`
 const PopupTimelineStyled = styled.div<{
   isDark: boolean;
   isPopupOpen: boolean;
+  isHome: boolean | undefined;
 }>`
   position: absolute;
   z-index: 10;
   width: ${rem(288)};
   height: ${rem(364.28)};
   margin-top: ${rem(30)};
+  transform: ${(props) =>
+    props.isHome ? "translateX(50px) translateY(-400px);" : "0"};
   background-color: red;
   transition: height 0.3s;
   border-radius: 8px;
