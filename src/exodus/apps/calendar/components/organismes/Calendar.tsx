@@ -16,6 +16,7 @@ import {
   fontSize,
   space,
   transitionTime,
+  breakPoint,
 } from "styles/const";
 
 interface props {
@@ -73,6 +74,9 @@ const ClendarContent = styled.div<{ isDark: boolean }>`
   background-color: ${(props) =>
     !props.isDark ? color.light.WhiteSmoke : color.darker.DarkestBlack};
   transition: background-color ${transitionTime};
+  @media (max-width: ${breakPoint.tabletPortrait}) {
+    height: 500px;
+  }
 `;
 
 const Title = styled.h1<{ isDark: boolean }>`
@@ -86,7 +90,7 @@ const Title = styled.h1<{ isDark: boolean }>`
 const CalendarInterraction = styled.div`
   display: flex;
   justify-content: flex-end;
-  transform: translate(0, 33px);
+  transform: translate(0, 55px);
   margin-right: ${space.m};
 `;
 

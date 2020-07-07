@@ -12,6 +12,8 @@ export const isPortrait = (current: number) => current <= tabletPortrait;
 
 export const isMobile = (current: number) => current < desktop;
 
+export const isCalendar = (current: number) => current < 950;
+
 export const isTabletLandscape = (current: number) =>
   current < desktop && current > tabletPortrait;
 

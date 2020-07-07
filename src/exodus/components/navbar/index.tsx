@@ -11,6 +11,31 @@ import { PlanetsDate } from "./organisms/planetDate";
 import { isMobileOnly } from "exodus/utils/checkWindowSize";
 import { AppContext } from "exodus/context";
 
+const NavBar = () => {
+  const Context = React.useContext(AppContext);
+  const [isDark] = Context.isDarkContext;
+  return (
+    <WrapperNavigation isDark={isDark}>
+      <IconMarsExodus />
+      <ListItemMenuLinkWrapper>
+        {apps.map((app, i) => {
+          return <LabeledIcon key={i} app={app} />;
+        })}
+      </ListItemMenuLinkWrapper>
+      <div style={{ marginTop: rem(100) }}>
+        <ThemePicker />
+        <PlanetsDate />
+      </div>
+    </WrapperNavigation>
+  );
+};
+
+export const NavBarContainer = () => {
+  const Context = React.useContext(AppContext);
+  const [windowSize] = Context.windowSizeContext;
+  return isMobileOnly(windowSize) ? <NavBarMobile /> : <NavBar />;
+};
+
 const WrapperMobileNavigation = styled.div<{ isDark: boolean }>`
   display: flex;
   align-items: center;
@@ -76,29 +101,4 @@ const NavBarMobile = () => {
       })}
     </WrapperMobileNavigation>
   );
-};
-
-const NavBar = () => {
-  const Context = React.useContext(AppContext);
-  const [isDark] = Context.isDarkContext;
-  return (
-    <WrapperNavigation isDark={isDark}>
-      <IconMarsExodus />
-      <ListItemMenuLinkWrapper>
-        {apps.map((app, i) => {
-          return <LabeledIcon key={i} app={app} />;
-        })}
-      </ListItemMenuLinkWrapper>
-      <div style={{ marginTop: rem(100) }}>
-        <ThemePicker />
-        <PlanetsDate />
-      </div>
-    </WrapperNavigation>
-  );
-};
-
-export const NavBarContainer = () => {
-  const Context = React.useContext(AppContext);
-  const [windowSize] = Context.windowSizeContext;
-  return isMobileOnly(windowSize) ? <NavBarMobile /> : <NavBar />;
 };
