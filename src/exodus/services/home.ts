@@ -1,5 +1,3 @@
-import { TokenStorage } from "exodus/utils/accessStorage";
-
 type GetArticlesType = {
   ["@context"]: string;
   ["@id"]: string;
@@ -129,7 +127,36 @@ export const getPlaces = (): Promise<GetPlacesType> => {
 export const getTimeEvent = (): Promise<GetTimeEventType> => {
   return fetch(`https://symfony-xmt3.frb.io/api/time_events`, {
     headers: {
-      Authorization: `Bearer ${TokenStorage()}`,
+      "Content-Type": "application/json",
+    },
+    method: "GET",
+  })
+    .then((resp) => {
+      return resp.json();
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+
+export const getMarsWeather = (): Promise<any> => {
+  return fetch("https://symfony-xmt3.frb.io/api/weather", {
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "GET",
+  })
+    .then((resp) => {
+      return resp.json();
+    })
+    .catch((err) => {
+      return err;
+    });
+};
+
+export const getDailyImage = (): Promise<any> => {
+  return fetch("https://symfony-xmt3.frb.io/api/picture-day", {
+    headers: {
       "Content-Type": "application/json",
     },
     method: "GET",

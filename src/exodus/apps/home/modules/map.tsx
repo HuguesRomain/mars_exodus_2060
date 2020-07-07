@@ -2,26 +2,33 @@ import React, { useState } from "react";
 import styled, { css } from "styled-components";
 import MapImg from "../../../../styles/assets/pics/marsMap.jpg";
 import { rem } from "polished";
-import { space, breakPoint, color, fontSize } from "styles/const";
+import {
+  space,
+  breakPoint,
+  color,
+  fontSize,
+  font,
+  titeFontsize,
+} from "styles/const";
 import { HomeTitle } from "../globalStyle";
 import { AppContext } from "exodus/context";
 import { PlaceType } from "exodus/services/home";
 import { Button } from "exodus/components/atoms/button";
 import { Link } from "react-router-dom";
 import { homeAppRouter } from "exodus/internal-router";
-import { Pulser } from "exodus/components/atoms/pulser";
+import NWC from "../../../../styles/assets/icons/NWC.png";
 
 const PlacesPosition = [
-  { position: "translateY(175px) translateX(50px)" },
-  { position: "translateY(200px) translateX(110px)" },
-  { position: "translateY(120px) translateX(155px)" },
-  { position: "translateY(50px) translateX(320px)" },
-  { position: "translateY(100px) translateX(345px)" },
-  { position: "translateY(230px) translateX(345px)" },
-  { position: "translateY(70px) translateX(480px)" },
-  { position: "translateY(120px) translateX(540px)" },
-  { position: "translateY(170px) translateX(600px)" },
-  { position: "translateY(190px) translateX(700px)" },
+  { position: "translateY(265px) translateX(90px)" },
+  { position: "translateY(350px) translateX(250px)" },
+  { position: "translateY(195px) translateX(305px)" },
+  { position: "translateY(150px) translateX(420px)" },
+  { position: "translateY(225px) translateX(510px)" },
+  { position: "translateY(400px) translateX(545px)" },
+  { position: "translateY(170px) translateX(710px)" },
+  { position: "translateY(250px) translateX(800px)" },
+  { position: "translateY(300px) translateX(890px)" },
+  { position: "translateY(350px) translateX(1050px)" },
 ];
 
 export const MapComponent = ({ places }: { places: PlaceType[] }) => {
@@ -32,21 +39,48 @@ export const MapComponent = ({ places }: { places: PlaceType[] }) => {
       <HomeTitle isDark={isDark}>Lieux à visiter</HomeTitle>
       {PlacesPosition.map((PlacePosition, i) => {
         return (
-          <PulserAndPopup
+          <PinAndPopup
             key={i}
             place={places[i]}
             PlacePosition={PlacePosition.position}
           />
         );
       })}
+      <ContentNWC>
+        <NWCStyle style={{ position: "absolute" }} src={NWC} />
+        <Title>NEW MUSK CITY</Title>
+      </ContentNWC>
       <MapStyled />
     </MapWrapper>
   );
 };
 
+const Title = styled.h1`
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(252, 82, 82, 1) 150%
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: ${font.josefin};
+  text-align: center;
+  margin: 0;
+  z-index: -1;
+  font-size: ${titeFontsize.s};
+  margin-top: ${rem(60)};
+  transform: translateX(-50px);
+`;
+
+const ContentNWC = styled.div`
+  display: flex;
+  position: absolute;
+  transform: translateY(150px) translateX(900px);
+`;
+
 const MapStyled = styled.div`
-  width: ${rem(850)};
-  height: ${rem(300)};
+  width: 87vw;
+  height: ${rem(400)};
   margin-bottom: ${space.l};
   border-radius: 10px;
   background-image: url(${MapImg});
@@ -57,23 +91,28 @@ const MapStyled = styled.div`
   }
 `;
 
+const NWCStyle = styled.img`
+  width: ${rem(50)};
+  z-index: 0;
+`;
+
 const MapWrapper = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const PulserAndPopup = ({
+const PinAndPopup = ({
   place,
   PlacePosition,
 }: {
   place: PlaceType;
   PlacePosition: string;
 }) => {
-  const [isPulserHovered, setIsPulserHovered] = useState<boolean>(false);
+  const [isPinHovered, setIsPinHovered] = useState<boolean>(false);
   const [isPopupHovered, setIsPopupHovered] = useState<boolean>(false);
 
   const isPopupOpen = (): boolean => {
-    if (isPulserHovered === true || isPopupHovered === true) {
+    if (isPinHovered === true || isPopupHovered === true) {
       return true;
     } else {
       return false;
@@ -86,7 +125,7 @@ const PulserAndPopup = ({
   `;
 
   return (
-    <PulserContent
+    <PinContent
       style={{
         transform: PlacePosition,
       }}
@@ -119,29 +158,52 @@ const PulserAndPopup = ({
           </Link>
         </ContentPopup>
       </Popup>
-      <Pulser
-        onMouseEnter={() => {
-          setIsPulserHovered((prevState) => !prevState);
-        }}
-        onMouseLeave={() => {
-          setTimeout(() => {
-            setIsPulserHovered((prevState) => !prevState);
-          }, 200);
-        }}
-      />
-    </PulserContent>
+      <Link to={homeAppRouter.place(place && place.id)}>
+        <Pin
+          onMouseEnter={() => {
+            setIsPinHovered((prevState) => !prevState);
+          }}
+          onMouseLeave={() => {
+            setTimeout(() => {
+              setIsPinHovered((prevState) => !prevState);
+            }, 200);
+          }}
+        >
+          <Pulser />
+        </Pin>
+      </Link>
+    </PinContent>
   );
 };
 
-const PulserContent = styled.div`
+const PinContent = styled.div`
   position: absolute;
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  z-index: 10000000;
+`;
+
+const Pin = styled.div`
+  z-index: 1;
+  width: ${rem(12)};
+  height: ${rem(12)};
+  border-radius: 50%;
+  background-color: ${color.SunsetOrange};
+`;
+
+const Pulser = styled.div`
+  position: absolute;
+  width: inherit;
+  height: inherit;
+  border-radius: inherit;
+  background-color: inherit;
+  :hover {
+    animation: pulse 1.75s ease-out infinite;
+  }
 `;
 
 const Popup = styled.div<{ image: string | null; isPopupOpen: boolean }>`
-  z-index: 10;
   position: absolute;
   background-image: ${(props) => `url(${props.image})`};
   background-size: cover;
@@ -171,6 +233,7 @@ const Popup = styled.div<{ image: string | null; isPopupOpen: boolean }>`
 
 const ContentPopup = styled.div<{ isPopupOpen: boolean }>`
   display: flex;
+  justify-content: space-between;
   align-items: flex-end;
   width: inherit;
   height: ${(props) => (props.isPopupOpen ? rem(143.98) : "0")};

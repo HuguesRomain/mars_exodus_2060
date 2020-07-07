@@ -1,29 +1,43 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { PlaceType } from "exodus/services/home";
+import {
+  ArticleType,
+  getArticlesSection,
+  SectionType,
+} from "exodus/services/home";
+// import CoverImage from "../../../styles/assets/pics/hero/hero_7.jpg";
 import {
   space,
   color,
-  fontSize,
   transitionTime,
   font,
+  fontSize,
+  iconSize,
   breakPoint,
 } from "styles/const";
-import { Icon } from "styles/atoms/icons";
 import { AppContext } from "exodus/context";
 import { rem } from "polished";
+import { Icon } from "styles/atoms/icons";
 import { isYoutubeUrl } from "exodus/utils/uriUtils";
-import { CarouselPlaces } from "./organismes/carousels/carousels";
+import { CarouselInfo } from "../organismes/carousels/carousels";
 
-export const Place = ({
-  place,
-  places,
+export const Article = ({
+  articles,
+  article,
 }: {
-  places: PlaceType[];
-  place: PlaceType;
+  articles: ArticleType[];
+  article: ArticleType;
 }) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
+  const [sections, setSections] = useState<SectionType[]>([]);
+
+  useEffect(() => {
+    getArticlesSection(article.id).then((resp) =>
+      setSections(resp["hydra:member"])
+    );
+  }, [article.id]);
+
   return (
     <>
       <div
@@ -33,7 +47,7 @@ export const Place = ({
           alignItems: "center",
         }}
       >
-        <Header img={`https://symfony-xmt3.frb.io${place.CoverImage}`}>
+        <Header img={`https://symfony-xmt3.frb.io${article.coverImage}`}>
           <HeaderContent>
             <ContentBackButton
               onClick={() => {
@@ -50,57 +64,82 @@ export const Place = ({
             </ContentBackButton>
             <HeaderFoooter>
               <TitleInfo>
-                <Text isDark={isDark}>{place.Category}</Text>
                 <TitleText style={{ fontSize: fontSize.xxl }} isDark={isDark}>
-                  {place.PlaceName}
+                  {article.title}
                 </TitleText>
+                <Text isDark={isDark}>{article.intro}</Text>
+                <TimeToRead>
+                  <Icon
+                    size={iconSize.s}
+                    color={color.light.PureWhite}
+                    name={"clock"}
+                  />
+                  <Text style={{ margin: `0 0 0 ${space.xs}` }} isDark={isDark}>
+                    Temps de lecture : 3 min
+                  </Text>
+                </TimeToRead>
               </TitleInfo>
             </HeaderFoooter>
           </HeaderContent>
         </Header>
         <Sections>
-          <div>
-            {place.Text.map((text, i) => {
-              return (
-                <Text key={i} isDark={isDark}>
-                  {text}
-                </Text>
-              );
-            })}
-            {place.DoubleMedia.length > 0 && (
-              <DoubleMedia>
-                {place.DoubleMedia.map((media, i) => {
+          {sections.map((section, i) => {
+            return (
+              <div key={i}>
+                <Title>
+                  <TitleText isDark={isDark}>{section.title}</TitleText>
+                  <TitleDecoration />
+                </Title>
+                {section.image.map((img, i) => {
                   return (
-                    <div key={i}>
-                      {isYoutubeUrl(media) ? (
-                        <>
-                          <DoubleMediaVideo
-                            src={media}
-                            allowFullScreen={true}
-                          />
-                        </>
-                      ) : (
-                        <>
-                          <DoubleMediaPhoto
-                            src={`https://symfony-xmt3.frb.io${media}`}
-                          />
-                        </>
-                      )}
-                    </div>
+                    <Image key={i} src={`https://symfony-xmt3.frb.io${img}`} />
                   );
                 })}
-              </DoubleMedia>
-            )}
-          </div>
-          );
+                {section.text.map((text, i) => {
+                  return (
+                    <Text key={i} isDark={isDark}>
+                      {text}
+                    </Text>
+                  );
+                })}
+                {section.doubleMedia.length > 0 && (
+                  <DoubleMedia>
+                    {section.doubleMedia.map((media) => {
+                      return (
+                        <>
+                          {isYoutubeUrl(media) ? (
+                            <>
+                              <DoubleMediaVideo
+                                src={media}
+                                allowFullScreen={true}
+                              />
+                            </>
+                          ) : (
+                            <DoubleMediaPhoto
+                              src={`https://symfony-xmt3.frb.io${media}`}
+                            />
+                          )}
+                        </>
+                      );
+                    })}
+                  </DoubleMedia>
+                )}
+              </div>
+            );
+          })}
         </Sections>
       </div>
       <CarouselContent>
-        <CarouselPlaces places={places.filter((p) => p.id !== place.id)} />
+        <CarouselInfo articles={articles.filter((a) => a.id !== article.id)} />
       </CarouselContent>
     </>
   );
 };
+
+const TimeToRead = styled.div`
+  display: flex;
+  align-items: center;
+`;
 
 const DoubleMedia = styled.div`
   display: flex;
@@ -123,14 +162,18 @@ const DoubleMediaVideo = styled.iframe`
 `;
 
 const DoubleMediaPhoto = styled.img`
-  width: 90%;
-  height: 100%;
+  width: 48%;
   border-radius: 10px;
 
   @media (max-width: ${breakPoint.mobileOnly}) {
     width: 100%;
-    height: 100%;
   }
+`;
+
+const Image = styled.img`
+  width: 100%;
+  border-radius: 10px;
+  margin-top: ${space.m};
 `;
 
 const TitleInfo = styled.div`
@@ -164,6 +207,7 @@ const HeaderContent = styled.div`
 `;
 
 const Sections = styled.div`
+  margin: ${space.l} 0 0 ${space.s};
   width: 50%;
   @media (max-width: ${breakPoint.mobileOnly}) {
     margin: 0;
@@ -179,6 +223,18 @@ const Text = styled.p<{ isDark: boolean }>`
   line-height: 30px;
   font-size: ${fontSize.m};
   transition: ${transitionTime};
+`;
+
+const Title = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const TitleDecoration = styled.span`
+  margin-top: ${space.xs};
+  width: ${rem(40)};
+  height: ${rem(5)};
+  background-color: ${color.SunsetOrange};
 `;
 
 const TitleText = styled.h2<{ isDark: boolean }>`
@@ -201,7 +257,7 @@ const CarouselContent = styled.div`
   overflow: hidden;
   margin: ${space.l} 0 0 ${space.s};
 
-  @media (min-width: ${breakPoint.mobileOnly}) {
+  @media (min-width: 550px) {
     margin: ${space.l} 0 0 ${space.l};
   }
 `;
