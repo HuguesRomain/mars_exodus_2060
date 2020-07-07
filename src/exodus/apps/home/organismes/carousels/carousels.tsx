@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import styled from "styled-components";
 import { space } from "styles/const";
-import { CarouselItem } from "../CarouselItem";
+import { CarouselItem } from "../../modules/CarouselItem";
 import { CarouselHead } from "../../molecules/CarouselHead";
 import Slider from "react-slick";
 

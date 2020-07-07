@@ -5,19 +5,20 @@ import { space, breakPoint } from "styles/const";
 import { isMobile } from "exodus/utils/checkWindowSize";
 import { AppContext } from "exodus/context";
 import { CarouselInfo, CarouselPlaces } from "./organismes/carousels/carousels";
-import { MapComponent } from "./organismes/map";
-import { Weather } from "./organismes/weather";
+import { MapComponent } from "./modules/map";
+import { Weather } from "./modules/weather/weather";
 
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import { homeAppRouter } from "exodus/internal-router";
-import { Article } from "./article";
+import { Article } from "./pages/article";
 import {
   ArticleType,
   getArticles,
   getPlaces,
   PlaceType,
 } from "exodus/services/home";
-import { Place } from "./place";
+import { Place } from "./pages/place";
+import { DayImage } from "./modules/dayImage";
 // import { ThemePicker } from "exodus/components/navbar/atoms/themePicker";
 
 const HomeApp = () => {
@@ -44,13 +45,14 @@ const HomeApp = () => {
               <Header />
               <HomeContent>
                 <CarouselInfo articles={articles} />
+                {!isMobile(windowSize) ? (
+                  <MapComponent places={places} />
+                ) : (
+                  <CarouselPlaces places={places} />
+                )}
                 <SecondSection>
-                  {!isMobile(windowSize) ? (
-                    <MapComponent places={places} />
-                  ) : (
-                    <CarouselPlaces places={places} />
-                  )}
                   <Weather />
+                  <DayImage />
                 </SecondSection>
               </HomeContent>
             </>
@@ -95,10 +97,10 @@ const SecondSection = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 100%;
-  padding-right: ${space.l};
   margin-bottom: ${space.m};
   @media (min-width: ${breakPoint.desktop}) {
     flex-direction: row;
+    padding-right: ${space.l};
   }
 `;
 
