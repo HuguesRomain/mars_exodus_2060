@@ -75,4 +75,4 @@ Vous retrouverez également dans les services tous les types globaux à l'applic
 Pour contribuer au projet vous devez créer des branches avec comme pattern de nom `vosInitial/l'objectif` Exemple : `hr/fix-hero-header` À la suite de ça vous devez créér votre pull Request et le tagger comme `wip` signifiant `Work In Progress` Une fois le code fini, vous pouvez tagger la PR comme `ToReview` et assigner un reviewer. Le raviver fera ses retours si nécessaire. Une fois la PR appouved vous pouvez `squash and merge` la Pull Request en prenant soin de lui donner un nom cohérent commençant [css] ou [js] voire [js css] en fonction de la partie du code touché. 
 
 Vous avez maintenant toutes les clés en main pour contribuer à ce projet.
-ibre à vous de crée ! 👨‍🎨
+libre à vous de crée ! 👨‍🎨
