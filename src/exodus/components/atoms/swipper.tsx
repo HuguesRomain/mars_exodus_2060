@@ -13,17 +13,13 @@ export const Swipper = ({ LeftArrow, RigthArrow }: Props) => {
   return (
     <ButtonContent>
       <ButtonCarousel onClick={LeftArrow}>
-        <Icon
-          name={"back"}
-          size={fontSize.m}
-          strokeColor={color.light.PureWhite}
-        />
+        <Icon name={"back"} size={fontSize.m} color={color.light.PureWhite} />
       </ButtonCarousel>
       <ButtonCarousel onClick={RigthArrow}>
         <Icon
           name={"forward"}
           size={fontSize.m}
-          strokeColor={color.light.PureWhite}
+          color={color.light.PureWhite}
         />
       </ButtonCarousel>
     </ButtonContent>

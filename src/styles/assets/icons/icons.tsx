@@ -545,13 +545,13 @@ export const Send = ({ size, style, color, onClick }: IconPropType) => {
   );
 };
 
-export const Back = ({ size, style, strokeColor }: IconPropType) => {
+export const Back = ({ size, style, color }: IconPropType) => {
   return (
     <svg
       width={size ? size : "24"}
       height={size ? size : "24"}
       style={style && style}
-      stroke={strokeColor ? strokeColor : "#C1C6D7"}
+      stroke={color ? color : "#C1C6D7"}
       viewBox="0 0 24 24"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
