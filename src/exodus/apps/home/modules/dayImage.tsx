@@ -104,5 +104,5 @@ const Box = styled.div`
 `;
 
 const Img = styled.img`
-  max-width: ${rem(450)};
+  max-width: ${rem(500)};
 `;
