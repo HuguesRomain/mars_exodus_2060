@@ -19,7 +19,6 @@ import {
 } from "exodus/services/home";
 import { Place } from "./pages/place";
 import { DayImage } from "./modules/dayImage";
-import { TokenStorage } from "exodus/utils/accessStorage";
 // import { ThemePicker } from "exodus/components/navbar/atoms/themePicker";
 
 const HomeApp = () => {
