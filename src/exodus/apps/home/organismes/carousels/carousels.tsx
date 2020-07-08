@@ -13,6 +13,9 @@ import { ArticleType, PlaceType } from "exodus/services/home";
 import { homeAppRouter } from "exodus/internal-router";
 
 const CarouselContent = styled.div`
+  margin-bottom: ${space.m};
+`;
+const CarouselTwoContent = styled.div`
   margin-bottom: ${space.l};
 `;
 
@@ -75,7 +78,7 @@ export const CarouselPlaces = ({ places }: { places: PlaceType[] }) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
   return (
-    <CarouselContent>
+    <CarouselTwoContent>
       <HomeTitle style={{ marginBottom: space.m }} isDark={isDark}>
         Lieux à visiter
       </HomeTitle>
@@ -92,6 +95,6 @@ export const CarouselPlaces = ({ places }: { places: PlaceType[] }) => {
           );
         })}
       </Slider>
-    </CarouselContent>
+    </CarouselTwoContent>
   );
 };

@@ -11,6 +11,10 @@
   width: 120%;
 }
 
+.slick-list {
+  height: 221px;
+}
+
 @media (max-width: 1200px) and (min-width: 1000px) {
   .slick-slider {
     overflow-y: hidden;
