@@ -29,6 +29,8 @@ export const Step = ({
   const isDateValide = () => {
     const DateMillisecond = new Date(event.Date);
     const Datenow = new Date();
+    // Le calcule du temps est volontairement mal fait pour pouvoir visualiser le comportement de la timeline
+    // return Datenow >= DateMillisecond ? true : false;
     return Datenow < DateMillisecond ? true : false;
   };
 
