@@ -18,6 +18,7 @@ import { isMobile, isMobileOnly } from "exodus/utils/checkWindowSize";
 import { AppContext } from "exodus/context";
 import { GetUser, GetImage } from "exodus/services/social/social.hook";
 import { formatDistanceToNow } from "date-fns";
+import { rem } from "polished";
 
 type Props = {
   post: Posts;
@@ -27,6 +28,7 @@ type Props = {
 export const PostItem = ({ callBack, post }: Props) => {
   const [infoUser, setInfoUser] = useState<UserType>();
   const [Images, setImages] = useState<string>();
+  const [isFullScreenImage, setIsFullScreenImage] = useState<boolean>(false);
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
   const [windowSize] = Context.windowSizeContext;
@@ -72,8 +74,19 @@ export const PostItem = ({ callBack, post }: Props) => {
         style={!Images ? { display: "none" } : {}}
         src={Images}
         alt="Image of post"
+        onClick={() => {
+          setIsFullScreenImage(true);
+        }}
       />
-
+      {isFullScreenImage && (
+        <Box
+          onClick={() => {
+            setIsFullScreenImage(false);
+          }}
+        >
+          <Img src={Images} alt="" />
+        </Box>
+      )}
       <Interact>
         <Share />
         <Comment
@@ -106,6 +119,7 @@ const PostImage = styled.img`
   height: 228px;
   object-fit: cover;
   border-radius: 5px;
+  cursor: pointer;
 `;
 
 const Item = styled.li<{ isDark: boolean }>`
@@ -151,4 +165,24 @@ const Interact = styled.div`
   display: flex;
   justify-content: flex-end;
   padding: ${space.xs} 0;
+`;
+
+const Box = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 200000000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+  overflow-y: auto;
+  cursor: pointer;
+`;
+
+const Img = styled.img`
+  max-width: ${rem(500)};
 `;
