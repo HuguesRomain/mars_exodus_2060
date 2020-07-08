@@ -21,3 +21,6 @@ export const isDesktop = (current: number) => current >= desktop;
 
 export const isMinTabletPortrait = (current: number) =>
   current >= tabletPortrait;
+
+export const isMinTabletLandscape = (current: number) =>
+  current >= tabletLandscape;
