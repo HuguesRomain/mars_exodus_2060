@@ -21,21 +21,12 @@ const settings = {
   dots: false,
   infinite: true,
   speed: 500,
-  slidesToShow: 5,
+  slidesToShow: 4,
   slidesToScroll: 1,
   arrows: false,
   responsive: [
     {
-      breakpoint: 1600,
-      settings: {
-        slidesToShow: 4,
-        slidesToScroll: 1,
-        infinite: true,
-        arrows: false,
-      },
-    },
-    {
-      breakpoint: 1280,
+      breakpoint: 1550,
       settings: {
         slidesToShow: 3,
         slidesToScroll: 1,
@@ -44,7 +35,7 @@ const settings = {
       },
     },
     {
-      breakpoint: 700,
+      breakpoint: 720,
       settings: {
         slidesToShow: 2,
         slidesToScroll: 1,
