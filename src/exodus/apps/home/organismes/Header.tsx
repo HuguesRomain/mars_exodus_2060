@@ -122,6 +122,7 @@ const ContentHeader = styled.div`
   }
   @media (max-width: 865px) {
     height: 330px;
+    margin-top: -25px;
   }
 `;
 
