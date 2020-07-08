@@ -18,6 +18,8 @@ const MobileComments = () => {
   // @ts-ignore
   const postId = location.param2;
 
+  window.scrollTo(0, 0);
+
   return (
     <MobileCommentStyle isDark={isDark}>
       <BackSection
