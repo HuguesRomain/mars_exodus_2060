@@ -23,7 +23,7 @@ export const Timeline = ({ isHome }: { isHome?: boolean }) => {
 };
 
 const TimelineStyle = styled.div<{ isHome?: boolean }>`
-  position: ${(props) => (props.isHome ? "relative" : "none")};
+  position: ${(props) => (props.isHome ? "absolute" : "none")};
   display: flex;
   z-index: 1000000;
   height: ${(props) => (props.isHome ? rem(500) : "none")};
@@ -53,6 +53,6 @@ const Background = styled.div`
   top: 0;
   height: ${rem(68)};
   width: 97vw;
-  border-bottom-right-radius: 80px;
+  border-bottom-right-radius: 1000px;
   z-index: 10000;
 `;

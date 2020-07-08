@@ -19,6 +19,7 @@ import {
 } from "exodus/services/home";
 import { Place } from "./pages/place";
 import { DayImage } from "./modules/dayImage";
+import { TokenStorage } from "exodus/utils/accessStorage";
 // import { ThemePicker } from "exodus/components/navbar/atoms/themePicker";
 
 const HomeApp = () => {
@@ -86,7 +87,6 @@ const HomeApp = () => {
 const HomeContent = styled.main`
   overflow: hidden;
   margin: ${space.l} 0 0 ${space.s};
-  transform: translateY(-500px);
   @media (min-width: ${breakPoint.mobileOnly}) {
     margin: ${space.l} 0 0 ${space.l};
   }

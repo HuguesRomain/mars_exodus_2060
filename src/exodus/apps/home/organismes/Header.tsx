@@ -21,6 +21,7 @@ import { rem } from "polished";
 import { AppContext } from "exodus/context";
 import { Link } from "react-router-dom";
 import { Timeline } from "exodus/components/timeline/timeline";
+import { TokenStorage } from "exodus/utils/accessStorage";
 const paramParallax = {
   center: false,
   wrapper: null,
@@ -91,7 +92,7 @@ export const Header = () => {
         <SixImage className="six" src={six} alt="" />
         <SevenImage className="seven" src={back} alt="" />
       </ContentHeader>
-      <Timeline isHome={true} />
+      {TokenStorage() && <Timeline isHome={true} />}
     </>
   );
 };
