@@ -1,6 +1,6 @@
 www.mars-exodus-2060.space
 
-
+![Alt text](src/styles/assets/pics/hero/hero_7.jpg?raw=true "Title")
 
 # Stack Technique et Documentation
 
