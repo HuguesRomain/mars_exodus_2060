@@ -25,7 +25,7 @@ type Props = {
 };
 
 export const PostItem = ({ callBack, post }: Props) => {
-  const [infoUser, setInfoUser] = useState<User>();
+  const [infoUser, setInfoUser] = useState<UserType>();
   const [Images, setImages] = useState<string>();
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;

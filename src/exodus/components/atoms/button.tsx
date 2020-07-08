@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled, { css, FlattenSimpleInterpolation } from "styled-components";
 import { Icon, IconName } from "styles/atoms/icons";
 import { rem } from "polished";
@@ -82,6 +82,7 @@ export const Button = ({
 }: ButtonProps) => {
   const Context = React.useContext(AppContext);
   const [isDark] = Context.isDarkContext;
+  const [isHovered, setIsHovered] = useState<boolean>(false);
   return (
     <PrecomputeButton
       type={type}
@@ -91,6 +92,12 @@ export const Button = ({
       style={style}
       styled={styled}
       isDark={isDark}
+      onMouseEnter={() => {
+        setIsHovered((prevState) => !prevState);
+      }}
+      onMouseLeave={() => {
+        setIsHovered((prevState) => !prevState);
+      }}
     >
       {children && children}
       {iconName && (
@@ -99,8 +106,12 @@ export const Button = ({
             type === "primary"
               ? globalColors.light.PureWhite
               : !isDark
-              ? globalColors.darker.LuckyPoint
-              : globalColors.light.PureWhite
+              ? !isHovered
+                ? globalColors.darker.LuckyPoint
+                : globalColors.light.PureWhite
+              : !isHovered
+              ? globalColors.light.PureWhite
+              : globalColors.darker.LuckyPoint
           }
           strokeColor={globalColors.light.PureWhite}
           name={iconName}

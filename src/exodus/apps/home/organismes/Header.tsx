@@ -20,6 +20,7 @@ import { authAppRouter } from "exodus/internal-router";
 import { rem } from "polished";
 import { AppContext } from "exodus/context";
 import { Link } from "react-router-dom";
+import { Timeline } from "exodus/components/timeline/timeline";
 const paramParallax = {
   center: false,
   wrapper: null,
@@ -62,32 +63,36 @@ export const Header = () => {
   const Context = React.useContext(AppContext);
   const [token] = Context.tokenContext;
   return (
-    <ContentHeader>
-      <TextContent className="title">
-        <Title>MARS EXODUS 2060</Title>
-        <Timer />
-      </TextContent>
-      {!token && (
-        <ButtonContainer className="button">
-          <Link to={authAppRouter.login()}>
-            <Button
-              color={color.light.PureWhite}
-              iconName={"ticket"}
-              styled={ButtonCustom}
-            >
-              <p style={{ marginLeft: space.xs, fontSize: fontSize.s }}>
-                S’enregistrer
-              </p>
-            </Button>
-          </Link>
-        </ButtonContainer>
-      )}
-      <FistImage className="first" src={first} alt="" />
-      <SecondImage className="two" src={second} alt="" />
-      <ThirdImage className="three" src={third} alt="" />
-      <SixImage className="six" src={six} alt="" />
-      <SevenImage className="seven" src={back} alt="" />
-    </ContentHeader>
+    <>
+      <ContentHeader>
+        <TextContent className="title">
+          <Title>MARS EXODUS 2060</Title>
+          <Timer />
+        </TextContent>
+        {!token && (
+          <ButtonContainer className="button">
+            <Link to={authAppRouter.login()}>
+              <Button
+                color={color.light.PureWhite}
+                iconName={"ticket"}
+                styled={ButtonCustom}
+              >
+                <p style={{ marginLeft: space.xs, fontSize: fontSize.s }}>
+                  S’enregistrer
+                </p>
+              </Button>
+            </Link>
+          </ButtonContainer>
+        )}
+
+        <FistImage className="first" src={first} alt="" />
+        <SecondImage className="two" src={second} alt="" />
+        <ThirdImage className="three" src={third} alt="" />
+        <SixImage className="six" src={six} alt="" />
+        <SevenImage className="seven" src={back} alt="" />
+      </ContentHeader>
+      <Timeline isHome={true} />
+    </>
   );
 };
 

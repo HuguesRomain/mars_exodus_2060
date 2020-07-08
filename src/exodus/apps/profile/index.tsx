@@ -4,7 +4,6 @@ import { profileAppRouter } from "exodus/internal-router";
 import styled from "styled-components";
 import { SubNavigation } from "../../components/molecules/subNavigation";
 import { IdentityCard } from "./molecules/identityCard";
-import Ticket from "../../../styles/assets/pics/ticket.png";
 import { WelcomeMessage } from "./atoms/welcomeMessage";
 import { InfoSection } from "./organisms/infoSection";
 import { TicketSection } from "./organisms/ticketSection";
@@ -12,15 +11,18 @@ import { fontSize, space } from "styles/const";
 import { isMobileOnly, isMobile } from "exodus/utils/checkWindowSize";
 import { AppContext } from "exodus/context";
 import { Button } from "exodus/components/atoms/button";
+import { UserStorage } from "exodus/utils/accessStorage";
+import { TimelinePage } from "exodus/components/timeline/timeline";
+import { rem } from "polished";
 
 export const apps = [
   {
     label: "Identité",
-    uri: profileAppRouter.identity("1"),
+    uri: profileAppRouter.identity(),
   },
   {
     label: "Billet",
-    uri: profileAppRouter.ticket("1"),
+    uri: profileAppRouter.ticket(),
   },
 ];
 const ProfileApp = () => {
@@ -35,13 +37,18 @@ const ProfileApp = () => {
         <Switch>
           <Route
             exact
-            path={profileAppRouter.identity("1")}
+            path={profileAppRouter.identity()}
             render={() => <IdentityCard />}
           />
           <Route
             exact
-            path={profileAppRouter.ticket("1")}
-            render={() => <img alt="your ticket" src={Ticket} />}
+            path={profileAppRouter.ticket()}
+            render={() => (
+              <Ticket
+                alt="your ticket"
+                src={`https://symfony-xmt3.frb.io${UserStorage().ticketUrl}`}
+              />
+            )}
           />
         </Switch>
       </Router>
@@ -60,22 +67,31 @@ const ProfileApp = () => {
       </Button>
     </ProfileAppMobileStyled>
   ) : (
-    <ProfileAppStyled>
-      <InfoSection />
-      <TicketSection />
-    </ProfileAppStyled>
+    <>
+      <TimelinePage />
+      <ProfileAppStyled>
+        <InfoSection />
+        <TicketSection />
+      </ProfileAppStyled>
+    </>
   );
 };
+
+const Ticket = styled.img`
+  width: 65vw;
+`;
 
 const ProfileAppMobileStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  height: 100vh;
 `;
 
 const ProfileAppStyled = styled.div`
   display: flex;
   height: 100vh;
+  padding-top: ${rem(30)};
 `;
 
 export default ProfileApp;

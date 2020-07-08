@@ -86,8 +86,8 @@ const HomeApp = () => {
 const HomeContent = styled.main`
   overflow: hidden;
   margin: ${space.l} 0 0 ${space.s};
-
-  @media (min-width: 550px) {
+  transform: translateY(-500px);
+  @media (min-width: ${breakPoint.mobileOnly}) {
     margin: ${space.l} 0 0 ${space.l};
   }
 `;

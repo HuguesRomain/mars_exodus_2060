@@ -11,7 +11,7 @@ type Posts = {
   "@id"?: string;
 };
 
-type User = {
+type UserType = {
   avatar?: string | undefined;
   comment?: Array<string>;
   id?: number;
@@ -25,6 +25,7 @@ type UserInfoType = {
   birthDate?: string;
   birthPlace?: string;
   firstName?: string;
+  username: string;
   name?: string;
   height?: string;
   profilePicture?: string;

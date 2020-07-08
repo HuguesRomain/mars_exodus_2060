@@ -84,7 +84,7 @@ const Title = styled.h1<{ isDark: boolean }>`
   color: ${(props) =>
     !props.isDark ? color.darker.BlackPearl : color.light.PureWhite};
   font-size: ${fontSize.xl};
-  margin: ${space.l} 0 0 50px;
+  margin: ${space.xl} 0 0 50px;
 `;
 
 const CalendarInterraction = styled.div`

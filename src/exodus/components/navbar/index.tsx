@@ -44,7 +44,6 @@ const WrapperMobileNavigation = styled.div<{ isDark: boolean }>`
   overflow: hidden;
   position: fixed;
   bottom: 0;
-  width: 100%;
   padding: ${rem(15)} ${rem(20)};
   background-color: ${(props) =>
     !props.isDark ? color.light.PureWhite : color.darker.BlackRussian};

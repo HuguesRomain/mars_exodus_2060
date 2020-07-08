@@ -8,6 +8,7 @@ import { isMobile } from "exodus/utils/checkWindowSize";
 import { breakPoint } from "styles/const";
 import { AppContext } from "exodus/context";
 import { getPosts } from "exodus/services/social/social.hook";
+import { TimelinePage } from "exodus/components/timeline/timeline";
 
 export const SocialPage = () => {
   let date = Date.now();
@@ -32,6 +33,7 @@ export const SocialPage = () => {
 
   return (
     <div style={{ display: "flex", minHeight: "100vh" }}>
+      <TimelinePage />
       <SocialPart>
         <div>
           <SendComment callBack={fetchPosts} />
@@ -57,7 +59,7 @@ export const SocialPage = () => {
 const SocialPart = styled.div`
   display: flex;
   justify-content: center;
-  padding: 0;
+  margin-top: ${rem(70)};
   width: 100vw;
   @media (min-width: ${breakPoint.tabletPortrait}) {
     padding: ${rem(50)};
@@ -70,6 +72,7 @@ const SocialPart = styled.div`
 `;
 
 const Pub = styled.div`
+  margin-top: ${rem(70)};
   width: 30vw;
   right: 0;
   position: fixed;

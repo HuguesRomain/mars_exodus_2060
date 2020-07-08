@@ -55,6 +55,12 @@ const AppWithContext = () => {
     localStorage.setItem("user", JSON.stringify(resp));
   });
 
+  console.log(
+    `window.location.pathname`,
+    homeAppRouter.home(),
+    window.location.pathname,
+  );
+
   return tokenWithoutContext ? (
     <AppFrame>
       <MobileHeader />
@@ -71,7 +77,7 @@ const AppWithContext = () => {
             <Route
               path={
                 isMobile(window.innerWidth)
-                  ? profileAppRouter.identity("1")
+                  ? profileAppRouter.identity()
                   : profileAppRouter.profile()
               }
               component={ProfileApp}

@@ -37,7 +37,7 @@ export const apps: AppsTypes[] = [
   {
     label: "Compte",
     uri: isMobile(window.innerWidth)
-      ? profileAppRouter.identity("1")
+      ? profileAppRouter.identity()
       : profileAppRouter.profile(),
     icon: "profile",
     order: 4,
