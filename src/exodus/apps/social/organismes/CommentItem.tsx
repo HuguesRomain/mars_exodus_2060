@@ -35,7 +35,7 @@ export const CommentItem = ({ comment }: Props) => {
   const avatarPicture = (() => {
     return infoUser && infoUser.profilePicture
       ? `https://symfony-xmt3.frb.io${infoUser.profilePicture}`
-      : "https://pbs.twimg.com/media/EapZFw1XgAA1LEW?format=jpg&name=small";
+      : "https://bit.ly/3fbe0m5";
   })();
 
   const PublishDate = (() => {
@@ -46,7 +46,7 @@ export const CommentItem = ({ comment }: Props) => {
         {
           addSuffix: true,
           includeSeconds: true,
-        }
+        },
       );
     }
   })();

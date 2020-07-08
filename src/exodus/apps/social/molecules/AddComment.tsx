@@ -76,7 +76,7 @@ export const AddComment = ({ callBack, postId }: Props) => {
   const avatarPicture = (() => {
     return UserInfo && UserInfo.profilePicture
       ? `https://symfony-xmt3.frb.io${UserInfo.profilePicture}`
-      : "https://www.writeups.org/wp-content/uploads/Punisher-netflix-daredevil-Bernthal.jpg";
+      : "https://bit.ly/3fbe0m5";
   })();
 
   useEffect(() => {
