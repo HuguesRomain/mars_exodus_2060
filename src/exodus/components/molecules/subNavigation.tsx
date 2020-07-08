@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
 import { profileAppRouter, UriType } from "exodus/internal-router";
 import { rem } from "polished";
 import { color, space, transitionTime } from "styles/const";
@@ -14,7 +13,7 @@ const NavigationWrapper = styled.div`
   width: ${rem(210)};
 `;
 
-const LinkWrapper = styled(Link)`
+const LinkWrapper = styled.a`
   display: flex;
   align-items: center;
   flex-direction: column;
@@ -55,7 +54,7 @@ export const SubNavigation = ({ datas }: TypeDatas) => {
             onClick={() => {
               setPath(data.uri);
             }}
-            to={data.uri}
+            href={data.uri}
           >
             <Text isDark={isDark}>{data.label}</Text>
             {path === data.uri && <Dot />}

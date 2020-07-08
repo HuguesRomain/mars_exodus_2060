@@ -10,7 +10,6 @@ import { CarouselPlacesItems } from "../../molecules/itemCarouselPlaces";
 import { HomeTitle } from "../../globalStyle";
 import { AppContext } from "exodus/context";
 import { ArticleType, PlaceType } from "exodus/services/home";
-import { Link } from "react-router-dom";
 import { homeAppRouter } from "exodus/internal-router";
 
 const CarouselContent = styled.div`
@@ -87,9 +86,9 @@ export const CarouselPlaces = ({ places }: { places: PlaceType[] }) => {
       >
         {places.map((place, i) => {
           return (
-            <Link to={homeAppRouter.place(place.id)}>
+            <a href={homeAppRouter.place(place.id)}>
               <CarouselPlacesItems key={i} place={place} />
-            </Link>
+            </a>
           );
         })}
       </Slider>

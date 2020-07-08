@@ -2,8 +2,6 @@ import React, { useState } from "react";
 
 import { Input } from "../../atoms/input";
 import { Paragraph, Title, FormStyle, Question } from "../../style";
-import { authAppRouter } from "exodus/internal-router";
-import { Link } from "react-router-dom";
 import { AppContext } from "exodus/context";
 import { Button } from "exodus/components/atoms/button";
 import { space, color } from "styles/const";
@@ -112,7 +110,6 @@ export const RegisterFirstStep = () => {
           <p style={{ marginRight: space.xs }}>Valider</p>
         </Button>
       </FormStyle>
-      <Link to={authAppRouter.loginSecondStep()}></Link>
       <Question isDark={isDark}>Vous n’avez pas de billet ?</Question>
       <Paragraph isDark={isDark}>
         Réservez un aller pour votre nouvelle vie sur notre{" "}

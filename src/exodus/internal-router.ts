@@ -17,8 +17,8 @@ class AuthAppRoutes {
 
 class HomeAppRoutes {
   home = () => `${homeApp}`;
-  article = (articleId: number) => `${homeApp}article/:${articleId}`;
-  place = (placeId: number) => `${homeApp}place/:${placeId}`;
+  article = (articleId: number) => `${homeApp}article/${articleId}`;
+  place = (placeId: number) => `${homeApp}place/${placeId}`;
 }
 
 class CalendarAppRoutes {

@@ -50,8 +50,8 @@ export const Place = ({
             </ContentBackButton>
             <HeaderFoooter>
               <TitleInfo>
-                <Text isDark={isDark}>{place.Category}</Text>
-                <TitleText style={{ fontSize: fontSize.xxl }} isDark={isDark}>
+                <TextCategory isDark={isDark}>{place.Category}</TextCategory>
+                <TitleText style={{ fontSize: fontSize.xxl }}>
                   {place.PlaceName}
                 </TitleText>
               </TitleInfo>
@@ -92,7 +92,6 @@ export const Place = ({
               </DoubleMedia>
             )}
           </div>
-          );
         </Sections>
       </div>
       <CarouselContent>
@@ -124,12 +123,11 @@ const DoubleMediaVideo = styled.iframe`
 
 const DoubleMediaPhoto = styled.img`
   width: 90%;
-  height: 100%;
   border-radius: 10px;
 
   @media (max-width: ${breakPoint.mobileOnly}) {
     width: 100%;
-    height: 100%;
+    max-height: ${rem(200)};
   }
 `;
 
@@ -181,9 +179,16 @@ const Text = styled.p<{ isDark: boolean }>`
   transition: ${transitionTime};
 `;
 
-const TitleText = styled.h2<{ isDark: boolean }>`
-  color: ${(props) =>
-    !props.isDark ? color.darker.BlackPearl : color.light.PureWhite};
+const TextCategory = styled.p<{ isDark: boolean }>`
+  color: ${color.light.PureWhite};
+  margin: ${space.s} 0;
+  line-height: 30px;
+  font-size: ${fontSize.m};
+  transition: ${transitionTime};
+`;
+
+const TitleText = styled.h2`
+  color: ${color.light.PureWhite};
   transition: ${transitionTime};
   font-family: ${font.josefin};
   font-size: ${fontSize.xl};

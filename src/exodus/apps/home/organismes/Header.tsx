@@ -19,7 +19,9 @@ import { Button } from "exodus/components/atoms/button";
 import { authAppRouter } from "exodus/internal-router";
 import { rem } from "polished";
 import { AppContext } from "exodus/context";
-import { Link } from "react-router-dom";
+import { TokenStorage } from "exodus/utils/accessStorage";
+import { Timeline } from "exodus/components/timeline/timeline";
+import { isMinTabletLandscape } from "exodus/utils/checkWindowSize";
 
 const paramParallax = {
   center: false,
@@ -62,6 +64,7 @@ export const Header = () => {
 
   const Context = React.useContext(AppContext);
   const [token] = Context.tokenContext;
+  const [windowSize] = Context.windowSizeContext;
   return (
     <>
       <ContentHeader>
@@ -71,7 +74,7 @@ export const Header = () => {
         </TextContent>
         {!token && (
           <ButtonContainer className="button">
-            <Link to={authAppRouter.login()}>
+            <a href={authAppRouter.login()}>
               <Button
                 color={color.light.PureWhite}
                 iconName={"ticket"}
@@ -81,7 +84,7 @@ export const Header = () => {
                   S’enregistrer
                 </p>
               </Button>
-            </Link>
+            </a>
           </ButtonContainer>
         )}
 
@@ -91,6 +94,9 @@ export const Header = () => {
         <SixImage className="six" src={six} alt="" />
         <SevenImage className="seven" src={back} alt="" />
       </ContentHeader>
+      {TokenStorage() && isMinTabletLandscape(windowSize) && (
+        <Timeline isHome={true} />
+      )}
     </>
   );
 };
