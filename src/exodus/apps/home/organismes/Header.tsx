@@ -20,9 +20,7 @@ import { authAppRouter } from "exodus/internal-router";
 import { rem } from "polished";
 import { AppContext } from "exodus/context";
 import { Link } from "react-router-dom";
-import { Timeline } from "exodus/components/timeline/timeline";
-import { TokenStorage } from "exodus/utils/accessStorage";
-import { isMinTabletLandscape } from "exodus/utils/checkWindowSize";
+
 const paramParallax = {
   center: false,
   wrapper: null,
@@ -64,7 +62,6 @@ export const Header = () => {
 
   const Context = React.useContext(AppContext);
   const [token] = Context.tokenContext;
-  const [windowSize] = Context.windowSizeContext;
   return (
     <>
       <ContentHeader>
