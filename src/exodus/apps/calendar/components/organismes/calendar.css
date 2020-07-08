@@ -10,6 +10,10 @@
   box-shadow: 0px 5px 15px rgba(153, 155, 168, 0.15);
 }
 
+.fc .fc-time {
+  display: none;
+}
+
 .fc .fc-head-container {
   border: none;
   background-color: #e8ecef;
@@ -42,7 +46,8 @@
 .fc .fc-day {
   background: white;
 }
-.fc .fc-today {
+.fc .fc-left {
+  color: grey;
 }
 
 .fc .fc-event {
