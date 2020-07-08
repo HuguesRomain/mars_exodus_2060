@@ -66,10 +66,12 @@ const SocialPart = styled.div`
   @media (min-width: ${breakPoint.tabletPortrait}) {
     padding: ${rem(50)};
     width: 100vw;
+    margin-top: 60px;
   }
 
   @media (min-width: ${breakPoint.desktop}) {
     width: 60vw;
+    margin-top: 60px;
   }
 `;
 
