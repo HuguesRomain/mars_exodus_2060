@@ -58,7 +58,7 @@ const AppWithContext = () => {
   console.log(
     `window.location.pathname`,
     homeAppRouter.home(),
-    window.location.pathname
+    window.location.pathname,
   );
 
   return tokenWithoutContext ? (

@@ -1,8 +1,14 @@
 import { createGlobalStyle } from "styled-components";
 import JosefinSansItalic from "./assets/fonts/josefinSansItalic.ttf";
 import JosefinSans from "./assets/fonts/josefinSans.ttf";
+import Avenir from "./assets/fonts/AvenirLTStd-Medium.otf";
 
 export const GlobalStyled = createGlobalStyle`
+@font-face {
+  font-family: "Avenir";
+  font-style: normal;
+  src: url(${Avenir}) format("truetype");
+}
   *{
     box-sizing: border-box;
 		transition: fill 1s ease;
@@ -34,7 +40,7 @@ time, mark, audio, video {
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-	font-family: Montserrat;
+	font-family: "Avenir";
   }
 }
 /* HTML5 display-role reset for older browsers */
@@ -63,13 +69,13 @@ table {
 }
 
 @keyframes pulse {
- 0% {
-	 opacity: 0.5;
- }
- 100%{
-	 transform: scale(3);
-	 opacity: 0;
- }
+  0% {
+    opacity: 0.5;
+  }
+  100%{
+    transform: scale(3);
+    opacity: 0;
+  }
 }
 
 @font-face {
@@ -77,6 +83,7 @@ table {
 	font-style: italic;
   src: url(${JosefinSansItalic}) format("truetype");
 }
+
 
 @font-face {
   font-family: "Josefin Sans";

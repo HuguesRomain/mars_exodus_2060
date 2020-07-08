@@ -1,9 +1,14 @@
 import React from "react";
 import { ActivityItem } from "../atoms/ActivityItem";
 import styled from "styled-components";
-import { fontSize, fontWeight, color, transitionTime } from "styles/const";
+import {
+  fontSize,
+  fontWeight,
+  color,
+  transitionTime,
+  breakPoint,
+} from "styles/const";
 import { AppContext } from "exodus/context";
-import { rem } from "polished";
 
 interface props {
   calendarEvents: Array<Dates>;
@@ -16,12 +21,12 @@ export const ActivityList = ({ calendarEvents }: props) => {
   return (
     <ActivityContent isDark={isDark}>
       <Title isDark={isDark}>Prochains Evenements</Title>
-      <ul>
+      <ContentList>
         {calendarEvents &&
           calendarEvents.map((value, i) => {
             return <ActivityItem key={i} dateEvent={value} />;
           })}
-      </ul>
+      </ContentList>
     </ActivityContent>
   );
 };
@@ -31,7 +36,28 @@ const ActivityContent = styled.div<{ isDark: boolean }>`
     !props.isDark ? color.light.PureWhite : color.darker.BlackRussian};
   padding: 0 82px 0 48px;
   transition: background-color ${transitionTime};
-  padding-top: ${rem(30)};
+
+  @media (max-width: ${breakPoint.tabletPortrait}) {
+    padding: 0 48px;
+    background-color: transparent;
+    width: 100%;
+  }
+
+  @media (max-width: 950px) {
+    padding: 0 48px;
+    background-color: transparent;
+    width: 100%;
+  }
+`;
+
+const ContentList = styled.ul`
+  @media (min-width: 950px) {
+    height: 100vh;
+    overflow-y: auto;
+    ::-webkit-scrollbar {
+      display: none;
+    }
+  }
 `;
 
 const Title = styled.h1<{ isDark: boolean }>`

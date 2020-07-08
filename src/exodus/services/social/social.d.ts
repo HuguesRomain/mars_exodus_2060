@@ -34,6 +34,7 @@ type UserInfoType = {
   weight?: string;
   hairColor?: string;
   eyeColor?: string;
+  gender?: string;
 };
 
 type Login = {

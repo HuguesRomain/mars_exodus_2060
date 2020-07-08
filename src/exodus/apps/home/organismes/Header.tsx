@@ -127,7 +127,7 @@ const ContentHeader = styled.div`
 `;
 
 const TextContent = styled.div`
-  margin-top: 15%;
+  margin-top: 10%;
   display: flex;
   flex-direction: column;
   justify-content: center;
