@@ -18,16 +18,21 @@ const CalendarApp = () => {
   }, []);
 
   return isCalendar(windowSize) ? (
-    <Content>
+    <>
       <TimelinePage />
-      <ActivityList calendarEvents={calendarEvents} />
-    </Content>
+      <Content>
+        <TimelinePage />
+        <ActivityList calendarEvents={calendarEvents} />
+      </Content>
+    </>
   ) : (
-    <Content>
+    <>
       <TimelinePage />
-      <ActivityList calendarEvents={calendarEvents} />
-      <Calendar calendarEvents={calendarEvents} />
-    </Content>
+      <Content>
+        <ActivityList calendarEvents={calendarEvents} />
+        <Calendar calendarEvents={calendarEvents} />
+      </Content>
+    </>
   );
 };
 
