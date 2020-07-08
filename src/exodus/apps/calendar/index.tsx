@@ -34,7 +34,6 @@ const CalendarApp = () => {
 const Content = styled.main`
   display: flex;
   flex-direction: row-reverse;
-  height: 100vh;
   @media (max-width: ${breakPoint.tabletPortrait}) {
     flex-direction: column;
     align-items: center;

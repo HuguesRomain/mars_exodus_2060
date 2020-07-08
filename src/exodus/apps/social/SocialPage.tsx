@@ -61,6 +61,8 @@ const SocialPart = styled.div`
   justify-content: center;
   margin-top: ${rem(70)};
   width: 100vw;
+  margin-top: 0;
+
   @media (min-width: ${breakPoint.tabletPortrait}) {
     padding: ${rem(50)};
     width: 100vw;
