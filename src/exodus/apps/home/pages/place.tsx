@@ -13,7 +13,7 @@ import { Icon } from "styles/atoms/icons";
 import { AppContext } from "exodus/context";
 import { rem } from "polished";
 import { isYoutubeUrl } from "exodus/utils/uriUtils";
-import { CarouselPlaces } from "../organismes/carousels/carousels";
+// import { CarouselPlaces } from "../organismes/carousels/carousels";
 
 export const Place = ({
   place,
@@ -95,7 +95,7 @@ export const Place = ({
         </Sections>
       </div>
       <CarouselContent>
-        <CarouselPlaces places={places.filter((p) => p.id !== place.id)} />
+        {/* <CarouselPlaces places={places.filter((p) => p.id !== place.id)} /> */}
       </CarouselContent>
     </>
   );
