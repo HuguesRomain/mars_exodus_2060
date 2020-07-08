@@ -14,37 +14,43 @@ export const IdentityCard = () => {
   }, []);
 
   return (
-    <CardStyle>
-      <Header>
-        <h2>MARS ID CARD N°08976589</h2>
-      </Header>
-      <Wrapper>
-        <Content>
-          <ProfileImage
-            src={`https://symfony-xmt3.frb.io${UserInfo?.profilePicture}`}
-          />
-          <Img src={Finger} />
-          <LabeledInfo title={"NOM"} value={UserInfo?.name} />
-          <LabeledInfo title={"PRÉNOM"} value={UserInfo?.firstName} />
-          <LabeledInfo
-            title={"DATE DE NAISSANCE"}
-            value={UserInfo?.birthDate}
-          />
-          <LabeledInfo title={"SEXE"} value={UserInfo?.gender} />
-          <LabeledInfo title={"PROFESSION"} value={UserInfo?.work} />
-          <LabeledInfo
-            title={"LIEU DE NAISSANCE"}
-            value={UserInfo?.birthPlace}
-          />
-          <LabeledInfo title={"YEUX"} value={UserInfo?.eyeColor} />
-          <LabeledInfo title={"CHEVEUX"} value={UserInfo?.hairColor} />
-          <LabeledInfo title={"TAILLE"} value={UserInfo?.height} />
-          <LabeledInfo title={"POIDS"} value={UserInfo?.weight} />
-        </Content>
-      </Wrapper>
-    </CardStyle>
+    <ContentCard>
+      <CardStyle>
+        <Header>
+          <h2>MARS ID CARD N°08976589</h2>
+        </Header>
+        <Wrapper>
+          <Content>
+            <ProfileImage
+              src={`https://symfony-xmt3.frb.io${UserInfo?.profilePicture}`}
+            />
+            <Img src={Finger} />
+            <LabeledInfo title={"NOM"} value={UserInfo?.name} />
+            <LabeledInfo title={"PRÉNOM"} value={UserInfo?.firstName} />
+            <LabeledInfo
+              title={"DATE DE NAISSANCE"}
+              value={UserInfo?.birthDate}
+            />
+            <LabeledInfo title={"SEXE"} value={UserInfo?.gender} />
+            <LabeledInfo title={"PROFESSION"} value={UserInfo?.work} />
+            <LabeledInfo
+              title={"LIEU DE NAISSANCE"}
+              value={UserInfo?.birthPlace}
+            />
+            <LabeledInfo title={"YEUX"} value={UserInfo?.eyeColor} />
+            <LabeledInfo title={"CHEVEUX"} value={UserInfo?.hairColor} />
+            <LabeledInfo title={"TAILLE"} value={UserInfo?.height} />
+            <LabeledInfo title={"POIDS"} value={UserInfo?.weight} />
+          </Content>
+        </Wrapper>
+      </CardStyle>
+    </ContentCard>
   );
 };
+
+const ContentCard = styled.div`
+  height: 100vh;
+`;
 
 const CardStyle = styled.div`
   display: flex;

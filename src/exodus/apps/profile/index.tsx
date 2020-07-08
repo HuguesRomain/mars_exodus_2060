@@ -48,10 +48,12 @@ const ProfileApp = () => {
             exact
             path={profileAppRouter.ticket()}
             render={() => (
-              <Ticket
-                alt="your ticket"
-                src={`https://symfony-xmt3.frb.io${UserStorage().ticketUrl}`}
-              />
+              <TicketContent>
+                <Ticket
+                  alt="your ticket"
+                  src={`https://symfony-xmt3.frb.io${UserStorage().ticketUrl}`}
+                />
+              </TicketContent>
             )}
           />
         </Switch>
@@ -81,6 +83,10 @@ const ProfileApp = () => {
   );
 };
 
+const TicketContent = styled.div`
+  height: 100vh;
+`;
+
 const Ticket = styled.img`
   width: 65vw;
 `;
@@ -94,7 +100,7 @@ const ProfileAppMobileStyled = styled.div`
 
 const ProfileAppStyled = styled.div`
   display: flex;
-  height: 100%;
+  height: calc(100vh + 30px);
   padding-top: ${rem(30)};
 `;
 

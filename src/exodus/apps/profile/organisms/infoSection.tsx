@@ -19,4 +19,5 @@ const SectionWrapper = styled.section`
   align-items: center;
   width: 60vw;
   padding-top: ${rem(20)};
+  height: 100vh;
 `;
