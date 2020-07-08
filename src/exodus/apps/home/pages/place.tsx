@@ -124,10 +124,9 @@ const DoubleMediaVideo = styled.iframe`
 const DoubleMediaPhoto = styled.img`
   width: 90%;
   border-radius: 10px;
-
+  height: ${rem(200)};
   @media (max-width: ${breakPoint.mobileOnly}) {
     width: 100%;
-    max-height: ${rem(200)};
   }
 `;
 

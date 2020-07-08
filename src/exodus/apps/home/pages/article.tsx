@@ -75,7 +75,7 @@ export const Article = ({
                     name={"clock"}
                   />
                   <TextHeader style={{ margin: `0 0 0 ${space.xs}` }}>
-                    Temps de lecture : {article.timeToRead}
+                    Temps de lecture : 3 min
                   </TextHeader>
                 </TimeToRead>
               </TitleInfo>
