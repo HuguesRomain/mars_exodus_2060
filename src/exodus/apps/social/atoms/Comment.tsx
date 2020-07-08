@@ -12,7 +12,6 @@ import { AppContext } from "exodus/context";
 const Item = styled(Link)`
   display: flex;
   align-items: center;
-  margin-right: ${space.m};
 `;
 
 const Text = styled.p`
