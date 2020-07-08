@@ -64,19 +64,19 @@ export const Article = ({
             </ContentBackButton>
             <HeaderFoooter>
               <TitleInfo>
-                <TitleText style={{ fontSize: fontSize.xxl }} isDark={isDark}>
+                <TitleText style={{ fontSize: fontSize.xxl }}>
                   {article.title}
                 </TitleText>
-                <Text isDark={isDark}>{article.intro}</Text>
+                <TextHeader>{article.intro}</TextHeader>
                 <TimeToRead>
                   <Icon
                     size={iconSize.s}
                     color={color.light.PureWhite}
                     name={"clock"}
                   />
-                  <Text style={{ margin: `0 0 0 ${space.xs}` }} isDark={isDark}>
-                    Temps de lecture : 3 min
-                  </Text>
+                  <TextHeader style={{ margin: `0 0 0 ${space.xs}` }}>
+                    Temps de lecture : {article.timeToRead}
+                  </TextHeader>
                 </TimeToRead>
               </TitleInfo>
             </HeaderFoooter>
@@ -87,7 +87,9 @@ export const Article = ({
             return (
               <div key={i}>
                 <Title>
-                  <TitleText isDark={isDark}>{section.title}</TitleText>
+                  <TitleTextSection isDark={isDark}>
+                    {section.title}
+                  </TitleTextSection>
                   <TitleDecoration />
                 </Title>
                 {section.image.map((img, i) => {
@@ -216,9 +218,17 @@ const Sections = styled.div`
   }
 `;
 
-const Text = styled.p<{ isDark: boolean }>`
+const Text = styled.p<{ isDark?: boolean }>`
   color: ${(props) =>
     !props.isDark ? color.medium.Manatee : color.light.PureWhite};
+  margin: ${space.s} 0;
+  line-height: 30px;
+  font-size: ${fontSize.m};
+  transition: ${transitionTime};
+`;
+
+const TextHeader = styled.p`
+  color: ${color.light.PureWhite};
   margin: ${space.s} 0;
   line-height: 30px;
   font-size: ${fontSize.m};
@@ -237,9 +247,16 @@ const TitleDecoration = styled.span`
   background-color: ${color.SunsetOrange};
 `;
 
-const TitleText = styled.h2<{ isDark: boolean }>`
+const TitleTextSection = styled.h2<{ isDark: boolean }>`
   color: ${(props) =>
     !props.isDark ? color.darker.BlackPearl : color.light.PureWhite};
+  transition: ${transitionTime};
+  font-family: ${font.josefin};
+  font-size: ${fontSize.xl};
+`;
+
+const TitleText = styled.h2`
+  color: ${color.light.PureWhite};
   transition: ${transitionTime};
   font-family: ${font.josefin};
   font-size: ${fontSize.xl};

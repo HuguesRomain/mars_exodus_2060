@@ -14,9 +14,9 @@ import { HomeTitle } from "../globalStyle";
 import { AppContext } from "exodus/context";
 import { PlaceType } from "exodus/services/home";
 import { Button } from "exodus/components/atoms/button";
-import { Link } from "react-router-dom";
 import { homeAppRouter } from "exodus/internal-router";
 import NWC from "../../../../styles/assets/icons/NWC.png";
+import { Link } from "react-router-dom";
 
 const PlacesPosition = [
   { position: "translateY(265px) translateX(90px)" },
@@ -153,13 +153,22 @@ const PinAndPopup = ({
           </TextContent>
           <Link to={homeAppRouter.place(place && place.id)}>
             <ContentButton isPopupOpen={isPopupOpen()}>
-              <Button styled={CustomButton} iconName={"forward"} />
+              <Button
+                onClick={() => {
+                  window.scrollTo(0, 0);
+                }}
+                styled={CustomButton}
+                iconName={"forward"}
+              />
             </ContentButton>
           </Link>
         </ContentPopup>
       </Popup>
       <Link to={homeAppRouter.place(place && place.id)}>
         <Pin
+          onClick={() => {
+            window.scrollTo(0, 0);
+          }}
           onMouseEnter={() => {
             setIsPinHovered((prevState) => !prevState);
           }}

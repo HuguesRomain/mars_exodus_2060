@@ -2,7 +2,6 @@ import React, { useState } from "react";
 
 import { Input } from "../../atoms/input";
 import { Title, Paragraph, FormStyle } from "../../style";
-import { Link } from "react-router-dom";
 import { authAppRouter } from "exodus/internal-router";
 import { AppContext } from "exodus/context";
 import { Button } from "exodus/components/atoms/button";
@@ -28,11 +27,11 @@ export const ResetPasswordFirstStep = () => {
           placeholder={"Adresse e-mail"}
           type={"email"}
         />
-        <Link to={authAppRouter.resetPasswordSecondStep()}>
+        <a href={authAppRouter.resetPasswordSecondStep()}>
           <Button iconSize={20} iconName={"forwardArrow"}>
             <p style={{ marginRight: space.xs }}>Valider</p>
           </Button>
-        </Link>
+        </a>
       </FormStyle>
     </>
   );

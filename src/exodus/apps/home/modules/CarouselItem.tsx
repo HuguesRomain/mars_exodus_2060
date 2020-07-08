@@ -13,8 +13,8 @@ import { Button } from "../../../components/atoms/button";
 import { rem } from "polished";
 import { AppContext } from "exodus/context";
 import { ArticleType } from "exodus/services/home";
-import { Link } from "react-router-dom";
 import { homeAppRouter } from "exodus/internal-router";
+import { Link } from "react-router-dom";
 
 export const CarouselItem = ({ article }: { article: ArticleType }) => {
   const Context = React.useContext(AppContext);
@@ -35,6 +35,7 @@ export const CarouselItem = ({ article }: { article: ArticleType }) => {
           </DescriptionArticle>
         </div>
       </ItemContent>
+      {console.log(article.id)}
       <Link to={homeAppRouter.article(article.id)}>
         <Button
           onClick={() => {

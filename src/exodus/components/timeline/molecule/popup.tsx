@@ -2,7 +2,6 @@ import React from "react";
 import styled, { css } from "styled-components";
 import { TimeEventType } from "exodus/services/home";
 import { rem } from "polished";
-import { Link } from "react-router-dom";
 import { Button } from "exodus/components/atoms/button";
 import { space, fontSize, color, transitionTime } from "styles/const";
 import { AppContext } from "exodus/context";
@@ -37,7 +36,7 @@ export const PopupTimeline = ({
       <TextContent>
         <Title isDark={isDark}>{event.title}</Title>
         <Text>{event.text}</Text>
-        <Link to={calendarAppRouter.calendar()}>
+        <a href={calendarAppRouter.calendar()}>
           <Button
             styled={customButtom}
             type={"secondary"}
@@ -45,7 +44,7 @@ export const PopupTimeline = ({
           >
             <p style={{ marginLeft: rem(2) }}>Accéder au calendrier</p>
           </Button>
-        </Link>
+        </a>
       </TextContent>
     </PopupTimelineStyled>
   );

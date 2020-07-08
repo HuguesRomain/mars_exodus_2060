@@ -18,27 +18,29 @@ const CalendarApp = () => {
   }, []);
 
   return isCalendar(windowSize) ? (
-    <Content>
+    <>
       {isMinTabletLandscape(windowSize) && <TimelinePage />}
-      <ActivityList calendarEvents={calendarEvents} />
-    </Content>
+      <Content>
+        <ActivityList calendarEvents={calendarEvents} />
+      </Content>
+    </>
   ) : (
-    <Content>
+    <>
       {isMinTabletLandscape(windowSize) && <TimelinePage />}
-      <ActivityList calendarEvents={calendarEvents} />
-      <Calendar calendarEvents={calendarEvents} />
-    </Content>
+      <Content>
+        <ActivityList calendarEvents={calendarEvents} />
+        <Calendar calendarEvents={calendarEvents} />
+      </Content>
+    </>
   );
 };
 
 const Content = styled.main`
   display: flex;
   flex-direction: row-reverse;
-  height: 100vh;
   @media (max-width: ${breakPoint.tabletPortrait}) {
     flex-direction: column;
     align-items: center;
-    height: 100%;
   }
 `;
 

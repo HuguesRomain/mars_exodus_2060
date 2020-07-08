@@ -39,6 +39,7 @@ const Pin = styled.div<{ isHovered: boolean; isGrey: boolean | undefined }>`
   width: ${rem(12)};
   height: ${rem(12)};
   border-radius: 50%;
+  cursor: pointer;
   background-color: ${(props) =>
     props.isGrey ? color.medium.Manatee : color.SunsetOrange};
 `;
