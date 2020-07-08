@@ -4,7 +4,7 @@ import { SendComment } from "./organismes/SendComment";
 import { PostItem } from "./organismes/PostItem";
 import { rem } from "polished";
 import { Advertisement } from "./organismes/advertisement";
-import { isMobile } from "exodus/utils/checkWindowSize";
+import { isMobile, isMinTabletLandscape } from "exodus/utils/checkWindowSize";
 import { breakPoint } from "styles/const";
 import { AppContext } from "exodus/context";
 import { getPosts } from "exodus/services/social/social.hook";
@@ -33,7 +33,7 @@ export const SocialPage = () => {
 
   return (
     <div style={{ display: "flex", minHeight: "100vh" }}>
-      <TimelinePage />
+      {isMinTabletLandscape(windowSize) && <TimelinePage />}
       <SocialPart>
         <div>
           <SendComment callBack={fetchPosts} />
