@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import { color, space, fontSize } from "styles/const";
 import { rem } from "polished";
-// import Proctor from "../../../../styles/assets/pics/proctor.jpg";
 import { PlaceType } from "exodus/services/home";
 
 export const CarouselPlacesItems = ({ place }: { place: PlaceType }) => {

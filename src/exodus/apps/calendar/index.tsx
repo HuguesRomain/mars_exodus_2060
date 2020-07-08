@@ -5,7 +5,7 @@ import styled from "styled-components";
 import { TimelinePage } from "exodus/components/timeline/timeline";
 import { AppContext } from "exodus/context";
 import { breakPoint } from "styles/const";
-import { isCalendar } from "exodus/utils/checkWindowSize";
+import { isCalendar, isMinTabletLandscape } from "exodus/utils/checkWindowSize";
 import { GetCalendar } from "exodus/services/clendar/calendar";
 
 const CalendarApp = () => {
@@ -19,15 +19,14 @@ const CalendarApp = () => {
 
   return isCalendar(windowSize) ? (
     <>
-      <TimelinePage />
+      {isMinTabletLandscape(windowSize) && <TimelinePage />}
       <Content>
-        <TimelinePage />
         <ActivityList calendarEvents={calendarEvents} />
       </Content>
     </>
   ) : (
     <>
-      <TimelinePage />
+      {isMinTabletLandscape(windowSize) && <TimelinePage />}
       <Content>
         <ActivityList calendarEvents={calendarEvents} />
         <Calendar calendarEvents={calendarEvents} />
@@ -39,11 +38,9 @@ const CalendarApp = () => {
 const Content = styled.main`
   display: flex;
   flex-direction: row-reverse;
-  height: 100%;
   @media (max-width: ${breakPoint.tabletPortrait}) {
     flex-direction: column;
     align-items: center;
-    height: 100vh;
   }
 `;
 

@@ -19,9 +19,10 @@ import { Button } from "exodus/components/atoms/button";
 import { authAppRouter } from "exodus/internal-router";
 import { rem } from "polished";
 import { AppContext } from "exodus/context";
-import { Link } from "react-router-dom";
-import { Timeline } from "exodus/components/timeline/timeline";
 import { TokenStorage } from "exodus/utils/accessStorage";
+import { Timeline } from "exodus/components/timeline/timeline";
+import { isMinTabletLandscape } from "exodus/utils/checkWindowSize";
+
 const paramParallax = {
   center: false,
   wrapper: null,
@@ -63,6 +64,7 @@ export const Header = () => {
 
   const Context = React.useContext(AppContext);
   const [token] = Context.tokenContext;
+  const [windowSize] = Context.windowSizeContext;
   return (
     <>
       <ContentHeader>
@@ -72,7 +74,7 @@ export const Header = () => {
         </TextContent>
         {!token && (
           <ButtonContainer className="button">
-            <Link to={authAppRouter.login()}>
+            <a href={authAppRouter.login()}>
               <Button
                 color={color.light.PureWhite}
                 iconName={"ticket"}
@@ -82,7 +84,7 @@ export const Header = () => {
                   S’enregistrer
                 </p>
               </Button>
-            </Link>
+            </a>
           </ButtonContainer>
         )}
 
@@ -92,14 +94,16 @@ export const Header = () => {
         <SixImage className="six" src={six} alt="" />
         <SevenImage className="seven" src={back} alt="" />
       </ContentHeader>
-      {TokenStorage() && <Timeline isHome={true} />}
+      {TokenStorage() && isMinTabletLandscape(windowSize) && (
+        <Timeline isHome={true} />
+      )}
     </>
   );
 };
 
 const ButtonContainer = styled.div`
   position: relative;
-  z-index: 1;
+  z-index: 2000000;
 `;
 
 const ButtonCustom = css`
@@ -109,7 +113,7 @@ const ButtonCustom = css`
   flex-direction: row-reverse;
   margin-top: ${rem(30)};
   width: ${rem(134)};
-  z-index: 1000000;
+  z-index: 2000000;
 `;
 
 const ContentHeader = styled.div`
@@ -124,6 +128,7 @@ const ContentHeader = styled.div`
   }
   @media (max-width: 865px) {
     height: 330px;
+    margin-top: -25px;
   }
 `;
 

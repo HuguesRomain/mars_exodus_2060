@@ -8,7 +8,11 @@ import { WelcomeMessage } from "./atoms/welcomeMessage";
 import { InfoSection } from "./organisms/infoSection";
 import { TicketSection } from "./organisms/ticketSection";
 import { fontSize, space } from "styles/const";
-import { isMobileOnly, isMobile } from "exodus/utils/checkWindowSize";
+import {
+  isMobileOnly,
+  isMobile,
+  isMinTabletLandscape,
+} from "exodus/utils/checkWindowSize";
 import { AppContext } from "exodus/context";
 import { Button } from "exodus/components/atoms/button";
 import { UserStorage } from "exodus/utils/accessStorage";
@@ -68,7 +72,7 @@ const ProfileApp = () => {
     </ProfileAppMobileStyled>
   ) : (
     <>
-      <TimelinePage />
+      {isMinTabletLandscape(windowSize) && <TimelinePage />}
       <ProfileAppStyled>
         <InfoSection />
         <TicketSection />
@@ -85,12 +89,12 @@ const ProfileAppMobileStyled = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  height: 100%;
 `;
 
 const ProfileAppStyled = styled.div`
   display: flex;
-  height: 100vh;
+  height: 100%;
   padding-top: ${rem(30)};
 `;
 

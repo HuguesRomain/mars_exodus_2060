@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled, { css } from "styled-components";
-import { Like } from "../atoms/Like";
 import { Comment } from "../atoms/Comment";
-import { Share } from "../atoms/Share";
 import { CommentItem } from "./CommentItem";
 import {
   iconSize,
@@ -88,13 +86,11 @@ export const PostItem = ({ callBack, post }: Props) => {
         </Box>
       )}
       <Interact>
-        <Share />
         <Comment
           postId={post["@id"]}
           comments={post.comments}
           quantity={post.comments?.length}
         />
-        <Like quantity={0} />
       </Interact>
       {!isMobileOnly(windowSize) && (
         <AddComment callBack={callBack} postId={post["@id"]} />

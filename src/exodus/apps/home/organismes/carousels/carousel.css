@@ -3,7 +3,7 @@
 
 .slick-slider {
   overflow-y: hidden;
-  width: 130%;
+  width: 140%;
 }
 
 .slick-slider-places {
@@ -11,34 +11,41 @@
   width: 120%;
 }
 
-/* @media (max-width: 900px) {
+@media (max-width: 1200px) and (min-width: 1000px) {
   .slick-slider {
     overflow-y: hidden;
-    width: 100%;
+    width: 105%;
   }
-} */
+}
 
-@media (max-width: 1045px) {
+@media (max-width: 1550px) and (min-width: 1300px) {
   .slick-slider {
     overflow-y: hidden;
+    width: 105%;
   }
 
   .slick-slider-places {
     overflow-y: hidden;
+    width: 110%;
   }
 }
 
-@media (min-width: 701px) {
+@media (min-width: 1650px) {
   .slick-slider {
     overflow-y: hidden;
-    width: 140%;
+    width: 105%;
+  }
+
+  .slick-slider-places {
+    overflow-y: hidden;
+    width: 110%;
   }
 }
 
 @media (max-width: 550px) {
   .slick-slider {
     overflow-y: hidden;
-    width: 150%;
+    width: 160%;
   }
 
   .slick-slider-places {

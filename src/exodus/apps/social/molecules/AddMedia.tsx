@@ -7,7 +7,6 @@ import {
   fontSize,
   iconSize,
   fontWeight,
-  breakPoint,
   transitionTime,
 } from "styles/const";
 import { AppContext } from "exodus/context";
@@ -18,7 +17,7 @@ export const AddMedia = () => {
   return (
     <Content isDark={isDark}>
       <Icon size={iconSize.s} color={color.medium.Manatee} name={"pics"} />
-      <Description>Photos/Vidéos</Description>
+      <Description>Photos</Description>
     </Content>
   );
 };
@@ -29,12 +28,12 @@ const Content = styled.div<{ isDark: boolean }>`
   max-width: 500px;
   display: flex;
   border-radius: 8px;
-
+  padding: ${space.xs};
+  background-color: ${(props) =>
+    !props.isDark ? color.light.WhiteSmoke : color.darker.BlackPearl};
   transition: ${transitionTime};
-  @media (min-width: ${breakPoint.desktop}) {
-    padding: ${space.xs};
-    background-color: ${(props) =>
-      !props.isDark ? color.light.WhiteSmoke : color.darker.BlackPearl};
+  &:hover {
+    box-shadow: 0 0 12px 2px rgba(153, 155, 168, 0.25);
   }
 `;
 

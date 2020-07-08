@@ -57,7 +57,12 @@ const InputComment = ({ callBack, postId }: Props) => {
         value={newComment}
       />
       <Send isDark={isDark}>
-        <Icon color={color.SunsetOrange} name={"send"} size={iconSize.s} />
+        <Icon
+          onClick={HandleSubmit}
+          color={color.SunsetOrange}
+          name={"send"}
+          size={iconSize.s}
+        />
       </Send>
     </InputCommentStyled>
   );
