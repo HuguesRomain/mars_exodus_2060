@@ -8,13 +8,13 @@ www.mars-exodus-2060.space
 
 ### ~~Pourquoi React ?~~
 
-### Pourquoi un frameworks ?
+### Pourquoi un framework ?
 
 Nous avons pris la décision d'organiser le projet de manière à séparer nos interfaces en application distincte. Le projet possède ses composants globaux et chaque application indépendante possède ses propres composants tous ces composants sont eux triés en organisms, molecules et atoms. l'utilisation d'un framework simplifie le développement en simplifiant la réutilisation et la communication entre tous son différent composant. Sa garantie a bon usage un code plus maintenable et plus optimisé. 
 
 ### Pourquoi Typescript ?
 
-L'application a en partie comme but d'afficher des données à différents degrés d'importance à l'utilisateur. Il pourrait être malencontreux de rendre un donné erroné. L'utilisation de typescript permet dans un premier temps de donner une forme de conscience au code qui lui permet d'indiquer au développeur quand une données non attendu est rendu. La raison la plus importante est d'imposer aux developers une rigueur l'empêchant de manipuler ces données de n'importe quelles façons. Cela force le maintiens d'une structure dans le code concernant la communication entre les composants. Il aide et guide aussi le devlelopers en lui indiquant les quelles données est attendues à quelles endroit. L'utilisation de typescript est très utile pour les nouveaux développeurs pouvant s'incruster au développement du projet et qui n'ont pas forcément une parfaite connaissance de ce dernier.
+L'application a en partie comme but d'afficher des données à différents degrés d'importance à l'utilisateur. Il pourrait être malencontreux de rendre une données erroné. L'utilisation de typescript permet dans un premier temps de donner une forme de conscience au code qui lui permet d'indiquer au développeur quand une données non attendu est rendu. La raison la plus importante est d'imposer aux développeur une rigueur l'empêchant de manipuler ces données de n'importe quelles façons. Cela force le maintiens d'une structure dans le code concernant la communication entre les composants. Il aide et guide aussi le développeur en lui indiquant les quelles données est attendues à quelles endroit. L'utilisation de typescript est très utile pour les nouveaux développeurs pouvant s'incruster au développement du projet et qui n'ont pas forcément une parfaite connaissance de ce dernier.
 
 ### Pourquoi Styled-components ?
 
