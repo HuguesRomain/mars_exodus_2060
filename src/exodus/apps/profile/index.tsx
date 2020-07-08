@@ -100,7 +100,7 @@ const ProfileAppMobileStyled = styled.div`
 
 const ProfileAppStyled = styled.div`
   display: flex;
-  height: calc(100vh + 30px);
+  height: calc(100vh + 68px);
   padding-top: ${rem(30)};
 `;
 
