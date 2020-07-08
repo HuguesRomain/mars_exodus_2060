@@ -7,6 +7,7 @@ import {
   isThisWeek,
   isThisMonth,
   getDate,
+  isPast,
 } from "date-fns";
 import { space, color, fontSize, transitionTime } from "styles/const";
 import { rem } from "polished";
@@ -24,6 +25,7 @@ export const ActivityItem = ({ dateEvent }: Props) => {
 
   const isActual = (() => {
     if (day) {
+      if (isPast(day)) return "Déjà passé";
       if (isToday(day)) return "Aujourd'hui";
       if (isTomorrow(day)) return "Demain";
       if (isThisWeek(day)) return "Cette semaine";
