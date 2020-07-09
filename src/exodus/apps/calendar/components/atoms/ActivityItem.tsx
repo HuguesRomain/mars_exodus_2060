@@ -36,6 +36,18 @@ export const ActivityItem = ({ dateEvent }: Props) => {
 
   const theDay = day && day.toLocaleString("default", { weekday: "long" });
 
+  const colorStatus = (() => {
+    return dateEvent.type === "Facultatif"
+      ? color.darker.Endeavour
+      : color.SunsetOrange;
+  })();
+
+  const colorStatusTrans = (() => {
+    return dateEvent.type === "Facultatif"
+      ? color.transparent.EndeavourTrans
+      : color.transparent.SunsetOrangeTrans;
+  })();
+
   const theMounth =
     day &&
     `${getDate(day)} ${day.toLocaleString("default", {
@@ -53,8 +65,14 @@ export const ActivityItem = ({ dateEvent }: Props) => {
   return (
     <ContentItem>
       <FromActual isDark={isDark}>{isActual}</FromActual>
-      <Item isDark={isDark}>
-        <Status isDark={isDark}>{dateEvent.type}</Status>
+      <Item colorStatus={colorStatus} isDark={isDark}>
+        <Status
+          colorStatusTrans={colorStatusTrans}
+          colorStatus={colorStatus}
+          isDark={isDark}
+        >
+          {dateEvent.type}
+        </Status>
         <Day>{theDay}</Day>
         <Date isDark={isDark}>{theMounth}</Date>
         <Description isDark={isDark}>{dateEvent.title}</Description>
@@ -77,7 +95,7 @@ const ContentItem = styled.div`
   margin: ${space.m} 0 0;
 `;
 
-const Item = styled.li<{ isDark: boolean }>`
+const Item = styled.li<{ isDark: boolean; colorStatus: any }>`
   position: relative;
   margin: ${space.s} 0 0;
   list-style-type: none;
@@ -94,19 +112,23 @@ const Item = styled.li<{ isDark: boolean }>`
     content: "";
     height: 100%;
     width: 11px;
-    background-color: #f98971;
+    background-color: ${(props) => props.colorStatus};
     position: absolute;
     left: 0;
     top: 0;
   }
 `;
 
-const Status = styled.p<{ isDark: boolean }>`
+const Status = styled.p<{
+  isDark: boolean;
+  colorStatus: string;
+  colorStatusTrans: string;
+}>`
   padding: ${space.xs};
   background-color: ${(props) =>
-    !props.isDark ? color.transparent.SunsetOrangeTrans : color.SunsetOrange};
+    !props.isDark ? props.colorStatusTrans : props.colorStatus};
   color: ${(props) =>
-    !props.isDark ? color.SunsetOrange : color.light.PureWhite};
+    !props.isDark ? props.colorStatus : color.light.PureWhite};
   border-radius: ${rem(8)};
   font-size: ${fontSize.xs};
   width: fit-content;

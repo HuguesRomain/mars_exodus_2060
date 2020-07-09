@@ -15,10 +15,12 @@ export const color = {
     BlackRussian: "#091124",
     BlackPearl: "#0D2E47",
     LuckyPoint: "#292C59",
+    Endeavour: "#246290",
   },
   transparent: {
     SunsetOrangeTrans: "rgba(249, 138, 113, 0.1)",
     BlackPearlTrans: "rgba(153, 155, 168, 0.15)",
+    EndeavourTrans: "rgba(36, 98, 144, 0.1)",
   },
 
   Alizarin: "#E02637",

@@ -3,5 +3,5 @@ type Dates = {
   type?: string;
   endTime?: Date;
   startTime?: Date;
-  date?: Date;
+  date?: string | number | Date;
 };

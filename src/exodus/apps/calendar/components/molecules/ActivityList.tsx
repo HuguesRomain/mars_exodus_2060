@@ -8,6 +8,7 @@ import {
   transitionTime,
   breakPoint,
 } from "styles/const";
+import { isPast } from "date-fns";
 import { AppContext } from "exodus/context";
 
 interface props {
@@ -23,9 +24,13 @@ export const ActivityList = ({ calendarEvents }: props) => {
       <Title isDark={isDark}>Prochains Evenements</Title>
       <ContentList>
         {calendarEvents &&
-          calendarEvents.map((value, i) => {
-            return <ActivityItem key={i} dateEvent={value} />;
-          })}
+          calendarEvents
+            .filter(
+              (event) => event.date && !isPast(new window.Date(event.date)),
+            )
+            .map((value, i) => {
+              return <ActivityItem key={i} dateEvent={value} />;
+            })}
       </ContentList>
     </ActivityContent>
   );

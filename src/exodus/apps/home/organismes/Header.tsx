@@ -146,7 +146,7 @@ const Title = styled.h1`
   background: linear-gradient(
     180deg,
     rgba(255, 255, 255, 1) 0%,
-    rgba(252, 82, 82, 1) 150%
+    rgba(252, 82, 82, 1) 180%
   );
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -154,6 +154,7 @@ const Title = styled.h1`
   text-align: center;
   font-size: ${titeFontsize.s};
   margin: 0;
+  text-shadow: 0px 15px 20px rgba(0, 0, 0, 0.25);
   z-index: -1;
   @media (min-width: ${breakPoint.tabletPortrait}) {
     font-size: ${titeFontsize.m};
