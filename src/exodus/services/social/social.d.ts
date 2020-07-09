@@ -18,6 +18,7 @@ type UserType = {
   name: string;
   posts?: Array<string>;
   profilePicture?: string;
+  firstName?: string;
 };
 
 type UserInfoType = {

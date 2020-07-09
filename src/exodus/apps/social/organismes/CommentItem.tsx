@@ -51,14 +51,18 @@ export const CommentItem = ({ comment }: Props) => {
     }
   })();
 
+  console.log(infoUser);
+
   return (
     <Comment>
       <Avatar src={avatarPicture} size={iconSize.l} />
       <Content isDark={isDark}>
-        <div style={{ display: "flex", marginBottom: space.xs }}>
-          <Author isDark={isDark}>{infoUser && infoUser?.name}</Author>
+        <ContentHeader>
+          <Author isDark={isDark}>
+            {infoUser?.firstName} {infoUser?.name}
+          </Author>
           <Since>{PublishDate}</Since>
-        </div>
+        </ContentHeader>
         <Text isDark={isDark}>{itemOfComment && itemOfComment.content}</Text>
       </Content>
     </Comment>
@@ -87,11 +91,21 @@ const Content = styled.div<{ isDark: boolean }>`
   }
 `;
 
+const ContentHeader = styled.div`
+  display: flex;
+  margin-bottom: ${space.xs};
+  justify-content: space-between;
+`;
+
 const Author = styled.p<{ isDark: boolean }>`
   font-weight: 500;
   color: ${(props) =>
     !props.isDark ? color.darker.BlackPearl : color.light.PureWhite};
   transition: ${transitionTime};
+  white-space: nowrap;
+  width: 40%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const Since = styled.p`

@@ -64,7 +64,9 @@ export const PostItem = ({ callBack, post }: Props) => {
           src={avatarPicture}
           size={isMobile(windowSize) ? iconSize.l : iconSize.xl}
         />
-        <Author isDark={isDark}>{infoUser && infoUser.name}</Author>
+        <Author isDark={isDark}>
+          {infoUser?.firstName} {infoUser?.name}
+        </Author>
         <Since>{PublishDate}</Since>
       </UserInfo>
       <PostText isDark={isDark}>{post.content}</PostText>
@@ -141,6 +143,10 @@ const Author = styled.h1<{ isDark: boolean }>`
   color: ${color.darker.LuckyPoint};
   ${(props) => props.isDark && dark};
   transition: ${transitionTime};
+  white-space: nowrap;
+  width: 40%;
+  overflow: hidden;
+  text-overflow: ellipsis;
 `;
 
 const Since = styled.p`
