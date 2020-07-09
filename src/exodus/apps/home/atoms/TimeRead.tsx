@@ -3,6 +3,16 @@ import styled from "styled-components";
 import { color, fontSize, space, breakPoint } from "styles/const";
 import { Icon } from "styles/atoms/icons";
 
+export const TimeRead = ({ timeToRead }: { timeToRead: string }) => {
+  return (
+    <ContentTimeRead>
+      <Icon color={color.medium.Manatee} name={"clock"} size={fontSize.m} />
+      <TimeText>Temps de lecture:</TimeText>
+      <Time>{timeToRead}</Time>
+    </ContentTimeRead>
+  );
+};
+
 const ContentTimeRead = styled.div`
   display: flex;
   align-items: center;
@@ -24,13 +34,3 @@ const Time = styled.p`
   color: ${color.medium.Manatee};
   padding-left: ${space.xs};
 `;
-
-export const TimeRead = ({ timeToRead }: { timeToRead: string }) => {
-  return (
-    <ContentTimeRead>
-      <Icon color={color.medium.Manatee} name={"clock"} size={fontSize.m} />
-      <TimeText>Temps de lecture:</TimeText>
-      <Time>{timeToRead}</Time>
-    </ContentTimeRead>
-  );
-};

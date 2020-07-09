@@ -10,7 +10,7 @@ type TimeType = {
 
 function TimeLeft(): TimeType[] {
   const difference =
-    new Date("2020-07-27T10:00:00").getTime() - new Date().getTime();
+    new Date("2020-07-12T10:00:00").getTime() - new Date().getTime();
   let days = Math.floor(difference / (1000 * 60 * 60 * 24));
   let hours = Math.floor((difference / (1000 * 60 * 60)) % 24);
   let minutes = Math.floor((difference / 1000 / 60) % 60);
