@@ -21,3 +21,12 @@ export const UserStorage = (): UserInfoType => {
   const User = JSON.parse(localStorage.getItem("user") || "{}");
   return typeof User === "object" ? User : null;
 };
+
+export const IsFirstConnection = (): UserInfoType => {
+  const isFirstConnection = JSON.parse(
+    localStorage.getItem("isFirstConnection") || "{}"
+  );
+  return typeof isFirstConnection === "object"
+    ? isFirstConnection.isFirstConnection
+    : null;
+};

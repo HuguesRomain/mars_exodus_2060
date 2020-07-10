@@ -8,6 +8,7 @@ import { AppContext } from "exodus/context";
 import { ModalResetPassword } from "exodus/apps/auth/authSteps/resetPassword/moodalResetPassword";
 import { RegisterSecondStep } from "exodus/apps/auth/authSteps/register/secondStep";
 import { RegisterFinalStep } from "exodus/apps/auth/authSteps/register/finalStep";
+import { homeAppRouter } from "exodus/internal-router";
 
 export const ProfileHeader = () => {
   const [ModalStep, setModalStep] = useState<number>(0);
@@ -39,19 +40,21 @@ export const ProfileHeader = () => {
             Changer le mot de passe
           </p>
         </Button> */}
-        <Button
-          onClick={() => {
-            localStorage.removeItem("token");
-            setToken(null);
-            document.location.reload(true);
-          }}
-          iconName={"disconnect"}
-          iconSize={15}
-        >
-          <p style={{ marginRight: space.xs, fontSize: fontSize.s }}>
-            Se déconnecter
-          </p>
-        </Button>
+        <a href={homeAppRouter.home()}>
+          <Button
+            onClick={() => {
+              localStorage.removeItem("token");
+              setToken(null);
+              document.location.reload(true);
+            }}
+            iconName={"disconnect"}
+            iconSize={15}
+          >
+            <p style={{ marginRight: space.xs, fontSize: fontSize.s }}>
+              Se déconnecter
+            </p>
+          </Button>
+        </a>
       </ButtonWrapper>
     </ProfileHeaderStyled>
   );
