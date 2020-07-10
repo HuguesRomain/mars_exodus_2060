@@ -22,6 +22,7 @@ import { NavBarContainer } from "exodus/components/navbar/index";
 import { authApp } from "./internal-router";
 import { TokenStorage, UsernameStorage } from "./utils/accessStorage";
 import { GetUserByName } from "./services/social/social.hook";
+import { Landing } from "./components/pages/landing";
 
 const AppWrapper = styled.div<{ token: string | null }>`
   padding: ${rem(69)} 0 ${rem(90)} 0;
@@ -32,9 +33,9 @@ const AppWrapper = styled.div<{ token: string | null }>`
 
 const currentPath = window.document.location.pathname;
 
-if (currentPath === "/") {
-  window.history.replaceState(null, "", homeAppRouter.home());
-}
+// if (currentPath === "/") {
+//   window.history.replaceState(null, "", homeAppRouter.home());
+// }
 
 const AppWithContext = () => {
   const [tokenWithoutContext] = React.useState<string | null>(TokenStorage());
@@ -46,9 +47,13 @@ const AppWithContext = () => {
     );
   };
 
-  if (!tokenWithoutContext) {
-    !isValidPath() &&
-      window.history.replaceState(null, "", homeAppRouter.home());
+  if (currentPath === "/") {
+    if (tokenWithoutContext) {
+      !isValidPath() &&
+        window.history.replaceState(null, "", homeAppRouter.home());
+    } else {
+      !isValidPath() && window.history.replaceState(null, "", "/landing");
+    }
   }
 
   GetUserByName(UsernameStorage()).then((resp) => {
@@ -58,7 +63,7 @@ const AppWithContext = () => {
   console.log(
     `window.location.pathname`,
     homeAppRouter.home(),
-    window.location.pathname,
+    window.location.pathname
   );
 
   return tokenWithoutContext ? (
@@ -90,6 +95,7 @@ const AppWithContext = () => {
     <AppFrame>
       <Router>
         <Switch>
+          <Route path={"/landing"} component={Landing} />
           <Route path={homeAppRouter.home()} component={HomeApp} />
           <Route path={authAppRouter.login()} component={AuthApp} />
         </Switch>

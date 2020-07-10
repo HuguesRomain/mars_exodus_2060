@@ -35,7 +35,6 @@ export const CarouselItem = ({ article }: { article: ArticleType }) => {
           </DescriptionArticle>
         </div>
       </ItemContent>
-      {console.log(article.id)}
       <Link to={homeAppRouter.article(article.id)}>
         <Button
           onClick={() => {

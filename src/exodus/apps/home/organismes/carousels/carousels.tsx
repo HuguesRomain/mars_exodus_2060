@@ -89,8 +89,8 @@ export const CarouselPlaces = ({ places }: { places: PlaceType[] }) => {
       >
         {places.map((place, i) => {
           return (
-            <a href={homeAppRouter.place(place.id)}>
-              <CarouselPlacesItems key={i} place={place} />
+            <a key={i} href={homeAppRouter.place(place.id)}>
+              <CarouselPlacesItems place={place} />
             </a>
           );
         })}
