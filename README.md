@@ -10,7 +10,7 @@ www.mars-exodus-2060.space
 
 ### Pourquoi un framework ?
 
-Nous avons pris la décision d'organiser le projet de manière à séparer nos interfaces en applications distinctes. Le projet possède ses composants globaux et chaque application indépendante possède ses propres composants. Tous ces composants quant à eux sont triés en organismes, molécules et atomes. L'utilisation d'un framework simplifie le développement en simplifiant la réutilisation et la communication entre tous ces différents composants. Cela garantit a bon usage un code plus maintenable et plus optimisé. 
+Nous avons pris la décision d'organiser le projet de manière à séparer nos interfaces en applications distinctes. Le projet possède ses composants globaux et chaque application indépendante possède ses propres composants. Tous ces composants quant à eux sont triés en organismes, molécules et atomes. L'utilisation d'un framework simplifie la réutilisation et la communication entre tous ces différents composants. Cela garantit a bon usage un code plus maintenable et plus optimisé. 
 
 ### Pourquoi Typescript ?
 
